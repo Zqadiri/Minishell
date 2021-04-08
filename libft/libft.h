@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/08 09:31:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/04/08 17:53:28 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char				*ft_strndup(const char *s, size_t n);
 # ifndef GET_NEXT_LINE_H
 #  define GET_NEXT_LINE_H
 
-#  define BUFFER_SIZE 32
+#  define BUFFER_SIZE 100
 
 int					get_next_line(int fd, char **line);
 size_t				ft_strln(const char *s);
