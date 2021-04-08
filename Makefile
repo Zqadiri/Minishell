@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
+#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/04/08 17:14:40 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/04/08 17:24:50 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME			=	minishell
 
 SRCS 			=	./sources/minishit.c\
 					./sources/main_exec.c\
+					
 LIBFT_PATH 		= 	./libft
 
 
