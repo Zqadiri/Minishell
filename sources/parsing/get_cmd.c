@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:17:00 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/11 18:25:56 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/11 18:39:27 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ void read_cmd(t_source *t)
     if (valid_syntax(t))
 	{	
 		if(strcmp(t->buffer, "exit\n") == 0)
-			//free()
+			// + free()
 			exit(EXIT_SUCCESS);
-
 		parse_cmd(t);
 	}
 	else
 	{
-		printf("ERROR\n");
-		// free
+		printf("bash: %s: command not found\n", t->buffer);
+		// + free()
 		exit(EXIT_FAILURE);
 	}
 }
