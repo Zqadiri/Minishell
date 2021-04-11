@@ -6,14 +6,15 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/04/08 17:24:50 by iidzim           ###   ########.fr        #
+#    Updated: 2021/04/11 15:50:26 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	minishell
 
 SRCS 			=	./sources/minishit.c\
-					./sources/main_exec.c\
+					./sources/execution/main_exec.c\
+					./sources/parsing/get_cmd.c\
 					
 LIBFT_PATH 		= 	./libft
 
@@ -28,7 +29,7 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				$(CC) -o $(NAME)  $(SRCS) $(LIBFLAGS)
+				$(CC) -o $(NAME) $(SRCS) $(LIBFLAGS) -g -fsanitize=address
 
 clean:			libft_clean
 				${RM} ${OBJS}
