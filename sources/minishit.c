@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/11 18:26:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/12 10:57:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int argc, char **argv, char **env)
 {
-	t_cmd x;
+	// t_cmd x;
 	t_source t;
 
 	(void)argc;

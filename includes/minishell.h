@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/11 18:37:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/12 10:57:36 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ typedef struct s_cmdlist
     struct s_cmdlist *next_cmd;
 }               t_cmdlist;
 
-void print_prompt();
-void read_cmd(t_source *x);
-t_cmdlist parse_cmd(t_source *t);
-void exec_cmd();
 
+
+
+
+void        print_prompt();
+void        read_cmd(t_source *x);
+t_cmdlist   parse_cmd(t_source *t);
+void        exec_cmd();
 
 #endif
