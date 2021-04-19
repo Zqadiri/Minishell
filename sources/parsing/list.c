@@ -6,73 +6,89 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:40:10 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/11 12:27:28 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/19 17:06:19 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int list_size(t_cmdlist *l)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while(l != NULL)
-    {
-        l = l->next_cmd++;
-        i++;
-    }
-    return (i);
+	i = 0;
+	while(l != NULL)
+	{
+		l = l->next_cmd++;
+		i++;
+	}
+	return (i);
 }
 
 //insert if the list is empty
-t_cmdlist *create(void *cmd)
+t_cmdlist *create(t_token **cmd, int pipe)
 {
-    t_cmdlist *l;
+	t_cmdlist *l;
 
-    if (!(l = malloc(sizeof(t_cmdlist))))
-        return (NULL);
-    l->cmd = &cmd;
-    l->next_cmd = NULL;
-    return (l);
+	if (!(l = malloc(sizeof(t_cmdlist))))
+		return (NULL);
+	l->tokens = cmd;
+	l->pipe = pipe;
+	l->next_cmd = NULL;
+	return (l);
 }
 
-// insert an element to the top of list
-void *push(t_cmdlist *l, char *cmd)
+// insert an element at the end of the list
+void add_back(t_cmdlist **l, t_token **cmd, int pipe)
 {
-    t_cmdlist *temp;
-    
-    temp = malloc(sizeof(t_cmdlist));
-    if (l)
-    {
-        temp->cmd = &cmd;
-        temp->next_cmd = l->next_cmd;
-        temp->next_cmd = NULL;
-    }
-}
+	t_cmdlist *new;
+	t_cmdlist *last;
 
-void ft_freelst(t_cmdlist *l)
-{
-	t_cmdlist *temp;
-
-	while(l != NULL)
+	new = malloc(sizeof(t_cmdlist));
+	new->tokens = cmd; 
+	new->pipe = pipe;
+	new->next_cmd = NULL;
+	last = *l;
+	if ((*l) == NULL)
+		(*l) = new;
+	else
 	{
-		temp = l;
-		l = l->next_cmd;
-		free(temp);
+		while (last->next_cmd != NULL)
+			last = last->next_cmd;
+		last->next_cmd = new;
 	}
-	// print_err();
 }
 
-void print_cmdlist(t_cmdlist *l)
+// insert an element to the top of list --> history
+void push(t_cmdlist **l, t_token **cmd, int pipe)
+{
+	t_cmdlist *new;
+	
+	if (l && cmd)
+	{
+		new = malloc(sizeof(t_cmdlist));
+		new->tokens = cmd;
+		new->pipe = pipe;
+		new->next_cmd = *l;
+		*l = new;
+	}
+}
+
+void print_cmd(t_cmdlist *l)
 {
 	t_cmdlist *temp;
+	int i;
 
+	i = 0;
 	temp = l;
 	while(temp)
 	{
-		printf("%s - ", temp->cmd);
-		temp = temp->next_cmd;
+		printf("pipe = %d\n", temp->pipe);
+		while(temp->tokens[i])
+		{
+			printf("token[%d]={type:%s, value:%s}\n", i, temp->tokens[i]->type, temp->tokens[i]->value);
+			i++;
+		}
 	}
 	printf("\n");
 }
