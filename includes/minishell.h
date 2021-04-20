@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/04/19 16:28:35 by iidzim           ###   ########.fr       */
+=======
+/*   Updated: 2021/04/12 10:57:36 by zqadiri          ###   ########.fr       */
+>>>>>>> 06630d4966de4870c6a577eaf15c743bbf6899f7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +59,7 @@ typedef struct s_cmdlist
     struct s_cmdlist *next_cmd;
 }               t_cmdlist;
 
+<<<<<<< HEAD
 void print_prompt();
 void read_cmd(t_lexer *x);
 void lexer(t_cmdlist *l, t_lexer *t);
@@ -70,4 +75,15 @@ void push(t_cmdlist **l, t_token **cmd, int pipe);
 void print_cmd(t_cmdlist *l);
 
 
+=======
+
+
+
+
+void        print_prompt();
+void        read_cmd(t_source *x);
+t_cmdlist   parse_cmd(t_source *t);
+void        exec_cmd();
+
+>>>>>>> 06630d4966de4870c6a577eaf15c743bbf6899f7
 #endif

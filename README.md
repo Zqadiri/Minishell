@@ -1,5 +1,6 @@
 # Minishell
-The objective of this project is for you to create a simple shell.
+The objective of this project is for you to create a simple shell. Yes, your
+own little bash or zsh. You will learn a lot about processes and file descriptors.
 
 ## Overview :
 
@@ -20,6 +21,8 @@ creates a new process by duplicating the calling process. The new process is ref
 It takes no parameters and returns an integer value. Below are different values returned by fork().
 
 ***Negative Value***: the creation of a child process was unsuccessful. ***Zero***: Returned to the newly created child process.***Positive value***: Returned to parent or caller. The value contains the process ID of the newly created child process.
+
+[Fork() system call tutorial](https://www.youtube.com/watch?v=xVSPv-9x3gk)
 
 `wait` 
 
@@ -54,3 +57,12 @@ A signal is a software generated interrupt that is sent to a process by the OS b
 
 Output: Print hello world infinite times. If user presses ctrl-c to terminate the process because of SIGINT signal sent and its default handler to terminate the process.
 
+`dup` `dup2`
+
+[https://www.youtube.com/watch?v=EqndHT606Tw](https://www.youtube.com/watch?v=EqndHT606Tw)
+
+`pipe`
+
+Conceptually, a pipe is a connection between two processes, such that the standard output from one process becomes the standard input of the other process.
+
+[Pipe() tutorial for linux](https://www.youtube.com/watch?v=uHH7nHkgZ4w)
