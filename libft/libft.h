@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/04/19 14:21:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/22 11:42:32 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char				*ft_strndup(const char *s, size_t n);
 # ifndef GET_NEXT_LINE_H
 #  define GET_NEXT_LINE_H
 
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1024
 
 int					get_next_line(int fd, char **line);
 size_t				ft_strln(const char *s);

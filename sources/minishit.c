@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/20 11:14:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/22 11:47:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(int argc, char **argv, char **env)
 {
 	// t_cmdtable x;
-	t_lexer t;
+	t_lexer *t;
 
 	(void)argc;
 	(void)argv; 
@@ -23,28 +23,32 @@ int main(int argc, char **argv, char **env)
 	while(1)
 	{
 		ft_putstr_fd("minishell$ ", 0);
-		read_cmd(&t);
-        if(!t.buffer)
+        t = malloc(sizeof(t_lexer));
+		read_cmd(t);
+        if(!t->buffer)
             exit(EXIT_SUCCESS);
-        if(t.buffer[0] == '\0' || strcmp(t.buffer, "\n") == 0)
+        if(t->buffer[0] == '\0' || strcmp(t->buffer, "\n") == 0)
         {
-            free(t.buffer);
+            free(t);
             continue;
         }
-        if(strcmp(t.buffer, "exit\n") == 0)
+        if(strcmp(t->buffer, "exit\n") == 0)
         {
-            free(t.buffer);
+            printf("exit\n");
+            free(t);
             break;
         }
-        printf("%s\n", t.buffer);
-        free(t.buffer);	
-		// exec_cmd();
+        // printf("%s\n", t.buffer);
+        lexer(t);
+        // parse
+        // execute
+        free(t);
 	}
 	exit(EXIT_SUCCESS);
 }
 
 // ToDo List:
-// read cmdline
+// read cmdline √
 // check if there is nay syntax error (eg: >>> or |; ...)
 // implement functions (map) for linked list
 // example :							 output
