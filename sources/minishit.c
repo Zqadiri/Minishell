@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/22 11:47:14 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/23 16:00:37 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,12 @@ int main(int argc, char **argv, char **env)
 // - echo bo"njou\$r					-> add " f next line ->bonjou$r
 // - ec"ho" bon"jo\"u"r					-> bonjo"ur
 // - echo "\\"							-> \
+
+// bash-3.2$ echo A B C
+// >>A B C
+// bash-3.2$ echo A''B''C
+// >>ABC
+// bash-3.2$ echo A '' B '' C
+// >>A  B  C
+// bash-3.2$ echo A  B  C
+// >>A B C

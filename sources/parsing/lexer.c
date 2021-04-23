@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/22 14:57:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/23 10:47:21 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,27 @@ t_token *create_token(t_token *token, char *type, char c)
     return (token);
 }
 
+int valid_cmd(char *s)
+{
+    if (ft_strcmp(s, "echo"))
+    {   
+    }
+    else if (ft_strcmp(s, "cd"))
+    { 
+    }
+    else if (ft_strcmp(s, "pwd"))
+    {
+    }
+    else if (ft_strcmp(s, "export"))
+    {
+    }
+    else if (ft_strcmp(s, "unset"))
+    {
+    }
+    else if (ft_strcmp(s, "env"))
+    {
+    }
+    else
+        return (0);
+    return (1);
+}
