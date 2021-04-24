@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/22 14:46:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/24 16:08:24 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@
 #define SQUOTE 39
 #define SEMICOLON 59
 #define SPACE 32
+#define DOLLAR 36
+#define SLASH 92
 #define CMD "cmd"
+#define OPTION "-flag"
 #define PARAM "param"
-#define ILLEGAL "err"
+#define ILLEGAL "syntax error"
 #define LITERAL "val"
-#define EOF 0
+#define EOC 0
 
 typedef struct s_token
 {
@@ -45,8 +48,8 @@ typedef struct s_token
 typedef struct s_lexer
 {   
     char *buffer;       // the input text
-    int bufsize;       // size of the input text
-    int curpos;        // absolute char position in source
+    int bufsize;        // size of the input text
+    int curpos;         // absolute char position in source
     int readpos;        // after current pos
     char c;             // current char under examination
     //  + check EOF
@@ -61,9 +64,8 @@ typedef struct s_cmdlist
 
 void print_prompt();
 void read_cmd(t_lexer *x);
-// void lexer(t_cmdlist *l, t_lexer *t);
-// t_cmdlist parse_cmd(t_lexer *t);
-void exec_cmd();
+void lexer(t_lexer *l);
+// void exec_cmd();
 
 
 //linkedlist

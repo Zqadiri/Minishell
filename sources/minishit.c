@@ -6,11 +6,27 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/23 16:00:37 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/24 14:53:55 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void read_cmd(t_lexer *t)
+{
+	char *line;
+
+	line = ft_strdup("");
+	while (get_next_line(0, &line) > 0)
+	{
+		t->buffer = ft_strdup(line);
+		t->bufsize = ft_strlen(line);
+		t->curpos = 0;
+		t->readpos = t->curpos + 1;
+		t->c = ' ';
+		free(line);
+	}
+}
 
 int main(int argc, char **argv, char **env)
 {
