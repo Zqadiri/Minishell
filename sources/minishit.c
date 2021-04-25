@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/24 14:53:55 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/25 17:12:12 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ void read_cmd(t_lexer *t)
 	}
 }
 
+void init_struct(t_lexer *t)
+{
+	t->buffer = NULL;
+	t->bufsize = 0;
+	t->c = 0;
+	t->curpos = 0;
+	t->readpos = 0;
+}
+
 int main(int argc, char **argv, char **env)
 {
 	// t_cmdtable x;
@@ -39,26 +48,27 @@ int main(int argc, char **argv, char **env)
 	while(1)
 	{
 		ft_putstr_fd("minishell$ ", 0);
-        t = malloc(sizeof(t_lexer));
+		t = malloc(sizeof(t_lexer));
+		init_struct(t);
 		read_cmd(t);
-        if(!t->buffer)
-            exit(EXIT_SUCCESS);
-        if(t->buffer[0] == '\0' || strcmp(t->buffer, "\n") == 0)
-        {
-            free(t);
-            continue;
-        }
-        if(strcmp(t->buffer, "exit\n") == 0)
-        {
-            printf("exit\n");
-            free(t);
-            break;
-        }
-        // printf("%s\n", t.buffer);
-        lexer(t);
-        // parse
-        // execute
-        free(t);
+		// printf("<<%s>>\n", t->buffer);
+		if(!t->buffer)
+			exit(EXIT_SUCCESS);
+		if(t->buffer[0] == '\0' || strcmp(t->buffer, "\n") == 0)
+		{
+			free(t);
+			continue;
+		}
+		if(strcmp(t->buffer, "exit\n") == 0)
+		{
+			printf("exit\n");
+			free(t);
+			break;
+		}
+		lexer(t);
+		// parse
+		// execute
+		free(t);
 	}
 	exit(EXIT_SUCCESS);
 }

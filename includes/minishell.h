@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/24 16:08:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/25 15:13:53 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,25 @@
 
 typedef struct s_token
 {
-    char *value;
-    char *type;
+	char *value;
+	char *type;
 }               t_token;
 
 typedef struct s_lexer
 {   
-    char *buffer;       // the input text
-    int bufsize;        // size of the input text
-    int curpos;         // absolute char position in source
-    int readpos;        // after current pos
-    char c;             // current char under examination
-    //  + check EOF
+	char *buffer;       // the input text
+	int bufsize;        // size of the input text
+	int curpos;         // absolute char position in source
+	int readpos;        // after current pos
+	char c;             // current char under examination
+	//  + check EOF
 }               t_lexer;
 
 typedef struct s_cmdlist
 {
-    t_token **tokens;
-    int pipe;
-    struct s_cmdlist *next_cmd;
+	t_token **tokens;
+	int pipe;
+	struct s_cmdlist *next_cmd;
 }               t_cmdlist;
 
 void print_prompt();

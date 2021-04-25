@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 20:08:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/10/23 19:37:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/04/25 16:50:58 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,7 @@ char		*ft_strduplicate(const char *src)
 	int		i;
 
 	i = 0;
-	size = 0;
-	while (src[i] != '\0')
-	{
-		i++;
-		size++;
-	}
-	size++;
+	size = ft_strlen(src) + 1;
 	p = (char *)malloc(size * sizeof(char));
 	if (p == NULL)
 		return (NULL);
