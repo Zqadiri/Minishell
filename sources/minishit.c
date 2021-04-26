@@ -6,41 +6,53 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/25 17:12:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:45:46 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void read_cmd(t_lexer *t)
-{
-	char *line;
+// void read_cmd(t_lexer *t)
+// {
+// 	char *line;
 
-	line = ft_strdup("");
-	while (get_next_line(0, &line) > 0)
-	{
-		t->buffer = ft_strdup(line);
-		t->bufsize = ft_strlen(line);
-		t->curpos = 0;
-		t->readpos = t->curpos + 1;
-		t->c = ' ';
-		free(line);
-	}
+// 	line = ft_strdup("");
+// 	while (get_next_line(0, &line) > 0)
+// 	{
+// 		t->buffer = ft_strdup(line);
+// 		t->bufsize = ft_strlen(line);
+// 		t->curpos = 0;
+// 		// t->readpos = t->curpos + 1;
+// 		t->c = ' ';
+// 		free(line);
+// 	}
+// }
+
+void read_cmd(t_lexer *l)
+{
+	size_t r;
+
+	l->buffer = malloc(sizeof(char) * 1024);
+	if (!l->buffer)
+		return ;
+	r = read(0, l->buffer, 1024);
+	l->buffer[r - 1] = '\0';
+	l->bufsize = ft_strlen(l->buffer);
 }
 
-void init_struct(t_lexer *t)
+void init_struct(t_lexer *l)
 {
-	t->buffer = NULL;
-	t->bufsize = 0;
-	t->c = 0;
-	t->curpos = 0;
-	t->readpos = 0;
+	l->buffer = NULL;
+	l->bufsize = 0;
+	l->c = 0;
+	l->curpos = 0;
+	l->readpos = 0;
 }
 
 int main(int argc, char **argv, char **env)
 {
 	// t_cmdtable x;
-	t_lexer *t;
+	t_lexer *l;
 
 	(void)argc;
 	(void)argv; 
@@ -48,27 +60,28 @@ int main(int argc, char **argv, char **env)
 	while(1)
 	{
 		ft_putstr_fd("minishell$ ", 0);
-		t = malloc(sizeof(t_lexer));
-		init_struct(t);
-		read_cmd(t);
-		// printf("<<%s>>\n", t->buffer);
-		if(!t->buffer)
+		l = malloc(sizeof(t_lexer));
+		init_struct(l);
+		// ft_memset(l, 0, sizeof(t_token));
+		read_cmd(l);
+		printf("|%s|\n", l->buffer);
+		if(!l->buffer)
 			exit(EXIT_SUCCESS);
-		if(t->buffer[0] == '\0' || strcmp(t->buffer, "\n") == 0)
+		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
 		{
-			free(t);
+			free(l);
 			continue;
 		}
-		if(strcmp(t->buffer, "exit\n") == 0)
+		if(strcmp(l->buffer, "exit") == 0)
 		{
 			printf("exit\n");
-			free(t);
+			free(l);
 			break;
 		}
-		lexer(t);
+		lexer(l);
 		// parse
 		// execute
-		free(t);
+		free(l);
 	}
 	exit(EXIT_SUCCESS);
 }

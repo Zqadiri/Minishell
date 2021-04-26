@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/25 15:13:53 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/26 13:47:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@
 #define PARAM "param"
 #define ILLEGAL "syntax error"
 #define LITERAL "val"
-#define EOC 0
+// #define EOF -1
 
 typedef struct s_token
 {
+	// t_lexer *lexer;
 	char *value;
 	char *type;
 }               t_token;
@@ -52,7 +53,6 @@ typedef struct s_lexer
 	int curpos;         // absolute char position in source
 	int readpos;        // after current pos
 	char c;             // current char under examination
-	//  + check EOF
 }               t_lexer;
 
 typedef struct s_cmdlist

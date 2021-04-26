@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/25 17:14:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:46:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ void readchar(t_lexer *l)
 	if (!l || !l->buffer)
 		printf("error\n");
 	if (l->readpos >= l->bufsize)
-		l->c = 0; //EOF
+		l->c = EOF; //EOF
 	else
-	{
-		printf(">>current char |%c|\n", l->c);
 		l->c = l->buffer[l->readpos];
-	}
 	l->curpos = l->readpos;
 	l->readpos++;
 }
@@ -30,7 +27,7 @@ void readchar(t_lexer *l)
 int peek_char(t_lexer *l)
 {
 	if (l->readpos >= l->bufsize)
-		return (0);
+		return (EOF);
 	else
 		return (l->buffer[l->readpos]);
 }
@@ -39,7 +36,7 @@ void skip_space(t_lexer *l)
 {
 	if (!l || !l->buffer)
 		printf("error\n");
-	while(l->c == SPACE || l->c == '\t' || l->c == '\r' || l->c == '\n')
+	while(l->readpos < l->bufsize && (l->c == SPACE || l->c == '\t' || l->c == '\n'))
 		readchar(l);
 }
 
@@ -55,23 +52,20 @@ char *read_identifier(t_lexer *l)
 	char *s;
 	int pos;
 	
-	if (!(s = malloc(sizeof(char)*20)))
+	if (!(s = malloc(sizeof(char) * 100)))
 		return (NULL);
-	s = ft_memset(s, 0, 20);
 	pos = 0;
-	// printf("current char : %c \n", l->c);
 	while(isalnum(l->c) || ft_strchar("._-/$\\", l->c))
 	{
-		if (l->c == '\\')
-			readchar(l);
-		printf("pos >> %d - character >> %c\n", pos, l->c);
+		// if (l->c == '\\') // add this case later
+		// 	readchar(l);
 		s[pos] = l->c;
 		pos++;
-		// readchar(l);
-		// s[pos++] = l->c;
+		readchar(l);
 		//check DQUOTE & SQUOTE
 	}
 	s[pos] = '\0';
+	printf("[%s]\n", s);
 	return (s);
 }
 
@@ -105,6 +99,10 @@ int valid_cmd(char *s)
 	else if (!ft_strcmp(s, "env"))
 	{
 	}
+	else if (!ft_strcmp(s, "exit\n"))
+	{
+		exit(0);
+	}
 	else
 		return (0);
 	// add condition for built-in function
@@ -130,6 +128,8 @@ t_token *next_token(t_lexer *l)
 	t_token *token;
 
 	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
 	skip_space(l);
 	if (l->c == '|')
 	{
@@ -174,12 +174,12 @@ t_token *next_token(t_lexer *l)
 		//syntax error
 	}
 	else if (l->c == 0)
-		token = create_token(token, "EOC", '\0');
+		token = create_token(token, "EOF", EOF);
 	else if (isalnum(l->c) || ft_strchar("._-/$\\", l->c))
 	{
 		token->value = read_identifier(l);
 		token->type = lookupident(token->value);
-		printf("ok\n");
+		printf("token type >> %s - token value >> %s\n", token->type, token->value);
 		// parse quoted text
 	}
 	else
@@ -191,13 +191,36 @@ t_token *next_token(t_lexer *l)
 void lexer(t_lexer *l)
 {
 	t_token *tok;
+	t_token **t;
+	int i;
 
-	while (l->c != 0)
+	i = 0;
+	t = malloc(sizeof(t_token));
+	if (!t)
+		return ;
+	while (l->bufsize > l->curpos)
 	{
-		// tok = malloc(sizeof(t_token));
 		tok = next_token(l);
-		// tok->value = ft_strjoin(tok->value, l->c)
-		// printf("value>> %s | type>> %s\n", tok->value, tok->type);
+		// if (!ft_strcmp(tok->type, "ILLEGAL") || !ft_strcmp(tok->type, "EOF"))
+		// 	printf("^syntax error : %s\n", tok->value);
+		// else
+		// 	printf("ok\n");
+		// else
+		// {
+		// 	// realloc t 
+		// 	// t = realloc(t, sizeof(t_token) * 2);
+		// 	// add tok to t
+		// 	// t[i]->type = tok->type;
+		// 	// t[i]->value = tok->value;
+		// 	// i++;
+		// 	// printf("%d\n", i);
+		// }
+		// i = 0;
+		// while(t)
+		// {
+		// 	printf("t[%d]->value: %s - t[%d]->type: %s\n", i, t[i]->value,i, t[i]->type);
+		// 	i++;
+		// }
 	}
+	
 }
-
