@@ -6,48 +6,48 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/26 14:45:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/27 16:47:07 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// void read_cmd(t_lexer *t)
-// {
-// 	char *line;
-
-// 	line = ft_strdup("");
-// 	while (get_next_line(0, &line) > 0)
-// 	{
-// 		t->buffer = ft_strdup(line);
-// 		t->bufsize = ft_strlen(line);
-// 		t->curpos = 0;
-// 		// t->readpos = t->curpos + 1;
-// 		t->c = ' ';
-// 		free(line);
-// 	}
-// }
-
-void read_cmd(t_lexer *l)
-{
-	size_t r;
-
-	l->buffer = malloc(sizeof(char) * 1024);
-	if (!l->buffer)
-		return ;
-	r = read(0, l->buffer, 1024);
-	l->buffer[r - 1] = '\0';
-	l->bufsize = ft_strlen(l->buffer);
-}
-
 void init_struct(t_lexer *l)
 {
 	l->buffer = NULL;
 	l->bufsize = 0;
-	l->c = 0;
+	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
 }
+
+void read_cmd(t_lexer *l)
+{
+	char *line;
+
+	init_struct(l);
+	line = ft_strdup("");
+	while (get_next_line(0, &line) > 0)
+	{
+		l->buffer = ft_strdup(line);
+		l->bufsize = ft_strlen(line);
+		free(line);
+	}
+}
+
+// void read_cmd(t_lexer *l)
+// {
+// 	size_t r;
+// 	char *line;
+
+// 	line = malloc(sizeof(char) * 1024);
+// 	if (!line)
+// 		return ;
+// 	r = read(0, line, 1024);
+// 	line[r - 1] = '\0';
+// 	l->buffer = ft_strdup(line);
+// 	l->bufsize = ft_strlen(l->buffer);
+// }
 
 int main(int argc, char **argv, char **env)
 {
@@ -61,7 +61,6 @@ int main(int argc, char **argv, char **env)
 	{
 		ft_putstr_fd("minishell$ ", 0);
 		l = malloc(sizeof(t_lexer));
-		init_struct(l);
 		// ft_memset(l, 0, sizeof(t_token));
 		read_cmd(l);
 		printf("|%s|\n", l->buffer);
@@ -111,3 +110,12 @@ int main(int argc, char **argv, char **env)
 // >>A  B  C
 // bash-3.2$ echo A  B  C
 // >>A B C
+
+// tok->value = malloc(sizeof(char) * 2);
+// tok->size = ft_strlen(tok->value);
+// realloc(tok->value, tok->size * 2);
+// tok->size *= 2;
+// initalize a struct
+// ft_memset(tok, 0, sizeof(t_token));
+
+// add list for history

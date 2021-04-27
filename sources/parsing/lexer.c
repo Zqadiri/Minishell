@@ -6,20 +6,55 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/26 14:46:16 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/27 17:13:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	*ftstrnstr(const char *str, const char *to_find, size_t len)
+{
+	size_t		i;
+	char		*ptr;
+	char		*find;
+	size_t		size;
+
+	i = 0;
+	ptr = (char *)str;
+	find = (char *)to_find;
+	if (*to_find == '\0' || to_find == NULL)
+		return (NULL);
+	size = ft_strlen(find);
+	while (ptr[i] != '\0' && len >= i + size)
+	{
+		if (ft_strncmp(ptr + i, find, size) == 0)
+			return (ptr + i);
+		i++;
+	}
+	return (NULL);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
 
 void readchar(t_lexer *l)
 {
 	if (!l || !l->buffer)
 		printf("error\n");
 	if (l->readpos >= l->bufsize)
-		l->c = EOF; //EOF
+		l->c = EOF;
 	else
+	{
 		l->c = l->buffer[l->readpos];
+		printf("current char: %c\n", l->c);
+	}
 	l->curpos = l->readpos;
 	l->readpos++;
 }
@@ -57,56 +92,26 @@ char *read_identifier(t_lexer *l)
 	pos = 0;
 	while(isalnum(l->c) || ft_strchar("._-/$\\", l->c))
 	{
-		// if (l->c == '\\') // add this case later
-		// 	readchar(l);
+		if (l->c == '\\') // add this case later
+			readchar(l);
 		s[pos] = l->c;
 		pos++;
 		readchar(l);
-		//check DQUOTE & SQUOTE
+		//check DQUOTE & SQUOTE & DOLLAR
 	}
 	s[pos] = '\0';
 	printf("[%s]\n", s);
 	return (s);
 }
 
-int		ft_strcmp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
 int valid_cmd(char *s)
 {
-	if (!ft_strcmp(s, "echo"))
-	{
-	}
-	else if (!ft_strcmp(s, "cd"))
-	{ 
-	}
-	else if (!ft_strcmp(s, "pwd"))
-	{
-	}
-	else if (!ft_strcmp(s, "export"))
-	{
-	}
-	else if (!ft_strcmp(s, "unset"))
-	{
-	}
-	else if (!ft_strcmp(s, "env"))
-	{
-	}
-	else if (!ft_strcmp(s, "exit\n"))
-	{
-		exit(0);
-	}
-	else
-		return (0);
+	char *cmd = "echo cd pwd export unset env exit";
+	
+	if (ftstrnstr(cmd, s, ft_strlen(s)))
+		return (1);
+	return (0);
 	// add condition for built-in function
-	return (1);
 }
 
 char *lookupident(char *s)
@@ -123,13 +128,8 @@ char *lookupident(char *s)
 	return (s);
 }
 
-t_token *next_token(t_lexer *l)
+t_token *next_token(t_token *token, t_lexer *l)
 {
-	t_token *token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
 	skip_space(l);
 	if (l->c == '|')
 	{
@@ -158,69 +158,47 @@ t_token *next_token(t_lexer *l)
 		token = create_token(token, "LESS", l->c);
 		//syntax error
 	}
-	else if (l->c == '\'')
-	{
-		token = create_token(token, "SQUOTE", l->c);
-		//syntax error
-	}
-	else if (l->c == '\"')
-	{
-		token = create_token(token, "DQUOTE", l->c);
-		//syntax error
-	}
-	else if (l->c == '$')
-	{
-		token = create_token(token, "DOLLAR", l->c);
-		//syntax error
-	}
+	
 	else if (l->c == 0)
 		token = create_token(token, "EOF", EOF);
-	else if (isalnum(l->c) || ft_strchar("._-/$\\", l->c))
+	else  // add DQUOTE & SQUOTE & $
 	{
-		token->value = read_identifier(l);
-		token->type = lookupident(token->value);
-		printf("token type >> %s - token value >> %s\n", token->type, token->value);
-		// parse quoted text
+		if (isalnum(l->c) || ft_strchar(".\'_\"-/$\\", l->c))
+		{
+			token->value = read_identifier(l);
+			token->type = lookupident(token->value);
+			printf("token type >> %s - token value >> %s\n", token->type, token->value);
+			// parse quoted text
+			
+		}
+		else
+			// Invalid character in input return NOTOKEN;
+			token = create_token(token, "ILLEGAL", l->c);
 	}
-	else
-		// Invalid character in input return NOTOKEN;
-		token = create_token(token, "ILLEGAL", l->c);
 	return (token);
 }
 
 void lexer(t_lexer *l)
 {
 	t_token *tok;
-	t_token **t;
+	int size_tok;
 	int i;
 
 	i = 0;
-	t = malloc(sizeof(t_token));
-	if (!t)
+	size_tok = 2;
+	tok = malloc(sizeof(t_token) * size_tok);
+	if (!tok)
 		return ;
 	while (l->bufsize > l->curpos)
 	{
-		tok = next_token(l);
-		// if (!ft_strcmp(tok->type, "ILLEGAL") || !ft_strcmp(tok->type, "EOF"))
-		// 	printf("^syntax error : %s\n", tok->value);
-		// else
-		// 	printf("ok\n");
-		// else
-		// {
-		// 	// realloc t 
-		// 	// t = realloc(t, sizeof(t_token) * 2);
-		// 	// add tok to t
-		// 	// t[i]->type = tok->type;
-		// 	// t[i]->value = tok->value;
-		// 	// i++;
-		// 	// printf("%d\n", i);
-		// }
-		// i = 0;
-		// while(t)
-		// {
-		// 	printf("t[%d]->value: %s - t[%d]->type: %s\n", i, t[i]->value,i, t[i]->type);
-		// 	i++;
-		// }
+		next_token(&tok[i], l);
+		if (!ft_strcmp(tok->type, "ILLEGAL") || !ft_strcmp(tok->type, "EOF"))
+			printf("^syntax error : %s\n", tok->value);
+		else
+		{
+			i++;
+			size_tok++;
+			tok = realloc(tok, sizeof(t_token) * size_tok);
+		}
 	}
-	
 }
