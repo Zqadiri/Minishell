@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/27 16:47:07 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/29 13:14:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void read_cmd(t_lexer *l)
 // 	size_t r;
 // 	char *line;
 
-// 	line = malloc(sizeof(char) * 1024);
+// 	line = malloc(sizeof(char) * 200);
 // 	if (!line)
 // 		return ;
-// 	r = read(0, line, 1024);
+// 	r = read(0, line, 200);
 // 	line[r - 1] = '\0';
 // 	l->buffer = ft_strdup(line);
 // 	l->bufsize = ft_strlen(l->buffer);

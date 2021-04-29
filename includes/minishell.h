@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/26 13:47:22 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/29 16:59:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,17 @@
 #define LESS 60
 #define DQUOTE 34
 #define SQUOTE 39
+// #define DQUOTE1 1
+// #define DQUOTE2 2
+// #define SQUOTE1 3
+// #define SQUOTE2 4
 #define SEMICOLON 59
 #define SPACE 32
 #define DOLLAR 36
 #define SLASH 92
-#define CMD "cmd"
+#define CMD "command"
 #define OPTION "-flag"
-#define PARAM "param"
+#define ARG "argument"
 #define ILLEGAL "syntax error"
 #define LITERAL "val"
 // #define EOF -1

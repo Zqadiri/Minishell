@@ -6,33 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/27 17:13:18 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:01:42 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-char	*ftstrnstr(const char *str, const char *to_find, size_t len)
-{
-	size_t		i;
-	char		*ptr;
-	char		*find;
-	size_t		size;
-
-	i = 0;
-	ptr = (char *)str;
-	find = (char *)to_find;
-	if (*to_find == '\0' || to_find == NULL)
-		return (NULL);
-	size = ft_strlen(find);
-	while (ptr[i] != '\0' && len >= i + size)
-	{
-		if (ft_strncmp(ptr + i, find, size) == 0)
-			return (ptr + i);
-		i++;
-	}
-	return (NULL);
-}
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -82,22 +60,64 @@ t_token *create_token(t_token *token, char *type, char c)
 	return (token);
 }
 
+char *parse_dquoted(t_lexer *l)
+{
+	char *str;
+	// int nbr_squote = 0;
+	// int nbr_dquote = 0;
+	// int start;
+	
+	// start = l->curpos - 1;
+	// while (++start > l->bufsize)
+	// {
+	// 	if (l->c == SQUOTE1)
+	// 		nbr_squote++;
+	// 	else
+	// 		nbr_dquote++;	
+	// }
+	// if ((nbr_dquote % 2) != 0 || (nbr_squote % 2) != 0)
+	// {
+	// 	printf("syntax error\n");
+	// 	return (0);
+	// }
+	readchar(l);
+	while (l->c != DQUOTE)
+	{
+		//join l->c to str
+		readchar(l);
+	}
+	return (str);
+}
+
 char *read_identifier(t_lexer *l)
 {
 	char *s;
 	int pos;
-	
+
 	if (!(s = malloc(sizeof(char) * 100)))
 		return (NULL);
 	pos = 0;
-	while(isalnum(l->c) || ft_strchar("._-/$\\", l->c))
+	while(isalnum(l->c) || ft_strchar(".\'_\"-/$\\", l->c))
 	{
 		if (l->c == '\\') // add this case later
+		{
+			//check DQUOTE & SQUOTE & DOLLAR
+			if (peek_char(l) == SQUOTE || peek_char(l) == DQUOTE ||
+				peek_char(l) == DOLLAR || peek_char(l) == SLASH)
+			{
+				readchar(l);
+				s[pos] = l->c;
+			}
+			s[pos] = l->c;
 			readchar(l);
+		}
+		if (l->c == DQUOTE)
+			parse_dquoted(l);
+		if (l->c == SQUOTE)
+			parse_squoted(l);
 		s[pos] = l->c;
 		pos++;
 		readchar(l);
-		//check DQUOTE & SQUOTE & DOLLAR
 	}
 	s[pos] = '\0';
 	printf("[%s]\n", s);
@@ -105,10 +125,9 @@ char *read_identifier(t_lexer *l)
 }
 
 int valid_cmd(char *s)
-{
-	char *cmd = "echo cd pwd export unset env exit";
-	
-	if (ftstrnstr(cmd, s, ft_strlen(s)))
+{	
+	if (!ft_strcmp(s, "echo") || !ft_strcmp(s, "cd") || !ft_strcmp(s, "pwd")
+		|| !ft_strcmp(s, "env") || !ft_strcmp(s, "export") || !ft_strcmp(s, "unset"))
 		return (1);
 	return (0);
 	// add condition for built-in function
@@ -124,7 +143,7 @@ char *lookupident(char *s)
 	else if (s[i] == '-' && ft_isalpha(s[i+1]))
 		s = OPTION;
 	else
-		s = PARAM;
+		s = ARG;
 	return (s);
 }
 
@@ -165,10 +184,24 @@ t_token *next_token(t_token *token, t_lexer *l)
 	{
 		if (isalnum(l->c) || ft_strchar(".\'_\"-/$\\", l->c))
 		{
-			token->value = read_identifier(l);
-			token->type = lookupident(token->value);
-			printf("token type >> %s - token value >> %s\n", token->type, token->value);
 			// parse quoted text
+			// int nbr_squote = 0, nbr_dquote = 0;
+			// if (l->c == SQUOTE)
+			// {
+			// 	nbr_squote += 1;
+						
+			// }
+			// else if (l->c == DQUOTE)
+			// {
+			// 	nbr_dquote += 1;
+				
+			// }
+			// else
+			// {
+				token->value = read_identifier(l);
+				token->type = lookupident(token->value);
+			// }
+			printf("token type >> %s - token value >> %s\n", token->type, token->value);
 			
 		}
 		else
