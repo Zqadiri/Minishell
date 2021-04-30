@@ -66,3 +66,6 @@ Output: Print hello world infinite times. If user presses ctrl-c to terminate th
 Conceptually, a pipe is a connection between two processes, such that the standard output from one process becomes the standard input of the other process.
 
 [Pipe() tutorial for linux](https://www.youtube.com/watch?v=uHH7nHkgZ4w)
+
+- Enclosing characters in single quotes (‘’’) preserves the literal value of each character within the quotes. A single quote may not occur between single quotes, even when preceded by a backslash.
+- Enclosing characters in double quotes (‘"’) preserves the literal value of all characters withinthe quotes, with the exception of ‘$’, ‘‘’, ‘\’ .  The characters ‘$’ and ‘‘’ retain their special meaning within double quotes.The backslash retains its special meaning only when followed by one of the following characters: ‘$’, ‘‘’, ‘"’, ‘\’, or newline. Within double quotes, backslashes that are followed by one of these characters are removed

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/29 17:01:42 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/04/30 16:43:25 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,24 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
+char	*ft_strjoinchar(char *s, char c)
+{
+	int		i;
+	char	*str;
+	i = 0;
+	while (s[i])
+		i++;
+	if (!(str = (char *)malloc(i + 2)))
+		return (0);
+	i = -1;
+	while (s[++i])
+		str[i] = s[i];
+	str[i] = c;
+	str[i + 1] = '\0';
+	// free(s);
+	return (str);
+}
+
 void readchar(t_lexer *l)
 {
 	if (!l || !l->buffer)
@@ -31,7 +49,7 @@ void readchar(t_lexer *l)
 	else
 	{
 		l->c = l->buffer[l->readpos];
-		printf("current char: %c\n", l->c);
+		printf("current char: |%c|\n", l->c);
 	}
 	l->curpos = l->readpos;
 	l->readpos++;
@@ -53,45 +71,45 @@ void skip_space(t_lexer *l)
 		readchar(l);
 }
 
-t_token *create_token(t_token *token, char *type, char c)
+t_token *create_token(t_token *t ,char *type, char c)
 {
-	token->value = &c;
-	token->type = type;
-	return (token);
+	// t_token  *t;
+
+	// t = malloc(sizeof(t_token));
+	// if (!t)
+	// 	return (NULL);
+	t->value = &c;
+	t->type = type;
+	return (t);
 }
 
 char *parse_dquoted(t_lexer *l)
 {
 	char *str;
-	// int nbr_squote = 0;
-	// int nbr_dquote = 0;
-	// int start;
+	char *temp;
 	
-	// start = l->curpos - 1;
-	// while (++start > l->bufsize)
-	// {
-	// 	if (l->c == SQUOTE1)
-	// 		nbr_squote++;
-	// 	else
-	// 		nbr_dquote++;	
-	// }
-	// if ((nbr_dquote % 2) != 0 || (nbr_squote % 2) != 0)
-	// {
-	// 	printf("syntax error\n");
-	// 	return (0);
-	// }
-	readchar(l);
+	// str = malloc(sizeof(char));
+	// if (!str)
+	// 	return (NULL);
+	// str[0] = '\0';
+	str = ft_strdup("");
 	while (l->c != DQUOTE)
 	{
-		//join l->c to str
+		printf("current char before DQUOTE: <%c>\n", l->c);
+		temp = str;
+		str = ft_strjoinchar(str, l->c);
 		readchar(l);
+		free(temp);
+		printf("s <%s>\n", str);
 	}
+	readchar(l);
 	return (str);
 }
 
 char *read_identifier(t_lexer *l)
 {
 	char *s;
+	char *temp;
 	int pos;
 
 	if (!(s = malloc(sizeof(char) * 100)))
@@ -108,19 +126,30 @@ char *read_identifier(t_lexer *l)
 				readchar(l);
 				s[pos] = l->c;
 			}
-			s[pos] = l->c;
-			readchar(l);
 		}
-		if (l->c == DQUOTE)
-			parse_dquoted(l);
-		if (l->c == SQUOTE)
-			parse_squoted(l);
-		s[pos] = l->c;
+		if (l->c == DQUOTE || l->c == SQUOTE)
+		{
+			readchar(l);
+			temp = s;
+			if (l->c == DQUOTE)
+			// {
+				// printf("s <%s>\n", s);
+				s = ft_strjoin(s,parse_dquoted(l));
+			// }
+			// printf("s <%s>\n", s);
+			// else
+			// 	s = ft_strjoin(s,parse_squoted(l));
+			// free(temp);
+			break;
+		}
+		else
+			s[pos] = l->c;
 		pos++;
 		readchar(l);
 	}
+	printf("pos : %d\n", pos);
 	s[pos] = '\0';
-	printf("[%s]\n", s);
+	// printf("[%s]\n", s);
 	return (s);
 }
 
@@ -184,23 +213,8 @@ t_token *next_token(t_token *token, t_lexer *l)
 	{
 		if (isalnum(l->c) || ft_strchar(".\'_\"-/$\\", l->c))
 		{
-			// parse quoted text
-			// int nbr_squote = 0, nbr_dquote = 0;
-			// if (l->c == SQUOTE)
-			// {
-			// 	nbr_squote += 1;
-						
-			// }
-			// else if (l->c == DQUOTE)
-			// {
-			// 	nbr_dquote += 1;
-				
-			// }
-			// else
-			// {
-				token->value = read_identifier(l);
-				token->type = lookupident(token->value);
-			// }
+			token->value = read_identifier(l);
+			token->type = lookupident(token->value);
 			printf("token type >> %s - token value >> %s\n", token->type, token->value);
 			
 		}
@@ -219,19 +233,22 @@ void lexer(t_lexer *l)
 
 	i = 0;
 	size_tok = 2;
-	tok = malloc(sizeof(t_token) * size_tok);
-	if (!tok)
-		return ;
+
 	while (l->bufsize > l->curpos)
 	{
-		next_token(&tok[i], l);
+		tok = malloc(sizeof(t_token) * size_tok);
+		if (!tok)
+			return ;
+		next_token(tok, l);
 		if (!ft_strcmp(tok->type, "ILLEGAL") || !ft_strcmp(tok->type, "EOF"))
 			printf("^syntax error : %s\n", tok->value);
 		else
 		{
-			i++;
+			// i++;
 			size_tok++;
-			tok = realloc(tok, sizeof(t_token) * size_tok);
+			//tok = realloc(tok, sizeof(t_token) * size_tok);
+			free(tok);
+			// tok = malloc(sizeof(t_token) * size_tok);
 		}
 	}
 }
