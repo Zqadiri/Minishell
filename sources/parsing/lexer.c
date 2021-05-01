@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/30 16:43:25 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/01 17:22:32 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ void readchar(t_lexer *l)
 	if (l->readpos >= l->bufsize)
 		l->c = EOF;
 	else
-	{
 		l->c = l->buffer[l->readpos];
-		printf("current char: |%c|\n", l->c);
-	}
 	l->curpos = l->readpos;
 	l->readpos++;
 }
@@ -95,12 +92,16 @@ char *parse_dquoted(t_lexer *l)
 	str = ft_strdup("");
 	while (l->c != DQUOTE)
 	{
+		if (l->c == SLASH && peek_char(l) == DOLLAR)
+			env_var(l);
+		else if (l->c == SLASH && (!ft_strchar("\\$\"", l->c)))
+			readchar(l);
 		printf("current char before DQUOTE: <%c>\n", l->c);
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
 		readchar(l);
 		free(temp);
-		printf("s <%s>\n", str);
+		printf("test\ns <%s>\n", str);
 	}
 	readchar(l);
 	return (str);
@@ -115,7 +116,7 @@ char *read_identifier(t_lexer *l)
 	if (!(s = malloc(sizeof(char) * 100)))
 		return (NULL);
 	pos = 0;
-	while(isalnum(l->c) || ft_strchar(".\'_\"-/$\\", l->c))
+	while((isalnum(l->c) || ft_strchar(".\'_\"-/$\\", l->c)) && l->c != 32)
 	{
 		if (l->c == '\\') // add this case later
 		{
@@ -144,6 +145,7 @@ char *read_identifier(t_lexer *l)
 		}
 		else
 			s[pos] = l->c;
+		printf("current char: |%c|\n", l->c);
 		pos++;
 		readchar(l);
 	}
@@ -206,17 +208,18 @@ t_token *next_token(t_token *token, t_lexer *l)
 		token = create_token(token, "LESS", l->c);
 		//syntax error
 	}
-	
 	else if (l->c == 0)
 		token = create_token(token, "EOF", EOF);
 	else  // add DQUOTE & SQUOTE & $
 	{
 		if (isalnum(l->c) || ft_strchar(".\'_\"-/$\\", l->c))
 		{
-			token->value = read_identifier(l);
-			token->type = lookupident(token->value);
+			if (read_identifier(l))
+			{
+				token->value = read_identifier(l);
+				token->type = lookupident(token->value);
 			printf("token type >> %s - token value >> %s\n", token->type, token->value);
-			
+			}
 		}
 		else
 			// Invalid character in input return NOTOKEN;
