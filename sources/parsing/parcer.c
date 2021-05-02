@@ -6,11 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/02 11:02:53 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/02 16:44:59 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_parser *init_parser(t_lexer *l)
 {
@@ -24,6 +24,7 @@ t_parser *init_parser(t_lexer *l)
     p->lexer = l;
     p->curr_token = get_next_token(l);
     p->prev_token = p->curr_token;
+    return (p);
 }
 
 // ToDo:

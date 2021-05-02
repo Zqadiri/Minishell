@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/02 12:05:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/02 16:50:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,62 +67,143 @@ void skip_space(t_lexer *l)
 		readchar(l);
 }
 
-t_token *init_token(char *type, char *c)
+t_token *init_token(char *type, char *s)
 {
 	t_token  *t;
 
 	t = malloc(sizeof(t_token));
 	if (!t)
 		return (NULL);
-	t->value = c;
+	t->value = s;
 	t->type = type;
 	return (t);
 }
 
-t_token *ret(t_lexer *l, int type)
+t_token *ret(t_lexer *l, char *s, char *type)
 {
-	if (type == "GREATER")
+	if (!ft_strcmp(type,"GREATER"))
 		readchar(l);
 	readchar(l);
-	return (init_token(type, l->c));
+	return (init_token(type, s));
 }
 
-t_token *tokenize_dquoted_text(t_lexer *l)
+char *envar_token(t_lexer *l)
 {
 	char *str;
 	char *temp;
-	
-	str = ft_strdup("");
-	while(l->c != SQUOTE)
-	{
-		
-	}
-	readchar(l);
-	init_token(ARG, str);
-}
 
-t_token *tokenize_squoted_text(t_lexer *l)
-{
-	char *str;
-	char *temp;
-	
-	str = ft_strdup("");
-	while(l->c != SQUOTE)
-	{
-		
-	}
-	readchar(l);
-	init_token("argument", str);
-}
-
-t_token *tokenize_text(t_lexer *l)
-{
 	if (!l)
 		return (NULL);
-	while(isalnum(l->c) || ft_strchar("._-/$\\", l->c))
+	str = ft_strdup("");
+	while (l->c != DQUOTE && l->c != '\0' && ft_isalnum(l->c))
 	{
-		
+		temp = str;
+		str = ft_strjoinchar(str, l->c);
+		readchar(l);
+		free(temp);
 	}
+	return (str);
+}
+
+char *tokenize_dquoted_text(t_lexer *l)
+{
+	char *str;
+	char *temp;
+	
+	readchar(l);
+	str = ft_strdup("");
+	while(l->c != DQUOTE && l->c != '\0')
+	{
+		temp = str;
+		if (l->c == SLASH)
+		{
+			readchar(l);
+			if (l->c == DQUOTE || l->c == DOLLAR || l->c == SLASH)
+			{
+				str = ft_strjoinchar(str, l->c);
+				readchar(l);
+			}
+		}
+		else if (l->c == DOLLAR)
+			str = envar_token(l);
+		else
+		{
+			str = ft_strjoinchar(str, l->c);
+			readchar(l);
+		}
+		free(temp);
+	}
+	if (l->c == '\0')
+		printf("syntax error->add \"\n"); //free + exit
+	readchar(l);
+	return (str);
+}
+
+char *tokenize_squoted_text(t_lexer *l)
+{
+	char *str;
+	char *temp;
+	
+	readchar(l);
+	str = ft_strdup("");
+	while(l->c != SQUOTE && l->c != '\0')
+	{
+		temp = str;
+		str = ft_strjoinchar(str, l->c);
+		readchar(l);
+		free(temp);
+	}
+	if (l->c == '\0')
+		printf("syntax error->add \"\n"); //free + exit
+	readchar(l);
+	return (str);
+}
+
+char *tokenize_text(t_lexer *l)
+{
+	char *str;
+	char *temp;
+
+	if (!l)
+		return (NULL);
+	str = ft_strdup("");
+	while (l->c != '\0' && ft_strchar("|;>><", l->c))
+	{
+		temp = str;
+		str = ft_strjoinchar(str, l->c);
+		readchar(l);
+		free(temp);
+	}
+	return (str);
+}
+
+t_token *string_token(t_lexer *l)
+{
+	char *str;
+	char *temp;
+
+	str = ft_strdup("");
+	while (l->curpos < l->bufsize)
+	{
+		temp = str;
+		if (l->c == DQUOTE)
+		{
+			str = ft_strjoin(str, tokenize_dquoted_text(l));
+			continue;
+		}
+		else if (l->c == SQUOTE)
+		{
+			str = ft_strjoin(str, tokenize_squoted_text(l));
+			continue;
+		}
+		else
+		{
+			str = ft_strjoin(str, tokenize_text(l));
+			continue;
+		}
+		free(temp);
+	}
+	return(ret(l, str, ARG));
 }
 
 t_token *get_next_token(t_lexer *l)
@@ -130,25 +211,20 @@ t_token *get_next_token(t_lexer *l)
 	while (l->c != EOF && (l->curpos < l->bufsize))
 	{
 		skip_space(l);
-		if (isalnum(l->c) || ft_strchar("._-/$\\", l->c))
-			return(tokenize_text(l));
-		if (l->c == DQUOTE)
-			return (tokenize_dquoted_text(l));
-		if (l->c == SQUOTE)
-			return (tokenize_squoted_text(l));
-		//switch cases:
 		if (l->c == PIPE)
-			return(ret(l, PIPE));
+			return(ret(l, &l->c, "PIPE"));
 		else if (l->c == SEMICOLON)
-			return(ret(l, SEMICOLON));
+			return(ret(l, &l->c, "SEMICOLON"));
 		else if (l->c == GREAT)
 		{
 			if (peek_char(l) == GREAT)
-				return(ret(l, GREATER));
-			return(ret(l, GREAT));
+				return(ret(l, ">>", "GREATER"));
+			return(ret(l, &l->c, "GREAT"));
 		}
 		else if (l->c == LESS)
-			return(ret(l, LESS));
+			return(ret(l, &l->c, "LESS"));
+		else
+			return(string_token(l));
 	}
-	return(ret(l,EOF));
+	return(ret(l, &l->c, "EOF"));
 }
