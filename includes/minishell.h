@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/29 16:59:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/02 12:38:42 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,10 @@
 #define PATH_MAX 15000
 #define PIPE 124
 #define GREAT 62
-#define GREATER ">>"
+#define GREATER 63 //">>"
 #define LESS 60
 #define DQUOTE 34
 #define SQUOTE 39
-// #define DQUOTE1 1
-// #define DQUOTE2 2
-// #define SQUOTE1 3
-// #define SQUOTE2 4
 #define SEMICOLON 59
 #define SPACE 32
 #define DOLLAR 36
@@ -40,8 +36,7 @@
 #define OPTION "-flag"
 #define ARG "argument"
 #define ILLEGAL "syntax error"
-#define LITERAL "val"
-// #define EOF -1
+// #define LITERAL "val"
 
 typedef struct s_token
 {
@@ -49,6 +44,13 @@ typedef struct s_token
 	char *value;
 	char *type;
 }               t_token;
+
+typedef struct s_parser
+{
+	// t_lexer *lexer;
+	t_token *curr_token;
+	t_token *prev_token;
+}				t_parser;
 
 typedef struct s_lexer
 {   
@@ -61,12 +63,13 @@ typedef struct s_lexer
 
 typedef struct s_cmdlist
 {
-	t_token **tokens;
+	t_token *tokens;
 	int pipe;
 	struct s_cmdlist *next_cmd;
 }               t_cmdlist;
 
 void print_prompt();
+// t_lexer *read_cmd(t_lexer *x);
 void read_cmd(t_lexer *x);
 void lexer(t_lexer *l);
 // void exec_cmd();
@@ -74,9 +77,9 @@ void lexer(t_lexer *l);
 
 //linkedlist
 int list_size(t_cmdlist *l);
-t_cmdlist *create(t_token **cmd, int pipe);
-void add_back(t_cmdlist **l, t_token **cmd, int pipe);
-void push(t_cmdlist **l, t_token **cmd, int pipe);
+t_cmdlist *create(t_token *cmd, int pipe);
+void add_back(t_cmdlist **l, t_token *cmd, int pipe);
+void push(t_cmdlist **l, t_token *cmd, int pipe);
 void print_cmd(t_cmdlist *l);
 
 

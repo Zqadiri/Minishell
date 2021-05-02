@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:40:10 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/19 17:06:19 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/02 12:38:59 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int list_size(t_cmdlist *l)
 }
 
 //insert if the list is empty
-t_cmdlist *create(t_token **cmd, int pipe)
+t_cmdlist *create(t_token *cmd, int pipe)
 {
 	t_cmdlist *l;
 
@@ -39,7 +39,7 @@ t_cmdlist *create(t_token **cmd, int pipe)
 }
 
 // insert an element at the end of the list
-void add_back(t_cmdlist **l, t_token **cmd, int pipe)
+void add_back(t_cmdlist **l, t_token *cmd, int pipe)
 {
 	t_cmdlist *new;
 	t_cmdlist *last;
@@ -60,7 +60,7 @@ void add_back(t_cmdlist **l, t_token **cmd, int pipe)
 }
 
 // insert an element to the top of list --> history
-void push(t_cmdlist **l, t_token **cmd, int pipe)
+void push(t_cmdlist **l, t_token *cmd, int pipe)
 {
 	t_cmdlist *new;
 	
@@ -74,21 +74,21 @@ void push(t_cmdlist **l, t_token **cmd, int pipe)
 	}
 }
 
-void print_cmd(t_cmdlist *l)
-{
-	t_cmdlist *temp;
-	int i;
+// void print_cmd(t_cmdlist *l)
+// {
+// 	t_cmdlist *temp;
+// 	int i;
 
-	i = 0;
-	temp = l;
-	while(temp)
-	{
-		printf("pipe = %d\n", temp->pipe);
-		while(temp->tokens[i])
-		{
-			printf("token[%d]={type:%s, value:%s}\n", i, temp->tokens[i]->type, temp->tokens[i]->value);
-			i++;
-		}
-	}
-	printf("\n");
-}
+// 	i = 0;
+// 	temp = l;
+// 	while(temp)
+// 	{
+// 		printf("pipe = %d\n", temp->pipe);
+// 		while(temp->tokens[i])
+// 		{
+// 			printf("token[%d]={type:%s, value:%s}\n", i, temp->tokens[i]->type, temp->tokens[i]->value);
+// 			i++;
+// 		}
+// 	}
+// 	printf("\n");
+// }

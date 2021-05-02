@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/04/30 14:22:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/02 12:39:58 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,10 @@ void read_cmd(t_lexer *l)
 	}
 }
 
-// t_lexer *init_lexer(char *line)
-// {
-// 	t_lexer *l;
-
-// 	l = malloc(sizeof(t_lexer));
-// 	if (!l)
-// 		return (NULL);
-// 	l->buffer = ft_strdup(line);
-// 	l->bufsize = ft_strlen(line);
-// 	l->c = ' ';
-// 	l->curpos = 0;
-// 	l->readpos = 0;
-// 	return (l);
-// }
-
-// void read_cmd(t_lexer *l)
-// {
-// 	size_t r;
-// 	char *line;
-
-// 	line = malloc(sizeof(char) * 50);
-// 	if (!line)
-// 		return ;
-// 	r = read(0, line, 50);
-// 	line[r - 1] = '\0';
-// 	init_lexer(line);
-// }
-
 int main(int argc, char **argv, char **env)
 {
 	// t_cmdtable x;
 	t_lexer *l;
-
 	(void)argc;
 	(void)argv; 
 	(void)env;
@@ -98,6 +69,50 @@ int main(int argc, char **argv, char **env)
 	}
 	exit(EXIT_SUCCESS);
 }
+
+// t_lexer *init_lexer(char *line)
+// {
+// 	t_lexer *l;
+
+// 	l = malloc(sizeof(t_lexer));
+// 	if (!l)
+// 		return (NULL);
+// 	l->buffer = ft_strdup(line);
+// 	l->bufsize = ft_strlen(line);
+// 	l->c = ' ';
+// 	l->curpos = 0;
+// 	l->readpos = 0;
+// 	return (l);
+// }
+
+// t_lexer *read_cmd(t_lexer *l)
+// {
+// 	size_t r;
+// 	char *line;
+
+// 	line = malloc(sizeof(char) * 50);
+// 	if (!line)
+// 		return(NULL);
+// 	r = read(0, line, 50);
+// 	line[r - 1] = '\0';
+// 	return(init_lexer(line));
+// }
+
+// int main(int argc, char **argv, char **env)
+// {
+// 	t_lexer *l;
+// 	t_parser *p;
+
+// 	(void)argc;
+// 	(void)argv; 
+// 	(void)env;
+// 	while(1)
+// 	{
+// 		ft_putstr_fd("minishell$ ", 0);
+// 		l = read_cmd(l);
+// 		p = init_parser(l);
+// 	}
+// }
 
 // ToDo List:
 // read cmdline √
