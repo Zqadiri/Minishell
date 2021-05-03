@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/02 16:50:14 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/03 11:14:29 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,56 +87,11 @@ t_token *ret(t_lexer *l, char *s, char *type)
 	return (init_token(type, s));
 }
 
-char *envar_token(t_lexer *l)
+int valid_envar(char c)
 {
-	char *str;
-	char *temp;
-
-	if (!l)
-		return (NULL);
-	str = ft_strdup("");
-	while (l->c != DQUOTE && l->c != '\0' && ft_isalnum(l->c))
-	{
-		temp = str;
-		str = ft_strjoinchar(str, l->c);
-		readchar(l);
-		free(temp);
-	}
-	return (str);
-}
-
-char *tokenize_dquoted_text(t_lexer *l)
-{
-	char *str;
-	char *temp;
-	
-	readchar(l);
-	str = ft_strdup("");
-	while(l->c != DQUOTE && l->c != '\0')
-	{
-		temp = str;
-		if (l->c == SLASH)
-		{
-			readchar(l);
-			if (l->c == DQUOTE || l->c == DOLLAR || l->c == SLASH)
-			{
-				str = ft_strjoinchar(str, l->c);
-				readchar(l);
-			}
-		}
-		else if (l->c == DOLLAR)
-			str = envar_token(l);
-		else
-		{
-			str = ft_strjoinchar(str, l->c);
-			readchar(l);
-		}
-		free(temp);
-	}
-	if (l->c == '\0')
-		printf("syntax error->add \"\n"); //free + exit
-	readchar(l);
-	return (str);
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
 }
 
 char *tokenize_squoted_text(t_lexer *l)
@@ -167,13 +122,71 @@ char *tokenize_text(t_lexer *l)
 	if (!l)
 		return (NULL);
 	str = ft_strdup("");
-	while (l->c != '\0' && ft_strchar("|;>><", l->c))
+	while (l->c != '\0' && !ft_strchar("|;>><", l->c))
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
 		readchar(l);
 		free(temp);
 	}
+	return (str);
+}
+
+char *envar_token(t_lexer *l)
+{
+	char *str;
+	char *temp;
+
+	if (!l)
+		return (NULL);
+	str = ft_strdup("");
+	readchar(l);
+	if (ft_isdigit(l->c))
+	{
+		readchar(l);
+		return(tokenize_text(l));
+	}
+	while (l->c != DQUOTE && l->c != '\0' && valid_envar(l->c)) 
+	{
+		temp = str;
+		str = ft_strjoinchar(str, l->c);
+		readchar(l);
+		free(temp);
+	}
+	return (str);
+}
+
+char *tokenize_dquoted_text(t_lexer *l)
+{
+	char *str;
+	char *temp;
+	
+	readchar(l);
+	str = ft_strdup("");
+	while(l->c != DQUOTE && l->c != '\0')
+	{
+		temp = str;
+		if (l->c == SLASH)
+		{
+			readchar(l);
+			if (l->c == DQUOTE || l->c == DOLLAR || l->c == SLASH)
+			{
+				str = ft_strjoinchar(str, l->c);
+				readchar(l);
+			}
+		}
+		else if (l->c == DOLLAR)// && !ft_isdigit(peek_char(l)))
+			str = envar_token(l);
+		else
+		{
+			str = ft_strjoinchar(str, l->c);
+			readchar(l);
+		}
+		free(temp);
+	}
+	if (l->c == '\0')
+		printf("syntax error->add \"\n"); //free + exit
+	readchar(l);
 	return (str);
 }
 
