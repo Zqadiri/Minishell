@@ -69,3 +69,5 @@ Conceptually, a pipe is a connection between two processes, such that the standa
 
 - Enclosing characters in single quotes (‘’’) preserves the literal value of each character within the quotes. A single quote may not occur between single quotes, even when preceded by a backslash.
 - Enclosing characters in double quotes (‘"’) preserves the literal value of all characters withinthe quotes, with the exception of ‘$’, ‘‘’, ‘\’ .  The characters ‘$’ and ‘‘’ retain their special meaning within double quotes.The backslash retains its special meaning only when followed by one of the following characters: ‘$’, ‘‘’, ‘"’, ‘\’, or newline. Within double quotes, backslashes that are followed by one of these characters are removed
+
+`notion : [https://www.notion.so/ikram9/MiniShell-b2a9017a1f784f4da4e55b79c3c46975](https://www.notion.so/ikram9/MiniShell-b2a9017a1f784f4da4e55b79c3c46975)

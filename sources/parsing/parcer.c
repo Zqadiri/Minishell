@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/02 16:44:59 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/04 12:35:55 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_parser *init_parser(t_lexer *l)
     
     if (!l)
         return (NULL);
+    printf("ok\n");
     p = malloc(sizeof(t_parser));
     if (!p)
         return (NULL);

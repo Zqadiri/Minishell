@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/03 11:14:29 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/04 13:39:38 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,11 @@ char *envar_token(t_lexer *l)
 		return (NULL);
 	str = ft_strdup("");
 	readchar(l);
-	if (ft_isdigit(l->c))
-	{
-		readchar(l);
-		return(tokenize_text(l));
-	}
+	// if (ft_isdigit(l->c))
+	// {
+	// 	readchar(l);
+	// 	return(tokenize_text(l));
+	// }
 	while (l->c != DQUOTE && l->c != '\0' && valid_envar(l->c)) 
 	{
 		temp = str;
@@ -175,6 +175,8 @@ char *tokenize_dquoted_text(t_lexer *l)
 				readchar(l);
 			}
 		}
+		else if (l->c == DOLLAR && ft_isdigit(peek_char(l)))
+			readchar(l);
 		else if (l->c == DOLLAR)// && !ft_isdigit(peek_char(l)))
 			str = envar_token(l);
 		else
