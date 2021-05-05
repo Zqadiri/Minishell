@@ -6,13 +6,13 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/02 16:47:15 by iidzim           ###   ########.fr        #
+#    Updated: 2021/05/05 12:08:10 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	minishell
 
-SRCS 			=	./sources/minishit.c\
+SRCS 			=	./sources/minishell.c\
 					./sources/execution/main_exec.c\
 					./sources/parsing/list.c\
 					./sources/parsing/lexer.c\

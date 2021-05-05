@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/02 16:45:49 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/05 15:14:03 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 #define OPTION "-flag"
 #define ARG "argument"
 #define ILLEGAL "syntax error"
-// #define LITERAL "val"
 
 typedef struct s_token
 {
@@ -67,6 +66,35 @@ typedef struct s_cmdlist
 	int pipe;
 	struct s_cmdlist *next_cmd;
 }               t_cmdlist;
+
+typedef enum t_ast_type
+{
+	compound,
+	pip,
+	semi,
+	great,
+	greater,
+	less,
+	id,
+	eof
+}			e_ast_type;
+
+typedef struct s_ast
+{
+	e_ast_type type;
+	//AST_COMPOUND
+	struct s_ast **comp_values;
+	int comp_size;
+	//AST_PIPE
+	struct s_ast **pipecmd_values;
+	int pipecmd_size;
+	//AST_CMD
+	struct s_ast **simplecmd_values;
+	int simplecmd_size;
+	//AST_ARG
+	struct s_ast **args;
+	int args_size;
+}				t_ast;
 
 void print_prompt();
 t_lexer *read_cmd();

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishit.c                                         :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/04 17:35:30 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/05 13:55:07 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,6 @@ t_lexer *init_lexer(char *line)
 	return (l);
 }
 
-// t_lexer *read_cmd()
-// {
-// 	size_t r;
-// 	char *line;
-// 	char *temp;
-// 	char *str;
-
-// 	line = malloc(sizeof(char) * 50);
-// 	if (!line)
-// 		return(NULL);
-// 	str = ft_strdup("");
-// 	while ((r = read(0, line, 50)) > 0)
-// 	{
-// 		temp = str;
-// 		str = strcat(str, line);
-// 		free(temp);
-// 		free(line);
-// 	}
-// 	int len = ft_strlen(str);
-// 	str[len - 1] = 0;
-// 	return(init_lexer(str));
-// 	// line[r - 1] = '\0';
-// 	// return(init_lexer(line));
-// }
-
 t_lexer *read_cmd()
 {
 	size_t r;
@@ -63,14 +38,13 @@ t_lexer *read_cmd()
 	r = read(0, line, 1024);
 	line[r - 1] = 0;
 	return(init_lexer(line));
-	// line[r - 1] = '\0';
-	// return(init_lexer(line));
 }
 
 int main(int argc, char **argv, char **env)
 {
 	t_lexer *l;
 	t_parser *p;
+	t_ast *ast;
 
 	(void)argc;
 	(void)argv; 
@@ -94,8 +68,7 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		p = init_parser(l);
-		printf("current token -> %s\n", p->curr_token->value);
-		printf("previous token -> %s\n\n", p->prev_token->value);
+		ast = parser(p);
 		// parse_cmd();
 	}//free before exit
 	exit(EXIT_SUCCESS);
