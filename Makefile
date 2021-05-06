@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/05 12:08:10 by iidzim           ###   ########.fr        #
+#    Updated: 2021/05/06 13:24:59 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ NAME			=	minishell
 
 SRCS 			=	./sources/minishell.c\
 					./sources/execution/main_exec.c\
-					./sources/parsing/list.c\
 					./sources/parsing/lexer.c\
-					./sources/parsing/parcer.c\
+					./sources/parsing/parser.c\
+					./sources/parsing/ast.c\
+					# ./sources/parsing/list.c\
 					
 					
 LIBFT_PATH 		= 	./libft

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/05 11:00:36 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/06 12:39:38 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void skip_space(t_lexer *l)
 		readchar(l);
 }
 
-t_token *init_token(char *type, char *s)
+t_token *init_token(int type, char *s)
 {
 	t_token  *t;
 
@@ -79,9 +79,9 @@ t_token *init_token(char *type, char *s)
 	return (t);
 }
 
-t_token *ret(t_lexer *l, char *s, char *type)
+t_token *ret(t_lexer *l, char *s, int type)
 {
-	if (!ft_strcmp(type,"GREATER"))
+	if (type == greater)
 		readchar(l);
 	readchar(l);
 	return (init_token(type, s));
@@ -221,7 +221,7 @@ t_token *string_token(t_lexer *l)
 		}
 		free(temp);
 	}
-	return(ret(l, str, ARG));
+	return(ret(l, str, id));
 }
 
 t_token *get_next_token(t_lexer *l)
@@ -230,19 +230,19 @@ t_token *get_next_token(t_lexer *l)
 	{
 		skip_space(l);
 		if (l->c == PIPE)
-			return(ret(l, &l->c, "PIPE"));
+			return(ret(l, &l->c, pip));
 		else if (l->c == SEMICOLON)
-			return(ret(l, &l->c, "SEMICOLON"));
+			return(ret(l, &l->c, semi));
 		else if (l->c == GREAT)
 		{
 			if (peek_char(l) == GREAT)
-				return(ret(l, ">>", "GREATER"));
-			return(ret(l, &l->c, "GREAT"));
+				return(ret(l, ">>", greater));
+			return(ret(l, &l->c, great));
 		}
 		else if (l->c == LESS)
-			return(ret(l, &l->c, "LESS"));
+			return(ret(l, &l->c, less));
 		else
 			return(string_token(l));
 	}
-	return(ret(l, &l->c, "EOF"));
+	return(ret(l, &l->c, eof));
 }

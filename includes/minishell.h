@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/05 15:14:03 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/06 17:09:46 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,26 @@
 #define SPACE 32
 #define DOLLAR 36
 #define SLASH 92
-#define CMD "command"
-#define OPTION "-flag"
-#define ARG "argument"
-#define ILLEGAL "syntax error"
+// #define ILLEGAL "syntax error"
 
-typedef struct s_token
+typedef enum t_token_type
 {
-	// t_lexer *lexer;
-	char *value;
-	char *type;
-}               t_token;
+	pip,
+	semi,
+	great,
+	greater,
+	less,
+	id,
+	eof
+}			e_token_type;
+
+typedef enum t_ast_type
+{
+	compound,
+	pipe_ast,
+	cmd_ast,
+	arg_ast
+}			e_ast_type;
 
 typedef struct s_lexer
 {   
@@ -53,6 +62,12 @@ typedef struct s_lexer
 	char c;             // current char under examination
 }               t_lexer;
 
+typedef struct s_token
+{
+	char *value;
+	e_token_type type;
+}               t_token;
+
 typedef struct s_parser
 {
 	t_lexer *lexer;
@@ -60,24 +75,12 @@ typedef struct s_parser
 	t_token *prev_token;
 }				t_parser;
 
-typedef struct s_cmdlist
-{
-	t_token *tokens;
-	int pipe;
-	struct s_cmdlist *next_cmd;
-}               t_cmdlist;
-
-typedef enum t_ast_type
-{
-	compound,
-	pip,
-	semi,
-	great,
-	greater,
-	less,
-	id,
-	eof
-}			e_ast_type;
+// typedef struct s_cmdlist
+// {
+// 	t_token *tokens;
+// 	int pipe;
+// 	struct s_cmdlist *next_cmd;
+// }               t_cmdlist;
 
 typedef struct s_ast
 {
@@ -103,13 +106,13 @@ t_token *get_next_token(t_lexer *l);
 t_parser *init_parser(t_lexer *l);
 
 
-
-//linkedlist
-int list_size(t_cmdlist *l);
-t_cmdlist *create(t_token *cmd, int pipe);
-void add_back(t_cmdlist **l, t_token *cmd, int pipe);
-void push(t_cmdlist **l, t_token *cmd, int pipe);
-void print_cmd(t_cmdlist *l);
+// /!\ update linked list function - new struct AST
+//linkedlist 
+// int list_size(t_cmdlist *l);
+// t_cmdlist *create(t_token *cmd, int pipe);
+// void add_back(t_cmdlist **l, t_token *cmd, int pipe);
+// void push(t_cmdlist **l, t_token *cmd, int pipe);
+// void print_cmd(t_cmdlist *l);
 
 
 #endif
