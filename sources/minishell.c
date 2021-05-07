@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/06 16:56:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/07 13:29:23 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv, char **env)
 {
 	t_lexer *l;
 	t_parser *p;
-	t_ast *ast;
+	// t_ast *ast;
 
 	(void)argc;
 	(void)argv; 
@@ -53,7 +53,7 @@ int main(int argc, char **argv, char **env)
 	{
 		ft_putstr_fd("minishell$ ", 0);
 		l = read_cmd();
-		printf("|%s|\n", l->buffer);
+		// printf("|%s|\n", l->buffer);
 		if(!l->buffer)
 			exit(EXIT_SUCCESS);
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
@@ -68,7 +68,7 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		p = init_parser(l);
-		ast = parser(p);
+		// ast = parser(p);
 		// parse_cmd();
 	}//free before exit
 	exit(EXIT_SUCCESS);

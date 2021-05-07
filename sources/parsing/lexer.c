@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/06 12:39:38 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/07 14:07:12 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,16 @@ char *tokenize_text(t_lexer *l)
 	if (!l)
 		return (NULL);
 	str = ft_strdup("");
-	while (l->c != '\0' && !ft_strchar("|;>><", l->c))
+	printf("<%c>\n", l->c);
+	while (l->c != '\0' && !ft_strchar("|;><", l->c))
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
+		printf("[%c]\n", l->c);
 		readchar(l);
 		free(temp);
 	}
+	printf("<%s>\n", str);
 	return (str);
 }
 
@@ -201,7 +204,9 @@ t_token *string_token(t_lexer *l)
 	char *temp;
 
 	str = ft_strdup("");
-	while (l->curpos < l->bufsize)
+	while (l->curpos < l->bufsize )/*&&
+		(l->c != PIPE || l->c != SEMICOLON || l->c != GREAT ||
+		 l->c != GREAT || l->c != LESS))*/
 	{
 		temp = str;
 		if (l->c == DQUOTE)
@@ -216,10 +221,13 @@ t_token *string_token(t_lexer *l)
 		}
 		else
 		{
+			printf("l->c >> |%c|\n", l->c);
+			// printf("str >> |%s|\n", str);
 			str = ft_strjoin(str, tokenize_text(l));
 			continue;
 		}
 		free(temp);
+		readchar(l);
 	}
 	return(ret(l, str, id));
 }
@@ -229,6 +237,7 @@ t_token *get_next_token(t_lexer *l)
 	while (l->c != EOF && (l->curpos < l->bufsize))
 	{
 		skip_space(l);
+		printf("current char >> %c\n", l->c);
 		if (l->c == PIPE)
 			return(ret(l, &l->c, pip));
 		else if (l->c == SEMICOLON)

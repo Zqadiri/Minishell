@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/06 17:09:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/07 13:48:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 #define SPACE 32
 #define DOLLAR 36
 #define SLASH 92
-// #define ILLEGAL "syntax error"
 
 typedef enum t_token_type
 {
@@ -42,6 +41,7 @@ typedef enum t_token_type
 	greater,
 	less,
 	id,
+	illegal,
 	eof
 }			e_token_type;
 
