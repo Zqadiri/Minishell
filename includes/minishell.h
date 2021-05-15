@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/07 13:48:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/15 16:49:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <string.h>
 #include <errno.h>
 #include <ctype.h>
+#include "./exec.h"
 #include "../libft/libft.h"
 
 #define PATH_MAX 15000
@@ -113,6 +114,9 @@ t_parser *init_parser(t_lexer *l);
 // void add_back(t_cmdlist **l, t_token *cmd, int pipe);
 // void push(t_cmdlist **l, t_token *cmd, int pipe);
 // void print_cmd(t_cmdlist *l);
+
+
+
 
 
 #endif
