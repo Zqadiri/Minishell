@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/15 16:18:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/15 18:28:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,38 @@ t_lexer *read_cmd()
 
 int main(int argc, char **argv, char **env)
 {
-	// t_lexer *l;
-	// t_parser *p;
+	t_lexer *l;
+	t_parser *p;
 	// t_ast *ast;
+	char **arg; // just tmp
 
 	(void)argc;
 	(void)argv; 
 	(void)env;
-	// while(1)
-	// {
-	// 	ft_putstr_fd("minishell$ ", 0);
-	// 	l = read_cmd();
-	// 	// printf("|%s|\n", l->buffer);
-	// 	if(!l->buffer)
-	// 		exit(EXIT_SUCCESS);
-	// 	if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
-	// 	{
-	// 		free(l);
-	// 		continue;
-	// 	}
-	// 	if(strcmp(l->buffer, "exit") == 0)
-	// 	{
-	// 		printf("exit\n");
-	// 		free(l);
-	// 		break;
-	// 	}
-	// 	p = init_parser(l);
-	// 	// ast = parser(p);
-	// 	// parse_cmd();
-	// }//free before exit
-	launch(env);
+	arg = NULL;
+	while(1)
+	{
+		ft_putstr_fd("minishell$ ", 0);
+		l = read_cmd();
+		// printf("|%s|\n", l->buffer);
+		if(!l->buffer)
+			exit(EXIT_SUCCESS);
+		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
+		{
+			free(l);
+			continue;
+		}
+		if(strcmp(l->buffer, "exit") == 0)
+		{
+			printf("exit\n");
+			free(l);
+			break;
+		}
+		p = init_parser(l);
+		// ast = parser(p);
+		// parse_cmd();
+	}//free before exit
+	launch(env, arg);
 	exit(EXIT_SUCCESS);
 }
 

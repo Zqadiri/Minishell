@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/15 17:31:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/15 18:31:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** List of builtin commands 
 */
-char *g_builtin_str[] = {
+char *g_builtin[] = {
   "cd",
   "echo",
   "env",
@@ -61,14 +61,33 @@ int exit_builtin(char **arg)
 ** Main funtion
 */
 
-int		launch(char **env)
+int		get_env_var(char **env)
 {
-	int i = 0;
-	while (env[i])
+	(void)env;
+	return (1);
+}
+
+int	get_built_num(void)
+{
+  return sizeof(g_builtin) / sizeof(char *);
+}
+
+
+int	launch(char **env, char **arg)
+{	
+	int i;
+	int num_builtin;
+
+	i = 0;
+	num_builtin = get_built_num();
+	get_env_var(env);
+	if (arg == NULL)
+		return (1);
+	while (i < num_builtin)
 	{
-		printf ( "%s\n", env[i]);
+		if (strcmp(arg[0], g_builtin[i]) == 0)
+			return (*g_builtin_func[i])(arg);
 		i++;
 	}
-	
 	return (1);
 }
