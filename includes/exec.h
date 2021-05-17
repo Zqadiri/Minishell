@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/16 19:26:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/17 09:18:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int     launch(char **env, char **arg);
 
 int     quit(void);
 int		len(char **env);
-int	    ft_strcmp(const char *s1, const char *s2);
-int		ft_strequ(const char *s1, const char *s2);
+
 
 #endif

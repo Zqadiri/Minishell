@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 09:19:51 by zqadiri          ###   ########.fr       */
+/*   Created: 2021/05/17 09:19:39 by zqadiri           #+#    #+#             */
+/*   Updated: 2021/05/17 09:19:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-int quit(void)
+int		ft_strequ(const char *s1, const char *s2)
 {
-    // free
-    write(1, "\n", 1);
-	exit(0);
-}
-
-int		len(char **env)
-{
-	register int	len;
-
-	len = 0;
-	while (env[len])
-		len++;
-	return (len);
+	if (!s1 || !s2)
+		return (0);
+	return (ft_strcmp(s1, s2) ? 0 : 1);
 }

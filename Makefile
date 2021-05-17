@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/15 18:07:53 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/17 09:21:31 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS 			=	./sources/minishell.c\
 					./sources/execution/main_exec.c\
 					./sources/parsing/lexer.c\
 					./sources/parsing/parser.c\
-					./sources/parsing/ast.c
+					./sources/parsing/ast.c\
+					./sources/execution/utils.c
 					# ./sources/parsing/list.c
 					
 
