@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 11:08:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:48:04 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char					**g_env_var;
 ** Function Declarations for builtin shell commands
 */
 
-int     cd_builtin(char **);
+int     cd_builtin(char *);
 int     echo_builtin(char **);
 int     env_builtin();
 int     exit_builtin(char **);
@@ -39,4 +39,10 @@ int     quit(void);
 int		len(char **env);
 int		alpha(char *key);
 
+/*
+** Helpers 
+*/
+
+int     find_env(char *key);
+char    *get_env_var_by_key(char *key);
 #endif
