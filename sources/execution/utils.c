@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 09:19:51 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/17 11:08:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,19 @@ int		len(char **env)
 	while (env[len])
 		len++;
 	return (len);
+}
+
+int		alpha(char *key)
+{
+	int i;
+
+	i = 0;
+	while (key[i] != '\0')
+	{
+        if (ft_isalpha(key[i]))
+		    i++;
+        else
+            return (-1);
+	}
+	return (1);
 }

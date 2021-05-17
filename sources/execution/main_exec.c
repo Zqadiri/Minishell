@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/16 17:09:06 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/17 10:27:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,7 @@ int		dup_env_var(char **env)
 	g_env_var = (char **)malloc(sizeof(char *) * (len(env) + 1));
 	if (g_env_var == NULL)
 		exit(EXIT_FAILURE);
-	while(g_env_var[i])
-	{
-		ft_memset(g_env_var[i], 0, ft_strlen(g_env_var[i]));
-		i++;
-	}
+	g_env_var[len(env)] = 0;
 	while (env[++i])
 	{
 		if (!(g_env_var[i] = ft_strdup(env[i])))

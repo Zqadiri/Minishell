@@ -6,25 +6,25 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/16 19:39:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/17 11:14:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void free_old_env(char **old_env)
+static void free_old_env()
 {
     int i;
 
     i = 0;
-    while (old_env[i])
+    while (g_env_var[i])
     {
-        free(old_env[i]);
-        old_env[i] = NULL;
+        free(g_env_var[i]);
+        g_env_var[i] = NULL;
         i++;
     }
-    free (old_env);
-    old_env = NULL;
+    free (g_env_var);
+    g_env_var = NULL;
 }
 
 int get_str_by_char(char *str, char c)
@@ -34,7 +34,7 @@ int get_str_by_char(char *str, char c)
 	ch = ft_strchr(str, c);
 	if (!ch)
 		return (-1);
-	return (ch);
+	return ((int)(ch - str));
 }
 
 int     find_env(char *key)
@@ -69,7 +69,7 @@ int     find_env(char *key)
     return (-1);
 }
 
-void    **realloc_new_env(int env_num)
+char    **realloc_new_env(int env_num)
 {
     char **new_env;
     int i;
@@ -84,7 +84,7 @@ void    **realloc_new_env(int env_num)
         i++;
     }
     new_env[env_num] = 0;
-    free_old_env(g_env_var);
+    free_old_env();
     return (new_env);
 }    
 
@@ -110,28 +110,42 @@ static  char    **remove_env_by_key(int index)
 **  unset arg1 arg2 *
 */
 
-int     unset_builtin(char **args, char *key)
+int     unset_builtin(char *key)
 {
     int i;
     int env_index;
 
-    i = 0;
-    if (!args[1])
+    i = -1;
+    if (!g_env_var[1])
         return (1);
-    while (args[++i])
+    while (g_env_var[++i])
     {
         env_index = find_env(key);
         if (env_index != -1)
-           g_env_var = remove_env_by_key(index);
+           g_env_var = remove_env_by_key(env_index);
         else
         {
-            if (!ft_isalpha)
+            if (alpha(key) == -1)
             {
                 write (2, "unset: `", 8);
-                write (2, args[i], ft_strlen(args[i]));
+                write (2, key, ft_strlen(key));
                 write (2, "': not a valid identifier\n", 26);
+                break;
             }
         }
     }
     return (1);
 }
+
+// int main(int argc, char **argv, char **env)
+// {
+//     int i = 1;
+// 	dup_env_var(env);
+//     while (i < argc)
+//     {
+//         unset_builtin(argv[i]);
+//         i++;
+//     }
+//     env_builtin();
+//     return (1);
+// }

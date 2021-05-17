@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/17 09:21:31 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/17 10:49:44 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,18 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/lexer.c\
 					./sources/parsing/parser.c\
 					./sources/parsing/ast.c\
-					./sources/execution/utils.c
+
 					# ./sources/parsing/list.c
-					
+
+SRCS_EXEC		=	./sources/execution/utils.c\
+					./sources/execution/env_builtin.c\
+					./sources/execution/unset_builtin.c\
 
 LIBFT_PATH 		= 	./libft
 
 OBJS			= 	${SRCS:.c=.o}
+OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
+
 INCLUDE 		= 	./includes/minishell.h
 CC				= 	gcc -Wall -Wextra -Werror 
 RM				= 	rm -f
@@ -32,10 +37,10 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				$(CC) -o $(NAME) $(SRCS) $(LIBFLAGS) -g -fsanitize=address
+				$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(LIBFLAGS) -g -fsanitize=address
 
 clean:			libft_clean
-				${RM} ${OBJS}
+				${RM} ${OBJS} ${OBJS_EXEC}
 fclean:			libft_fclean clean
 				${RM} ${NAME}
 re:				fclean all
