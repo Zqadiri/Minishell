@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqadiri <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 12:11:32 by zqadiri           #+#    #+#              #
-#    Updated: 2019/10/24 22:32:22 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/17 09:20:33 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRCB =  ft_lstlast_bonus.c\
 		ft_lstadd_back_bonus.c\
 
 SRC = ft_memset.c\
+	  ft_strequ.c\
+	  ft_strcmp.c\
 	  ft_bzero.c\
 	  ft_memcpy.c\
 	  ft_memccpy.c\

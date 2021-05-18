@@ -1,32 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 22:12:17 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 13:09:47 by zqadiri          ###   ########.fr       */
+/*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
+/*   Updated: 2021/05/17 11:08:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+int quit(void)
 {
-	char	*str;
-	char	val;
-	int		i;
+    // free
+    write(1, "\n", 1);
+	exit(0);
+}
 
-	i = ft_strlen(s);
-	str = (char *)s;
-	val = (char)c;
-	while (i >= 0)
+int		len(char **env)
+{
+	register int	len;
+
+	len = 0;
+	while (env[len])
+		len++;
+	return (len);
+}
+
+int		alpha(char *key)
+{
+	int i;
+
+	i = 0;
+	while (key[i] != '\0')
 	{
-		if (*str == val)
-			return (str);
-		str++;
-		i--;
+        if (ft_isalpha(key[i]))
+		    i++;
+        else
+            return (-1);
 	}
-	return (NULL);
+	return (1);
 }

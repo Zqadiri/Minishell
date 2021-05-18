@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 22:12:17 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 13:09:47 by zqadiri          ###   ########.fr       */
+/*   Created: 2021/05/17 09:19:39 by zqadiri           #+#    #+#             */
+/*   Updated: 2021/05/17 09:19:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int		ft_strequ(const char *s1, const char *s2)
 {
-	char	*str;
-	char	val;
-	int		i;
-
-	i = ft_strlen(s);
-	str = (char *)s;
-	val = (char)c;
-	while (i >= 0)
-	{
-		if (*str == val)
-			return (str);
-		str++;
-		i--;
-	}
-	return (NULL);
+	if (!s1 || !s2)
+		return (0);
+	return (ft_strcmp(s1, s2) ? 0 : 1);
 }

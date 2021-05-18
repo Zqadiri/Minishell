@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2021/05/18 10:23:54 by iidzim           ###   ########.fr        #
+=======
+#    Updated: 2021/05/17 17:22:43 by zqadiri          ###   ########.fr        #
+>>>>>>> 07f42a46c046b7b10e1447e43089d6129a31542a
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,27 +21,40 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/lexer.c\
 					./sources/parsing/parser.c\
 					./sources/parsing/ast.c\
+<<<<<<< HEAD
 					./sources/parsing/utils.c\
 					# ./sources/parsing/list.c\
 					
 					
 LIBFT_PATH 		= 	./libft
+=======
+>>>>>>> 07f42a46c046b7b10e1447e43089d6129a31542a
 
+					# ./sources/parsing/list.c
 
+SRCS_EXEC		=	./sources/execution/utils.c\
+					./sources/execution/env_builtin.c\
+					./sources/execution/unset_builtin.c\
+					./sources/execution/pwd_builtin.c\
+					./sources/execution/cd_builtin.c
+
+LIBFT_PATH 		= 	./libft
 
 OBJS			= 	${SRCS:.c=.o}
+OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
+
 INCLUDE 		= 	./includes/minishell.h
-CC				= 	gcc  -Wall -Wextra -Werror
+CC				= 	gcc -Wall -Wextra -Werror 
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				$(CC) -o $(NAME) $(SRCS) $(LIBFLAGS) -g -fsanitize=address
+				$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(LIBFLAGS) -g -fsanitize=address
 
 clean:			libft_clean
-				${RM} ${OBJS}
+				${RM} ${OBJS} ${OBJS_EXEC}
 fclean:			libft_fclean clean
 				${RM} ${NAME}
 re:				fclean all
