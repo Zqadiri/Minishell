@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/18 11:08:21 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/18 11:54:04 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ long long   ft_atoi_exit(char *str)
 	while (str[i] >= '0' && str[i] <= '9' && ++j)
 	{
 		result = (result * 10) + (str[i] - 48);
-        
+        i++;
 	}
+    // check for overflow
+    return (result * neg);
 }
 
 void		exit_error(char *arg, char **args)
@@ -89,6 +91,7 @@ void    exit_builtin(char **args)
 	}
     else
     {
-        exit_code = ft_atoi_exit(args[1])
+        exit_code = ft_atoi_exit(args[1]);
     }
+    ft_exit();
 }
