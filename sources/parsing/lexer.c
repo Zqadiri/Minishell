@@ -6,38 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/07 14:07:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/18 11:47:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-char	*ft_strjoinchar(char *s, char c)
-{
-	int		i;
-	char	*str;
-
-	i = strlen(s);
-	if (!(str = (char *)malloc(i + 2)))
-		return (0);
-	i = -1;
-	while (s[++i])
-		str[i] = s[i];
-	str[i] = c;
-	str[i + 1] = '\0';
-	// free(s);
-	return (str);
-}
 
 void readchar(t_lexer *l)
 {
@@ -84,6 +57,7 @@ t_token *ret(t_lexer *l, char *s, int type)
 	if (type == greater)
 		readchar(l);
 	readchar(l);
+	// printf("f:ret\tstr >> |%s|\n", s);
 	return (init_token(type, s));
 }
 
@@ -122,16 +96,17 @@ char *tokenize_text(t_lexer *l)
 	if (!l)
 		return (NULL);
 	str = ft_strdup("");
-	printf("<%c>\n", l->c);
-	while (l->c != '\0' && !ft_strchar("|;><", l->c))
+	printf("f:tokenize_text\t<%c>\n", l->c);
+	while (l->c != EOF && !ft_strchar("|;><", l->c))
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
-		printf("[%c]\n", l->c);
 		readchar(l);
 		free(temp);
 	}
-	printf("<%s>\n", str);
+	if (ft_strchar("|;><", l->c))
+		printf("f:tokenize_text\tl->c > %c\n", l->c);
+	printf("f:tokenize text <%s>\n", str);
 	return (str);
 }
 
@@ -202,33 +177,37 @@ t_token *string_token(t_lexer *l)
 {
 	char *str;
 	char *temp;
+	int i = 0;
 
 	str = ft_strdup("");
-	while (l->curpos < l->bufsize )/*&&
-		(l->c != PIPE || l->c != SEMICOLON || l->c != GREAT ||
-		 l->c != GREAT || l->c != LESS))*/
+	while (l->curpos < l->bufsize)/* && (l->c != PIPE || l->c != SEMICOLON
+		|| l->c != GREAT|| l->c != LESS))*/
 	{
+		printf("f:string_token\ti = %d\n", i++);
 		temp = str;
 		if (l->c == DQUOTE)
 		{
 			str = ft_strjoin(str, tokenize_dquoted_text(l));
+			free(temp);
+			readchar(l);
 			continue;
 		}
 		else if (l->c == SQUOTE)
 		{
 			str = ft_strjoin(str, tokenize_squoted_text(l));
+			free(temp);
+			readchar(l);
 			continue;
 		}
 		else
 		{
-			printf("l->c >> |%c|\n", l->c);
-			// printf("str >> |%s|\n", str);
 			str = ft_strjoin(str, tokenize_text(l));
+			free(temp);
+			readchar(l);
 			continue;
 		}
-		free(temp);
-		readchar(l);
 	}
+	printf("f:string_token\tstr >> |%s|\n", str);
 	return(ret(l, str, id));
 }
 
@@ -237,7 +216,7 @@ t_token *get_next_token(t_lexer *l)
 	while (l->c != EOF && (l->curpos < l->bufsize))
 	{
 		skip_space(l);
-		printf("current char >> %c\n", l->c);
+		printf("f:get_next_token\tcurrent char >%c\n", l->c);
 		if (l->c == PIPE)
 			return(ret(l, &l->c, pip));
 		else if (l->c == SEMICOLON)

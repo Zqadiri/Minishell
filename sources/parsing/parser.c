@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/07 13:30:54 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/18 10:14:38 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_parser *init_parser(t_lexer *l)
 	printf("|%s|\n", p->lexer->buffer);
 	p->curr_token = get_next_token(l);
 	p->prev_token = p->curr_token;
-	printf("current token -> %s\n", p->curr_token->value);
-	printf("previous token -> %s\n\n", p->prev_token->value);
+	// printf("current token -> %s\n", p->curr_token->value);
+	// printf("previous token -> %s\n\n", p->prev_token->value);
 	return (p);
 }
 

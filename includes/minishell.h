@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/07 13:48:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/18 10:41:07 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ t_lexer *read_cmd();
 // void read_cmd(t_lexer *x);
 t_token *get_next_token(t_lexer *l);
 t_parser *init_parser(t_lexer *l);
-
+int	ft_strcmp(char *s1, char *s2);
+char	*ft_strjoinchar(char *s, char c);
 
 // /!\ update linked list function - new struct AST
 //linkedlist 
