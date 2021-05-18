@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 17:20:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/18 09:54:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int     cd_builtin(char *);
 int     echo_builtin(char **);
 int     pwd_builtin();
 int     env_builtin();
-int     exit_builtin(char **);
+void    exit_builtin(char **);
 int     unset_builtin(char *key);
 int		dup_env_var(char **env);
 int     launch(char **env, char **arg);
