@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
+#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2021/05/18 10:23:54 by iidzim           ###   ########.fr        #
-=======
-#    Updated: 2021/05/17 17:22:43 by zqadiri          ###   ########.fr        #
->>>>>>> 07f42a46c046b7b10e1447e43089d6129a31542a
+#    Updated: 2021/05/18 14:31:54 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,16 +17,12 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/lexer.c\
 					./sources/parsing/parser.c\
 					./sources/parsing/ast.c\
-<<<<<<< HEAD
 					./sources/parsing/utils.c\
 					# ./sources/parsing/list.c\
 					
 					
 LIBFT_PATH 		= 	./libft
-=======
->>>>>>> 07f42a46c046b7b10e1447e43089d6129a31542a
 
-					# ./sources/parsing/list.c
 
 SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/env_builtin.c\
