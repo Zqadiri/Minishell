@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/17 10:03:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/18 11:57:08 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,50 +32,51 @@ t_lexer *read_cmd()
 	size_t r;
 	char *line;
 
+	//buffersize = 1 -> signels!
 	line = malloc(sizeof(char) * 1024);
 	if (!line)
 		return(NULL);
-	r = read(0, line, 1024);
-	line[r - 1] = 0;
+	r = read(0, line, 1023);
+	printf("f:read_cmd\tr>%ld\n", r);
+	line[r] = '\0';
 	return(init_lexer(line));
 }
 
-// int main(int argc, char **argv, char **env)
-// {
-// 	t_lexer *l;
-// 	t_parser *p;
-// 	// t_ast *ast;
-// 	char **arg; // just tmp
+int main(int argc, char **argv, char **env)
+{
+	t_lexer *l; 
+	t_parser *p;
+	// t_ast *ast;
 
-// 	(void)argc;
-// 	(void)argv; 
-// 	(void)env;
-// 	arg = NULL;
-// 	while(1)
-// 	{
-// 		ft_putstr_fd("minishell$ ", 0);
-// 		l = read_cmd();
-// 		// printf("|%s|\n", l->buffer);
-// 		if(!l->buffer)
-// 			exit(EXIT_SUCCESS);
-// 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
-// 		{
-// 			free(l);
-// 			continue;
-// 		}
-// 		if(strcmp(l->buffer, "exit") == 0)
-// 		{
-// 			printf("exit\n");
-// 			free(l);
-// 			break;
-// 		}
-// 		p = init_parser(l);
-// 		// ast = parser(p);
-// 		// parse_cmd();
-// 	}//free before exit
-// 	launch(env, arg);
-// 	exit(EXIT_SUCCESS);
-// }
+	(void)argc;
+	(void)argv; 
+	(void)env;
+	// if (argc != 1)
+	// 	exit(1);
+	while(1)
+	{
+		ft_putstr_fd("minishell$ ", 0);
+		l = read_cmd();
+		// printf("|%s|\n", l->buffer);
+		if(!l->buffer)
+			exit(EXIT_SUCCESS);
+		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
+		{
+			free(l);
+			continue;
+		}
+		if(strcmp(l->buffer, "exit") == 0)
+		{
+			printf("exit\n");
+			free(l);
+			break;
+		}
+		p = init_parser(l);
+		// ast = parser(p);
+		// parse_cmd();
+	}//free before exit
+	exit(EXIT_SUCCESS);
+}
 
 // ToDo List:
 // read cmdline √
