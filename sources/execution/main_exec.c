@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 10:27:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 10:09:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ int echo_builtin(char **arg)
 	(void)arg;
 
 	return (1);
-}
-
-int exit_builtin(char **arg)
-{
-	(void)arg;
-	return (1);	
 }
 
 int		dup_env_var(char **env)

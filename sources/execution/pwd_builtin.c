@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/18 09:35:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/18 14:43:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,26 @@ int     pwd_builtin()
 	return (1);
 }
 
-int			check_builtin(char **args)
-{
-	char	*pwd;
+// int			check_builtin(char **args)
+// {
+// 	char	*pwd;
 
-	if (ft_strequ(args[0], "echo"))
-		return (echo_builtin(args));
-	else if (ft_strequ(args[0], "cd"))
-		return (cd_builtin(args));
-	else if (ft_strequ(args[0], "unset"))
-		return (unset_builtin(args));
-	else if (ft_strequ(args[0], "export"))
-		return (export_builtin(args));
-	else if (ft_strequ(args[0], "exit"))
-		exit_builtin(args);
-	else if (ft_strequ(args[0], "pwd"))
-            pwd_builtin();
-	else if (ft_strequ(args[0], "env"))
-		return (env_builtin());
-	return (0);
-}
+// 	if (ft_strequ(args[0], "echo"))
+// 		return (echo_builtin(args));
+// 	else if (ft_strequ(args[0], "cd"))
+// 		return (cd_builtin(args));
+// 	else if (ft_strequ(args[0], "unset"))
+// 		return (unset_builtin(args));
+// 	else if (ft_strequ(args[0], "export"))
+// 		return (export_builtin(args));
+// 	else if (ft_strequ(args[0], "exit"))
+// 		exit_builtin(args);
+// 	else if (ft_strequ(args[0], "pwd"))
+//             pwd_builtin();
+// 	else if (ft_strequ(args[0], "env"))
+// 		return (env_builtin());
+// 	return (0);
+// }
 
 // int main(void)
 // {
