@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 16:08:53 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/19 19:24:33 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,6 @@ t_lexer *init_lexer(char *line)
 	l->readpos = 0;
 	return (l);
 }
-
-// t_lexer *read_cmd()
-// {
-	// size_t r;
-	// char *line;
-// 
-	// line = malloc(sizeof(char) * 1024);
-	// if (!line)
-		// return(NULL);
-	// r = read(0, line, 1023);
-	// printf("f:read_cmd\tr>%ld\n", r);
-	// line[r] = '\0';
-	// return(init_lexer(line));
-// }
 
 t_lexer *read_cmd()
 {
@@ -69,7 +55,7 @@ int main(int argc, char **argv, char **env)
 {
 	t_lexer *l; 
 	t_parser *p;
-	// t_ast *ast;
+	t_ast *ast;
 
 	(void)argc;
 	(void)argv; 
@@ -95,7 +81,7 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		p = init_parser(l);
-		// ast = parser(p);
+		ast = parser(p);
 	}//free before exit
 	exit(EXIT_SUCCESS);
 }

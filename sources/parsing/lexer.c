@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 17:58:26 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/19 19:23:28 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,16 @@ t_token *ret2(t_lexer *l, char c, e_token_type type)
 	if (type == greater)
 		readchar(l);
 	readchar(l);
-	
 	return (init_token(type, c));
+}
+
+t_token *ret(t_lexer *l, char *s, int type)
+{
+	if (type == greater)
+		readchar(l);
+	readchar(l);
+	// printf("f:ret\tstr >> |%s|\n", s);
+	return (init_token2(type, s));
 }
 
 t_token *init_token2(e_token_type type, char *c)
@@ -79,15 +87,6 @@ t_token *init_token2(e_token_type type, char *c)
 	return (t);
 }
 
-t_token *ret(t_lexer *l, char *s, int type)
-{
-	if (type == greater)
-		readchar(l);
-	readchar(l);
-	// printf("f:ret\tstr >> |%s|\n", s);
-	return (init_token2(type, s));
-}
-
 int valid_envar(char c)
 {
 	if (ft_isalnum(c) || c == '_')
@@ -99,18 +98,22 @@ char *tokenize_squoted_text(t_lexer *l)
 {
 	char *str;
 	char *temp;
+	int s;
 	
+	s = 0;
 	readchar(l);
 	str = ft_strdup("");
-	while(l->c != SQUOTE && l->c != '\0')
+	while(l->c != SQUOTE && l->c != EOF)
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
 		readchar(l);
 		free(temp);
 	}
-	if (l->c == '\0')
-		printf("syntax error->add \"\n"); //free + exit
+	if (l->c == SQUOTE)
+		s += 1;
+	if (l->c == EOF && s == 0)
+		printf("syntax error->add \'\n"); //free + exit
 	readchar(l);
 	return (str);
 }
@@ -217,7 +220,7 @@ t_token *string_token(t_lexer *l)
 		if (l->c == 32)
 			return(ret(l, str, id));
 		readchar(l);
-		continue;
+		// continue;
 	}
 	printf("f:string_token\tstr >> |%s|\n", str);
 	return(ret(l, str, id));
