@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/18 14:42:17 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/19 10:11:44 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRCS 			=	./sources/minishell.c\
 					
 LIBFT_PATH 		= 	./libft
 
-					# ./sources/parsing/list.c
 
 SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/env_builtin.c\
