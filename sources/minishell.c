@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 11:51:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 16:08:53 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,41 @@ t_lexer *init_lexer(char *line)
 	return (l);
 }
 
+// t_lexer *read_cmd()
+// {
+	// size_t r;
+	// char *line;
+// 
+	// line = malloc(sizeof(char) * 1024);
+	// if (!line)
+		// return(NULL);
+	// r = read(0, line, 1023);
+	// printf("f:read_cmd\tr>%ld\n", r);
+	// line[r] = '\0';
+	// return(init_lexer(line));
+// }
+
 t_lexer *read_cmd()
 {
 	size_t r;
 	char *line;
+	char *buffer;
 
-	//buffersize = 1 -> signels!
-	line = malloc(sizeof(char) * 1024);
-	if (!line)
+	buffer = malloc(sizeof(char) * 2);
+	r = read(0, buffer, 1);
+	line = malloc(sizeof(char) * 2); 
+	if (!buffer || !line)
 		return(NULL);
-	r = read(0, line, 1023);
-	printf("f:read_cmd\tr>%ld\n", r);
-	line[r] = '\0';
+	line[0] = '\0';
+	while( r > 0)
+	{
+		buffer[1] = 0;
+		if (buffer[0] == '\n')
+			break ;
+		line = ft_strjoinchar(line, buffer[0]);
+		r = read(0, buffer, 1);
+	}
+	free(buffer);
 	return(init_lexer(line));
 }
 
@@ -55,7 +78,7 @@ int main(int argc, char **argv, char **env)
 	// 	exit(1);
 	while(1)
 	{
-		ft_putstr_fd("minishell$ ", 0);
+		ft_putstr_fd("\nminishell$ ", 0);
 		l = read_cmd();
 		// printf("|%s|\n", l->buffer);
 		if(!l->buffer)
@@ -73,7 +96,6 @@ int main(int argc, char **argv, char **env)
 		}
 		p = init_parser(l);
 		// ast = parser(p);
-		// parse_cmd();
 	}//free before exit
 	exit(EXIT_SUCCESS);
 }
@@ -82,6 +104,7 @@ int main(int argc, char **argv, char **env)
 // read cmdline √
 // check if there is nay syntax error (eg: >>> or |; ...)
 // implement functions (map) for linked list
+// abstract syntax tree
 // example :							 output
 // - echo c'o\'u'cou'					-> co\ucou
 // - ec"ho" bon"'j'o'u"r				-> bon'j'o'ur

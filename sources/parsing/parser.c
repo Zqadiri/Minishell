@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/18 10:14:38 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/19 17:12:38 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ t_parser *init_parser(t_lexer *l)
 	if (!p)
 		return (NULL);
 	p->lexer = l;
-	printf("|%s|\n", p->lexer->buffer);
 	p->curr_token = get_next_token(l);
 	p->prev_token = p->curr_token;
-	// printf("current token -> %s\n", p->curr_token->value);
-	// printf("previous token -> %s\n\n", p->prev_token->value);
+	printf("current token value-> [%s]\n", p->curr_token->value);
+	printf("current token type-> [%u]\n", p->curr_token->type);
+	printf("previous token -> [%s]\n", p->prev_token->value);
 	return (p);
 }
 
@@ -69,19 +69,6 @@ t_parser *init_parser(t_lexer *l)
 	
 // }
 
-// t_ast *parse_stat(t_parser *p)
-// {
-// 	if (p->curr_token->type == semi || p->curr_token->type == pip)
-// 	{
-// 		printf("Unexpected token `%s', with type %d", p->curr_token->value, p->curr_token->type);
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (p->curr_token->type == id)
-// 		return(parse_id(p));
-// 	if (p->curr_token->type == great || p->curr_token->type == greater || p->curr_token->type == less)
-//         return(parse_redirection(p));
-// }
-
 // t_ast *parse_pipeline(t_parser *p)
 // {
 // 	t_ast *ast;
@@ -98,6 +85,20 @@ t_parser *init_parser(t_lexer *l)
 		
 // 	}
 	
+// }
+
+// t_ast *parse_stat(t_parser *p)
+// {
+// 	if (p->curr_token->type == semi || p->curr_token->type == pip)
+// 	{
+// 		p->curr_token->type = illegal;
+// 		printf("Unexpected token `%s', with type %d", p->curr_token->value, p->curr_token->type);
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	if (p->curr_token->type == id)
+// 		return(parse_id(p));
+// 	if (p->curr_token->type == great || p->curr_token->type == greater || p->curr_token->type == less)
+//         return(parse_redirection(p));
 // }
 
 // t_ast *parse_statements(t_parser *p)

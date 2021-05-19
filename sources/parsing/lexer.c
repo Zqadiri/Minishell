@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/18 11:57:23 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/19 17:58:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,41 @@ void skip_space(t_lexer *l)
 		readchar(l);
 }
 
-t_token *init_token(int type, char *s)
+t_token *init_token(e_token_type type, char c)
 {
 	t_token  *t;
+	char s[2];
 
+	s[0] = c;
+	s[1] = '\0';
+	printf("f:init_token\t[%c]\n", c);
 	t = malloc(sizeof(t_token));
 	if (!t)
 		return (NULL);
-	t->value = s;
+	t->value = ft_strdup(s);
+	t->type = type;
+	return (t);
+}
+
+t_token *ret2(t_lexer *l, char c, e_token_type type)
+{	
+	printf("f:ret\t[%c]\n", c);
+	if (type == greater)
+		readchar(l);
+	readchar(l);
+	
+	return (init_token(type, c));
+}
+
+t_token *init_token2(e_token_type type, char *c)
+{
+	t_token  *t;
+
+	printf("f:init_token\t[%s]\n", c);
+	t = malloc(sizeof(t_token));
+	if (!t)
+		return (NULL);
+	t->value = ft_strdup(c);
 	t->type = type;
 	return (t);
 }
@@ -58,7 +85,7 @@ t_token *ret(t_lexer *l, char *s, int type)
 		readchar(l);
 	readchar(l);
 	// printf("f:ret\tstr >> |%s|\n", s);
-	return (init_token(type, s));
+	return (init_token2(type, s));
 }
 
 int valid_envar(char c)
@@ -96,16 +123,13 @@ char *tokenize_text(t_lexer *l)
 	if (!l)
 		return (NULL);
 	str = ft_strdup("");
-	printf("f:tokenize_text\t<%c>\n", l->c);
-	while (l->c != EOF && !ft_strchar("|;><", l->c))
+	while (l->c != EOF && !ft_strchar("|;>< ", l->c))
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
 		readchar(l);
 		free(temp);
 	}
-	if (ft_strchar("|;><", l->c))
-		printf("f:tokenize_text\tl->c > %c\n", l->c);
 	printf("f:tokenize text <%s>\n", str);
 	return (str);
 }
@@ -177,35 +201,23 @@ t_token *string_token(t_lexer *l)
 {
 	char *str;
 	char *temp;
-	int i = 0;
 
 	str = ft_strdup("");
-	while (l->curpos < l->bufsize)/* && (l->c != PIPE || l->c != SEMICOLON
-		|| l->c != GREAT|| l->c != LESS))*/
+	while (l->curpos < l->bufsize && (l->c != PIPE || l->c != SEMICOLON
+		|| l->c != GREAT|| l->c != LESS))
 	{
-		printf("f:string_token\ti = %d\n", i++);
 		temp = str;
 		if (l->c == DQUOTE)
-		{
 			str = ft_strjoin(str, tokenize_dquoted_text(l));
-			free(temp);
-			readchar(l);
-			continue;
-		}
 		else if (l->c == SQUOTE)
-		{
 			str = ft_strjoin(str, tokenize_squoted_text(l));
-			free(temp);
-			readchar(l);
-			continue;
-		}
 		else
-		{
 			str = ft_strjoin(str, tokenize_text(l));
-			free(temp);
-			readchar(l);
-			continue;
-		}
+		free(temp);
+		if (l->c == 32)
+			return(ret(l, str, id));
+		readchar(l);
+		continue;
 	}
 	printf("f:string_token\tstr >> |%s|\n", str);
 	return(ret(l, str, id));
@@ -216,21 +228,24 @@ t_token *get_next_token(t_lexer *l)
 	while (l->c != EOF && (l->curpos < l->bufsize))
 	{
 		skip_space(l);
-		printf("f:get_next_token\tcurrent char >%c\n", l->c);
+		// printf("f:get_next_token\tcurrent char [%c]\n", l->c);
 		if (l->c == PIPE)
-			return(ret(l, &l->c, pip));
+			return(ret2(l, l->c, pip));
 		else if (l->c == SEMICOLON)
-			return(ret(l, &l->c, semi));
+		{
+			printf("f:get_next_token\tsemicolon [%c]\n", l->c);
+			return(ret2(l, l->c, semi));
+		}
 		else if (l->c == GREAT)
 		{
 			if (peek_char(l) == GREAT)
-				return(ret(l, ">>", greater));
-			return(ret(l, &l->c, great));
+				return(ret2(l, '?', greater));
+			return(ret2(l, l->c, great));
 		}
 		else if (l->c == LESS)
-			return(ret(l, &l->c, less));
+			return(ret2(l, l->c, less));
 		else
 			return(string_token(l));
 	}
-	return(ret(l, &l->c, eof));
+	return(ret2(l, l->c, eof));
 }
