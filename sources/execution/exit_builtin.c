@@ -6,12 +6,25 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/18 11:54:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 11:13:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	ft_exit()
+{
+	// free allocated memory
+	exit(EXIT_SUCCESS);
+}
+
+int		ft_isspace(char c)
+{
+	if (c == '\f' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == ' ')
+		return (1);
+	return (0);
+}
 /*
 ** errors:
 ** greater than LONG_MIN   -9223372036854775808
@@ -47,10 +60,11 @@ long long   ft_atoi_exit(char *str)
 
 void		exit_error(char *arg, char **args)
 {
+	(void)args;
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
-	ft_exit(args);
+	ft_exit();
 }
 
 void		check_arg(char *arg, char **args)

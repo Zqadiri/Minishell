@@ -6,14 +6,13 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/19 10:11:44 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/19 11:04:52 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	minishell
 
 SRCS 			=	./sources/minishell.c\
-					./sources/execution/main_exec.c\
 					./sources/parsing/lexer.c\
 					./sources/parsing/parser.c\
 					./sources/parsing/ast.c\
@@ -25,10 +24,12 @@ LIBFT_PATH 		= 	./libft
 
 
 SRCS_EXEC		=	./sources/execution/utils.c\
+					./sources/execution/cd_builtin.c\
 					./sources/execution/env_builtin.c\
-					./sources/execution/unset_builtin.c\
+					./sources/execution/exit_builtin.c\
+					./sources/execution/main_exec.c\
 					./sources/execution/pwd_builtin.c\
-					./sources/execution/cd_builtin.c
+					./sources/execution/unset_builtin.c
 
 LIBFT_PATH 		= 	./libft
 

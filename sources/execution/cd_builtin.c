@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 10:43:52 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/18 14:16:58 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 10:32:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int change_dir(char *path)
     }
 }
 
-int cd_builtin(char *arg)
+int cd_builtin(char **arg)
 {
 	char *home_path;
 
@@ -117,7 +117,7 @@ int cd_builtin(char *arg)
 	 	ft_putstr_fd("cd: too many arguments\n", 2);
 		return (1);       
 	}
-	if (!arg || ft_strequ(arg, "~") || ft_strequ(arg, "--"))
+	if (!arg[1] || ft_strequ(arg[1], "~") || ft_strequ(arg[1], "--"))
 	{
 		home_path = get_env_var_by_key("HOME");
 		if (home_path == NULL)
@@ -127,14 +127,14 @@ int cd_builtin(char *arg)
 		}
 		change_dir(home_path);
 	}
-	else if (ft_strequ(arg, "-"))
+	else if (ft_strequ(arg[1], "-"))
 	{
 		home_path = get_env_var_by_key("OLDPWD");
 		change_dir(home_path);
 		return (1);
 	}
 	else
-		change_dir(arg);
+		change_dir(arg[1]);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/18 13:56:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 11:03:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,25 +110,25 @@ static  char    **remove_env_by_key(int index)
 **  unset arg1 arg2 *
 */
 
-int     unset_builtin(char *key)
+int     unset_builtin(char **args)
 {
     int i;
     int env_index;
 
     i = -1;
-    if (!g_env_var[1])
+    if (!args[1])
         return (1);
-    while (g_env_var[++i])
+    while (args[++i])
     {
-        env_index = find_env(key);
+        env_index = find_env(args[i]);
         if (env_index != -1)
            g_env_var = remove_env_by_key(env_index);
         else
         {
-            if (alpha(key) == -1)
+            if (alpha(args[1]) == -1)
             {
                 write (2, "unset: `", 8);
-                write (2, key, ft_strlen(key));
+                write (2, args[i], ft_strlen(args[i]));
                 write (2, "': not a valid identifier\n", 26);
                 break;
             }
