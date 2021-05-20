@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 19:24:33 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/20 13:53:30 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,3 +132,11 @@ int main(int argc, char **argv, char **env)
 // /bin/zsh
 // bash-3.2$ echo $?
 // 0
+
+//bash-3.2$ export number="0 1  2       3"
+// bash-3.2$ env | less
+// bash-3.2$ echo "$number"
+// 0 1  2       3
+// bash-3.2$ echo $number - trim environment variable
+// 0 1 2 3
+// -> $IFS default separators used for field splitting 
