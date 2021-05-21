@@ -6,13 +6,13 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/21 21:02:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 21:40:41 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void readchar(t_lexer *l)
+void	readchar(t_lexer *l)
 {
 	if (!l || !l->buffer)
 		printf("error\n");
@@ -24,7 +24,7 @@ void readchar(t_lexer *l)
 	l->readpos++;
 }
 
-int peek_char(t_lexer *l)
+int	peek_char(t_lexer *l)
 {
 	if (l->readpos >= l->bufsize)
 		return (EOF);
@@ -32,18 +32,18 @@ int peek_char(t_lexer *l)
 		return (l->buffer[l->readpos]);
 }
 
-void skip_space(t_lexer *l)
+void	skip_space(t_lexer *l)
 {
 	if (!l || !l->buffer)
 		return ; //error
-	while(l->readpos < l->bufsize &&
-		(l->c == SPACE || l->c == '\t' || l->c == '\n'))
+	while (l->readpos < l->bufsize && (l->c == SPACE
+			|| l->c == '\t' || l->c == '\n'))
 		readchar(l);
 }
 
-t_token *init_token(e_token_type type, char *s)
+t_token	*init_token(e_token_type type, char *s)
 {
-	t_token  *t;
+	t_token	*t;
 
 	// printf("f:init_token\t[%s]\n", c);
 	t = malloc(sizeof(t_token));
@@ -54,9 +54,9 @@ t_token *init_token(e_token_type type, char *s)
 	return (t);
 }
 
-t_token *ret_char(t_lexer *l, char c, e_token_type type)
+t_token	*ret_char(t_lexer *l, char c, e_token_type type)
 {
-	char *str;
+	char	*str;
 
 	str = malloc(sizeof(char) * 2);
 	str[0] = c;
@@ -67,7 +67,7 @@ t_token *ret_char(t_lexer *l, char c, e_token_type type)
 	return (init_token(type, str));
 }
 
-t_token *ret_str(t_lexer *l, char *s, int type)
+t_token	*ret_str(t_lexer *l, char *s, int type)
 {
 	printf("f:ret_str\t[%s]\n", s);
 	if (type == greater)
@@ -76,23 +76,23 @@ t_token *ret_str(t_lexer *l, char *s, int type)
 	return (init_token(type, s));
 }
 
-int valid_envar(char c)
+int	valid_envar(char c)
 {
 	if (ft_isalnum(c) || c == '_')
 		return (1);
 	return (0);
 }
 
-char *tokenize_squoted_text(t_lexer *l)
+char	*tokenize_squoted_text(t_lexer *l)
 {
-	char *str;
-	char *temp;
-	int s;
-	
+	char	*str;
+	char	*temp;
+	int		s;
+
 	s = 0;
 	readchar(l);
 	str = ft_strdup("");
-	while(l->c != SQUOTE && l->c != EOF)
+	while (l->c != SQUOTE && l->c != EOF)
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
@@ -107,10 +107,10 @@ char *tokenize_squoted_text(t_lexer *l)
 	return (str);
 }
 
-char *envar_token(t_lexer *l)
+char	*envar_token(t_lexer *l)
 {
-	char *str;
-	char *temp;
+	char	*str;
+	char	*temp;
 
 	if (!l)
 		return (NULL);
@@ -121,9 +121,9 @@ char *envar_token(t_lexer *l)
 		if (l->c == '0')
 			str = ft_strjoin(str, "minishell");
 		readchar(l);
-		return(tokenize_text(l, str));
+		return (tokenize_text(l, str));
 	}
-	while (valid_envar(l->c) && l->c != EOF) 
+	while (valid_envar(l->c) && l->c != EOF)
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
@@ -136,10 +136,10 @@ char *envar_token(t_lexer *l)
 	return (str);
 }
 
-char *tokenize_text(t_lexer *l, char *s)
+char	*tokenize_text(t_lexer *l, char *s)
 {
-	char *str;
-	char *temp;
+	char	*str;
+	char	*temp;
 
 	if (!l)
 		return (NULL);
@@ -165,14 +165,14 @@ char *tokenize_text(t_lexer *l, char *s)
 	return (str);
 }
 
-char *tokenize_dquoted_text(t_lexer *l)
+char	*tokenize_dquoted_text(t_lexer *l)
 {
-	char *str;
-	char *temp;
-	
+	char	*str;
+	char	*temp;
+
 	readchar(l);
 	str = ft_strdup("");
-	while(l->c != DQUOTE && l->c != '\0')
+	while (l->c != DQUOTE && l->c != '\0')
 	{
 		temp = str;
 		if (l->c == BSLASH)
@@ -204,10 +204,10 @@ char *tokenize_dquoted_text(t_lexer *l)
 	return (str);
 }
 
-t_token *string_token(t_lexer *l)
+t_token	*string_token(t_lexer *l)
 {
-	char *str;
-	char *temp;
+	char	*str;
+	char	*temp;
 
 	str = ft_strdup("");
 	while (l->curpos < l->bufsize && (l->c != PIPE || l->c != SEMICOLON
@@ -233,26 +233,26 @@ t_token *string_token(t_lexer *l)
 	return(ret_str(l, str, id));
 }
 
-t_token *get_next_token(t_lexer *l)
+t_token	*get_next_token(t_lexer *l)
 {
 	while (l->c != EOF && (l->curpos < l->bufsize))
 	{
 		skip_space(l);
 		// printf("f:get_next_token\tcurrent char [%c]\n", l->c);
 		if (l->c == PIPE)
-			return(ret_char(l, l->c, pip));
+			return (ret_char(l, l->c, pip));
 		else if (l->c == SEMICOLON)
-			return(ret_char(l, l->c, semi));
+			return (ret_char(l, l->c, semi));
 		else if (l->c == GREAT)
 		{
 			if (peek_char(l) == GREAT)
-				return(ret_str(l, ">>", greater));
-			return(ret_char(l, l->c, great));
+				return (ret_str(l, ">>", greater));
+			return (ret_char(l, l->c, great));
 		}
 		else if (l->c == LESS)
-			return(ret_char(l, l->c, less));
+			return (ret_char(l, l->c, less));
 		else
-			return(string_token(l));
+			return (string_token(l));
 	}
-	return(ret_char(l, l->c, eof));
+	return (ret_char(l, l->c, eof));
 }

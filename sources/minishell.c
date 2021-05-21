@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/21 21:07:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 21:43:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ t_lexer *read_cmd()
 // {
 // 	t_lexer *l; 
 // 	t_parser *p;
+// 	// t_ast *ast;
+// 	(void)argc;
+// 	(void)argv; 
+// 	(void)env;
 // 	// if (argc != 1)
 // 	// 	exit(1);
 // 	while(1)
@@ -77,7 +81,7 @@ t_lexer *read_cmd()
 // 		}
 // 		p = init_parser(l);
 // 		// ast = parser(p);
-// 		ast = parser(p);
+// 		// ast = parser(p);
 // 	}//free before exit
 // 	exit(EXIT_SUCCESS);
 // }
