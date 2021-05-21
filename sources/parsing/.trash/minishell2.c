@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 16:40:16 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/15 16:15:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 14:17:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int argc, char **argv, char **env)
 		l = malloc(sizeof(t_lexer));
 		// ft_memset(l, 0, sizeof(t_token));
 		read_cmd(l);
-		printf("|%s|\n", l->buffer);
+		// printf("|%s|\n", l->buffer);
 		if(!l->buffer)
 			exit(EXIT_SUCCESS);
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)

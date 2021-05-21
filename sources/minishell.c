@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/05/19 11:52:18 by zqadiri          ###   ########.fr       */
+=======
+/*   Updated: 2021/05/20 13:53:30 by iidzim           ###   ########.fr       */
+>>>>>>> da8ebf8fc1570e66a7a42099ddbffb9f034fdf81
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +35,23 @@ t_lexer *read_cmd()
 {
 	size_t r;
 	char *line;
+	char *buffer;
 
-	//buffersize = 1 -> signels!
-	line = malloc(sizeof(char) * 1024);
-	if (!line)
+	buffer = malloc(sizeof(char) * 2);
+	r = read(0, buffer, 1);
+	line = malloc(sizeof(char) * 2); 
+	if (!buffer || !line)
 		return(NULL);
-	r = read(0, line, 1023);
-	printf("f:read_cmd\tr>%ld\n", r);
-	line[r] = '\0';
+	line[0] = '\0';
+	while( r > 0)
+	{
+		buffer[1] = 0;
+		if (buffer[0] == '\n')
+			break ;
+		line = ft_strjoinchar(line, buffer[0]);
+		r = read(0, buffer, 1);
+	}
+	free(buffer);
 	return(init_lexer(line));
 }
 
@@ -46,7 +59,7 @@ t_lexer *read_cmd()
 // {
 // 	t_lexer *l; 
 // 	t_parser *p;
-// 	// t_ast *ast;
+// 	t_ast *ast;
 
 // 	(void)argc;
 // 	(void)argv; 
@@ -55,7 +68,7 @@ t_lexer *read_cmd()
 // 	// 	exit(1);
 // 	while(1)
 // 	{
-// 		ft_putstr_fd("minishell$ ", 0);
+// 		ft_putstr_fd("\nminishell$ ", 0);
 // 		l = read_cmd();
 // 		// printf("|%s|\n", l->buffer);
 // 		if(!l->buffer)
@@ -72,8 +85,7 @@ t_lexer *read_cmd()
 // 			break;
 // 		}
 // 		p = init_parser(l);
-// 		// ast = parser(p);
-// 		// parse_cmd();
+// 		ast = parser(p);
 // 	}//free before exit
 // 	exit(EXIT_SUCCESS);
 // }
@@ -82,6 +94,7 @@ t_lexer *read_cmd()
 // read cmdline √
 // check if there is nay syntax error (eg: >>> or |; ...)
 // implement functions (map) for linked list
+// abstract syntax tree
 // example :							 output
 // - echo c'o\'u'cou'					-> co\ucou
 // - ec"ho" bon"'j'o'u"r				-> bon'j'o'ur
@@ -123,3 +136,11 @@ t_lexer *read_cmd()
 // /bin/zsh
 // bash-3.2$ echo $?
 // 0
+
+//bash-3.2$ export number="0 1  2       3"
+// bash-3.2$ env | less
+// bash-3.2$ echo "$number"
+// 0 1  2       3
+// bash-3.2$ echo $number - trim environment variable
+// 0 1 2 3
+// -> $IFS default separators used for field splitting 
