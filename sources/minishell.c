@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/20 13:53:30 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 12:18:46 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,45 +51,45 @@ t_lexer *read_cmd()
 	return(init_lexer(line));
 }
 
-int main(int argc, char **argv, char **env)
-{
-	t_lexer *l; 
-	t_parser *p;
-	t_ast *ast;
+// int main(int argc, char **argv, char **env)
+// {
+// 	t_lexer *l; 
+// 	t_parser *p;
+// 	// t_ast *ast;
 
-	(void)argc;
-	(void)argv; 
-	(void)env;
-	// if (argc != 1)
-	// 	exit(1);
-	while(1)
-	{
-		ft_putstr_fd("\nminishell$ ", 0);
-		l = read_cmd();
-		// printf("|%s|\n", l->buffer);
-		if(!l->buffer)
-			exit(EXIT_SUCCESS);
-		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
-		{
-			free(l);
-			continue;
-		}
-		if(strcmp(l->buffer, "exit") == 0)
-		{
-			printf("exit\n");
-			free(l);
-			break;
-		}
-		p = init_parser(l);
-		ast = parser(p);
-	}//free before exit
-	exit(EXIT_SUCCESS);
-}
+// 	(void)argc;
+// 	(void)argv; 
+// 	(void)env;
+// 	// if (argc != 1)
+// 	// 	exit(1);
+// 	while(1)
+// 	{
+// 		ft_putstr_fd("\nminishell$ ", 0);
+// 		l = read_cmd();
+// 		// printf("|%s|\n", l->buffer);
+// 		if(!l->buffer)
+// 			exit(EXIT_SUCCESS);
+// 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
+// 		{
+// 			free(l);
+// 			continue;
+// 		}
+// 		if(strcmp(l->buffer, "exit") == 0)
+// 		{
+// 			printf("exit\n");
+// 			free(l);
+// 			break;
+// 		}
+// 		p = init_parser(l);
+// 		// ast = parser(p);
+// 	}//free before exit
+// 	exit(EXIT_SUCCESS);
+// }
 
 // ToDo List:
 // read cmdline √
 // check if there is nay syntax error (eg: >>> or |; ...)
-// implement functions (map) for linked list
+// implement functions (map) for doubly linked list
 // abstract syntax tree
 // example :							 output
 // - echo c'o\'u'cou'					-> co\ucou

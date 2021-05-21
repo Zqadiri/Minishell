@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 19:23:28 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 17:11:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,16 @@ void skip_space(t_lexer *l)
 {
 	if (!l || !l->buffer)
 		return ; //error
-	while(l->readpos < l->bufsize && (l->c == SPACE || l->c == '\t' || l->c == '\n'))
+	while(l->readpos < l->bufsize &&
+		(l->c == SPACE || l->c == '\t' || l->c == '\n'))
 		readchar(l);
 }
 
-t_token *init_token(e_token_type type, char c)
+t_token *init_token(e_token_type type, char *s)
 {
 	t_token  *t;
-	char s[2];
 
-	s[0] = c;
-	s[1] = '\0';
-	printf("f:init_token\t[%c]\n", c);
+	// printf("f:init_token\t[%s]\n", c);
 	t = malloc(sizeof(t_token));
 	if (!t)
 		return (NULL);
@@ -56,35 +54,26 @@ t_token *init_token(e_token_type type, char c)
 	return (t);
 }
 
-t_token *ret2(t_lexer *l, char c, e_token_type type)
-{	
-	printf("f:ret\t[%c]\n", c);
+t_token *ret_char(t_lexer *l, char c, e_token_type type)
+{
+	char *str;
+
+	str = malloc(sizeof(char) * 2);
+	str[0] = c;
+	str[1] = '\0';
 	if (type == greater)
 		readchar(l);
 	readchar(l);
-	return (init_token(type, c));
+	return (init_token(type, str));
 }
 
-t_token *ret(t_lexer *l, char *s, int type)
+t_token *ret_str(t_lexer *l, char *s, int type)
 {
+	printf("f:ret_str\t[%s]\n", s);
 	if (type == greater)
 		readchar(l);
 	readchar(l);
-	// printf("f:ret\tstr >> |%s|\n", s);
-	return (init_token2(type, s));
-}
-
-t_token *init_token2(e_token_type type, char *c)
-{
-	t_token  *t;
-
-	printf("f:init_token\t[%s]\n", c);
-	t = malloc(sizeof(t_token));
-	if (!t)
-		return (NULL);
-	t->value = ft_strdup(c);
-	t->type = type;
-	return (t);
+	return (init_token(type, s));
 }
 
 int valid_envar(char c)
@@ -113,27 +102,8 @@ char *tokenize_squoted_text(t_lexer *l)
 	if (l->c == SQUOTE)
 		s += 1;
 	if (l->c == EOF && s == 0)
-		printf("syntax error->add \'\n"); //free + exit
+		printf("syntax error expected token \'\n"); //free + exit
 	readchar(l);
-	return (str);
-}
-
-char *tokenize_text(t_lexer *l)
-{
-	char *str;
-	char *temp;
-
-	if (!l)
-		return (NULL);
-	str = ft_strdup("");
-	while (l->c != EOF && !ft_strchar("|;>< ", l->c))
-	{
-		temp = str;
-		str = ft_strjoinchar(str, l->c);
-		readchar(l);
-		free(temp);
-	}
-	printf("f:tokenize text <%s>\n", str);
 	return (str);
 }
 
@@ -146,18 +116,50 @@ char *envar_token(t_lexer *l)
 		return (NULL);
 	str = ft_strdup("");
 	readchar(l);
-	// if (ft_isdigit(l->c))
-	// {
-	// 	readchar(l);
-	// 	return(tokenize_text(l));
-	// }
-	while (l->c != DQUOTE && l->c != '\0' && valid_envar(l->c)) 
+	if (ft_isdigit(l->c))
+	{
+		if (l->c == '0')
+			str = ft_strjoin(str, "minishell");
+		readchar(l);
+		return(tokenize_text(l, str));
+	}
+	while (valid_envar(l->c) && l->c != EOF) 
 	{
 		temp = str;
 		str = ft_strjoinchar(str, l->c);
 		readchar(l);
 		free(temp);
 	}
+	return (getenv(str)); 
+}
+
+char *tokenize_text(t_lexer *l, char *s)
+{
+	char *str;
+	char *temp;
+
+	if (!l)
+		return (NULL);
+	if (!s)
+		str = ft_strdup("");
+	else
+		str = ft_strdup(s);
+	while (l->c != EOF && !ft_strchar("|;>< ", l->c))
+	{
+		temp = str;
+		if (l->c == DOLLAR)
+			str = ft_strjoin(str, envar_token(l));
+		readchar(l);
+		if (l->c == EOF)
+		{
+			free(temp);
+			return (str);
+		}
+		str = ft_strjoinchar(str, l->c);
+		readchar(l);
+		free(temp);
+	}
+	// printf("f:tokenize text22 <%s>\n", str);
 	return (str);
 }
 
@@ -171,10 +173,10 @@ char *tokenize_dquoted_text(t_lexer *l)
 	while(l->c != DQUOTE && l->c != '\0')
 	{
 		temp = str;
-		if (l->c == SLASH)
+		if (l->c == BSLASH)
 		{
 			readchar(l);
-			if (l->c == DQUOTE || l->c == DOLLAR || l->c == SLASH)
+			if (l->c == DQUOTE || l->c == DOLLAR || l->c == BSLASH)
 			{
 				str = ft_strjoinchar(str, l->c);
 				readchar(l);
@@ -185,7 +187,7 @@ char *tokenize_dquoted_text(t_lexer *l)
 			readchar(l);
 			readchar(l);
 		}
-		else if (l->c == DOLLAR)// && !ft_isdigit(peek_char(l)))
+		else if (l->c == DOLLAR)
 			str = envar_token(l);
 		else
 		{
@@ -195,7 +197,7 @@ char *tokenize_dquoted_text(t_lexer *l)
 		free(temp);
 	}
 	if (l->c == '\0')
-		printf("syntax error->add \"\n"); //free + exit
+		printf("syntax error expected \"\n"); //free + exit
 	readchar(l);
 	return (str);
 }
@@ -215,15 +217,18 @@ t_token *string_token(t_lexer *l)
 		else if (l->c == SQUOTE)
 			str = ft_strjoin(str, tokenize_squoted_text(l));
 		else
-			str = ft_strjoin(str, tokenize_text(l));
+		{
+			str = ft_strjoin(str, tokenize_text(l, NULL));
+			printf("f:string_token\t-%s-\n", str);
+		}
 		free(temp);
 		if (l->c == 32)
-			return(ret(l, str, id));
+			return(ret_str(l, str, id));
 		readchar(l);
 		// continue;
 	}
-	printf("f:string_token\tstr >> |%s|\n", str);
-	return(ret(l, str, id));
+	// printf("f:string_token\tstr >> |%s|\n", str);
+	return(ret_str(l, str, id));
 }
 
 t_token *get_next_token(t_lexer *l)
@@ -233,22 +238,19 @@ t_token *get_next_token(t_lexer *l)
 		skip_space(l);
 		// printf("f:get_next_token\tcurrent char [%c]\n", l->c);
 		if (l->c == PIPE)
-			return(ret2(l, l->c, pip));
+			return(ret_char(l, l->c, pip));
 		else if (l->c == SEMICOLON)
-		{
-			printf("f:get_next_token\tsemicolon [%c]\n", l->c);
-			return(ret2(l, l->c, semi));
-		}
+			return(ret_char(l, l->c, semi));
 		else if (l->c == GREAT)
 		{
 			if (peek_char(l) == GREAT)
-				return(ret2(l, '?', greater));
-			return(ret2(l, l->c, great));
+				return(ret_str(l, ">>", greater));
+			return(ret_char(l, l->c, great));
 		}
 		else if (l->c == LESS)
-			return(ret2(l, l->c, less));
+			return(ret_char(l, l->c, less));
 		else
 			return(string_token(l));
 	}
-	return(ret2(l, l->c, eof));
+	return(ret_char(l, l->c, eof));
 }

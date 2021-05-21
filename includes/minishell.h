@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 19:41:44 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 16:52:00 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #define SEMICOLON 59
 #define SPACE 32
 #define DOLLAR 36
-#define SLASH 92
+#define BSLASH 92
 
 typedef enum t_token_type
 {
@@ -100,16 +100,17 @@ typedef struct s_ast
 	int args_size;
 }				t_ast;
 
+char *ft_strjoinchar(char *s, char c);
 void print_prompt();
 t_lexer *read_cmd();
-// void read_cmd(t_lexer *x);
 t_token *get_next_token(t_lexer *l);
 t_parser *init_parser(t_lexer *l);
 int	ftstrcmp(char *s1, char *s2);
-char	*ft_strjoinchar(char *s, char c);
+t_ast *init_ast(e_ast_type type);
+char *tokenize_text(t_lexer *l, char *s);
+char *envar_token(t_lexer *l);
 
 // /!\ update linked list function - new struct AST
-//linkedlist 
 // int list_size(t_cmdlist *l);
 // t_cmdlist *create(t_token *cmd, int pipe);
 // void add_back(t_cmdlist **l, t_token *cmd, int pipe);
