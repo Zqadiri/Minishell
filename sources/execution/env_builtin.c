@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/17 11:01:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/21 10:49:58 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int env_builtin()
     i = 0; 
     while (g_env_var[i])
     {
-        write (1, g_env_var[i], ft_strlen(g_env_var[i]));
-        write (1, "\n", 1);
+        ft_putendl_fd( g_env_var[i], 1);
         i++;
     }
 	return (1);

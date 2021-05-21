@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 10:43:52 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/19 10:32:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 14:39:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int change_dir(char *path)
 
 int cd_builtin(char **arg)
 {
+	printf ("start cd >"); 
 	char *home_path;
 
 	home_path = NULL;
@@ -135,6 +136,7 @@ int cd_builtin(char **arg)
 	}
 	else
 		change_dir(arg[1]);
+	
 	return (1);
 }
 

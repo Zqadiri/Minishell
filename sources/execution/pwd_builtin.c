@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/19 10:29:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 14:47:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,17 @@ int     pwd_builtin()
 
 int			check_builtin(char **args)
 {
+	printf ("in check\n");
+
 	if (ft_strequ(args[0], "echo"))
 		return (echo_builtin(args));
-	else if (ft_strequ(args[0], "cd"))
-		return (cd_builtin(args));
+	// else if (ft_strequ(args[0], "cd"))
+	else if (args[0][0] == 'c' && args[0][1] == 'd')
+	{
+		printf ("arg[0]:%s\n", args[0]);
+		cd_builtin(args);
+	}
+		
 	else if (ft_strequ(args[0], "unset"))
 		return (unset_builtin(args));
 	else if (ft_strequ(args[0], "export"))

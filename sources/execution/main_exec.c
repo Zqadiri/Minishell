@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/19 11:50:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/21 11:03:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,26 @@ int echo_builtin(char **arg)
 int export_builtin(char **arg)
 {
 	(void)arg;
-
+	
 	return (1);
+}
+
+char	**get_path(void)
+{
+	char	**path;
+	char	*tmp;
+	int		ret;
+
+	if ((ret = find_env("PATH")) == -1)
+		return (NULL);
+	tmp = ft_strdup(g_env_var[ret]);
+	tmp = return_value(tmp, '=');
+	if (!(path = ft_split(tmp, ':')))
+	{
+		free(tmp);
+		return (NULL);
+	}
+	return (path);
 }
 
 int		dup_env_var(char **env)
@@ -68,21 +86,36 @@ int	launch(char **env, char **arg)
 	return (1);
 }
 
-// int		main(int argc, char  **argv, char **env)
-// {
-// 	char **args;
+int		main(int argc, char  **argv, char **env)
+{
+	char **args;
+	char *line;
+	int r = 0;
 
-// 	argv++;
-// 	(void)argc;
-// 	args = argv;
-// 	dup_env_var(env);
-// 	char *line;
-// 	int r = 0;
-
-// 	//buffersize = 1 -> signels!
-// 	line = malloc(sizeof(char) * 1024);
-// 	if (!line)
-// 		return(NULL);
-// 	r = read(0, line, 1023);
-// 	return (1);
-// }
+	(void)argc;
+	(void)argv;
+	dup_env_var(env);
+	while (1)
+	{
+		line = malloc(sizeof(char) * 1024);
+		if (!line)
+			return(-1);
+		r = read(0, line, 1023);
+		line[r] = '\0';
+		args = ft_split(line, ' ');
+		int i = 0;
+		while (args[i])
+		{
+			printf ("[%s]\n", args[i]);
+			i++;
+		}
+		check_builtin(args);
+	}
+	// char **path = get_path();
+	// while (path[r])
+	// {
+	// 	ft_putendl_fd(path[r], 1);
+	// 	r++;
+	// }
+	return (1);
+}

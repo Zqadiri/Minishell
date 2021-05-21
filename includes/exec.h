@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/19 11:03:20 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/21 10:39:31 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int     unset_builtin(char **args);
 int     export_builtin(char **arg);
 
 int		dup_env_var(char **env);
+char	**get_path(void);
 int     launch(char **env, char **arg);
 
 /*

@@ -6,15 +6,10 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/21 16:52:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 21:07:56 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
-
-#include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
