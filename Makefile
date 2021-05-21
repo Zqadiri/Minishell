@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/21 16:34:02 by iidzim           ###   ########.fr        #
+#    Updated: 2021/05/21 20:04:05 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ clean:			libft_clean
 fclean:			libft_fclean clean
 				@${RM} ${NAME}
 re:				fclean all
-run:			
+run:			re
+				./minishell
 
 # make other makefiles compile with the -C flag
 # The -C flag makes you go to the appropriate path and do the asked command

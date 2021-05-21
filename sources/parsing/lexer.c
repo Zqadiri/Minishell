@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/21 17:11:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 21:02:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,10 @@ char *envar_token(t_lexer *l)
 		readchar(l);
 		free(temp);
 	}
-	return (getenv(str)); 
+	str = getenv(str);
+	if (!str)
+		str = ft_strdup("");
+	return (str);
 }
 
 char *tokenize_text(t_lexer *l, char *s)
@@ -149,7 +152,6 @@ char *tokenize_text(t_lexer *l, char *s)
 		temp = str;
 		if (l->c == DOLLAR)
 			str = ft_strjoin(str, envar_token(l));
-		readchar(l);
 		if (l->c == EOF)
 		{
 			free(temp);
