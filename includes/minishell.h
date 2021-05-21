@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 10:25:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/19 14:26:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include "./exec.h"
 #include "../libft/libft.h"
 
+#define GREEN "\033[31m"
+#define RESET "\033[0m"
 #define PATH_MAX 15000
 #define PIPE 124
 #define GREAT 62

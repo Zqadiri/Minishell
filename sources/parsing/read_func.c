@@ -24,7 +24,7 @@ static	char	*ft_join(char *s, char c)
 	return (str);
 }
 
-int	get_next_line(char **line)
+int	get_next_char(char **line)
 {
 	char	*buffer;
 	int		flag;
