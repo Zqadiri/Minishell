@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 12:02:47 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/22 13:33:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// int echo_builtin(char **arg)
-// {
-// 	(void)arg;
-
-// 	return (1);
-// }
-
-int export_builtin(char **arg)
-{
-	(void)arg;
-	
-	return (1);
-}
 
 char	**get_path(void)
 {
@@ -92,35 +78,6 @@ int	launch(char **env, char **arg)
 // 	char *line;
 // 	int r = 0;
 
-<<<<<<< HEAD
-	// (void)argc;
-	// (void)argv;
-	// dup_env_var(env);
-	// while (1)
-	// {
-	// 	line = malloc(sizeof(char) * 1024);
-	// 	if (!line)
-	// 		return(-1);
-	// 	r = read(0, line, 1023);
-	// 	line[r] = '\0';
-	// 	args = ft_split(line, ' ');
-	// 	int i = 0;
-	// 	while (args[i])
-	// 	{
-	// 		printf ("[%s]\n", args[i]);
-	// 		i++;
-	// 	}
-	// 	check_builtin(args);
-	// }
-	// char **path = get_path();
-	// while (path[r])
-	// {
-	// 	ft_putendl_fd(path[r], 1);
-	// 	r++;
-	// }
-	// return (1);
-// }
-=======
 // 	(void)argc;
 // 	(void)argv;
 // 	dup_env_var(env);
@@ -148,4 +105,3 @@ int	launch(char **env, char **arg)
 // 	// }
 // 	return (1);
 // }
->>>>>>> e84794a47db39f709caf67537cc188b2b6b3f8b3
