@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 11:56:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/22 16:11:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #define SPACE 32
 #define DOLLAR 36
 #define BSLASH 92
+#define TILDE 126
 
 typedef enum t_token_type
 {

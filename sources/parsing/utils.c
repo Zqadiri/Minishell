@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 11:26:28 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/22 20:17:02 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ char	*ft_strjoinchar(char *s, char c)
 int	no_quotes(t_lexer *l, char c)
 {
 	if (l->c == EOF)
+	{
 		printf("syntax error expected %c\n", c);
-	//free + exit
+		//free + exit
+		exit (1);
+	}
 	return (1);
 }

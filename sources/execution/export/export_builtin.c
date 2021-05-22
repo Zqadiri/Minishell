@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 11:26:16 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/22 12:05:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ void    sort_and_print(void)
 	print_sorted_env(dup);
 }
 
-int     export_builtin(char **args)
-{
-    if (!args[1])
-    {
-        sort_and_print();
-        return (1);
-    }
-}
+// int     export_builtin(char **args)
+// {
+//     if (!args[1])
+//     {
+//         sort_and_print();
+//         return (1);
+//     }
+// }

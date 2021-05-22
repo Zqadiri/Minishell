@@ -6,11 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/05/22 11:58:31 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/05/22 10:55:12 by zqadiri          ###   ########.fr       */
->>>>>>> e84794a47db39f709caf67537cc188b2b6b3f8b3
+/*   Updated: 2021/05/22 15:41:19 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +80,6 @@ void print_prompt();
 t_ast *init_ast(e_ast_type type);
 t_parser	*init_parser(t_lexer *l);
 
-//utils.c
-int	ftstrcmp(char *s1, char *s2);
-char *ft_strjoinchar(char *s, char c);
-int	no_quotes(t_lexer *l, char c);
 
 // /!\ update linked list function - new struct AST
 // int list_size(t_cmdlist *l);
