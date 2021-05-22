@@ -6,14 +6,16 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/21 20:04:05 by iidzim           ###   ########.fr        #
+#    Updated: 2021/05/22 11:57:36 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	minishell
 
 SRCS 			=	./sources/minishell.c\
+					./sources/parsing/get_next_token.c\
 					./sources/parsing/lexer.c\
+					./sources/parsing/lexer_utils.c\
 					./sources/parsing/parser.c\
 					./sources/parsing/ast.c\
 					./sources/parsing/utils.c\
@@ -29,6 +31,7 @@ SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/exit_builtin.c\
 					./sources/execution/main_exec.c\
 					./sources/execution/pwd_builtin.c\
+					./sources/execution/echo_builtin.c\
 					./sources/execution/unset_builtin.c
 
 LIBFT_PATH 		= 	./libft

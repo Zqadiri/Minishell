@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/19 14:47:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/21 11:07:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int			check_builtin(char **args)
 		printf ("arg[0]:%s\n", args[0]);
 		cd_builtin(args);
 	}
-		
 	else if (ft_strequ(args[0], "unset"))
 		return (unset_builtin(args));
 	else if (ft_strequ(args[0], "export"))

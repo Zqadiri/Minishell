@@ -6,11 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 11:07:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/22 11:57:41 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/lexer.h"
 
 char	*tokenize_text(t_lexer *l, char *s)
 {
@@ -121,7 +121,6 @@ t_token	*string_token(t_lexer *l)
 		if (l->c == 32)
 			return (ret_str(l, str, id));
 		readchar(l);
-		// continue;
 	}
 	// printf("f:string_token\tstr >> |%s|\n", str);
 	return (ret_str(l, str, id));

@@ -6,86 +6,48 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 11:09:22 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/22 11:11:30 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../includes/minishell.h"
 
-t_lexer *init_lexer(char *line)
+int main(int argc, char **argv, char **env)
 {
-	t_lexer *l;
+	t_lexer *l; 
+	t_parser *p;
+	// t_ast *ast;
 
-	l = malloc(sizeof(t_lexer));
-	if (!l)
-		return (NULL);
-	l->buffer = ft_strdup(line);
-	l->bufsize = ft_strlen(line);
-	l->c = ' ';
-	l->curpos = 0;
-	l->readpos = 0;
-	return (l);
-}
-
-t_lexer *read_cmd()
-{
-	size_t r;
-	char *line;
-	char *buffer;
-
-	buffer = malloc(sizeof(char) * 2);
-	r = read(0, buffer, 1);
-	line = malloc(sizeof(char) * 2); 
-	if (!buffer || !line)
-		return(NULL);
-	line[0] = '\0';
-	while( r > 0)
+	(void)argc;
+	(void)argv; 
+	(void)env;
+	// if (argc != 1)
+	// 	exit(1);
+	while(1)
 	{
-		buffer[1] = 0;
-		if (buffer[0] == '\n')
-			break ;
-		line = ft_strjoinchar(line, buffer[0]);
-		r = read(0, buffer, 1);
-	}
-	free(buffer);
-	return(init_lexer(line));
+		ft_putstr_fd("\nminishell$ ", 0);
+		l = read_cmd();
+		// printf("|%s|\n", l->buffer);
+		if(!l->buffer)
+			exit(EXIT_SUCCESS);
+		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
+		{
+			free(l);
+			continue;
+		}
+		if(strcmp(l->buffer, "exit") == 0)
+		{
+			printf("exit\n");
+			free(l);
+			break;
+		}
+		p = init_parser(l);
+		// ast = parser(p);
+		// ast = parser(p);
+	}//free before exit
+	exit(EXIT_SUCCESS);
 }
-
-// int main(int argc, char **argv, char **env)
-// {
-// 	t_lexer *l; 
-// 	t_parser *p;
-// 	// t_ast *ast;
-
-// 	(void)argc;
-// 	(void)argv; 
-// 	(void)env;
-// 	// if (argc != 1)
-// 	// 	exit(1);
-// 	while(1)
-// 	{
-// 		ft_putstr_fd("\nminishell$ ", 0);
-// 		l = read_cmd();
-// 		// printf("|%s|\n", l->buffer);
-// 		if(!l->buffer)
-// 			exit(EXIT_SUCCESS);
-// 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
-// 		{
-// 			free(l);
-// 			continue;
-// 		}
-// 		if(strcmp(l->buffer, "exit") == 0)
-// 		{
-// 			printf("exit\n");
-// 			free(l);
-// 			break;
-// 		}
-// 		p = init_parser(l);
-// 		// ast = parser(p);
-// 		// ast = parser(p);
-// 	}//free before exit
-// 	exit(EXIT_SUCCESS);
-// }
 
 // /!\ A single quote may not occur between single quotes, even when preceded by a backslash.
 

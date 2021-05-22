@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/19 10:11:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/22 11:26:28 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ char	*ft_strjoinchar(char *s, char c)
 	str[i + 1] = '\0';
 	// free(s);
 	return (str);
+}
+
+int	no_quotes(t_lexer *l, char c)
+{
+	if (l->c == EOF)
+		printf("syntax error expected %c\n", c);
+	//free + exit
+	return (1);
 }
