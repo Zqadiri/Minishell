@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 15:28:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/22 17:34:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,36 @@ int		is_valid_env_key(char *arg)
 	return (1);
 }
 
+void	set_new_env(char **args, int index)
+{
+	int n;
+	char *env;
+
+	n = env_count() + 1;
+	g_env_var = realloc_new_env(n);
+	env = ft_substr(args[index], 0, ft_strlen(args[index]));
+	g_env_var[env_count()] = env;
+	
+}
+
+void	modify_env(char **args, int index)
+{
+	int i;
+
+	i = find_env(args[index]);
+}
+
+void	set_or_modify(char **args, int i)
+{
+	int	k;
+
+	k = find_env(args[i]);
+	if (k == -1)
+		set_new_env(args, i);
+	else
+		modify_env(args, i);
+}
+
 int     export_builtin(char **args)
 {
 	int i;
@@ -95,6 +125,7 @@ int     export_builtin(char **args)
 			continue ;
 		}
 		i++;
+		set_or_modify(args, i);
 	}
 	return (1);
 }

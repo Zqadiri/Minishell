@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 15:30:09 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/22 17:31:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int		dup_env_var(char **env);
 char	**dup_env(void);
 char	**get_path(void);
 void    print_sorted_env(char **sorted_env);
+char    **realloc_new_env(int env_num);
+int     set_env_var(char *key, char *new_path);
 
 /*
 ** Helpers 
