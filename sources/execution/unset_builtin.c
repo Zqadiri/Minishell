@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 11:26:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/22 15:26:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ static void free_old_env()
 
 int get_str_by_char(char *str, char c)
 {
-	char	*ch;
+	char	*str2;
+    int     ret;
 
-	ch = ft_strchr(str, c);
-	if (!ch)
+	str2 = ft_strchr(str, c);
+	if (!str2)
 		return (-1);
-	return ((int)(ch - str));
+    else
+        ret = (int)(str2 - str);
+	return (1);
 }
 
 int     find_env(char *key)
@@ -88,9 +91,10 @@ char    **realloc_new_env(int env_num)
     return (new_env);
 }    
 
-static  char    **remove_env_by_key(int index)
+char    **remove_env_by_key(int index)
 {
     char            *next_env;
+    char            **new_one;
     register    int i;
 
     i = index;
@@ -101,7 +105,8 @@ static  char    **remove_env_by_key(int index)
         g_env_var[i] = next_env;
         i++;
     }
-    return (realloc_new_env(len(g_env_var) - 1));
+    new_one = realloc_new_env(len(g_env_var) - 1);
+    return (new_one);
 }
 
 /*
@@ -141,11 +146,12 @@ int     unset_builtin(char **args)
 // {
 //     int i = 1;
 // 	dup_env_var(env);
-//     while (i < argc)
-//     {
-//         unset_builtin(argv[i]);
-//         i++;
-//     }
+//     // while (i < argc)
+//     // {
+//     //     unset_builtin(argv[i]);
+//     //     i++;
+//     // }
 //     env_builtin();
 //     return (1);
 // }
+

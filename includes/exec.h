@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 11:00:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/22 15:30:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int     env_builtin();
 void    exit_builtin(char **);
 int     unset_builtin(char **args);
 int     export_builtin(char **arg);
-
-int		dup_env_var(char **env);
-char	**get_path(void);
+int		check_builtin(char **args);
 int     launch(char **env, char **arg);
 
 /*
@@ -43,6 +41,10 @@ int     launch(char **env, char **arg);
 int     quit(void);
 int		len(char **env);
 int		alpha(char *key);
+int		dup_env_var(char **env);
+char	**dup_env(void);
+char	**get_path(void);
+void    print_sorted_env(char **sorted_env);
 
 /*
 ** Helpers 
@@ -51,7 +53,5 @@ int		alpha(char *key);
 int     find_env(char *key);
 char    *get_env_var_by_key(char *key);
 char	*return_value(const char *s, int c);
-int		check_builtin(char **args);
-
 
 #endif
