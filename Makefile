@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/22 12:02:56 by iidzim           ###   ########.fr        #
+#    Updated: 2021/05/22 15:41:31 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/pwd_builtin.c\
 					./sources/execution/echo_builtin.c\
 					./sources/execution/unset_builtin.c\
+					./sources/execution/export/helpers.c\
 					./sources/execution/export/export_builtin.c
 
 LIBFT_PATH 		= 	./libft
@@ -40,7 +41,9 @@ LIBFT_PATH 		= 	./libft
 OBJS			= 	${SRCS:.c=.o}
 OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
-INCLUDE 		= 	./includes/minishell.h
+# fix header
+
+INCLUDE 		= 	-I ./includes/minishell.h 
 CC				= 	gcc -Wall -Wextra -Werror 
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
@@ -48,7 +51,7 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(LIBFLAGS) -g -fsanitize=address
+				@$(CC) $(INCLUDE) -o $(NAME)  $(SRCS)  $(SRCS_EXEC) $(LIBFLAGS) -g -fsanitize=address
 
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
