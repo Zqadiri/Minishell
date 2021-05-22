@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/19 11:04:52 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/21 11:07:19 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/exit_builtin.c\
 					./sources/execution/main_exec.c\
 					./sources/execution/pwd_builtin.c\
+					./sources/execution/echo_builtin.c\
 					./sources/execution/unset_builtin.c
 
 LIBFT_PATH 		= 	./libft
