@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/20 13:37:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/21 21:44:54 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_parser	*init_parser(t_lexer *l)
 	p->prev_token = p->curr_token;
 	printf("current token value-> [%s]\n", p->curr_token->value);
 	printf("current token type-> [%u]\n", p->curr_token->type);
-	printf("previous token -> [%s]\n", p->prev_token->value);
+	// printf("previous token -> [%s]\n", p->prev_token->value);
 	return (p);
 }
 
@@ -39,8 +39,9 @@ void	parse_expected_token(t_parser *p, e_token_type type)
 	}
 	else
 	{
-		printf("Unexpected token `%s', with type %d", p->curr_token->value,
-			p->curr_token->type);
+		// printf("Unexpected token `%s', with type %d", p->curr_token->value,
+		// 	p->curr_token->type);
+		printf("syntax error near unexpected token %s\n", p->curr_token->value); 
 		exit(EXIT_FAILURE);
 	}
 }
@@ -59,11 +60,13 @@ t_ast	*parse_id(t_parser *p)
 
 t_ast	*parse_redirection(t_parser *p)
 {
-	t_ast	*ast;
-	t_ast	*simple_cmd;
-	char	*redir;
+	// t_ast	*ast;
+	// t_ast	*simple_cmd;
+	// char	*redir;
 
-	parse_expected_token(p, great);
+	//get next token 
+	parse_expected_token(p, id);
+	
 }
 
 t_ast	*parse_pipeline(t_parser *p)
@@ -79,6 +82,7 @@ t_ast	*parse_pipeline(t_parser *p)
 	while (p->curr_token->type != eof)
 	{
 		parse_expected_token(p, pip);
+		
 	}
 	return (ast);
 }
@@ -97,7 +101,7 @@ t_ast	*parse_stat(t_parser *p)
 	if (p->curr_token->type == great || p->curr_token->type == greater
 		|| p->curr_token->type == less)
 		return (parse_redirection(p));
-	return ();
+	// return ();
 }
 
 t_ast	*parse_statements(t_parser *p)

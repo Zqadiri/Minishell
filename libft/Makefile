@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
+#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 12:11:32 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/17 09:20:33 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/21 10:56:18 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,18 +63,18 @@ SRC = ft_memset.c\
 all:	$(NAME)
 
 $(NAME): 
-		$(CC) $(CFLAGS) -c $(SRC)
-	 	$(AR) rsc $(NAME) $(OBJ)
-		ranlib $(NAME)
+		@$(CC) $(CFLAGS) -c $(SRC)
+	 	@$(AR) rsc $(NAME) $(OBJ)
+		@ranlib $(NAME)
 clean:
-		rm -rf $(OBJ) $(OBJB)
+		@rm -rf $(OBJ) $(OBJB)
 
 bonus:
-		$(CC) $(CFLAGS) -c $(SRCB)
-	 	$(AR) rsc $(NAME) $(OBJB)
-		ranlib $(NAME)
+		@$(CC) $(CFLAGS) -c $(SRCB)
+	 	@$(AR) rsc $(NAME) $(OBJB)
+		@ranlib $(NAME)
 
 fclean: clean
-		rm -rf $(NAME)
+		@rm -rf $(NAME)
 re: fclean all
     
