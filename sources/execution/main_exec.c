@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/05/22 10:14:45 by zqadiri          ###   ########.fr       */
-=======
-/*   Updated: 2021/05/21 21:41:12 by iidzim           ###   ########.fr       */
->>>>>>> c5b323211e82d275ee43a9b66a589a905c22a7b7
+/*   Updated: 2021/05/22 11:00:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,35 +92,6 @@ int	launch(char **env, char **arg)
 // 	char *line;
 // 	int r = 0;
 
-<<<<<<< HEAD
-	(void)argc;
-	(void)argv;
-	dup_env_var(env);
-	while (1)
-	{
-		line = malloc(sizeof(char) * 1024);
-		if (!line)
-			return(-1);
-		r = read(0, line, 1023);
-		line[r] = '\0';
-		args = ft_split(line, ' ');
-		int i = 0;
-		while (args[i])
-		{
-			printf ("[%s]\n", args[i]);
-			i++;
-		}
-		check_builtin(args);
-	}
-	// char **path = get_path();
-	// while (path[r])
-	// {
-	// 	ft_putendl_fd(path[r], 1);
-	// 	r++;
-	// }
-	return (1);
-}
-=======
 // 	(void)argc;
 // 	(void)argv;
 // 	dup_env_var(env);
@@ -152,4 +119,3 @@ int	launch(char **env, char **arg)
 // 	// }
 // 	return (1);
 // }
->>>>>>> c5b323211e82d275ee43a9b66a589a905c22a7b7

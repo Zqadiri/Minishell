@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2021/05/21 11:07:19 by zqadiri          ###   ########.fr        #
-=======
-#    Updated: 2021/05/21 20:04:05 by iidzim           ###   ########.fr        #
->>>>>>> c5b323211e82d275ee43a9b66a589a905c22a7b7
+#    Updated: 2021/05/22 11:09:35 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +30,8 @@ SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/main_exec.c\
 					./sources/execution/pwd_builtin.c\
 					./sources/execution/echo_builtin.c\
-					./sources/execution/unset_builtin.c
+					./sources/execution/unset_builtin.c\
+					./sources/execution/export/export_builtin.c
 
 LIBFT_PATH 		= 	./libft
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 10:15:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/22 10:42:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		check_n_option(char **args)
 	return (i);
 }
 
-int     echo_builtin(char **args)
+int		echo_builtin(char **args)
 {
 	register int	i;
 	int				is_n;
