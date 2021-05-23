@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 21:47:23 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 12:12:41 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*tokenize_text(t_lexer *l, char *s)
 	while (l->c != EOF && !ft_strchar("|;>< \"\'", l->c))
 	{
 		temp = str;
+		if (l->c == BSLASH && peek_char(l) == EOF)
+			no_quotes(l, '/');
 		if (l->c == DOLLAR)
 			str = ft_strjoin(str, envar_token(l));
 		if (l->c == EOF)
@@ -37,7 +39,6 @@ char	*tokenize_text(t_lexer *l, char *s)
 		readchar(l);
 		free(temp);
 	}
-	printf("f:tokenize_text\tstr [%s]\n", str);
 	return (str);
 }
 
@@ -45,14 +46,13 @@ char	*tokenize_dquoted_text(t_lexer *l)
 {
 	char	*str;
 	char	*temp;
-	int sq = 0;
+	int		sq;
 
-	printf("f:tokenize_dquoted_text\tl->c = [%c]\n", l->c);
 	readchar(l);
-	printf("f:tokenize_dquoted_text\tl->c = [%c]\n", l->c);
 	if (l->c == EOF)
 		no_quotes(l, DQUOTE);
 	str = ft_strdup("");
+	sq = 0;
 	while (l->c != DQUOTE && l->c != EOF)
 	{
 		temp = str;
@@ -62,18 +62,16 @@ char	*tokenize_dquoted_text(t_lexer *l)
 		{
 			if (sq == 0)
 				readchar(l);
-			printf("f:tokenize_dquoted\tl->c = [%c]\n", l->c);
 			if (l->c == DQUOTE || l->c == DOLLAR || l->c == BSLASH)
 			{
 				str = ft_strjoinchar(str, l->c);
 				readchar(l);
 			}
 		}
-		if (l->c == DOLLAR)
-			str = envar_token(l);
+		else if (l->c == DOLLAR)
+			str = ft_strjoin(str, envar_token(l));
 		else
 		{
-			printf("f:****tokenize_dquoted\tl->c = [%c]\n", l->c);
 			str = ft_strjoinchar(str, l->c);
 			readchar(l);
 		}
@@ -103,11 +101,7 @@ char	*tokenize_squoted_text(t_lexer *l)
 	if (l->c == SQUOTE)
 		s += 1;
 	if (l->c == EOF && s == 0)
-	{
-		printf("minishell: syntax error expected token \'\n");
-		//free + exit
-		exit(1);
-	}
+		no_quotes(l, SQUOTE);
 	readchar(l);
 	return (str);
 }

@@ -6,48 +6,48 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 21:50:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 10:40:01 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/minishell.h"
 
-// int main(int argc, char **argv, char **env)
-// {
-// 	t_lexer *l; 
-// 	t_parser *p;
-// 	// t_ast *ast;
+int main(int argc, char **argv, char **env)
+{
+	t_lexer *l; 
+	t_parser *p;
+	// t_ast *ast;
 
-// 	(void)argc;
-// 	(void)argv; 
-// 	(void)env;
-// 	// if (argc != 1)
-// 	// 	exit(1);
-// 	while(1)
-// 	{
-// 		ft_putstr_fd("\nminishell-3.2$ ", 0);
-// 		l = read_cmd();
-// 		// printf("|%s|\n", l->buffer);
-// 		if(!l->buffer)
-// 			exit(EXIT_SUCCESS);
-// 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
-// 		{
-// 			free(l);
-// 			continue;
-// 		}
-// 		if(strcmp(l->buffer, "exit") == 0)
-// 		{
-// 			printf("exit\n");
-// 			free(l);
-// 			break;
-// 		}
-// 		p = init_parser(l);
-// 		// ast = parser(p);
-// 		// ast = parser(p);
-// 	}//free before exit
-// 	exit(EXIT_SUCCESS);
-// }
+	(void)argc;
+	(void)argv; 
+	(void)env;
+	// if (argc != 1)
+	// 	exit(1);
+	while(1)
+	{
+		ft_putstr_fd("\nminishell-3.2$ ", 0);
+		l = read_cmd();
+		// printf("|%s|\n", l->buffer);
+		if(!l->buffer)
+			exit(EXIT_SUCCESS);
+		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
+		{
+			free(l);
+			continue;
+		}
+		if(strcmp(l->buffer, "exit") == 0)
+		{
+			printf("exit\n");
+			free(l);
+			break;
+		}
+		p = init_parser(l);
+		// ast = parser(p);
+		// ast = parser(p);
+	}//free before exit
+	exit(EXIT_SUCCESS);
+}
 
 // ToDo List:
 // read cmdline √
@@ -56,7 +56,7 @@
 // example :							 output
 // √- echo c'o\'u'cou'					-> co\ucou 
 // √- ec"ho" bon"'j'o'u"r				-> bon'j'o'ur
-// - ec"ho" bon"j'o\'u"r				-> bonj'o\'ur XXXX
+// √- ec"ho" bon"j'o\'u"r				-> bonj'o\'ur
 // √- echo co'c"o"u'					-> coc"o"u
 // √- echo co'"c\"o"u'					-> co"c\"o"u
 // √- ec"ho" bon"jo"u"r					-> add " f next line ->bonjour

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 11:57:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 11:57:12 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_token	*ret_char(t_lexer *l, char c, e_token_type type)
 
 t_token	*ret_str(t_lexer *l, char *s, int type)
 {
-	printf("f:ret_str\t[%s]\n", s);
+	// printf("f:ret_str\t[%s]\n", s);
 	if (type == greater)
 		readchar(l);
 	readchar(l);
