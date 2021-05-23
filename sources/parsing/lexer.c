@@ -6,17 +6,16 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 12:10:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 16:31:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "../../includes/minishell.h"
 
 t_token	*init_token(e_token_type type, char *s)
 {
 	t_token	*t;
 
-	// printf("f:init_token\t[%s]\n", c);
 	t = malloc(sizeof(t_token));
 	if (!t)
 		return (NULL);
@@ -25,9 +24,9 @@ t_token	*init_token(e_token_type type, char *s)
 	return (t);
 }
 
-t_lexer *init_lexer(char *line)
+t_lexer	*init_lexer(char *line)
 {
-	t_lexer *l;
+	t_lexer	*l;
 
 	l = malloc(sizeof(t_lexer));
 	if (!l)
@@ -38,30 +37,6 @@ t_lexer *init_lexer(char *line)
 	l->curpos = 0;
 	l->readpos = 0;
 	return (l);
-}
-
-t_lexer *read_cmd()
-{
-	size_t r;
-	char *line;
-	char *buffer;
-
-	buffer = malloc(sizeof(char) * 2);
-	r = read(0, buffer, 1);
-	line = malloc(sizeof(char) * 2); 
-	if (!buffer || !line)
-		return(NULL);
-	line[0] = '\0';
-	while( r > 0)
-	{
-		buffer[1] = 0;
-		if (buffer[0] == '\n')
-			break ;
-		line = ft_strjoinchar(line, buffer[0]);
-		r = read(0, buffer, 1);
-	}
-	free(buffer);
-	return(init_lexer(line));
 }
 
 int	valid_envar(char c)
@@ -98,4 +73,30 @@ char	*envar_token(t_lexer *l)
 	if (!str)
 		str = ft_strdup("");
 	return (str);
+}
+
+void	check_string(t_lexer *l, char *str, int i)
+{
+	if (i == 1)
+	{
+		if (l->c == BSLASH)
+		{
+			if (peek_char(l) == DQUOTE || peek_char(l) == DOLLAR
+				|| peek_char(l) == BSLASH)
+			{
+				readchar(l);
+				str = ft_strjoinchar(str, l->c);
+				readchar(l);
+			}
+		}
+	}
+	else
+	{
+		if (l->c == BSLASH)
+			readchar(l);
+		if (l->c == BSLASH && peek_char(l) == EOF)
+			no_quotes(l, '/');
+		if (l->c == DOLLAR)
+			str = ft_strjoin(str, envar_token(l));
+	}
 }
