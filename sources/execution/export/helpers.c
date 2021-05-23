@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 15:27:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 15:14:33 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/23 16:04:14 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,32 @@ int	env_count(void)
 	return (i);
 }
 
-void    print_sorted_env(char **sorted_env)
+ void	print_sorted_env(char **sorted_env)
 {
-	int i;
-	int j;
-	int equ_sign;
+	int		i;
+	int		j;
+	char	equ_sign;
 
 	i = 0;
-	equ_sign = 1;
-	while(sorted_env[i])
+	while (sorted_env[i])
 	{
 		j = 0;
 		equ_sign = 1;
 		ft_putstr_fd("declare -x ", 1);
-		while(sorted_env[i][j])
+		while (sorted_env[i][j])
 		{
 			ft_putchar_fd(sorted_env[i][j], 1);
-			if (sorted_env[i][i] == '=' && equ_sign)
+			if (sorted_env[i][j] == '=' && equ_sign)
 			{
 				ft_putchar_fd('"', 1);
 				equ_sign = 0;
 			}
 			j++;
-		} 
+		}
 		if (!equ_sign)
-			ft_putchar_fd('"', 1);
-		ft_putchar_fd('\n', 1);
+			ft_putendl_fd("\"", 1);
+		else
+			ft_putchar_fd('\n', 1);
 		i++;
 	}
 }
