@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 15:14:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/23 16:11:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void    sort_and_print(void)
 		}
 		i++;
 	}
+	// int k = 0;
+	// while (dup[k])
+	// {
+	// 	printf ("%s\n", dup[k]);
+	// 	k++;
+	// }
 	print_sorted_env(dup);
 }
 
@@ -51,12 +57,16 @@ void    sort_and_print(void)
 ** declared at the top of the file. Ex: MY_CONSTANT
 */
 
+
+
 int		is_valid_env_key(char *arg)
 {
+	// printf ("is_valid_name{%s}\n", arg);
 	int i;
 	int alpha;
 
 	i = 0;
+	alpha = 0;
 	if (!arg || arg[0] == '=')
 		return (0);
 	while (arg[i] && arg[i] != '=')
@@ -107,6 +117,7 @@ void	set_or_modify(char **args, int i)
 
 int     export_builtin(char **args)
 {
+	
 	int i;
 
 	i = 0;
@@ -117,15 +128,26 @@ int     export_builtin(char **args)
     }
 	while (args[i])
 	{
+		printf("arg[%s]\n", args[i]);
 		if (!is_valid_env_key(args[i]))
 		{
+			printf ("not valid\n");
 			ft_putstr_fd("export: `", 2);
 			ft_putstr_fd(args[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
-			continue ;
 		}
 		i++;
-		set_or_modify(args, i);
+		// set_or_modify(args, i);
 	}
 	return (1);
 }
+
+// int		main(int argc, char **argv, char **envv)
+// {
+// 	(void)argc;
+// 	argv++;
+// 	dup_env_var(envv);
+// 	// env_builtin(g_env_var);
+// 	export_builtin(argv);
+// 	return (1);
+// }
