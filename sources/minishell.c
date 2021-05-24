@@ -3,15 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 15:23:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/23 16:39:36 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/minishell.h"
+
+t_lexer	*read_cmd(void)
+{
+	size_t	r;
+	char	*line;
+	char	*buffer;
+
+	buffer = malloc(sizeof(char) * 2);
+	r = read(0, buffer, 1);
+	line = malloc(sizeof(char) * 2);
+	if (!buffer || !line)
+		return (NULL);
+	line[0] = '\0';
+	while (r > 0)
+	{
+		buffer[1] = 0;
+		if (buffer[0] == '\n')
+			break ;
+		line = ft_strjoinchar(line, buffer[0]);
+		r = read(0, buffer, 1);
+	}
+	free(buffer);
+	return (init_lexer(line));
+}
 
 // int main(int argc, char **argv, char **env)
 // {

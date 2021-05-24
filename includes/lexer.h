@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 11:06:42 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 16:30:45 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ char	*tokenize_text(t_lexer *l, char *s);
 //lexer.c
 t_token	*init_token(e_token_type type, char *s);
 t_lexer *init_lexer(char *line);
-t_lexer *read_cmd();
 int     valid_envar(char c);
 char    *envar_token(t_lexer *l);
+void	check_string(t_lexer *l, char *str, int i);
 
 //lexer_utlis.c
 void	readchar(t_lexer *l);

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 12:12:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 15:43:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ftstrcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
@@ -28,7 +28,8 @@ char	*ft_strjoinchar(char *s, char c)
 	char	*str;
 
 	i = strlen(s);
-	if (!(str = (char *)malloc(i + 2)))
+	str = (char *)malloc(i + 2);
+	if (!str)
 		return (0);
 	i = -1;
 	while (s[++i])
@@ -47,6 +48,8 @@ int	no_quotes(t_lexer *l, char c)
 		printf("minishell: syntax error multiple lines\n");
 		//free + exit
 		exit (1);
+		// l->status = -1;
+		// return ;
 	}	
 	if (l->c == EOF)
 	{

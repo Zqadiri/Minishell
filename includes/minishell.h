@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/22 21:52:05 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 16:04:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_ast
 }				t_ast;
 
 void print_prompt();
+t_lexer *read_cmd();
 t_ast *init_ast(e_ast_type type);
 t_parser	*init_parser(t_lexer *l);
 

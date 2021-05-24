@@ -6,11 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 12:12:41 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/23 16:33:03 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "../../includes/minishell.h"
 
 char	*tokenize_text(t_lexer *l, char *s)
 {
@@ -26,10 +26,7 @@ char	*tokenize_text(t_lexer *l, char *s)
 	while (l->c != EOF && !ft_strchar("|;>< \"\'", l->c))
 	{
 		temp = str;
-		if (l->c == BSLASH && peek_char(l) == EOF)
-			no_quotes(l, '/');
-		if (l->c == DOLLAR)
-			str = ft_strjoin(str, envar_token(l));
+		check_string(l, str, 2);
 		if (l->c == EOF)
 		{
 			free(temp);
@@ -46,29 +43,16 @@ char	*tokenize_dquoted_text(t_lexer *l)
 {
 	char	*str;
 	char	*temp;
-	int		sq;
 
 	readchar(l);
 	if (l->c == EOF)
 		no_quotes(l, DQUOTE);
 	str = ft_strdup("");
-	sq = 0;
 	while (l->c != DQUOTE && l->c != EOF)
 	{
 		temp = str;
-		if (l->c == SQUOTE)
-			sq = 1;
-		if (l->c == BSLASH)
-		{
-			if (sq == 0)
-				readchar(l);
-			if (l->c == DQUOTE || l->c == DOLLAR || l->c == BSLASH)
-			{
-				str = ft_strjoinchar(str, l->c);
-				readchar(l);
-			}
-		}
-		else if (l->c == DOLLAR)
+		check_string(l, str, 1);
+		if (l->c == DOLLAR)
 			str = ft_strjoin(str, envar_token(l));
 		else
 		{
@@ -125,7 +109,6 @@ t_token	*string_token(t_lexer *l)
 		free(temp);
 		if (l->c == 32)
 			return (ret_str(l, str, id));
-		// readchar(l);
 	}
 	return (ret_str(l, str, id));
 }
@@ -135,7 +118,6 @@ t_token	*get_next_token(t_lexer *l)
 	while (l->c != EOF && (l->curpos < l->bufsize))
 	{
 		skip_space(l);
-		// printf("f:get_next_token\tcurrent char [%c]\n", l->c);
 		if (l->c == PIPE)
 			return (ret_char(l, l->c, pip));
 		else if (l->c == SEMICOLON)
