@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 15:27:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 16:04:14 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/23 19:31:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,11 @@ char	**dup_env(void)
 		i--;
 	}
 	return (dup);
+}
+
+void	modify_env(char **args, int index)
+{
+	int i;
+
+	i = find_env(args[index]);
 }

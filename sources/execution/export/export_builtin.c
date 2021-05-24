@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 16:11:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/23 19:52:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void    sort_and_print(void)
 {
-    char	**dup;
+	char	**dup;
 	char	*tmp;
 	int 	i;
 	int 	j;
@@ -57,8 +57,6 @@ void    sort_and_print(void)
 ** declared at the top of the file. Ex: MY_CONSTANT
 */
 
-
-
 int		is_valid_env_key(char *arg)
 {
 	// printf ("is_valid_name{%s}\n", arg);
@@ -67,7 +65,7 @@ int		is_valid_env_key(char *arg)
 
 	i = 0;
 	alpha = 0;
-	if (!arg || arg[0] == '=')
+	if (arg == NULL || arg[0] == '=')
 		return (0);
 	while (arg[i] && arg[i] != '=')
 	{
@@ -85,69 +83,78 @@ int		is_valid_env_key(char *arg)
 	return (1);
 }
 
-void	set_new_env(char **args, int index)
+void	set_new_env(char *arg)
 {
-	int n;
+	int index;
 	char *env;
-
-	n = env_count() + 1;
-	g_env_var = realloc_new_env(n);
-	env = ft_substr(args[index], 0, ft_strlen(args[index]));
-	g_env_var[env_count()] = env;
-	
-}
-
-void	modify_env(char **args, int index)
-{
 	int i;
 
-	i = find_env(args[index]);
+	index = 0;
+	i = -1;
+	if (arg == NULL)
+		return ;
+	while (arg[++i])
+		if (arg[i] == '=')
+			index = 1;
+	if (index == 0)
+		return ;
+	else
+	{
+		index = (env_count() + 1);
+		g_env_var = realloc_new_env(index);
+		env = ft_substr(arg, 0, ft_strlen(arg));
+		g_env_var[env_count() - 1] = env;
+		g_env_var[index] = 0;
+		// printf ("in set new [%s]\n", g_env_var[env_count()]);
+		// env_builtin();
+	}
 }
 
 void	set_or_modify(char **args, int i)
 {
-	int	k;
+	int	is_set;
 
-	k = find_env(args[i]);
-	if (k == -1)
-		set_new_env(args, i);
-	else
-		modify_env(args, i);
+	// env_builtin();
+	is_set = find_env(args[i]);
+	// printf("arg[%s]\n", args[i]);
+	// printf ("[%d]\n", is_set);
+	if (is_set == -1)
+		set_new_env(args[i]);
+	// else
+	// 	modify_env(args, i);
 }
 
 int     export_builtin(char **args)
 {
-	
 	int i;
 
-	i = 0;
-    if (!args[1])
-    {
-        sort_and_print();
-        return (1);
-    }
-	while (args[i])
+	i = -1;
+	if (!args[1])
 	{
-		printf("arg[%s]\n", args[i]);
-		if (!is_valid_env_key(args[i]))
+		sort_and_print();
+		return (1);
+	}
+	while (args[i++])
+	{
+		// printf ("not valid %s\n", args[i]);
+		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
-			printf ("not valid\n");
 			ft_putstr_fd("export: `", 2);
 			ft_putstr_fd(args[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
+			continue ;
 		}
-		i++;
-		// set_or_modify(args, i);
+		set_or_modify(args, i);
 	}
 	return (1);
 }
 
-// int		main(int argc, char **argv, char **envv)
-// {
-// 	(void)argc;
-// 	argv++;
-// 	dup_env_var(envv);
-// 	// env_builtin(g_env_var);
-// 	export_builtin(argv);
-// 	return (1);
-// }
+int		main(int argc, char **argv, char **envv)
+{
+	(void)argc;
+	argv++;
+	dup_env_var(envv);
+	// env_builtin(g_env_var);
+	export_builtin(argv);
+	return (1);
+}

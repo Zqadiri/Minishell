@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 15:15:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/23 17:40:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int     set_env_var(char *key, char *new_path);
 ** Helpers 
 */
 
+void	set_new_env(char *arg);
 int     env_count(void);
 int     find_env(char *key);
 char    *get_env_var_by_key(char *key);
