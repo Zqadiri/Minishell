@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 17:35:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/24 14:32:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int     find_env(char *key)
 		{
 			sub_env = ft_substr(g_env_var[i], 0, index);
 			// printf ("sub_env[%s]\n", sub_env);
+			// printf ("key[%s]\n", key);
 			if (sub_env == NULL)
 				return (-1);
 			if (ft_strequ(key, sub_env))

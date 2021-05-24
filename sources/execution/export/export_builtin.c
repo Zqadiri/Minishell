@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 19:52:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/24 14:49:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,28 @@ void	set_new_env(char *arg)
 	}
 }
 
-void	set_or_modify(char **args, int i)
+void	set_or_modify(char *arg)
 {
+	// printf ("%s\n", arg);
 	int	is_set;
+	int		i;
+	char	*key;
 
-	// env_builtin();
-	is_set = find_env(args[i]);
-	// printf("arg[%s]\n", args[i]);
-	// printf ("[%d]\n", is_set);
+	// get the key
+	if (arg == NULL)
+		return ;
+	i = get_str_by_char(arg, '=');
+	// printf ("iiiii[%d]\n", i);
+	if (i == -1)
+		i = ft_strlen(arg);
+	key = ft_substr(arg, 0, i);
+	// printf ("[%d]\n", i);
+	// printf("---> key[%s]\n", key);
+	is_set = find_env(key);
 	if (is_set == -1)
-		set_new_env(args[i]);
-	// else
-	// 	modify_env(args, i);
+		set_new_env(arg);
+	else
+		modify_env(arg, key);
 }
 
 int     export_builtin(char **args)
@@ -136,7 +146,7 @@ int     export_builtin(char **args)
 	}
 	while (args[i++])
 	{
-		// printf ("not valid %s\n", args[i]);
+		// printf ("export builtin %s\n", args[i]);
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
 			ft_putstr_fd("export: `", 2);
@@ -144,7 +154,7 @@ int     export_builtin(char **args)
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			continue ;
 		}
-		set_or_modify(args, i);
+		set_or_modify(args[i]);
 	}
 	return (1);
 }
@@ -154,7 +164,7 @@ int		main(int argc, char **argv, char **envv)
 	(void)argc;
 	argv++;
 	dup_env_var(envv);
-	// env_builtin(g_env_var);
 	export_builtin(argv);
+	env_builtin(g_env_var);
 	return (1);
 }
