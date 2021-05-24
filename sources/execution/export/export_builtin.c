@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/24 14:49:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/24 16:01:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    sort_and_print(void)
 	// while (dup[k])
 	// {
 	// 	printf ("%s\n", dup[k]);
-	// 	k++;
+	// 	k++; 
 	// }
 	print_sorted_env(dup);
 }
@@ -159,12 +159,12 @@ int     export_builtin(char **args)
 	return (1);
 }
 
-int		main(int argc, char **argv, char **envv)
-{
-	(void)argc;
-	argv++;
-	dup_env_var(envv);
-	export_builtin(argv);
-	env_builtin(g_env_var);
-	return (1);
-}
+// int		main(int argc, char **argv, char **envv)
+// {
+// 	(void)argc;
+// 	argv++;
+// 	dup_env_var(envv);
+// 	export_builtin(argv);
+// 	env_builtin(g_env_var);
+// 	return (1);
+// }

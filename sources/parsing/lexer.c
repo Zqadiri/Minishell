@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 16:31:14 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/24 18:49:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,11 @@ void	check_string(t_lexer *l, char *str, int i)
 	}
 	else
 	{
-		if (l->c == BSLASH)
-			readchar(l);
 		if (l->c == BSLASH && peek_char(l) == EOF)
 			no_quotes(l, '/');
+		else
+		// if (l->c =BSLAH)
+			readchar(l);
 		if (l->c == DOLLAR)
 			str = ft_strjoin(str, envar_token(l));
 	}
