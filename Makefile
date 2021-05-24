@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
+#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/23 15:22:05 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/23 19:12:53 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/lexer_utils.c\
 					./sources/parsing/parser.c\
 					./sources/parsing/ast.c\
-					./sources/parsing/utils.c\
-					# ./sources/parsing/list.c\
+					./sources/parsing/utils.c
+					# ./sources/parsing/list.c
 					
 					
 LIBFT_PATH 		= 	./libft
@@ -43,16 +43,17 @@ OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
 # fix header
 
-INCLUDE 		= 	-I ./includes/
-CC				= 	gcc -Wall -Wextra -Werror 
+INCLUDE 		= 	-I includes -L includes
+CC				= 	gcc
+FLAGS           =  -Wall -Wextra -Werror 
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) $(INCLUDE) -o $(NAME)   $(SRCS)  $(SRCS_EXEC) $(LIBFLAGS) -g -fsanitize=address
-
+				@$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g -fsanitize=address
+				
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
 fclean:			libft_fclean clean

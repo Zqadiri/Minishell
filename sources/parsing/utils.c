@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 15:43:18 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/24 20:58:37 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	no_quotes(t_lexer *l, char c)
 	}	
 	if (l->c == EOF)
 	{
-		printf("MINISHELL: syntax error expected %c\n", c);
+		printf("minishell: syntax error expected %c\n", c);
 		//free + exit
 		exit (1);
 	}

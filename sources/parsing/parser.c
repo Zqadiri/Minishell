@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 15:25:19 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/24 20:15:24 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ t_parser	*init_parser(t_lexer *l)
 // 	return (ast);
 // }
 
-// ToDo:
-// expectPeek() : primary purpose is to enforce the correctness of the order
-// of tokens by checking the type of the next token.
+// // ToDo:
+// // expectPeek() : primary purpose is to enforce the correctness of the order
+// // of tokens by checking the type of the next token.
