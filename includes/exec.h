@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 15:15:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/24 16:54:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
 char					**g_env_var;
 
@@ -52,9 +55,13 @@ int     set_env_var(char *key, char *new_path);
 ** Helpers 
 */
 
+void	set_new_env(char *arg);
 int     env_count(void);
 int     find_env(char *key);
 char    *get_env_var_by_key(char *key);
 char	*return_value(const char *s, int c);
+int     get_str_by_char(char *str, char c);
+void	modify_env(char *arg, char *key);
+
 
 #endif

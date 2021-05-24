@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 19:12:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/24 21:52:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int get_str_by_char(char *str, char c)
 		return (-1);
 	else
 		ret = (int)(str2 - str);
-	return (1);
+	return (ret);
 }
 
 int     find_env(char *key)
@@ -58,6 +58,8 @@ int     find_env(char *key)
 		else
 		{
 			sub_env = ft_substr(g_env_var[i], 0, index);
+			// printf ("sub_env[%s]\n", sub_env);
+			// printf ("key[%s]\n", key);
 			if (sub_env == NULL)
 				return (-1);
 			if (ft_strequ(key, sub_env))
