@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 16:33:03 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/24 21:45:47 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,26 @@ char	*tokenize_text(t_lexer *l, char *s)
 		str = ft_strdup(s);
 	while (l->c != EOF && !ft_strchar("|;>< \"\'", l->c))
 	{
+		// printf("f:tokenize_text\tl->c ----> [%c]\n", l->c);
 		temp = str;
-		check_string(l, str, 2);
-		if (l->c == EOF)
+		if (l->c == BSLASH || l->c == DOLLAR)
+			str = check_string(l, str, 2);
+		else if (l->c == EOF)
 		{
 			free(temp);
 			return (str);
 		}
-		str = ft_strjoinchar(str, l->c);
-		readchar(l);
-		free(temp);
+		else
+		{
+			// printf("***f:tokenize_text\tl->c = [%c]\n", l->c);
+			// printf("****f:tokenize_text\tstr /////// [%s]\n", str);
+			str = ft_strjoinchar(str, l->c);
+			readchar(l);
+			free(temp);
+			// printf("****f:tokenize_text\tstr ======> [%s]\n", str);
+		}
+		// free(temp);
+		// printf("****f:tokenize_text\tstr ======> [%s]\n", str);
 	}
 	return (str);
 }
