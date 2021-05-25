@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/05/24 21:47:04 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/05/24 18:49:55 by zqadiri          ###   ########.fr       */
->>>>>>> e3f0d1d5d46520d80e90211095276e27d768fd7b
+/*   Updated: 2021/05/25 10:59:57 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +96,6 @@ char *check_string(t_lexer *l, char *str, int i)
 	}
 	if (i == 2)
 	{
-<<<<<<< HEAD
 		// printf("[%c]\n", l->c);
 		if (l->c == BSLASH)
 		{
@@ -119,13 +114,6 @@ char *check_string(t_lexer *l, char *str, int i)
 			// printf(".......[%c]\n", l->c);
 			return (str);
 		}
-=======
-		if (l->c == BSLASH && peek_char(l) == EOF)
-			no_quotes(l, '/');
-		else
-		// if (l->c =BSLAH)
-			readchar(l);
->>>>>>> e3f0d1d5d46520d80e90211095276e27d768fd7b
 		if (l->c == DOLLAR)
 		{
 			// printf("f:check_string\t[%c]\n", l->c);

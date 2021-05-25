@@ -6,127 +6,111 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/24 20:15:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/25 19:04:48 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_parser	*init_parser(t_lexer *l)
+t_token	*check_token(t_parser *p)
 {
-	t_parser	*p;
+	t_token *t;
 
-	if (!l)
-		return (NULL);
-	p = malloc(sizeof(t_parser));
-	if (!p)
-		return (NULL);
-	p->lexer = l;
-	p->curr_token = get_next_token(l);
-	p->prev_token = p->curr_token;
-	printf("current token value-> [%s]\n", p->curr_token->value);
-	printf("current token type-> [%u]\n", p->curr_token->type);
-	// printf("previous token -> [%s]\n", p->prev_token->value);
-	return (p);
+	
+	if (p->prev_token->type == id)
+		// expect all types
+	
+	if (p->prev_token->type == pip)
+		// expect all types except semi
+	
+	if (p->prev_token->type == semi)
+		// expect all types except pipe
+	
+	// if the previous token is_redirection then the next token must be an id
+	if (is_redirection(p, 'p'))
+		parse_expected_token(p, id);
+	t = p->curr_token;
+	return (t);
 }
 
-// void	parse_expected_token(t_parser *p, e_token_type type)
-// {
-// 	if (p->curr_token->type == type)
-// 	{
-// 		p->prev_token = p->curr_token;
-// 		p->curr_token = get_next_token(p->lexer);
-// 	}
-// 	else
-// 	{
-// 		// printf("Unexpected token `%s', with type %d", p->curr_token->value,
-// 		// 	p->curr_token->type);
-// 		printf("syntax error near unexpected token %s\n", p->curr_token->value); 
-// 		exit(EXIT_FAILURE);
-// 	}
-// }
+t_ast	*parse_args(t_parser *p)
+{
+	t_ast	*ast;
+	int		i;
 
-// t_ast	*parse_id(t_parser *p)
-// {
-// 	t_ast	ast;
-// 	t_ast	simple_cmd;
-// 	char	*first_tok;
+	ast = init_ast(arg_ast);
+	ast->args = (t_token*)malloc(sizeof(t_token));
+	if (!ast->args)
+		return (NULL);
+	i = 0;
+	while (p->curr_token->type != eof || p->curr_token != pip
+		|| p->curr_token->type != semi)
+	{
+		ast->args_size += 1;
+		//check syntax error : pipe, semicolon, redirection, id
+		//get_next_token -> check err -> store the value then move to the next token 
+		ast->args[i] = check_token(p);
+		i++;
+	}
+	return (ast);
+}
 
-// 	parse_expected_token(p, id);
-// 	first_tok = p->prev_token->value;
-// 	ast = init_ast(pipe_ast);
-// 	return (ast);
-// }
+t_ast	*parse_cmd(t_parser *p)
+{
+	t_ast	*ast;
+	int     i;
 
-// t_ast	*parse_redirection(t_parser *p)
-// {
-// 	// t_ast	*ast;
-// 	// t_ast	*simple_cmd;
-// 	// char	*redir;
+	ast = init_ast(cmd_ast);
+	ast->simplecmd_values = (t_ast**)malloc(sizeof(t_ast*));
+	if (!ast->simplecmd_values)
+		return (NULL);
+	i = 0;
+	while (p->curr_token->type != eof)
+	{
+		ast->simplecmd_size += 1;
+		ast->simplecmd_values[i] = parse_args(p);
+		i++;
+	}
+	return (ast);
+}
 
-// 	//get next token 
-// 	parse_expected_token(p, id);
+t_ast	*parse_pipe(t_parser *p)
+{
+	t_ast	*ast;
+	int		i;
+
+	ast = init_ast(pipe_ast);
+	ast->pipecmd_values = (t_ast**)malloc(sizeof(t_ast*));
+	if (!ast->pipecmd_values)
+		return (NULL);
+	i = 0;
+	while (p->curr_token->type != eof)// && p->curr_token->type = pip)
+	{
+		ast->pipecmd_size += 1;
+		ast->pipecmd_values[i] = parse_cmd(p);
+		i++;
+	}
+	return (ast);
+}
+
+t_ast	*parse_compound(t_parser *p)
+{
+	t_ast	*ast;
+	int		i;
 	
-// }
-
-// t_ast	*parse_pipeline(t_parser *p)
-// {
-// 	t_ast	*ast;
-
-// 	ast = init_ast(pipe_ast);
-// 	ast->pipecmd_values = (t_ast**)malloc(sizeof(t_ast*));
-// 	if (!ast->pipecmd_values)
-// 		return (NULL);
-// 	ast->pipecmd_values[0] = parse_stat(p);
-// 	ast->pipecmd_size += 1;
-// 	while (p->curr_token->type != eof)
-// 	{
-// 		parse_expected_token(p, pip);
-		
-// 	}
-// 	return (ast);
-// }
-
-// t_ast	*parse_stat(t_parser *p)
-// {
-// 	if (p->curr_token->type == semi || p->curr_token->type == pip)
-// 	{
-// 		p->curr_token->type = illegal;
-// 		printf("Unexpected token `%s', with type %d", p->curr_token->value,
-// 			p->curr_token->type);
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (p->curr_token->type == id)
-// 		return (parse_id(p));
-// 	if (p->curr_token->type == great || p->curr_token->type == greater
-// 		|| p->curr_token->type == less)
-// 		return (parse_redirection(p));
-// 	// return ();
-// }
-
-// t_ast	*parse_statements(t_parser *p)
-// {
-// 	t_ast	*ast;
-
-// 	ast = init_ast(compound);
-// 	ast->comp_values = (t_ast**)malloc(sizeof(t_ast*));
-// 	if (!ast->comp_values)
-// 		return (NULL);
-// 	ast->comp_values[0] = parse_stat(p);
-// 	ast->comp_size += 1;
-// 	while (p->curr_token->type != eof) // while(1)
-// 	{
-// 		parse_expected_token(p, semi);
-// 		if (p->curr_token->type == eof)
-// 			break ;
-// 		ast->comp_size += 1;
-// 		ast->comp_values = realloc(ast->comp_values,
-// 				ast->comp_size * sizeof(t_ast*));
-// 		ast->comp_values[ast->comp_size - 1] = parse_stat(p);
-// 	}
-// 	return (ast);
-// }
-
-// // ToDo:
-// // expectPeek() : primary purpose is to enforce the correctness of the order
-// // of tokens by checking the type of the next token.
+	if (!p)
+		return (NULL);
+	ast = init_ast(compound);
+	ast->comp_values = (t_ast**)malloc(sizeof(t_ast*));
+	if (!ast->comp_values)
+		return (NULL);
+	i = 0;
+	while (p->curr_token->type != eof)
+	{
+		ast->comp_size += 1;
+		ast->comp_values[i] = parse_pipe(p);
+		i++;
+		//realloc
+	}
+	return (ast);
+}

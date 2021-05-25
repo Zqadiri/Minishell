@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 15:14:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/25 17:06:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,25 @@ typedef struct s_ast
 	struct s_ast **simplecmd_values;
 	int simplecmd_size;
 	//AST_ARG
-	struct s_ast **args;
+	t_token *args;
 	int args_size;
 }				t_ast;
 
 /*
 **parser.c
 */
-t_parser	*init_parser(t_lexer *l);
-void	parse_expected_token(t_parser *p, e_token_type type);
 t_ast	*parse_id(t_parser *p);
 t_ast	*parse_redirection(t_parser *p);
 t_ast	*parse_pipeline(t_parser *p);
 t_ast	*parse_stat(t_parser *p);
 t_ast	*parse_statements(t_parser *p);
 
+
+/*
+**parser_utils.c
+*/
+t_parser	*init_parser(t_lexer *l);
+void		parse_expected_token(t_parser *p, e_token_type type);
+int			is_redirection(t_parser *p);
 
 #endif

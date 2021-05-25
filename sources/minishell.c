@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/05/23 18:51:18 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/05/24 16:34:00 by zqadiri          ###   ########.fr       */
->>>>>>> e3f0d1d5d46520d80e90211095276e27d768fd7b
+/*   Updated: 2021/05/25 16:29:10 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,42 +36,24 @@ t_lexer	*read_cmd(void)
 	return (init_lexer(line));
 }
 
-<<<<<<< HEAD
 int main(int argc, char **argv, char **env)
 {
 	t_lexer *l; 
 	t_parser *p;
-	// t_ast *ast;
+	t_ast *ast;
 
-=======
-// heap-use-after-free  irg"\"
-
-int main(int argc, char **argv, char **env)
-{
-	t_lexer *l; 
-	t_parser *p;
-	// t_ast *ast;
-
->>>>>>> e3f0d1d5d46520d80e90211095276e27d768fd7b
 	(void)argc;
 	(void)argv; 
 	(void)env;
 	// if (argc != 1)
-	// 	exit(1);
+	// 	exit(EXIT_FAILURE);
 	while(1)
 	{
 		ft_putstr_fd("\nminishell-3.2$ ", 0);
 		l = read_cmd();
-<<<<<<< HEAD
 		// printf("|%s|\n", l->buffer);
 		if(!l->buffer)
 			exit(EXIT_SUCCESS);
-=======
-		printf("|%s|\n", l->buffer);
-		if(!l->buffer)
-			exit(EXIT_SUCCESS);
-		history(l);
->>>>>>> e3f0d1d5d46520d80e90211095276e27d768fd7b
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
 		{
 			free(l);
@@ -88,9 +66,9 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		p = init_parser(l);
-		// ast = parser(p);
-		// ast = parser(p);
-	}//free before exit
+		ast = parser_compound(p);
+	}
+	//free before exit
 	exit(EXIT_SUCCESS);
 }
 
