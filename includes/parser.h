@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/26 16:04:30 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/26 20:59:46 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_ast
 	struct s_ast **simplecmd_values;
 	int simplecmd_size;
 	//AST_ARG
-	t_token *args;
+	t_token **args;
 	int args_size;
 }				t_ast;
 

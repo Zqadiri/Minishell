@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/26 16:16:11 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/26 21:46:13 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,45 +44,53 @@ t_parser	*init_parser(t_lexer *l)
 ** the order of tokens by checking the type of the next token.
 */
 
-// void	parse_expected_token(t_parser *p, e_token_type type)
-// {
-// 	if (p->curr_token->type == type)
-// 	{
-// 		p->prev_token = p->curr_token;
-// 		p->curr_token = get_next_token(p->lexer);
-// 	}
-// 	else
-// 	{
-// 		printf("minishell: syntax error near unexpected token `%s'\n",
-// 			p->prev_token->value);
-// 		//free before exit
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	// else
-// 	// {
-// 	// 	p->prev_token->value = p->curr_token->value;
-// 	// 	p->prev_token->type = illegal;
-// 	// 	p->curr_token = get_next_token(p->lexer);
-// 	// }
-// }
+void	parse_expected_token(t_parser *p, e_token_type type)
+{
+	if (p->curr_token->type == type)
+	{
+		p->prev_token = p->curr_token;
+		p->curr_token = get_next_token(p->lexer);
+	}
+	else
+	{
+		printf("minishell: syntax error near unexpected token `%s'\n",
+			p->prev_token->value);
+		//free before exit
+		exit(EXIT_FAILURE);
+	}
+	// else
+	// {
+	// 	p->prev_token->value = p->curr_token->value;
+	// 	p->prev_token->type = illegal;
+	// 	p->curr_token = get_next_token(p->lexer);
+	// }
+}
 
-// void	syntax_error_pipe_semi(t_parser *p)
-// {
-// 	if ((p->prev_token->type == pip && p->curr_token->type == semi)
-// 			|| (p->prev_token->type == semi && p->curr_token->type == pip))
-// 		printf("minishell: syntax error near unexpected token `%s'\n",
-// 			p->prev_token->value);
-// 	if ((p->prev_token->type == pip && p->curr_token->type == eof)
-// 			|| (p->prev_token->type == semi && p->curr_token->type == eof))
-// 		printf("minishell: syntax error near unexpected token `%s'\n",
-// 			p->prev_token->value);
-// 	//free before exit
-// 	exit(EXIT_FAILURE);
-// }
+void	syntax_error_pipe_semi(t_parser *p)
+{
+	if ((p->prev_token->type == pip && p->curr_token->type == semi)
+			|| (p->prev_token->type == semi && p->curr_token->type == pip))
+	{
+		printf("minishell: syntax error near unexpected token `%s'\n",
+			p->prev_token->value);
+		exit(EXIT_FAILURE);
+	}	
+	if ((p->prev_token->type == pip && p->curr_token->type == eof)
+			|| (p->prev_token->type == semi && p->curr_token->type == eof))
+	{
+		printf("minishell: syntax error near unexpected token `%s'\n",
+			p->prev_token->value);
+		exit(EXIT_FAILURE);
+	}
+	printf("f:syntax_error_pipe_semi\tNO SYNTAX ERROR\n");
+	//free before exit
+	// exit(EXIT_FAILURE);
+	// return ;
+}
 
-// int	is_redirection(t_token *t)
-// {
-// 	if (t->type == great || t->type == greater || t->type == less)
-// 		return (1);
-// 	return (0);
-// }
+int	is_redirection(t_token *t)
+{
+	if (t->type == great || t->type == greater || t->type == less)
+		return (1);
+	return (0);
+}
