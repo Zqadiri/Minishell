@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/25 11:53:10 by iidzim           ###   ########.fr        #
+#    Updated: 2021/05/26 16:16:28 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/get_next_token.c\
 					./sources/parsing/lexer.c\
 					./sources/parsing/lexer_utils.c\
-					./sources/parsing/parser.c\
 					./sources/parsing/parser_utils.c\
+					./sources/parsing/parser.c\
 					./sources/parsing/ast.c\
 					./sources/parsing/utils.c
 					# ./sources/parsing/list.c

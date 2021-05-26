@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/24 16:26:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/26 16:05:01 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void print_prompt();
 t_lexer *read_cmd();
 t_ast *init_ast(e_ast_type type);
 t_parser	*init_parser(t_lexer *l);
+// t_ast		*parse_compound(t_parser *p);
 
 
 // /!\ update linked list function - new struct AST

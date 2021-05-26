@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/25 21:53:08 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/26 16:19:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ t_lexer	*read_cmd(void)
 // 			break;
 // 		}
 // 		p = init_parser(l);
-// 		ast = parser_compound(p);
+// 		ast = parse_compound(p);
 // 	}
 // 	//free before exit
-// 	exit(EXIT_SUCCESS);
+// 	// exit(EXIT_SUCCESS);
+// 	return (0);
 // }
 
 // ToDo List:
@@ -115,4 +116,4 @@ t_lexer	*read_cmd(void)
 // -> $IFS default separators used for field splitting 
 
 
-// 123"456\""789
+// ! switch cmd name to lowercase before cmp

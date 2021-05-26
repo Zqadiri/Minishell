@@ -6,11 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/05/25 10:59:57 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/05/25 11:22:25 by zqadiri          ###   ########.fr       */
->>>>>>> 5f500691dfbab1ed392f3508ebf057543d3086fd
+/*   Updated: 2021/05/26 14:28:46 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +96,6 @@ char *check_string(t_lexer *l, char *str, int i)
 	}
 	if (i == 2)
 	{
-<<<<<<< HEAD
 		// printf("[%c]\n", l->c);
 		if (l->c == BSLASH)
 		{
@@ -119,13 +114,6 @@ char *check_string(t_lexer *l, char *str, int i)
 			// printf(".......[%c]\n", l->c);
 			return (str);
 		}
-=======
-		if (l->c == BSLASH && peek_char(l) == EOF)
-			no_quotes(l, '/');
-		else
-		// if (l->c =BSLAH)
-			readchar(l);
->>>>>>> 5f500691dfbab1ed392f3508ebf057543d3086fd
 		if (l->c == DOLLAR)
 		{
 			// printf("f:check_string\t[%c]\n", l->c);
