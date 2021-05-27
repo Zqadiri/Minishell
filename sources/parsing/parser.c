@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/27 12:47:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/27 21:50:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 t_token	*check_token(t_parser *p, int i)
 {
-	printf("****************f:check_token\thi bitch\n");
+	// printf("****************f:check_token\thi bitch\n");
 	//!skip the first token bcz the current and the previous token are the same
 	if (i == 1)
 	{
 		p->curr_token = get_next_token(p->lexer);
 		if (p->curr_token->type == eof)
 			return (p->curr_token);
-		printf("next token value-> [%s]\n", p->curr_token->value);
-		printf("next token type-> [%u]\n", p->curr_token->type);
+		// printf("next token value-> [%s]\n", p->curr_token->value);
+		// printf("next token type-> [%u]\n", p->curr_token->type);
 	}
 	syntax_error_pipe_semi(p);
 	//? if the previous token is_redirection then the next token must be an id
@@ -60,6 +60,7 @@ t_ast	*parse_args(t_parser *p)
 	ast->args[ast->args_size] = malloc(sizeof(t_token));
 	// printf("f:parse_arg\tcurrent token-> [%s]\n", p->curr_token->value);
 	ast->args[ast->args_size] = p->curr_token;
+    printf("f:parse_args\tcurrent token [%s]\n", ast->args[ast->args_size]->value);
 	while (p->curr_token->type != eof)
 	{
 		ast->args_size += 1;
@@ -163,6 +164,7 @@ t_ast	*parse_compound(t_parser *p)
 		ast->comp_values[ast->comp_size - 1] = parse_pipe(p);
 		printf("f:parse_compound\thi bitch1\n");
 		ast->comp_size += 1;
+        printf("f:parse_compound\tsize = %d\n", ast->comp_size);
 		ast->comp_values = realloc(ast->comp_values, ast->comp_size
 			* sizeof(t_ast*));
 	}

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/26 21:46:13 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/27 21:28:00 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_parser	*init_parser(t_lexer *l)
 		// free before exit
 		return (NULL);
 	}
-	printf("current token value-> [%s]\n", p->curr_token->value);
-	printf("current token type-> [%u]\n", p->curr_token->type);
+	// printf("current token value-> [%s]\n", p->curr_token->value);
+	// printf("current token type-> [%u]\n", p->curr_token->type);
 	// printf("previous token -> [%s]\n", p->prev_token->value);
 	//free p
 	return (p);
@@ -82,7 +82,7 @@ void	syntax_error_pipe_semi(t_parser *p)
 			p->prev_token->value);
 		exit(EXIT_FAILURE);
 	}
-	printf("f:syntax_error_pipe_semi\tNO SYNTAX ERROR\n");
+	// printf("f:syntax_error_pipe_semi\tNO SYNTAX ERROR\n");
 	//free before exit
 	// exit(EXIT_FAILURE);
 	// return ;
