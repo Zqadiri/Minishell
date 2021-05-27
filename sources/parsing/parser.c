@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/27 21:50:16 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/27 21:57:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_ast	*parse_args(t_parser *p)
 	if (!ast->args)
 		return (NULL);
 	ast->args[ast->args_size] = malloc(sizeof(t_token));
-	// printf("f:parse_arg\tcurrent token-> [%s]\n", p->curr_token->value);
 	ast->args[ast->args_size] = p->curr_token;
     printf("f:parse_args\tcurrent token [%s]\n", ast->args[ast->args_size]->value);
 	while (p->curr_token->type != eof)
