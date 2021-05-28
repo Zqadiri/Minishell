@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/27 19:17:47 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/28 15:39:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int main(int argc, char **argv, char **env)
 		ft_putstr_fd("\nminishell-3.2$ ", 0);
 		l = read_cmd();
 		// printf("|%s|\n", l->buffer);
+		history(l);
 		if(!l->buffer)
 			exit(EXIT_SUCCESS);
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)

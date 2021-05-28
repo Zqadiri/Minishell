@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/25 17:03:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/28 18:30:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <termios.h>
 #include <curses.h>
 #include <term.h>
+#include <signal.h>
 
 char					**g_env_var;
 
+   
 /*
 ** Function Declarations for builtin shell commands
 */
@@ -65,5 +68,12 @@ char	*return_value(const char *s, int c);
 int     get_str_by_char(char *str, char c);
 void	modify_env(char *arg, char *key);
 
+
+/*
+** Signals
+*/
+
+void	reset_term(struct termios *old_attr);
+int     check_signals();
 
 #endif
