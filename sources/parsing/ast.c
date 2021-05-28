@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/25 12:51:20 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/28 15:27:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,36 @@ t_ast	*init_ast(e_ast_type type)
 	ast->args = 0;
 	ast->args_size = 0;
 	return (ast);
+}
+
+void print_tree(t_ast *ast)
+{
+	int i, j, k, l;
+
+	i = j = k = l = 0;
+	printf("f:print_tree\n");
+	printf("f:print_tree\t comp_size = %d \n", ast->comp_size);
+	printf("f:print_tree\t pipe_size = %d \n", ast->pipecmd_size);
+	printf("f:print_tree\t cmd_size = %d \n", ast->simplecmd_size);
+	printf("f:print_tree\t args_size = %d \n", ast->args_size);
+
+	while (i < ast->comp_size)
+	{
+		while (j < ast->pipecmd_size)
+		{
+			while (k < ast->simplecmd_size)
+			{
+				while (l < ast->args_size)
+				{
+					printf("token->value --> [%s]\n", ast->args[ast->args_size]->value);
+					printf("token->value --> [%u]\n", ast->args[ast->args_size]->type);
+					l--;
+				}
+				k--;
+			}
+			j--;
+		}
+		i--;
+	}
+	return ;
 }

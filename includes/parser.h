@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/26 20:59:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/28 15:16:39 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int			is_redirection(t_token *t);
 **parser.c
 */
 t_ast		*parse_compound(t_parser *p);
-t_ast		*parse_pipe(t_parser *p);
-t_ast		*parse_cmd(t_parser *p);
-t_ast		*parse_args(t_parser *p);
-t_token		*check_token(t_parser *p, int i);
+t_ast		*parse_pipe(t_parser *p, char **str);
+t_ast		*parse_cmd(t_parser *p, char **str);
+t_ast		*parse_args(t_parser *p, char **str);
+t_token		*check_token(t_parser *p, char **str);
 
 #endif

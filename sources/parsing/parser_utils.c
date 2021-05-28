@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/27 21:28:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/28 13:38:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	parse_expected_token(t_parser *p, e_token_type type)
 
 void	syntax_error_pipe_semi(t_parser *p)
 {
+	printf("f:syntax_error\t prev [%s] -- curr [%s]\n", p->prev_token->value, p->curr_token->value);
 	if ((p->prev_token->type == pip && p->curr_token->type == semi)
 			|| (p->prev_token->type == semi && p->curr_token->type == pip))
 	{

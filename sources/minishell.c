@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/27 19:17:47 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/28 19:22:25 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int main(int argc, char **argv, char **env)
 		}
 		p = init_parser(l);
 		ast = parse_compound(p);
+		// print_tree(ast);
 	}
 	//free before exit
 	// exit(EXIT_SUCCESS);
