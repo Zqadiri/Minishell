@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/05/28 13:23:42 by iidzim           ###   ########.fr       */
+=======
+/*   Updated: 2021/05/28 16:31:33 by zqadiri          ###   ########.fr       */
+>>>>>>> a5e70343cd21f32407947ebdb9f1ed07669da980
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +24,7 @@
 #include "./exec.h"
 #include "lexer.h"
 #include "parser.h"
+
 
 #define PATH_MAX 15000
 
