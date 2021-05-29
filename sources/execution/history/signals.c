@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/28 18:38:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/29 14:21:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 void    interrupt_program(int sig)
 {
-    
+    (void)sig;
+    printf("ctrl + c\n");
 }
 
 void    quit_program(int sig)
 {
-    
+    (void)sig;
+    printf("ctrl + \\ \n");
 }
 
 void    terminate_process(int sig)
 {
-    
+    (void)sig;
+    printf("ctrl + d\n");
 }
 
 int	check_signals()

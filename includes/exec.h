@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/28 18:30:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/29 15:24:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@
 
 char					**g_env_var;
 
-   
+typedef struct s_index
+{
+    struct termios      *old_attr;
+	struct termios      *term;
+	char	            *buf;
+}       t_index;
 /*
 ** Function Declarations for builtin shell commands
 */

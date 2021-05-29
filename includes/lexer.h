@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/24 21:26:45 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/29 16:34:06 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_token
 
 
 //get_next_token.c
+
 t_token	*get_next_token(t_lexer *l);
 t_token	*string_token(t_lexer *l);
 char	*tokenize_squoted_text(t_lexer *l);
@@ -67,6 +68,7 @@ char	*tokenize_dquoted_text(t_lexer *l);
 char	*tokenize_text(t_lexer *l, char *s);
 
 //lexer.c
+
 t_token	*init_token(e_token_type type, char *s);
 t_lexer *init_lexer(char *line);
 int     valid_envar(char c);
@@ -74,6 +76,7 @@ char    *envar_token(t_lexer *l);
 char	*check_string(t_lexer *l, char *str, int i);
 
 //lexer_utlis.c
+
 void	readchar(t_lexer *l);
 int     peek_char(t_lexer *l);
 void	skip_space(t_lexer *l);
@@ -81,6 +84,7 @@ t_token	*ret_char(t_lexer *l, char c, e_token_type type);
 t_token	*ret_str(t_lexer *l, char *s, int type);
 
 //utils.c
+
 int	ftstrcmp(char *s1, char *s2);
 char *ft_strjoinchar(char *s, char c);
 int	no_quotes(t_lexer *l, char c);

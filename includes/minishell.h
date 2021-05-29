@@ -6,11 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/05/28 13:23:42 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/05/28 16:31:33 by zqadiri          ###   ########.fr       */
->>>>>>> a5e70343cd21f32407947ebdb9f1ed07669da980
+/*   Updated: 2021/05/29 16:08:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +43,6 @@ void print_tree(t_ast *ast);
 */
 
 
-int history(t_lexer *l);
+t_lexer *history();
 
 #endif

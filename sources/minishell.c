@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/28 19:41:32 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/29 16:37:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_lexer	*read_cmd(void)
 
 int main(int argc, char **argv, char **env)
 {
-	t_lexer *l; 
+	t_lexer *l;
 	t_parser *p;
 	t_ast *ast;
 
@@ -50,9 +50,10 @@ int main(int argc, char **argv, char **env)
 	while(1)
 	{
 		ft_putstr_fd("\nminishell-3.2$ ", 0);
-		l = read_cmd();
-		// printf("|%s|\n", l->buffer);
-		history(l);
+		// l = read_cmd();
+		l = history();
+		printf("l->buffer --->|%s|\n", l->buffer);
+		printf("l->bufsize --->|%d|\n", l->bufsize);
 		if(!l->buffer)
 			exit(EXIT_SUCCESS);
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
