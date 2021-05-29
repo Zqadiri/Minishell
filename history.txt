@@ -46,3 +46,50 @@ hieegbnhnechi ojclkdwhcs clk hd
 
  gggggg
 [D[C[C[D[B[C[D[A[C[D[B[C[D[A[C[D[D[A[C[D[B[C[D[B[C[D[A[C[B[D[C[D[A[C[D[B[C[Bnizar
+echo "\\"
+"\"
+echo \\
+echo '\\'
+echo "\\"
+"\\"
+"\"
+"\"
+"\"
+"\"
+"\"
+"\\"
+"\\"
+"\\"
+
+"\\"
+"\"
+"\\"
+"\\"
+echo "\\"
+echo "\\"
+echo "\\"
+echo c'o\'u'cou'
+ec"ho" bon"'j'o'u"r
+ec"ho" bon"j'o\'u"r
+echo co'c"o"u'
+echo co'"c\"o"u'
+ec"ho" bon"jo"u"r	
+ec"ho" bon"jo"u"r"
+ec"ho" bon"jo\"u"r
+echo bo'njou\$r
+echo bo'njou\$r'
+echo bo"njou\$r
+echo bo"njou\$r"
+echo bo"njou\$r"
+echo bo"njou\$r"
+ec"ho" bon"jo\"u"r
+echo A B C
+bash-3.2$ echo A''B''C
+echo A '' B '' C
+echo $SHELL
+echo $SHELL
+echo $_
+echo $?
+echo $?0
+echo $?0
+echo $0

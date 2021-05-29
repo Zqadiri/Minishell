@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/28 19:38:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/29 12:16:31 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*envar_token(t_lexer *l)
 char *check_string(t_lexer *l, char *str, int i)
 {
 	char *temp;
-	
+
 	if (i == 1)
 	{
 		if (l->c == BSLASH)
@@ -86,17 +86,14 @@ char *check_string(t_lexer *l, char *str, int i)
 			if (peek_char(l) == DQUOTE || peek_char(l) == DOLLAR
 				|| peek_char(l) == BSLASH)
 			{
-				temp = str;
 				readchar(l);
 				str = ft_strjoinchar(str, l->c);
-				readchar(l);
-				free(temp);
+				// readchar(l);
 			}
 		}
 	}
 	if (i == 2)
 	{
-		// printf("[%c]\n", l->c);
 		if (l->c == BSLASH)
 		{
 			if (peek_char(l) == EOF)
@@ -104,24 +101,15 @@ char *check_string(t_lexer *l, char *str, int i)
 			if (peek_char(l) == DOLLAR)
 			{
 				readchar(l);
-				// printf("=====[%c]\n", l->c);
 				temp = str;
 				str = ft_strjoinchar(str, l->c);
-				// printf("&&&&&&&&&&f:check_string\tstr = [%s]\n", str);
 				free(temp);
 			}	
 			readchar(l);
-			// printf(".......[%c]\n", l->c);
 			return (str);
 		}
 		if (l->c == DOLLAR)
-		{
-			// printf("f:check_string\t[%c]\n", l->c);
-			temp = str;
 			str = ft_strjoin(str, envar_token(l));
-			// printf("**f:check_string\tstr = [%s]\n", str);
-			// free(temp);
-		}
 	}
 	return (str);
 }
