@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+ksgkbskrbgbrgokhdjgddhfhfghdfhfhfghdhdhfdhzvzdfvzzzzzdfff
+sdfsfdfdfd
+,;ll
+lkmmm
+km;
+ddddddddfdfh
+echo
+echo hello world 
+kkkhgdd
+testtest
+hhhh
+=======
 yjt5jryr 5ryk5\
 cnjksf
 lrg
@@ -93,6 +106,7 @@ echo $?
 echo $?0
 echo $?0
 echo $0
+<<<<<<< HEAD
 echo ok 
 echo ok
 echo ok
@@ -152,3 +166,7 @@ echo ok ; ls > file | cat < file ; ls -la
 gfgjfgjjjhkjgkhghidfg
 fjdksgksjhgjsdkhg
 echo ok ; ls > file | cat < file ; ls -la > fileee
+=======
+>>>>>>> 549c5a54ade836df87b6cb4875f5807d170e7aae
+>>>>>>> e081ef7bc05522e93d3930e537ceebac8aee8bd2
+echo okhi world kjfzbjkdf;gns ;jfksgnkjgn

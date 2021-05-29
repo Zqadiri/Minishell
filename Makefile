@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/05/28 15:25:55 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/05/29 10:34:37 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,9 @@ SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/unset_builtin.c\
 					./sources/execution/export/helpers.c\
 					./sources/execution/export/export_builtin.c\
-					./sources/execution/history/history.c	
-
+					./sources/execution/history/history.c\
+					./sources/execution/history/signals.c
+					
 LIBFT_PATH 		= 	./libft
 
 OBJS			= 	${SRCS:.c=.o}

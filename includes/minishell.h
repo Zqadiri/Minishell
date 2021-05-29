@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/29 10:28:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/29 19:27:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void print_tree(t_ast *ast);
 */
 
 
-int history(t_lexer *l);
+t_lexer *history();
 
 #endif
