@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/29 16:36:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/30 12:18:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ void	init_termios(struct termios *term, struct termios *old_attr)
 	tgetent(NULL, term_type);
 	tcgetattr(0, old_attr);
 	tcgetattr(0, term);
-	// set new attr
+	// Keys typed on the keyboard will no longer display in the terminal
 	term->c_lflag &= ~ECHO;
-	// turns off canonical mode
+	// Put the terminal in non-canonical mode. The read function will receive live 
+	// keyboard input without waiting for you to press Enter 
 	term->c_lflag &= ~ICANON;
 	tcsetattr(0, TCSANOW, term);
 }
@@ -92,9 +93,21 @@ void	read_char(t_index *m)
 {
 	init_termios(m->old_attr, m->term);
 	read(0, m->buf, 1);
-	printf("------>%d\n", m->buf[0]);
+	// printf("------>%d\n", m->buf[0]);
 	reset_term(m->old_attr);
 	
+}
+
+void clean_term(t_index *m)
+{
+	printf ("in clean \n");
+	char  *cl_cap;
+	
+	// char  * tgetstr ( char  * id ,  char  ** area );	
+	cl_cap = tgetstr("cl", NULL);
+	// int  tputs ( const  char  * str ,  int  affcnt ,  int  ( * putc ) ( int ));
+	tputs  ( cl_cap ,  1 ,  putchar );
+	// read_char(m);
 }
 
 t_lexer *history(void)
@@ -138,7 +151,7 @@ t_lexer *history(void)
 		else if (m.buf[0] == '\n')
 		{
 			
-			printf ("H line : [%s]\n", line);
+			// printf ("H line : [%s]\n", line);
 			// write(fd, line, ft_strlen(line));
 			ft_putendl_fd(line, fd);
 			break ;
@@ -149,10 +162,11 @@ t_lexer *history(void)
 			line = ft_strjoinchar(line, m.buf[0]);
 			l->buffer = ft_strdup(line);
 			l->bufsize = ft_strlen(line);
-			printf("|%s|\n", l->buffer);
+			// printf("|%s|\n", l->buffer);
 			free (tmp);
-			printf ("line : [%s]\n", line);
+			// printf ("line : [%s]\n", line);
 		}
+		// clean_term(&m);
 	}
 	close(fd);
 	return (l);

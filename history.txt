@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-ksgkbskrbgbrgokhdjgddhfhfghdfhfhfghdhdhfdhzvzdfvzzzzzdfff
-sdfsfdfdfd
-,;ll
-lkmmm
-km;
-ddddddddfdfh
-echo
-echo hello world 
-kkkhgdd
-testtest
-hhhh
-=======
 yjt5jryr 5ryk5\
 cnjksf
 lrg
@@ -106,4 +93,12 @@ echo $?
 echo $?0
 echo $?0
 echo $0
->>>>>>> 549c5a54ade836df87b6cb4875f5807d170e7aae
+[A[A[A[A[A[A[A[B[B[B[A[B[B[A[B[B[B[B[A[B[B[B[A[A[A[B[B[B[B[1;5A
+kldgbjneboj
+
+ijger
+iojrg
+iog
+jdeije
+igegnkt bat
+
