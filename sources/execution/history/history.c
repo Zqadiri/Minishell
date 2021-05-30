@@ -6,15 +6,17 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/30 12:18:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/30 16:22:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 
-int	init_term(void)
+
+int	init_term(t_index *m)
 {
+	(void)m;
 	char	*term_type;
 	int			ret;
 
@@ -35,6 +37,7 @@ int	init_term(void)
 		ft_putendl_fd("database does not contain any information for this type of terminal", 2);
 		return (-1);
 	}
+	// get_str_cmd(m);
 	return (ret);
 }
 
@@ -98,36 +101,38 @@ void	read_char(t_index *m)
 	
 }
 
+
 void clean_term(t_index *m)
 {
+	(void)m;
 	printf ("in clean \n");
 	char  *cl_cap;
 	
-	// char  * tgetstr ( char  * id ,  char  ** area );	
+	// char  * tgetstr ( char *id, char **area);	
 	cl_cap = tgetstr("cl", NULL);
-	// int  tputs ( const  char  * str ,  int  affcnt ,  int  ( * putc ) ( int ));
-	tputs  ( cl_cap ,  1 ,  putchar );
+	cl_cap = tigetstr("clear");
+	// int  tputs ( const char *str ,  int  affcnt ,  int  ( * putc ) ( int ));
+	tputs  (cl_cap, 1, putchar);
 	// read_char(m);
 }
 
 t_lexer *history(void)
 {
-	int		fd;
 	t_index m;
 	t_lexer *l;
 	char	*line;
 	char	*tmp;
 
-	// int ret = 0;
 	l = NULL;
 	l = init(l);
-	fd = open("history.txt", O_APPEND | O_CREAT | O_RDWR, S_IRWXU);
+	m.fd = open("history.txt", O_APPEND | O_CREAT | O_RDWR, S_IRWXU);
 	m.old_attr = (struct termios *)malloc(sizeof(struct termios));
 	m.term = (struct termios *)malloc(sizeof(struct termios));
 	m.buf = malloc(sizeof(char) * 2);
 	m.buf[1] = 0;
+	get_history_file(&m);
 	check_signals(l);
-	init_term();	
+	init_term(&m);	
 	line = malloc(sizeof(char) * 2);
 	line[0] = '\0';
 	while (1)
@@ -150,10 +155,9 @@ t_lexer *history(void)
 		}
 		else if (m.buf[0] == '\n')
 		{
-			
 			// printf ("H line : [%s]\n", line);
 			// write(fd, line, ft_strlen(line));
-			ft_putendl_fd(line, fd);
+			ft_putendl_fd(line, m.fd);
 			break ;
 		}
 		else
@@ -166,8 +170,8 @@ t_lexer *history(void)
 			free (tmp);
 			// printf ("line : [%s]\n", line);
 		}
-		// clean_term(&m);
+		clean_term(&m);
 	}
-	close(fd);
+	close(m.fd);
 	return (l);
 }

@@ -1,69 +1,8 @@
-yjt5jryr 5ryk5\
-cnjksf
-lrg
-krgs
-jorg
-idg
-lidg
-lidnrg
-7y
-srg
-srg
-hhhhhhhh
-hhhhhhhh
-adasd
-adasd
-fgjfgjfjfjfgjfgjfgjfgjfgjfgjfgjgggg
-fgfgfgfghghfghfghfghfghfghfghfghfghfghfghf
-fghgfhfgh
-fghfghfghf
-554rvr
- gr
-nizar
-ekram
-ziiii
-[C[D[A[D[B[B[A[C[D[B[A[D[B[C[D[B[D[A[B
-hi jkjkhk.
-
-
-
-hieegbnhnechi ojclkdwhcs clk hd 
-
-
-
-
-
-
-
-
-[A 
- 
- 
-  
- 
- 
-      
-
- gggggg
-[D[C[C[D[B[C[D[A[C[D[B[C[D[A[C[D[D[A[C[D[B[C[D[B[C[D[A[C[B[D[C[D[A[C[D[B[C[Bnizar
 echo "\\"
-"\"
 echo \\
 echo '\\'
 echo "\\"
-"\\"
 "\"
-"\"
-"\"
-"\"
-"\"
-"\\"
-"\\"
-"\\"
-
-"\\"
-"\"
-"\\"
 "\\"
 echo "\\"
 echo "\\"
@@ -93,79 +32,28 @@ echo $?
 echo $?0
 echo $?0
 echo $0
-<<<<<<< HEAD
-[A[A[A[A[A[A[A[B[B[B[A[B[B[A[B[B[B[B[A[B[B[B[A[A[A[B[B[B[B[1;5A
-kldgbjneboj
-
-ijger
-iojrg
-iog
-jdeije
-igegnkt bat
-
-=======
-<<<<<<< HEAD
-echo ok 
-echo ok
-echo ok
-echo ok
 echo ok
 echo ok ; echo ok2 ; echo ok3;
 echo ok ; echo ok2 
 echo ok ; echoo ok2
-1; 2 ; 3; 4
 eho ok ; echo oko3; ok
 echo ok ; echo ok2; echo ok3
 echo ok ; cat file1
 echo ok ; cat file1 ;echo ok ; cat file1
 echo ok ; cat file1 | echo ok ; cat file1
-    printf("-------->f:parse_compound\tsize = %d\n", ast->comp_size);
 echo ok1 ; echo ko > file1 | echo "done\$user" ; echo end > file2
 1 2 ; 3 > 4 | 5 ; 6
 echo ok | > file1 greap ko
 echo ok | > file1 greap ko | echo done 
 echo ok ; ls > file | cat < file ; ls -la
 echo ok ; ls > file | cat < file ; ls -la
-
-echo ok ; ls > file | cat < file ; ls -la ;
-echo ok ; ls > file | cat << file
-echo ok ; ls > file | cat < | file
- echo ok > ; echo ok
- echo ok > ; echo ok
- echo ok > 
- echo ok >
-echo ok >
-echo ok > 
-echo ok > 
-echo ok > 
-[Aecho
-
-echo ok >
-echo ok > 
-echo ok > file
-echo ok >
-echo ok > 
-echo ok >
-echo ok > 
-echo ok >
-eecho ok >
-echho ok > 
-echo ok > 
-echo ok > 
-echo ok >
-echo ok > 
-echo ok > 
-echo ok > 
 echo > ; dfngjkfd
 echo ok > ;
 eccho ok >    ;
- echo ok ; ls > file | cat < file ; ls -la
 echo ok ; ls > file | cat < file ; ls -la
-gfgjfgjjjhkjgkhghidfg
-fjdksgksjhgjsdkhg
+echo ok ; ls > file | cat < file ; ls -la
 echo ok ; ls > file | cat < file ; ls -la > fileee
-=======
->>>>>>> 549c5a54ade836df87b6cb4875f5807d170e7aae
->>>>>>> e081ef7bc05522e93d3930e537ceebac8aee8bd2
-echo okhi world kjfzbjkdf;gns ;jfksgnkjgn
->>>>>>> d4374603336dff89c2ebaa2843a0eb31adffc787
+echo ""
+echo "" ""
+echio hi
+hhhhjhxfhsef\
