@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/29 18:43:28 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/30 19:50:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ void	syntax_error_pipe_semi(t_parser *p)
 			p->prev_token->value);
 		exit(EXIT_FAILURE);
 	}	
-	if ((p->prev_token->type == pip && p->curr_token->type == eof)
-			|| (p->prev_token->type == semi && p->curr_token->type == eof))
+	if (p->prev_token->type == pip && p->curr_token->type == eof)
 	{
 		printf("minishell: syntax error near unexpected token `%s'\n",
 			p->prev_token->value);
@@ -94,6 +93,23 @@ void	syntax_error_pipe_semi(t_parser *p)
 	// exit(EXIT_FAILURE);
 	// return ;
 }
+
+// void	syntax_error_pipe_semi(t_parser *p)
+// {
+// 	// printf("f:syntax_error\t prev [%s] -- curr [%s]\n", p->prev_token->value, p->curr_token->value);
+// 	if ((p->prev_token->type == pip && p->curr_token->type == semi)
+// 			|| (p->prev_token->type == semi && p->curr_token->type == pip))
+// 		printf("minishell: syntax error near unexpected token `%s'\n",
+// 			p->prev_token->value);
+// 	if (p->prev_token->type == pip && p->curr_token->type == eof)
+// 		printf("minishell: syntax error near unexpected token `%s'\n",
+// 			p->prev_token->value);
+// 	if (is_redirection(p->prev_token) && p->curr_token->type == eof)
+// 		printf("minishell: syntax error near unexpected token `newline'\n");
+// 	//free before exit
+// 	exit(EXIT_FAILURE);
+// 	// return ;
+// }
 
 int	is_redirection(t_token *t)
 {

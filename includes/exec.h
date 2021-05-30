@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/29 15:24:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/30 16:22:02 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,27 @@
 #include <term.h>
 #include <signal.h>
 
+
+#define HISTSIZE 30000
+#define	HISTFILE "history.txt"
+
 char					**g_env_var;
+
+// typedef struct s_tc_cmd
+// {
+// 	char *cmd_im; //  Enter insert mode 
+// 	char
+// }	t_tc_cmd;
 
 typedef struct s_index
 {
     struct termios      *old_attr;
 	struct termios      *term;
 	char	            *buf;
+	int					cursor;
+	char				**history;
+	int					fd;
+	
 }       t_index;
 /*
 ** Function Declarations for builtin shell commands
@@ -80,5 +94,6 @@ void	modify_env(char *arg, char *key);
 
 void	reset_term(struct termios *old_attr);
 int     check_signals();
+int     get_history_file(t_index *m);
 
 #endif
