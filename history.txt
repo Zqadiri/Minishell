@@ -55,21 +55,3 @@ echo ok ; ls > file | cat < file ; ls -la
 echo ok ; ls > file | cat < file ; ls -la > fileee
 echo ""
 echo "" ""
-echio hi
-hhhhjhxfhsef\
-test
-test
-yyyyy
-hjkdbgtu
-hkgbejrgio
-		lknb
-linebuffer
-echo
-echo
-mkae 
-eklglsr
-kg
-kleln
-lkn
-jk
-jnkg

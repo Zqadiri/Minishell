@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/31 12:20:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/31 12:25:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int     get_history_file(t_index *m)
 		line = ft_strjoinchar(line, m->buf[0]);	
 	}
 	m->cursor = counter;
-	printf ("counter :[%d]\n", counter);
-	printf ("<|line: %s|>\n", line);
+	// printf("counter :[%d]\n", counter);
+	// printf("<|line: %s|>\n", line);
 	m->history = ft_split(line, '\n');
 	// free(line);
 	// free(m->buf);

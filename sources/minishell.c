@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/29 19:27:27 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/30 19:25:23 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int main(int argc, char **argv, char **env)
 		ft_putstr_fd("\nminishell-3.2$ ", 0);
 		// l = read_cmd();
 		l = history();
-		printf("l->buffer --->|%s|\n", l->buffer);
+		printf("\nl->buffer --%s--\n", l->buffer);
 		printf("l->bufsize --->|%d|\n", l->bufsize);
 		if(!l->buffer)
 			exit(EXIT_SUCCESS);

@@ -6,13 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/31 12:20:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/31 12:25:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-
 
 int	init_term(t_index *m)
 {
@@ -128,8 +126,7 @@ t_lexer *history(void)
 	m.term = (struct termios *)malloc(sizeof(struct termios));
 	m.buf = malloc(sizeof(char) * 2);
 	m.buf[1] = 0;
-	m.delete_cur = 0;
-	// get_history_file(&m);
+	get_history_file(&m);
 	// check_signals(l);
 	init_term(&m);	
 	m.line = malloc(sizeof(char) * 2);
