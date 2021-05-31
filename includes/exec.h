@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/30 16:22:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/31 11:21:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,33 @@
 
 char					**g_env_var;
 
-// typedef struct s_tc_cmd
-// {
-// 	char *cmd_im; //  Enter insert mode 
-// 	char
-// }	t_tc_cmd;
+
+typedef struct s_tc_cmd
+{
+	char *cmd_im; // Enter insert mode 
+	char *cmd_ic; // Insert character
+	char *cmd_ei; // end insert mode
+
+	char *cmd_dm; // Enter delete mode
+	char *cmd_dc; // Delete character
+	char *cmd_de; // End delete mode
+	char *cmd_dl; // Delete line
+
+	char *cmd_ce; // Clear to end of line
+	char *cmd_le; // move cursor one left position
+}	t_tc_cmd;
 
 typedef struct s_index
 {
-    struct termios      *old_attr;
-	struct termios      *term;
-	char	            *buf;
+    struct termios     	*old_attr;
+	struct termios     	*term;
+	char	           	*buf;
 	int					cursor;
 	char				**history;
 	int					fd;
+	int					delete_cur;
+	char				*line;
+	t_tc_cmd			tc_cmd;
 	
 }       t_index;
 /*
@@ -95,5 +108,9 @@ void	modify_env(char *arg, char *key);
 void	reset_term(struct termios *old_attr);
 int     check_signals();
 int     get_history_file(t_index *m);
+void	delete_char(t_index *m);
+void	move_up(void);
+void	move_down(void);
+int		get_str_cmd(t_index *m);
 
 #endif
