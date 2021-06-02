@@ -55,3 +55,11 @@ echo ok ; ls > file | cat < file ; ls -la
 echo ok ; ls > file | cat < file ; ls -la > fileee
 echo ""
 echo "" ""
+echo test test ""
+make clean
+echo '\\'
+echo test test ""
+echo ok ; ls > file | cat < file ; ls -la > fileee
+1 2 ; 3 > 4 | 5 ; 6
+echo ok
+echo ok;echo test test ""

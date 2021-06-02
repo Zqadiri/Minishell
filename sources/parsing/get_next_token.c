@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/29 19:18:56 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/31 16:58:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_token	*string_token(t_lexer *l)
 	while (l->curpos < l->bufsize && (l->c != PIPE || l->c != SEMICOLON
 			|| l->c != GREAT || l->c != LESS))
 	{
+		
 		temp = str;
 		if (l->c == DQUOTE)
 			str = ft_strjoin(str, tokenize_dquoted_text(l));
