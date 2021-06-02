@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/01 13:35:57 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/02 11:55:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ t_token	*check_token(t_parser *p, char **str)
 		*str = ft_strjoin(*str, p->prev_token->value);
 		*str = ft_strjoin(*str, " ");
 		printf("\n\nf:check_token\t join token -> [%s]\n\n", p->curr_token->value);
-		return (p->prev_token);
 	}
 	else
 	{
@@ -132,10 +131,10 @@ t_ast	*parse_args(t_parser *p, char **str)
 		// printf("f:parse_arg\t current_token = [%s][%u]\n", p->curr_token->value, p->curr_token->type);
 		// if (p->curr_token->type == pip || p->curr_token->type == semi)
 		// 	break;
-		printf("f:parse_arg\t current_token = [%s][%u]\n", ast->args[ast->args_size - 1]->value, ast->args[ast->args_size - 1]->type);
-		printf("f:parse_arg\t ast->size token = [%s][%u]\n", ast->args[ast->args_size]->value, ast->args[ast->args_size]->type);
-		if (ast->args[ast->args_size]->type == pip
-			|| ast->args[ast->args_size]->type == semi)
+		// printf("f:parse_arg\t current_token = [%s][%u]\n", ast->args[ast->args_size - 1]->value, ast->args[ast->args_size - 1]->type);
+		// printf("f:parse_arg\t ast->size token = [%s][%u]\n", ast->args[ast->args_size]->value, ast->args[ast->args_size]->type);
+		if (ast->args[ast->args_size - 1]->type == pip
+			|| ast->args[ast->args_size - 1]->type == semi)
 			break;
 	}
 	syntax_error_pipe_semi(p);
@@ -159,11 +158,11 @@ t_ast	*parse_pipe(t_parser *p, char **str)
 	{
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(p, str);
 		printf("\t\tf:parse_pipe\t cuurent token = [%s][%u]\n", p->curr_token->value, p->curr_token->type);
-		if (p->curr_token->type != eof && p->curr_token->type == pip)
+		if (p->curr_token->type == pip)
 		{
 			ast->pipecmd_size += 1;
 			ast->pipecmd_values = realloc(ast->comp_values, ast->pipecmd_size
-				* sizeof(t_ast*));	
+				* sizeof(t_ast*));
 		}
 		// printf("++++++++++f:parse_pipe\tsize = %d\n", ast->pipecmd_size);
 		if (p->curr_token->type == semi)

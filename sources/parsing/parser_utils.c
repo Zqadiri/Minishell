@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/01 13:15:30 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/02 11:49:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	parse_expected_token(t_parser *p, e_token_type type)
 	{
 		p->prev_token = p->curr_token;
 		p->curr_token = get_next_token(p->lexer);
-		printf("f:parse_expected_token\tprev = [%s]\n", p->prev_token->value);
-		printf("f:parse_expected_token\tcurr = [%s]\n", p->curr_token->value);
+	// 	printf("f:parse_expected_token\tprev = [%s]\n", p->prev_token->value);
+	// 	printf("f:parse_expected_token\tcurr = [%s]\n", p->curr_token->value);
 	}
 	else
 	{
