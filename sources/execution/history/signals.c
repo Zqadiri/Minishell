@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/31 19:42:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/02 14:58:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int     get_history_file(t_index *m)
 		line = ft_strjoinchar(line, m->buf[0]);
 		free (pfree);
 	}
-	m->cursor = counter + 1;
+	m->cursor = counter;
 	m->history = ft_split(line, '\n');
 	return (1);
 }
@@ -108,22 +108,26 @@ void	move_up(t_index *m, t_lexer *l)
 	tputs(m->tc_cmd.cmd_dl, 1, ft_putc);
 	m->tc_cmd.cmd_ed = tigetstr("rmdc");
 	tputs(m->tc_cmd.cmd_ed, 1, ft_putc);
+	// printf("{%d}\n", len(m->history));
 	if (m->cursor - 1 != 0)
 	{
 		m->cursor--;
-		ft_putstr_fd("minishell-3.2$ ", 0);
+		ft_putstr_fd("minishell-1.0$ ", 0);
 		tmp = m->line;
+		// printf ("%d\n", m->cursor);
 		m->line = ft_strdup(m->history[m->cursor]);
 		l->buffer = ft_strdup(m->line);
+		l->bufsize = ft_strlen(m->line);
 		free (tmp);
 		ft_putstr_fd(m->history[m->cursor], 0);
 	}
 	else
 	{
-		ft_putstr_fd("minishell-3.2$ ", 0);
+		ft_putstr_fd("minishell-1.0$ ", 0);
 		tmp = m->line;
 		m->line = ft_strdup(m->history[0]);
 		l->buffer = ft_strdup(m->line);
+		l->bufsize = ft_strlen(m->line);
 		free (tmp);
 		ft_putstr_fd(m->history[0], 0);
 	}
@@ -142,15 +146,16 @@ void	move_down(t_index *m, t_lexer *l)
 	if (m->cursor + 1 < len(m->history))
 	{
 		m->cursor++;
-		ft_putstr_fd("minishell-3.2$ ", 0);
+		ft_putstr_fd("minishell-1.0$ ", 0);
 		tmp = m->line;
 		m->line = ft_strdup(m->history[m->cursor]);
 		l->buffer = ft_strdup(m->line);
+		l->bufsize = ft_strlen(m->line);
 		free (tmp);
 		ft_putstr_fd(m->history[m->cursor], 0);
 	}
 	else
-		ft_putstr_fd("minishell-3.2$ ", 0);
+		ft_putstr_fd("minishell-1.0$ ", 0);
 }
 
 void    interrupt_program(int sig)

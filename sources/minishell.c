@@ -6,15 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/06/02 10:25:25 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/06/02 11:23:52 by zqadiri          ###   ########.fr       */
->>>>>>> 0752d95ca1f9aaadbccfbd413663662ed76aa666
+/*   Updated: 2021/06/02 14:40:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// add new line 
 
 t_lexer	*read_cmd(void)
 {
@@ -59,7 +57,7 @@ int main(int argc, char **argv, char **env)
 		printf("\nl->buffer --%s--\n", l->buffer);
 		printf("l->bufsize --->|%d|\n", l->bufsize);
 		if(!l->buffer)
-			exit(EXIT_SUCCESS);
+			continue;
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
 		{
 			free(l);

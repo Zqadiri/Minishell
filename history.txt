@@ -63,3 +63,13 @@ echo ok ; ls > file | cat < file ; ls -la > fileee
 1 2 ; 3 > 4 | 5 ; 6
 echo ok
 echo ok;echo test test ""
+echo ok ; echoo ok2
+echo ok ; ls > file | cat < file ; ls -la > fileee
+echo test test ""
+echo ok ; echoo ok2
+echo ok > ;
+echo ok
+echo oktest test
+ok ko
+echo ok ; echoo ok2
+echo oktest test
