@@ -73,3 +73,46 @@ echo oktest test
 ok ko
 echo ok ; echoo ok2
 echo oktest test
+echo ok ; hi world > file | cat file
+exit 00000000000000000000000000000000000000000000001\n
+make run 
+echo a ; ;\n 
+echo a ; ;\n
+;\n 
+; ;\n 
+; ; ;\n
+echo a ; ; echo b\n
+;;\n 
+;;;;;\n
+echo a ;; echo b\n 
+echo a ;;;;; echo b\n
+echo a ; ;\n
+;;;\n
+echo a ; ;\n
+echo a ;; echo b\n 
+; echo\n
+ ;echo\n
+echo a ; ;\n 
+; ; ;\n
+;;;;;\n 
+echo a ;;;;; echo b\n 
+echo a ; ; ; ; ; echo b\n 
+< | a\n
+< | a\n 
+>> | a\n
+< ; a\n
+< ; a\n
+exit
+echo ok
+eccho ok
+eccho ok
+echooio ok
+echo ok
+echo ok
+echo ok
+echo ok ; ls > file | cat < file;
+echo ok ; ls > file | cat < file;
+echo ok ; ls > file | cat < file;
+echo ok ; ls > file | cat < file;
+echo ok ; ls > file | cat < file;
+echo ok ; ls > file | cat < file;

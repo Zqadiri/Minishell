@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 14:13:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/02 21:34:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,28 @@ t_ast	*init_ast(e_ast_type type)
 	return (ast);
 }
 
-// void print_ast(t_ast *ast)
-// {
-// 	int cmd_semi = 0;
-// 	int cmd_pipe;
-// 	int cmd_args;
-// 	t_ast *temp, temp1, temp2, temp3;
+void visitor(t_ast *ast)
+{
+	int i, j, k;
 
-// 	while (cmd_semi < ast->comp_size)
-// 	{
-// 		temp = ast->comp_values[cmd_semi];
-// 		temp1 = temp->pipecmd_values[0];
-// 		temp2 = temp1
-// 		printf("ast -> %s\n", temp->);
-// 		cmd_semi++;
-// 	}
-// 	printf("end loop\n");
-// }  
-
-// t_ast *visitor(t_ast ast)
-// {
-// }
+	if (ast->type == compound)
+	{
+		i = -1;
+		while (++i < ast->comp_size)
+			visitor(ast->comp_values[i]);
+	}
+	if (ast->type == pipe_ast)
+	{
+		j = -1;
+		while (++j < ast->pipecmd_size)
+			visitor(ast->pipecmd_values[j]);
+			
+	}
+	if (ast->type == arg_ast)
+	{
+		k = -1;
+		while (++k < ast->args_size)
+			printf("f:visitor\ttoken -> [%s][%u]\n", ast->args[k]->value,
+				ast->args[k]->type);
+	}
+}

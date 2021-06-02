@@ -6,77 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 11:55:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/02 21:55:01 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// // !infinite loop
-// t_ast	*parse_args(t_parser *p, char **str)
-// {
-// 	t_ast	*ast;
-
-// 	ast = init_ast(arg_ast);
-// 	ast->args = (t_token**)malloc(sizeof(t_token*));
-// 	if (!ast->args)
-// 		return (NULL);
-// 	ast->args[ast->args_size] = malloc(sizeof(t_token));
-// 	ast->args[ast->args_size] = p->curr_token;
-// 	ast->args_size = 1;
-// 	while (p->curr_token->type != eof)
-// 	{
-// 		ast->args = realloc(ast->args, (ast->args_size + 1) * sizeof(t_token));
-// 		p->prev_token = p->curr_token;
-// 		if (ast->args_size == 1)
-// 		{
-// 			p->curr_token = get_next_token(p->lexer);
-// 			if (p->curr_token->type == eof)
-// 				break ;
-// 		}
-// 		ast->args[ast->args_size] = check_token(p, str);
-// 		ast->args_size += 1;
-// 		break ;
-// 		// if (ast->args[ast->args_size - 1]->type == pip
-// 		// 	|| ast->args[ast->args_size - 1]->type == semi)
-// 		// 	break;
-// 	}
-// 	syntax_error_pipe_semi(p);
-// 	// ast->args_size -= 1;
-//     printf("-------->f:parse_args\tsize = %d\n", ast->args_size);
-// 	return (ast);
-// }
-
-// t_ast	*parse_cmd(t_parser *p, char **str)
-// {
-// 	t_ast	*ast;
-
-// 	ast = init_ast(cmd_ast);
-// 	ast->simplecmd_values = (t_ast**)malloc(sizeof(t_ast*));
-// 	if (!ast->simplecmd_values)
-// 		return (NULL);
-// 	ast->simplecmd_size += 1;
-// 	while (p->curr_token->type != eof)
-// 	{
-// 		ast->simplecmd_values[ast->simplecmd_size - 1] = parse_args(p, str);
-// 		ast->simplecmd_size += 1;
-//     	// printf("-------->f:parse_cmd\tsize = %d\n", ast->simplecmd_size);
-// 		ast->simplecmd_values = realloc(ast->comp_values, ast->simplecmd_size
-// 			* sizeof(t_ast*));
-// 		// printf("f:parse_args\tsize = %d\n", ast->args_size);
-// 		printf("f:parse_cmd\t current token [%s][%u]\n", p->curr_token->value, p->curr_token->type);
-// 		if (p->curr_token->type == pip || p->curr_token->type == semi)
-// 		{
-// 			printf("\\\\\\\\f:check_token\t previous token [%s]\n", p->prev_token->value);
-// 			printf("\\\\\\\\f:check_token\t current token [%s]\n", p->curr_token->value);
-// 			printf("\\\\\\\\\\\\\f:check_token\n");
-// 			break;
-// 		}
-// 	}
-// 	ast->simplecmd_size -= 1;
-//     printf("-------->f:parse_cmd\tsize = %d\n", ast->simplecmd_size);
-// 	return (ast);
-// }
 
 t_token	*check_token(t_parser *p, char **str)
 {
@@ -87,10 +21,12 @@ t_token	*check_token(t_parser *p, char **str)
 	printf("\n******f:check_token\t previous token [%s][%u]\n", p->prev_token->value, p->prev_token->type);
 	printf("******f:check_token\t current token [%s][%u]\n", p->curr_token->value, p->curr_token->type);
 	printf("**************************f:check_token\n\n");
-	syntax_error_pipe_semi(p);
+	if (!syntax_error_pipe_semi(p))
+		return (NULL);
 	if (is_redirection(p->prev_token))
 	{
-		parse_expected_token(p, id);
+		if (!parse_expected_token(p, id))
+			return (NULL);
 		*str = ft_strjoin(*str, p->prev_token->value);
 		*str = ft_strjoin(*str, " ");
 		printf("\n\nf:check_token\t join token -> [%s]\n\n", p->curr_token->value);
@@ -101,6 +37,7 @@ t_token	*check_token(t_parser *p, char **str)
 		*str = ft_strjoin(*str, " ");
 	}
 	// printf("----------------f:final result\tstr = [%s]\n", *str);
+	printf(">>>>>>>>>>>out\n");
 	return (p->curr_token);
 }
 
@@ -112,23 +49,31 @@ t_ast	*parse_args(t_parser *p, char **str)
 	ast->args = (t_token**)malloc(sizeof(t_token*));
 	if (!ast->args)
 		return (NULL);
+	// store the first token
 	if (ast->args_size == 0)
 	{
 		ast->args[ast->args_size] = malloc(sizeof(t_token));
 		ast->args[ast->args_size] = p->curr_token;
 		*str = ft_strjoin(*str, p->curr_token->value);
 		*str = ft_strjoin(*str, " ");
+		printf("f:parse_args\t curr[%s][%u]\n", ast->args[ast->args_size]->value, ast->args[ast->args_size]->type);
 	}
 	while (p->curr_token->type != eof)
 	{
 		ast->args_size += 1;
 		ast->args = realloc(ast->args, (ast->args_size + 1) * sizeof(t_token));
+		printf("f:parse_arg\tcurr>>>[%s]\n", p->curr_token->value);
 		p->prev_token = p->curr_token;
 		p->curr_token = get_next_token(p->lexer);
+		printf("f:parse_arg\tcurr****>>>[%s]\n", p->curr_token->value);
 		if (p->curr_token->type == eof)
 			break ;
+		if (!check_token(p, str))
+			return (NULL);
 		ast->args[ast->args_size] = check_token(p, str);
 		// printf("f:parse_arg\t current_token = [%s][%u]\n", p->curr_token->value, p->curr_token->type);
+		// printf("f:parse_arg\t previous_token = [%s][%u]\n", p->prev_token->value, p->prev_token->type);
+
 		// if (p->curr_token->type == pip || p->curr_token->type == semi)
 		// 	break;
 		// printf("f:parse_arg\t current_token = [%s][%u]\n", ast->args[ast->args_size - 1]->value, ast->args[ast->args_size - 1]->type);
@@ -137,11 +82,15 @@ t_ast	*parse_args(t_parser *p, char **str)
 			|| ast->args[ast->args_size - 1]->type == semi)
 			break;
 	}
-	syntax_error_pipe_semi(p);
-	if (ast->args[ast->args_size - 1]->type == pip)
+	printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+	if (!syntax_error_pipe_semi(p))
+		return (NULL);
+	printf("f:parse_args\t before abort line [%s][%u]\n", ast->args[ast->args_size - 1]->value, ast->args[ast->args_size - 1]->type);
+	printf("f:parse_args\tsize before abort [%d]\n", ast->args_size);
+	if (ast->args[ast->args_size]->type == pip)
 		printf("\n=========================================================pipe\n");
 	// ast->args_size -= 1;
-    // printf("-------->f:parse_args\tsize = %d\n", ast->args_size);
+    printf("-------->f:parse_args\tsize = %d\n", ast->args_size);
 	return (ast);
 }
 
@@ -156,6 +105,8 @@ t_ast	*parse_pipe(t_parser *p, char **str)
 	ast->pipecmd_size = 1;
 	while (p->curr_token->type != eof)
 	{
+		if (!parse_args(p, str))
+			return (NULL);
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(p, str);
 		printf("\t\tf:parse_pipe\t cuurent token = [%s][%u]\n", p->curr_token->value, p->curr_token->type);
 		if (p->curr_token->type == pip)
@@ -169,7 +120,7 @@ t_ast	*parse_pipe(t_parser *p, char **str)
 			break;
 	}
 	printf("\n=========================================================semi\n");
-    // printf("-------->f:parse_pipe\tsize = %d\n", ast->pipecmd_size);
+    printf("-------->f:parse_pipe\tsize = %d\n", ast->pipecmd_size);
 	return (ast);
 }
 
@@ -188,6 +139,8 @@ t_ast	*parse_compound(t_parser *p)
 	ast->comp_size = 1;
 	while (p->curr_token->type != eof)
 	{
+		if (!parse_pipe(p, &str))
+			return (NULL);
 		ast->comp_values[ast->comp_size - 1] = parse_pipe(p, &str);
 		ast->comp_size += 1;
 		ast->comp_values = realloc(ast->comp_values, ast->comp_size
@@ -195,7 +148,7 @@ t_ast	*parse_compound(t_parser *p)
 		// printf("++++++++++f:parse_compound\tsize compound = [%d]\n", ast->comp_size);
 	}
 	ast->comp_size -= 1;
-    // printf("-------->f:parse_compound\tsize = %d\n", ast->comp_size);
+    printf("-------->f:parse_compound\tsize = %d\n", ast->comp_size);
 	// printf("previous token type-> [%s][%u]\n", p->prev_token->value, p->prev_token->type);
 	// printf("current token value-> [%s][%u]\n", p->curr_token->value, p->curr_token->type);
 	printf("----------------f:final result\tstr = [%s]\n", str);

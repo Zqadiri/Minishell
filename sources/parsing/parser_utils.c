@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 14:15:29 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/02 18:32:57 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_parser	*init_parser(t_lexer *l)
 ** the order of tokens by checking the type of the next token.
 */
 
-void	parse_expected_token(t_parser *p, e_token_type type)
+int	parse_expected_token(t_parser *p, e_token_type type)
 {
 	printf("f:parse_expected_token\tcurr before = [%s]\n", p->curr_token->value);
 	if (p->curr_token->type == type)
@@ -60,8 +60,10 @@ void	parse_expected_token(t_parser *p, e_token_type type)
 		printf("minishell: syntax error near unexpected token `%s'\n",
 			p->curr_token->value);
 		//free before exit
-		exit(EXIT_FAILURE);
+		// exit(EXIT_FAILURE);
+		return (0);
 	}
+	return (1);
 	// else
 	// {
 	// 	p->prev_token->value = p->curr_token->value;
@@ -70,28 +72,34 @@ void	parse_expected_token(t_parser *p, e_token_type type)
 	// }
 }
 
-void	syntax_error_pipe_semi(t_parser *p)
+int	syntax_error_pipe_semi(t_parser *p)
 {
 	// printf("f:syntax_error\t prev [%s] -- curr [%s]\n", p->prev_token->value, p->curr_token->value);
 	if ((p->prev_token->type == pip && p->curr_token->type == semi)
+			|| (p->prev_token->type == semi && p->curr_token->type == semi)
+			|| (p->prev_token->type == pip && p->curr_token->type == pip)
 			|| (p->prev_token->type == semi && p->curr_token->type == pip))
 	{
 		printf("minishell: syntax error near unexpected token `%s'\n",
 			p->prev_token->value);
-		exit(EXIT_FAILURE);
+		// exit(EXIT_FAILURE);
+		return (0);
 	}
 	if (p->prev_token->type == pip && p->curr_token->type == eof)
 	{
 		printf("minishell: syntax error near unexpected token `%s'\n",
 			p->prev_token->value);
-		exit(EXIT_FAILURE);
+		// exit(EXIT_FAILURE);
+		return (0);
 	}
 	if (is_redirection(p->prev_token) && p->curr_token->type == eof)
 	{
 		printf("minishell: syntax error near unexpected token `newline'\n");
 		// free before exit
-		exit(EXIT_FAILURE);
+		// exit(EXIT_FAILURE);
+		return (0);
 	}
+	return (1);
 	// printf("f:syntax_error_pipe_semi\tNO SYNTAX ERROR\n");
 	//free before exit
 	// exit(EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 12:06:49 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/02 18:45:20 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef enum t_ast_type
 {
 	compound,
 	pipe_ast,
-	cmd_ast,
+	// //cmd_ast,
 	arg_ast
 }			e_ast_type;
 
@@ -52,20 +52,25 @@ typedef struct s_ast
 }				t_ast;
 
 /*
-**parser_utils.c
+** parser_utils.c
 */
 t_parser	*init_parser(t_lexer *l);
-void		parse_expected_token(t_parser *p, e_token_type type);
-void		syntax_error_pipe_semi(t_parser *p);
+int			parse_expected_token(t_parser *p, e_token_type type);
+int			syntax_error_pipe_semi(t_parser *p);
 int			is_redirection(t_token *t);
 
 /*
-**parser.c
+** parser.c
 */
 t_ast		*parse_compound(t_parser *p);
 t_ast		*parse_pipe(t_parser *p, char **str);
 t_ast		*parse_cmd(t_parser *p, char **str);
 t_ast		*parse_args(t_parser *p, char **str);
 t_token		*check_token(t_parser *p, char **str);
+
+/*
+** ast.c
+*/
+void visitor(t_ast *ast);
 
 #endif
