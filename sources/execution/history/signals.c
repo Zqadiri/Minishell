@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/30 16:43:08 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/31 12:25:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,61 @@ int     get_history_file(t_index *m)
 	// free(line);
 	// free(m->buf);
 	return (1);
-	// m->history = (char **)malloc(sizeof(char *) * )
 }
 
-// int	get_str_cmd(t_index *m)
-// {
+int	get_str_cmd(t_index *m)
+{
+	/* DELETE */
+
+	m->tc_cmd.cmd_dm = tgetstr("dm", NULL);
+	m->tc_cmd.cmd_dl = tgetstr("dl", NULL);
+	m->tc_cmd.cmd_de = tgetstr("de", NULL);
+	m->tc_cmd.cmd_dc = tgetstr("dc", NULL);
+
+	/* INSERT */
+
+	m->tc_cmd.cmd_im = tgetstr("im", NULL);
+	m->tc_cmd.cmd_ic = tgetstr("ic", NULL);
+	m->tc_cmd.cmd_ei = tgetstr("ei", NULL);
+
+	/* cursor & clear */
 	
-// 	return (1);
-// }
+	m->tc_cmd.cmd_ce = tgetstr("ce", NULL);
+	m->tc_cmd.cmd_le = tgetstr("le", NULL);
+
+	return (1);
+}
+
+int ft_putc(int c)
+{
+	return write(1, &c, 1);
+}
+
+void	delete_char(t_index *m)
+{
+	m->delete_cur++;
+	// printf ("--> cur [%d]\n", m->delete_cur);
+	// printf ("--> line [%d]\n", ft_strlen(m->line));
+	// printf ("--> line : %s\n", m->line);
+	m->tc_cmd.cmd_dm = tigetstr("smdc");
+	tputs(m->tc_cmd.cmd_dm, 1, ft_putc);
+	m->tc_cmd.cmd_le = tigetstr("cub1");
+	tputs(m->tc_cmd.cmd_le, 1, ft_putc);
+	m->tc_cmd.cmd_dc = tigetstr("dch1");
+	tputs(m->tc_cmd.cmd_dc, 1, ft_putc);
+}
+
+void	move_up(void)
+{
+	printf ("up\n");
+	exit (0);
+}
+
+void	move_down(void)
+{
+	printf ("down\n");
+	exit (0);
+}
 
 void    interrupt_program(int sig)
 {

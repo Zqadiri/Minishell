@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/30 18:56:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/05/31 12:25:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-
 
 int	init_term(t_index *m)
 {
@@ -37,7 +35,7 @@ int	init_term(t_index *m)
 		ft_putendl_fd("database does not contain any information for this type of terminal", 2);
 		return (-1);
 	}
-	// get_str_cmd(m);
+	get_str_cmd(m);
 	return (ret);
 }
 
@@ -98,7 +96,6 @@ void	read_char(t_index *m)
 	read(0, m->buf, 1);
 	// printf("------>%d\n", m->buf[0]);
 	reset_term(m->old_attr);
-	
 }
 
 
@@ -120,7 +117,6 @@ t_lexer *history(void)
 {
 	t_index m;
 	t_lexer *l;
-	char	*line;
 	char	*tmp;
 
 	l = NULL;
@@ -133,43 +129,48 @@ t_lexer *history(void)
 	get_history_file(&m);
 	// check_signals(l);
 	init_term(&m);	
-	line = malloc(sizeof(char) * 2);
-	line[0] = '\0';
+	m.line = malloc(sizeof(char) * 2);
+	m.line[0] = '\0';
 	while (1)
 	{
 		read_char(&m);
-		if (m.buf[0] == 27)
+		if (m.buf[0] == 127)
+		{
+			if (l->bufsize != 0)
+			{
+				delete_char(&m);
+				l->bufsize--;
+				tmp = m.line;
+				m.line = ft_substr(m.line, 0, l->bufsize);
+				l->buffer = ft_strdup(m.line);
+				free (tmp);				
+			}
+			else
+				continue ;
+		}
+		else if (m.buf[0] == 27)
 		{
 			read_char(&m);
 			read_char(&m);
 			if (m.buf[0] == 65)
-			{
-				printf("inA");
-				exit (0);
-			}
+				move_up();
 			else if (m.buf[0] == 66)
-			{
-				printf("inB");		
-				exit (0);
-			}
+				move_down();
 		}
 		else if (m.buf[0] == '\n')
 		{
-			// printf ("H line : [%s]\n", line);
-			// write(fd, line, ft_strlen(line));
-			ft_putendl_fd(line, m.fd);
+			ft_putchar_fd('\n', 0);
+			ft_putendl_fd(m.line, m.fd);
 			break ;
 		}
 		else
 		{
-			tmp = line;
-			line = ft_strjoinchar(line, m.buf[0]);
-			l->buffer = ft_strdup(line);
-			l->bufsize = ft_strlen(line);
-			ft_putchar_fd(m.buf[0], 0);
-			// printf("|%s|\n", l->buffer);
+			tmp = m.line;
+			m.line = ft_strjoinchar(m.line, m.buf[0]);
+			l->buffer = ft_strdup(m.line);
+			l->bufsize = ft_strlen(m.line);
 			free (tmp);
-			// printf ("line : [%s]\n", line);
+			ft_putchar_fd(m.buf[0], 0);
 		}
 		// clean_term(&m);
 	}
