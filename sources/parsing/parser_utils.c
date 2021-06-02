@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/31 16:55:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/02 11:23:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ t_parser	*init_parser(t_lexer *l)
 
 void	parse_expected_token(t_parser *p, e_token_type type)
 {
+	printf("f:parse_expected_token\tcurr before = [%s]\n", p->curr_token->value);
 	if (p->curr_token->type == type)
 	{
 		p->prev_token = p->curr_token;
 		p->curr_token = get_next_token(p->lexer);
+		printf("f:parse_expected_token\tprev = [%s]\n", p->prev_token->value);
+		printf("f:parse_expected_token\tcurr = [%s]\n", p->curr_token->value);
 	}
 	else
 	{
@@ -76,7 +79,7 @@ void	syntax_error_pipe_semi(t_parser *p)
 		printf("minishell: syntax error near unexpected token `%s'\n",
 			p->prev_token->value);
 		exit(EXIT_FAILURE);
-	}	
+	}
 	if (p->prev_token->type == pip && p->curr_token->type == eof)
 	{
 		printf("minishell: syntax error near unexpected token `%s'\n",

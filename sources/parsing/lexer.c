@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/29 16:39:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/01 14:53:27 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ char	*envar_token(t_lexer *l)
 		return (NULL);
 	str = ft_strdup("");
 	readchar(l);
-	if (ft_isdigit(l->c))
+	if (ft_isdigit(l->c) || l->c == '?')
 	{
 		if (l->c == '0')
 			str = ft_strjoin(str, "minishell");
+		if (l->c == '?')
+			str = ft_strjoin(str, "$?");
 		readchar(l);
 		return (tokenize_text(l, str));
 	}
@@ -88,7 +90,6 @@ char *check_string(t_lexer *l, char *str, int i)
 			{
 				readchar(l);
 				str = ft_strjoinchar(str, l->c);
-				// readchar(l);
 			}
 		}
 	}
@@ -98,8 +99,10 @@ char *check_string(t_lexer *l, char *str, int i)
 		{
 			if (peek_char(l) == EOF)
 				no_quotes(l, '\\');
-			if (peek_char(l) == DOLLAR)
+			// if (peek_char(l) == DOLLAR)
+			else
 			{
+				printf("in\n");
 				readchar(l);
 				temp = str;
 				str = ft_strjoinchar(str, l->c);

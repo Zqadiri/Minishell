@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 19:12:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/01 14:54:52 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,18 @@ void	skip_space(t_lexer *l)
 {
 	if (!l || !l->buffer)
 		return ; //error
-	while (l->readpos < l->bufsize && (l->c == SPACE
+	while (l->readpos <= l->bufsize && (l->c == 32
 			|| l->c == '\t' || l->c == '\n'))
 		readchar(l);
+}
+
+t_token	*ret_str(t_lexer *l, char *s, int type)
+{
+	if (type == greater)
+		readchar(l);
+	if (type == great || type == pip || type == semi || type == greater)
+		readchar(l);
+	return (init_token(type, s));
 }
 
 t_token	*ret_char(t_lexer *l, char c, e_token_type type)
@@ -46,19 +55,9 @@ t_token	*ret_char(t_lexer *l, char c, e_token_type type)
 	char	*str;
 
 	str = malloc(sizeof(char) * 2);
+	if (!str)
+		return (NULL);
 	str[0] = c;
 	str[1] = '\0';
-	if (type == greater)
-		readchar(l);
-	readchar(l);
-	return (init_token(type, str));
-}
-
-t_token	*ret_str(t_lexer *l, char *s, int type)
-{
-	// printf("f:ret_str\t[%s]\n", s);
-	if (type == greater)
-		readchar(l);
-	readchar(l);
-	return (init_token(type, s));
+	return (ret_str(l, str, type));
 }
