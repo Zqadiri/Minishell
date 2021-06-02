@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/31 12:25:25 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/31 16:53:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,12 +153,19 @@ t_lexer *history(void)
 			read_char(&m);
 			read_char(&m);
 			if (m.buf[0] == 65)
-				move_up();
+			{
+				move_up(&m, l);
+				continue ;
+			}
 			else if (m.buf[0] == 66)
-				move_down();
+			{
+				move_down(&m, l);
+				continue ;
+			}
 		}
 		else if (m.buf[0] == '\n')
 		{
+			m.cursor =	len(m.history);
 			ft_putchar_fd('\n', 0);
 			ft_putendl_fd(m.line, m.fd);
 			break ;
@@ -166,6 +173,7 @@ t_lexer *history(void)
 		else
 		{
 			tmp = m.line;
+			// m.cursor =	len(m.history);
 			m.line = ft_strjoinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);
 			l->bufsize = ft_strlen(m.line);

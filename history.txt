@@ -55,19 +55,11 @@ echo ok ; ls > file | cat < file ; ls -la
 echo ok ; ls > file | cat < file ; ls -la > fileee
 echo ""
 echo "" ""
-echo a '' b '' c '' d\n 
-echo -n a "" b "" c "" d\n 
-echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
-echo ok > file1 ; cat file1
-echo ok > file1 ; cat file1
-echo >| ls
- echo > | ls
-echo <>file
-echo < > file
-echo $PWD; echo $PWD;
-cho ok ;  echi ok;
-echo ok ; echo ko;
-echook ; echo ko ;
-echo ok ;  echo ko ;
+echo test test ""
+make clean
+echo '\\'
+echo test test ""
+echo ok ; ls > file | cat < file ; ls -la > fileee
+1 2 ; 3 > 4 | 5 ; 6
+echo ok
+echo ok;echo test test ""

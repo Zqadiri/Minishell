@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/31 11:21:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/31 15:28:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ typedef struct s_tc_cmd
 
 	char *cmd_dm; // Enter delete mode
 	char *cmd_dc; // Delete character
-	char *cmd_de; // End delete mode
+	char *cmd_ed; // End delete mode
 	char *cmd_dl; // Delete line
 
 	char *cmd_ce; // Clear to end of line
 	char *cmd_le; // move cursor one left position
+
+	char *cmd_ch; // Indicates screen relative cursor motion
 }	t_tc_cmd;
 
 typedef struct s_index
@@ -100,7 +102,6 @@ char	*return_value(const char *s, int c);
 int     get_str_by_char(char *str, char c);
 void	modify_env(char *arg, char *key);
 
-
 /*
 ** Signals
 */
@@ -109,8 +110,6 @@ void	reset_term(struct termios *old_attr);
 int     check_signals();
 int     get_history_file(t_index *m);
 void	delete_char(t_index *m);
-void	move_up(void);
-void	move_down(void);
 int		get_str_cmd(t_index *m);
 
 #endif

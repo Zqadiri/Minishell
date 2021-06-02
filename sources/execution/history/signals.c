@@ -6,22 +6,37 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/31 12:25:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/05/31 19:42:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	array = NULL;
+}
 
 int     get_history_file(t_index *m)
 {
 	int i;
 	int counter;
 	char	*line;
+	char	*pfree;
 
 	i = 0;
 	counter = 0;
-	// if (m->history != NULL)
-	// 	ft_free(m->history);
+	// if (m->history)
+	// 	free_array(m->history);
 	line = malloc(sizeof(char) * 2);
 	line[0] = '\0';
 	m->buf = malloc(sizeof(char) * 2);
@@ -32,14 +47,12 @@ int     get_history_file(t_index *m)
 	{
 		if (m->buf[0] == '\n')
 			counter++;
-		line = ft_strjoinchar(line, m->buf[0]);	
+		pfree = line;
+		line = ft_strjoinchar(line, m->buf[0]);
+		free (pfree);
 	}
-	m->cursor = counter;
-	// printf("counter :[%d]\n", counter);
-	// printf("<|line: %s|>\n", line);
+	m->cursor = counter + 1;
 	m->history = ft_split(line, '\n');
-	// free(line);
-	// free(m->buf);
 	return (1);
 }
 
@@ -49,7 +62,7 @@ int	get_str_cmd(t_index *m)
 
 	m->tc_cmd.cmd_dm = tgetstr("dm", NULL);
 	m->tc_cmd.cmd_dl = tgetstr("dl", NULL);
-	m->tc_cmd.cmd_de = tgetstr("de", NULL);
+	m->tc_cmd.cmd_ed = tgetstr("ed", NULL);
 	m->tc_cmd.cmd_dc = tgetstr("dc", NULL);
 
 	/* INSERT */
@@ -63,6 +76,8 @@ int	get_str_cmd(t_index *m)
 	m->tc_cmd.cmd_ce = tgetstr("ce", NULL);
 	m->tc_cmd.cmd_le = tgetstr("le", NULL);
 
+	// m->tc_cmd.cmd_cm = tgetstr("cm", NULL);
+
 	return (1);
 }
 
@@ -73,28 +88,69 @@ int ft_putc(int c)
 
 void	delete_char(t_index *m)
 {
-	m->delete_cur++;
-	// printf ("--> cur [%d]\n", m->delete_cur);
-	// printf ("--> line [%d]\n", ft_strlen(m->line));
-	// printf ("--> line : %s\n", m->line);
 	m->tc_cmd.cmd_dm = tigetstr("smdc");
 	tputs(m->tc_cmd.cmd_dm, 1, ft_putc);
 	m->tc_cmd.cmd_le = tigetstr("cub1");
 	tputs(m->tc_cmd.cmd_le, 1, ft_putc);
 	m->tc_cmd.cmd_dc = tigetstr("dch1");
 	tputs(m->tc_cmd.cmd_dc, 1, ft_putc);
+	m->tc_cmd.cmd_ed = tigetstr("rmdc");
+	tputs(m->tc_cmd.cmd_ed, 1, ft_putc);
 }
 
-void	move_up(void)
-{
-	printf ("up\n");
-	exit (0);
+void	move_up(t_index *m, t_lexer *l)
+{	
+	char	*tmp;
+
+	m->tc_cmd.cmd_dm = tigetstr("smdc");
+	tputs(m->tc_cmd.cmd_dm, 1, ft_putc);
+	m->tc_cmd.cmd_dl = tigetstr("dl1");
+	tputs(m->tc_cmd.cmd_dl, 1, ft_putc);
+	m->tc_cmd.cmd_ed = tigetstr("rmdc");
+	tputs(m->tc_cmd.cmd_ed, 1, ft_putc);
+	if (m->cursor - 1 != 0)
+	{
+		m->cursor--;
+		ft_putstr_fd("minishell-3.2$ ", 0);
+		tmp = m->line;
+		m->line = ft_strdup(m->history[m->cursor]);
+		l->buffer = ft_strdup(m->line);
+		free (tmp);
+		ft_putstr_fd(m->history[m->cursor], 0);
+	}
+	else
+	{
+		ft_putstr_fd("minishell-3.2$ ", 0);
+		tmp = m->line;
+		m->line = ft_strdup(m->history[0]);
+		l->buffer = ft_strdup(m->line);
+		free (tmp);
+		ft_putstr_fd(m->history[0], 0);
+	}
 }
 
-void	move_down(void)
+void	move_down(t_index *m, t_lexer *l)
 {
-	printf ("down\n");
-	exit (0);
+	char	*tmp;
+
+	m->tc_cmd.cmd_dm = tigetstr("smdc");
+	tputs(m->tc_cmd.cmd_dm, 1, ft_putc);
+	m->tc_cmd.cmd_dl = tigetstr("dl1");
+	tputs(m->tc_cmd.cmd_dl, 1, ft_putc);
+	m->tc_cmd.cmd_ed = tigetstr("rmdc");
+	tputs(m->tc_cmd.cmd_ed, 1, ft_putc);
+	if (m->cursor + 1 < len(m->history))
+	{
+		m->cursor++;
+		ft_putstr_fd("minishell-3.2$ ", 0);
+		tmp = m->line;
+		m->line = ft_strdup(m->history[m->cursor]);
+		l->buffer = ft_strdup(m->line);
+		free (tmp);
+		ft_putstr_fd(m->history[m->cursor], 0);
+	}
+	else
+		ft_putstr_fd("minishell-3.2$ ", 0);
 }
 
 void    interrupt_program(int sig)
