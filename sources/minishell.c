@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/30 19:25:23 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/01 13:12:58 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(int argc, char **argv, char **env)
 	// 	exit(EXIT_FAILURE);
 	while(1)
 	{
-		ft_putstr_fd("\nminishell-3.2$ ", 0);
+		ft_putstr_fd("\nminishell-1.0$ ", 0);
 		// l = read_cmd();
 		l = history();
 		printf("\nl->buffer --%s--\n", l->buffer);
@@ -69,7 +69,7 @@ int main(int argc, char **argv, char **env)
 		}
 		p = init_parser(l);
 		ast = parse_compound(p);
-		// print_tree(ast);
+		// print_tree(ast);echo ok
 	}
 	//free before exit
 	// exit(EXIT_SUCCESS);
@@ -121,3 +121,12 @@ int main(int argc, char **argv, char **env)
 
 // ! switch cmd name to lowercase before cmp
 
+
+//? f:string_token  l-> = [;]
+//? f:tokenize_token         last char = [;]
+//? 00000f:tokenize_token   l->c = [;]
+//? f:tokenize_text str = []
+//? f:string_token  l-> = [;]
+//? f:tokenize_token         last char = [;]
+//? 00000f:tokenize_token   l->c = [;]
+//? f:tokenize_text str = []

@@ -109,3 +109,280 @@ echo |
 echo | 
 echo |
 eho |
+ech ok ; file < cat
+echo ok ; > file echo done | ls
+ehecho ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+	ast->pipecmd_size = 1;
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok ; > file echo done | ls
+echo ok;
+echo ok ; 
+echo ok;
+echo ok ; 
+cecho ok ;
+echo ok;
+echo ok;
+echo "$?"
+echo "$?'
+echo "$?"
+ echo ok : echo done > file | ls
+echo ok : decho dome > file | l
+echo "$_"
+echp ok  ;
+echo ok;
+echo ok ;
+echi ok;
+echo ok;
+echo ok;
+echoo ok;
+echo ok;
+echo ok;
+echo ok
+echo ok 
+echo ok 
+echo ok  
+echo ok
+echo ok 
+echo ok 
+echi ok    
+echo ok      
+
+ehho ok    
+echo ok   
+echo ok ;
+echo ok    
+echo     ok    
+echo "$user"
+echo    ok   
+echo     ok     
+echo   ok   
+echo   ok   
+echo   ok   
+echo    ok   
+echo    ok    
+echo   ok   
+echo ok;
+echo ok ;
+echo ok;
+echo ok;
+echo ok;
+echoo ok
+echo ok       
+echo     ok     
+echoo ok;
+echo ok   ;
+echoo ok;
+echoo ok;
+echo ok;
+echo ok;
+echo ok;
+eho ok;
+echo ko;
+echo ok;
+echo ok;
+echo ok ; 
+
+echo ok;
+echo ok;
+echo ok;
+echo ok;
+echo ok;
+echo ok; echo dome > file | sl
+echo ok;
+echo ok;
+echo ok;
+echo ok;
+.0                                                                                                    
+                                    
+........              
+echo ok;
+                              0
+                         0
+              p
+     echo    ok   
+       p
+          echo     
+         p
+              ;l,;,
+              e
+          2ubhj
+             ecdff
+                                  echo ok
+     o
+    e
+   e
+e             e
+                  t
+                                    echo                                  ok
+echo                       ok            
+..
+echo     ok
+echo      ok
+        eechoh   ok
+           e
+echo ok;
+             echo               ok      
+echo ok ;
+make fclear ;
+echo ok
+echo ok > file | ls ; cat file
+echo ok > ifle ; ls | cat > file
+echo ok     ;
+echo ok;
+echo ok |
+echo ok|
+echo ok|
+
+echo ok|
+echo ok|
+echo ok|
+echo ok|
+echo ok;
+echo ok > file | ls ; echo done
+echo ok > file ; ls | cat > file
+<file 
+echo ||
+echo plz > file < 
+cat | ls
+echo 
+ echo | ls
+cat | ls
+cat | cat | cat | cat < file
+echo ok hello world hi people
+echo $PWD
+echo $PWD ; echo $PWD ; 
+echo $USER; echo " " ; echo $USER
+echo \n
+echo "\n"
+r
+echo '\n'
+1 2 3 4 5 6
+ 1 2 3 ;    4 5 6
+1 2 3;4 5 6
+1 2 3 | 4 5 6
+echo
+1 2 3 | 4 5 6
+ecj
+1 2 3 | 45 6 
+1 2 3 | 4 5 6
+a b c ; d e f
+1 2 3
+a b c | d e f
+a b c | d e f
+a b c | d e f
+a b c | e f g
+a b c | d e f
+a b c | e f g
+a b c | d e f
+a b c | d e f
+a b c | e
+a b c | d e f
+a b c | e f 
+a b c | d e f
+a b c | d e f
+echo ok > file
+echo ok > file
+echo ok > file
+echo ok > file
+echho ok > file
+ech ok > file
+echo hello
+e/
+e\c\h\o
+e\\cho
+ech\\o
+ec
+ec'h'o
+e
+
+ech\\o
+
+ech\\o
+ech\\o
+make run 
+ech\\o
+ech\\o
+"ech\o"
+e\
+ech
+'ech\o'
+'ech\\o'
+echo " " " " " " " "l
+$?
+echo $?
+$?
+EchO bonjour\n 
+echo -n lalalala lalalalal alalalalal alalalala\
+echo hello
+sdfs sfdfsd fsdfds
+1 2 3 
+1 2 3 4 
+echo -n a "" b "" c "" d\
+echo -n a "" b "" c "" d\n 
+echo -nnnnnnnnnnnnnnnnnnnnn bonjour\n 
+echo > test'yo'"sticked" bonjour
+echo > test'yo'"sticked" bonjour
+echo > test'yo'"sticked" bonjour\n 
+echo > test'yo'"sticked" bonjour\n v
+echo "hello" hello
+echo 'hello' "hello" hello
+echo hello 'hello' "hello" hello
+echo >  hello 'hello' "hello" hello
+echo >  hfello 'hello' "hello" hello
+echo >  hfello 'hffello' "hfffello" hffffello
+hfello 'hffello' "hfffello" hffffello
+>  hfello 'hffello' "hfffello" hffffello
+echo >>  hfello 'hffello' "hfffello" hffffello
+echo >  hfello > 'hffello' "hfffello" hffffello
+echo bonjour  a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo "hh ; " ; echo
+echo "hh ; " l; echo
+echo "hh ; " ; echo
+ech\\o
+ech\\o
+ech\\o
+ech\\o
+ech\\o
+ech\\o
+ech\\o
+ech\\o
+ech\\
+ech\\o
+ech "\\"
+echo co'"c\"o"u'
+ec"ho" bon"jo\"u"r
+echo "\"
+echo\n
+echo bonjour\n 
+echo lalalala lalalalal alalalalal alalalala\n 
+echo lalalala                lalalalal      alalalalal alalalala\n
+echo Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas mole... 
+echo -n\n 
+echo -n\n 
+echo -m 
+echo -n"\n"
+echo -n bonjour\n 
+echo -n lalalala lalalalal alalalalal alalalala\n
+echo bonjour -n\n
+echo -n bonjour -n\n
+echo                     bonjour             je\n
+echo       -n            bonjour             je\n
+echo a '' b '' c '' d\n
+echo a "" b "" c "" d\n
+echo '' '' ''\n
+echo o'' '' ''o\n
+echo -n -n -n -n bonjour\n
+echo -nnnnnnnnnnnnnnnnnnnnn bonjour\n
+echo lol''
+echo lol '' lol "" $uU
+echo lol '' lol "" $USER lol
+export PATH='/bin:/usr/bin' Echo bonjour\n 

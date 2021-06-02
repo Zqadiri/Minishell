@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/30 19:49:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/01 13:35:57 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,23 @@ t_token	*check_token(t_parser *p, char **str)
 	// //? if the previous token is_redirection then the next token must be an id
 	// //* bash-3.2$ echo ok > ; echo ok
 	// //* bash: syntax error near unexpected token `;'
-	// printf("******f:check_token\t previous token [%s][%u]\n", p->prev_token->value, p->prev_token->type);
-	// printf("******f:check_token\t current token [%s][%u]\n", p->curr_token->value, p->curr_token->type);
-	// printf("**************************f:check_token\n");
+	printf("\n******f:check_token\t previous token [%s][%u]\n", p->prev_token->value, p->prev_token->type);
+	printf("******f:check_token\t current token [%s][%u]\n", p->curr_token->value, p->curr_token->type);
+	printf("**************************f:check_token\n\n");
 	syntax_error_pipe_semi(p);
 	if (is_redirection(p->prev_token))
+	{
 		parse_expected_token(p, id);
-	*str = ft_strjoin(*str, p->curr_token->value);
+		*str = ft_strjoin(*str, p->prev_token->value);
+		*str = ft_strjoin(*str, " ");
+		printf("\n\nf:check_token\t join token -> [%s]\n\n", p->curr_token->value);
+		return (p->prev_token);
+	}
+	else
+	{
+		*str = ft_strjoin(*str, p->curr_token->value);
+		*str = ft_strjoin(*str, " ");
+	}
 	// printf("----------------f:final result\tstr = [%s]\n", *str);
 	return (p->curr_token);
 }
@@ -108,8 +118,8 @@ t_ast	*parse_args(t_parser *p, char **str)
 		ast->args[ast->args_size] = malloc(sizeof(t_token));
 		ast->args[ast->args_size] = p->curr_token;
 		*str = ft_strjoin(*str, p->curr_token->value);
+		*str = ft_strjoin(*str, " ");
 	}
-	// ast->args_size += 1;
 	while (p->curr_token->type != eof)
 	{
 		ast->args_size += 1;
@@ -119,14 +129,20 @@ t_ast	*parse_args(t_parser *p, char **str)
 		if (p->curr_token->type == eof)
 			break ;
 		ast->args[ast->args_size] = check_token(p, str);
-		// ast->args_size += 1;
-		if (ast->args[ast->args_size - 1]->type == pip
-			|| ast->args[ast->args_size - 1]->type == semi)
+		// printf("f:parse_arg\t current_token = [%s][%u]\n", p->curr_token->value, p->curr_token->type);
+		// if (p->curr_token->type == pip || p->curr_token->type == semi)
+		// 	break;
+		printf("f:parse_arg\t current_token = [%s][%u]\n", ast->args[ast->args_size - 1]->value, ast->args[ast->args_size - 1]->type);
+		printf("f:parse_arg\t ast->size token = [%s][%u]\n", ast->args[ast->args_size]->value, ast->args[ast->args_size]->type);
+		if (ast->args[ast->args_size]->type == pip
+			|| ast->args[ast->args_size]->type == semi)
 			break;
 	}
 	syntax_error_pipe_semi(p);
+	if (ast->args[ast->args_size - 1]->type == pip)
+		printf("\n=========================================================pipe\n");
 	// ast->args_size -= 1;
-    printf("-------->f:parse_args\tsize = %d\n", ast->args_size);
+    // printf("-------->f:parse_args\tsize = %d\n", ast->args_size);
 	return (ast);
 }
 
@@ -138,19 +154,23 @@ t_ast	*parse_pipe(t_parser *p, char **str)
 	ast->pipecmd_values = (t_ast**)malloc(sizeof(t_ast*));
 	if (!ast->pipecmd_values)
 		return (NULL);
-	ast->pipecmd_size += 1;
+	ast->pipecmd_size = 1;
 	while (p->curr_token->type != eof)
 	{
-		// ast->pipecmd_values[ast->pipecmd_size - 1] = parse_cmd(p, str);
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(p, str);
-		ast->pipecmd_size += 1;
-		ast->pipecmd_values = realloc(ast->comp_values, ast->pipecmd_size
-			* sizeof(t_ast*));	
+		printf("\t\tf:parse_pipe\t cuurent token = [%s][%u]\n", p->curr_token->value, p->curr_token->type);
+		if (p->curr_token->type != eof && p->curr_token->type == pip)
+		{
+			ast->pipecmd_size += 1;
+			ast->pipecmd_values = realloc(ast->comp_values, ast->pipecmd_size
+				* sizeof(t_ast*));	
+		}
+		// printf("++++++++++f:parse_pipe\tsize = %d\n", ast->pipecmd_size);
 		if (p->curr_token->type == semi)
 			break;
 	}
-	ast->pipecmd_size -= 1;
-    printf("-------->f:parse_pipe\tsize = %d\n", ast->pipecmd_size);
+	printf("\n=========================================================semi\n");
+    // printf("-------->f:parse_pipe\tsize = %d\n", ast->pipecmd_size);
 	return (ast);
 }
 
@@ -173,13 +193,12 @@ t_ast	*parse_compound(t_parser *p)
 		ast->comp_size += 1;
 		ast->comp_values = realloc(ast->comp_values, ast->comp_size
 			* sizeof(t_ast*));
+		// printf("++++++++++f:parse_compound\tsize compound = [%d]\n", ast->comp_size);
 	}
 	ast->comp_size -= 1;
-    printf("-------->f:parse_compound\tsize = %d\n", ast->comp_size);
-
+    // printf("-------->f:parse_compound\tsize = %d\n", ast->comp_size);
 	// printf("previous token type-> [%s][%u]\n", p->prev_token->value, p->prev_token->type);
 	// printf("current token value-> [%s][%u]\n", p->curr_token->value, p->curr_token->type);
-
 	printf("----------------f:final result\tstr = [%s]\n", str);
 	return (ast);
 }
