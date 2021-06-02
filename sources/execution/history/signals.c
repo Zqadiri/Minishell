@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/02 14:58:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/02 17:38:56 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,12 @@ void	move_down(t_index *m, t_lexer *l)
 		ft_putstr_fd(m->history[m->cursor], 0);
 	}
 	else
+	{
 		ft_putstr_fd("minishell-1.0$ ", 0);
+		m->line = ft_strdup("\n");
+		l->buffer = ft_strdup(m->line);
+		l->bufsize = 0;
+	}
 }
 
 void    interrupt_program(int sig)

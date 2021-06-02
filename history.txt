@@ -72,4 +72,7 @@ echo ok
 echo oktest test
 ok ko
 echo ok ; echoo ok2
+echo ok ; echoo ok2
 echo oktest test
+echo '\\'
+echo ok ; ls > file | cat < file ; ls -la > fileee
