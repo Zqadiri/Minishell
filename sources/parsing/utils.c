@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/24 20:58:37 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/03 15:49:41 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoinchar(char *s, char c)
 	return (str);
 }
 
-int	no_quotes(t_lexer *l, char c)
+int	multi_lines(t_lexer *l, char c)
 {
 	// printf("f:no_quotes\tl->c = [%c]\n", l->c);
 	if (l->c == BSLASH)

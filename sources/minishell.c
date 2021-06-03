@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 21:37:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/03 19:52:24 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int main(int argc, char **argv, char **env)
 	// 	exit(EXIT_FAILURE);
 	while(1)
 	{
+		// ? set return value to $? = 0  //!pipeline
 		ft_putstr_fd("\nminishell-1.0$ ", 0);
 		// l = read_cmd();
 		l = history();
@@ -71,7 +72,10 @@ int main(int argc, char **argv, char **env)
 		}
 		p = init_parser(l);
 		ast = parse_compound(p);
-		// visitor(ast);
+		// ? set exit status  $? = 258 (syntax error)
+		// if (!ast)
+			// $? = 258
+		visitor(ast);
 	}
 	//free before exit
 	// exit(EXIT_SUCCESS);

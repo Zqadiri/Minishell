@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 18:45:20 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/03 19:46:48 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ typedef struct s_parser
 	t_token *prev_token;
 }				t_parser;
 
+typedef struct		s_redir
+{
+	e_token_type	type;
+	char			*filename;
+}					t_redir;
+
 typedef enum t_ast_type
 {
 	compound,
 	pipe_ast,
-	// //cmd_ast,
 	arg_ast
 }			e_ast_type;
 
@@ -43,11 +48,9 @@ typedef struct s_ast
 	//AST_PIPE
 	struct s_ast **pipecmd_values;
 	int pipecmd_size;
-	// //AST_CMD
-	// struct s_ast **simplecmd_values;
-	// int simplecmd_size;
 	//AST_ARG
 	t_token **args;
+	t_redir **redir;
 	int args_size;
 }				t_ast;
 
@@ -71,6 +74,7 @@ t_token		*check_token(t_parser *p, char **str);
 /*
 ** ast.c
 */
-void visitor(t_ast *ast);
+t_ast		*init_ast(e_ast_type type);
+void		visitor(t_ast *ast);
 
 #endif

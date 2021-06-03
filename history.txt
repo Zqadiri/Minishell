@@ -76,3 +76,84 @@ echo ok ; echoo ok2
 echo oktest test
 echo '\\'
 echo ok ; ls > file | cat < file ; ls -la > fileee
+echo ok ; ls > file | cat < file;echo ok ; ls > file | cat < file;
+echo ok ; ls > file | cat < file;
+echo ok ; ls > file | cat < file;
+
+
+echo ok ; ls > file | cat < file;
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+export BONJOURJESUIS=a;
+echo $key
+export A='' export\n
+echo bonjour > test\n
+>> test'sticked' echo bonjour\n 
+echo > test"sticked" bonjour\n
+ echo >> test"sticked" bonjour\n 
+echo >> test"sticked" bonjour\n
+echo > test"sticked" bonjour\n 
+echo > test"sticked" bonjour\n 
+echo > test"sticked" bonjour\n 
+
+
+echo > test"sticked" bonjour\n
+echo > test'yo'"sticked" bonjour\n 
+echo ok > 
+echo ok >
+echo ok >
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+echo ok ; echo done > file | cat file
+abc def ; ghi jkl > mnl | opq rst
+echo ok ; echo done > file | cat file
+abc def ; ghi jkl > mnl | opq rst
+abc def ; ghi jkl > mnl | opq rst
+echo bonjour > test\n 
+echo bonjour > test\n
+echo > test bonjour\n
+> test echo bonjour\n
+echo bonjour >> test'sticked'\n
+> test'sticked' echo bonjour\n 
+> test'sticked' echo bonjour\n
+echo bonjour > test\n
+> test echo bonjour\n
+echo bonjour >> test\n
+echo >> test bonjour\n
+abc def ; ghi jkl > mnl | opq rst
+echo > test bonjour\n
+echo > test bonjour\n
+echo > test bonjour\n
+echo > test bonjour\n
+echo > test bonjour\n
+	printf("f:check_token token [%s][%u]\n", p->curr_token->value, p->curr_token->type);
+echo > test bonjour\n
+echo > test bonjour\n
+echo > test bonjour\n
+echo > test bonjour\n
+> test echo bonjour\n
+echo bonjour >> test\n
+echo >> test bonjour\n
+>> test echo bonjour\n
+echo bonjour > test\n
+echo > test'sticked' bonjour\n
+> test'sticked' echo bonjour\n
+echo bonjour >> test'sticked'\n
+echo > test'yo'"sticked" bonjour\n
+echo bonjour > test > je > suis\n
+echi ok >
+echo ok >
+echo ok > 
+echo ok > 
+echo > test'sticked' bonjour\n   
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+ >\n
+echo $hi
+$USER
+$1USER
+echo $?

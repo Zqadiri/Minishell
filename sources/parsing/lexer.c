@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/01 14:53:27 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/03 15:50:20 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char *check_string(t_lexer *l, char *str, int i)
 		if (l->c == BSLASH)
 		{
 			if (peek_char(l) == EOF)
-				no_quotes(l, '\\');
+				multi_lines(l, '\\');
 			// if (peek_char(l) == DOLLAR)
 			else
 			{

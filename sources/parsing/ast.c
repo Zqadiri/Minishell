@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 21:34:22 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/03 15:51:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ t_ast	*init_ast(e_ast_type type)
 	//AST_PIPE
 	ast->pipecmd_values = (void*) 0;
 	ast->pipecmd_size = 0;
-	// //AST_CMD
-	// ast->simplecmd_values = (void*) 0;
-	// ast->simplecmd_size = 0;
 	//AST_ARG
 	ast->args = 0;
 	ast->args_size = 0;
