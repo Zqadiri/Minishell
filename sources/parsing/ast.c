@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 12:06:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 17:03:33 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,59 @@ void visitor(t_ast *ast)
 	}
 }
 
+t_ast	*free_tree(t_ast *ast)
+{
+	int i, j, k;
+
+	if (ast->type == compound)
+	{
+		i = -1;
+		while (++i < ast->comp_size)
+		{
+			if (ast->comp_values[i])
+				free_tree(ast->comp_values[i]);
+		}
+		if (ast->comp_values)
+		{
+			free(ast->comp_values);
+			ast->comp_values = NULL;
+		}
+	}
+	if (ast->type == pipe_ast)
+	{
+		j = -1;
+		while (++j < ast->pipecmd_size)
+		{
+			if (ast->pipecmd_values[j])
+				free_tree(ast->pipecmd_values[j]);
+		}
+		if (ast->pipecmd_values)
+		{
+			free(ast->pipecmd_values);
+			ast->pipecmd_values = NULL;
+		}
+	}
+	if (ast->type == arg_ast)
+	{
+		k = -1;
+		while (++k < ast->args_size)
+		{
+			if (ast->args[k]->value)
+			{
+				free(ast->args[k]->value);
+				ast->args[k]->value = NULL;
+			}
+			if (ast->args[k])
+			{
+				free(ast->args[k]);
+				ast->args[k] = NULL;
+			}
+		}
+		if (ast->args)
+		{
+			free(ast->args);
+			ast->args = NULL;
+		}
+	}
+	return (NULL);
+}

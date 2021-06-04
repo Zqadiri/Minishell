@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 12:00:40 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 20:09:52 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*tokenize_text(t_lexer *l, char *s)
 {
 	char	*str;
 	char	*temp;
+	char	*p;
 
 	if (!s)
 		str = ft_strdup("");
@@ -27,7 +28,10 @@ char	*tokenize_text(t_lexer *l, char *s)
 		while (l->c == 32 && l->c != EOF)
 			readchar(l);
 		if (l->c == BSLASH || l->c == DOLLAR)
-			str = check_string(l, str, 2);
+		{
+			p = check_string(l, str, 2);
+			str = ft_strjoin(str, p);
+		}
 		else if (l->c == EOF)
 		{
 			free(temp);
@@ -37,8 +41,8 @@ char	*tokenize_text(t_lexer *l, char *s)
 		{
 			str = ft_strjoinchar(str, l->c);
 			readchar(l);
-			free(temp);
 		}
+		free(temp);
 	}
 	// if (!ft_strcmp(str, " "))
 	// 	return (NULL);
@@ -116,6 +120,7 @@ t_token	*string_token(t_lexer *l)
 			if (!s && l->multi_line == 1)
 				return (NULL);
 			str = ft_strjoin(str, s);
+			free(s);
 		}
 		else if (l->c == SQUOTE)
 		{
@@ -123,9 +128,14 @@ t_token	*string_token(t_lexer *l)
 			if (!s && l->multi_line == 1)
 				return (NULL);
 			str = ft_strjoin(str, s);
+			free(s);
 		}
 		else
-			str = ft_strjoin(str, tokenize_text(l, NULL));
+		{
+			s = tokenize_text(l, NULL);
+			str = ft_strjoin(str, s);
+			free(s);
+		}
 		free(temp);
 		if (l->c == 32)
 			return (ret_str(l, str, id));

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 19:42:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 19:36:19 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_parser	*init_parser(t_lexer *l)
 		// free before exit
 		return (NULL);
 	}
-	//free p
 	return (p);
 }
 

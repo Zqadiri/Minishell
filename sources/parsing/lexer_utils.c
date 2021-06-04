@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/01 14:54:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 19:24:08 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	peek_char(t_lexer *l)
 void	skip_space(t_lexer *l)
 {
 	if (!l || !l->buffer)
-		return ; //error
+		return ;
 	while (l->readpos <= l->bufsize && (l->c == 32
 			|| l->c == '\t' || l->c == '\n'))
 		readchar(l);

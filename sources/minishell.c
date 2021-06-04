@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 12:06:37 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 19:30:21 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int main(int argc, char **argv, char **env)
 		ft_putstr_fd("\nminishell-1.0$ ", 0);
 		// l = read_cmd();
 		l = history();
-		printf("\nl->buffer --%s--\n", l->buffer);
-		printf("l->bufsize --->|%d|\n", l->bufsize);
+		// printf("\nl->buffer --%s--\n", l->buffer);
+		// printf("l->bufsize --->|%d|\n", l->bufsize);
 		if(!l->buffer)
 			continue;
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
@@ -72,10 +72,13 @@ int main(int argc, char **argv, char **env)
 		}
 		p = init_parser(l);
 		ast = parse_compound(p);
+			
 		// ? set exit status  $? = 258 (syntax error)
 		// if (!ast)
 			// $? = 258
 		visitor(ast);
+		free_tree(ast);
+		// system("leaks minishell");
 	}
 	//free before exit
 	// exit(EXIT_SUCCESS);
@@ -136,3 +139,9 @@ int main(int argc, char **argv, char **env)
 //? f:tokenize_token         last char = [;]
 //? 00000f:tokenize_token   l->c = [;]
 //? f:tokenize_text str = []
+
+
+// ! filename -> cmd or delim
+// ! previous -> current token
+// ? l->buffer = |echo ok > |
+// * semicolon at the end of line -> valid

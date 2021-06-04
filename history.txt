@@ -216,3 +216,96 @@ cat < doesntexist  > ; echo $?\n
 cat < doesntexist  > ; echo $?\n
 cat < doesntexist > > echo ok;
 cat < doesntexist ; echo ok
+export A='a' unset 'A='; echo $A\n
+echo a; echo b; echo c; echo d; echo e; echo f; echo g; echo h; echo i;echo j; echo k; echo l; echo m; echo ... 
+echo bonjour > test\n
+echo > test'sticked' bonjour\n
+export A='a' B='b' C='c' unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C\n
+export A='a' B='b' C='c' unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C\n
+unset 'AH@'=nop\n
+echo bonjour > test > je > suis\n 
+echo bonjour > test > je >
+export A======a; echo $A\n 
+export A======a; echo $A\n 
+echo >>> hello
+echo bonjour > test > je > suis\n
+echo bonjour > test ; je > suis\n
+
+echo $?
+echo bonjour >> test > je >> suis\n
+echo bonjour >> test > je >> suis\n
+echo bonjour >> test > je << suis\n
+
+
+
+
+echo
+cjdbaen;fjkd
+clkksdcls
+exit
+echo hello
+echo a; echo b; echo c; echo d; echo e; echo f; echo g; echo h; echo i;echo j; ech...
+echo ok
+echo ok
+echo hello
+echo ok
+echo heeloo
+echo heello
+echo ok
+echooo ok
+echo hello world > file ; ls | cat file
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n
+echo bonjour > test
+echo bonjour > test
+echo bonjour > file
+echo bonjour > test
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo ok > 
+echo ok >
+echo ok>
+echo ok >
+echo ok > 
+echo ok >
+echo bonjour >
+echo $a
+echo $a
+echo $a
+echo $USER
+
+echo $a
+echo $USER
+echo $PWD; echo $PWD;
+echo $PWD; echo $PWD;
+echo $PWD; echo $PWD;
+echo $PWD; echo $PWD;
+echo $PWD; echo $PWD;
+echo $PWD; echo $PWD;
+check_string(l, str, 2)
+echo $a
