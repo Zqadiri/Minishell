@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 15:51:22 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 12:06:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,37 @@ void visitor(t_ast *ast)
 {
 	int i, j, k;
 
+	if (!ast)
+		return ;
 	if (ast->type == compound)
 	{
 		i = -1;
+		printf("f:visitor compound size = [%d]\n",ast->comp_size);
 		while (++i < ast->comp_size)
+		{
 			visitor(ast->comp_values[i]);
+			if (ast->comp_size >= 2)
+				printf("f:visitor\ttoken -> [;][semi]\n");
+		}
 	}
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
+		printf("f:visitor pipe size = [%d]\n",ast->pipecmd_size);
 		while (++j < ast->pipecmd_size)
+		{
 			visitor(ast->pipecmd_values[j]);
-			
+			if (ast->pipecmd_size >= 2)
+				printf("f:visitor\ttoken -> [|][pipe]\n");
+		}
 	}
 	if (ast->type == arg_ast)
 	{
 		k = -1;
+		printf("f:visitor args size = [%d]\n",ast->args_size);
 		while (++k < ast->args_size)
 			printf("f:visitor\ttoken -> [%s][%u]\n", ast->args[k]->value,
 				ast->args[k]->type);
 	}
 }
+

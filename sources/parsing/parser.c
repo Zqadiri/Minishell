@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 19:38:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 12:08:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ t_ast	*parse_compound(t_parser *p)
 			* sizeof(t_ast*));
 	}
 	ast->comp_size -= 1;
-	printf("----------------f:final result\tstr = [%s]\n", str);
+	// printf("----------------f:final result\tstr = [%s]\n", str);
 	return (ast);
 }

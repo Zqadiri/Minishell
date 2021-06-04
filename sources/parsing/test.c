@@ -344,7 +344,7 @@
 // * echo $?\n                                                                                                       
 // * echo; echo $?\n                                                                                                 
 // * notfound; echo $?\n                                                                                             
-// * cat < doesntexist; echo $?\n                                                                                    
+// * cat < doesntexist ; echo $?\n                                                                                    
 // * SETUP echo bonjour > noperm; chmod 000 noperm cat < noperm; echo $?\n                                         
 // * echo\n                                                                                                          
 // * notfound\n                                                                                                      

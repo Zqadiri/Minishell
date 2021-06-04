@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 15:49:41 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 11:56:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,31 @@ char	*ft_strjoinchar(char *s, char c)
 
 int	multi_lines(t_lexer *l, char c)
 {
-	// printf("f:no_quotes\tl->c = [%c]\n", l->c);
 	if (l->c == BSLASH)
 	{
 		printf("minishell: syntax error multiple lines\n");
-		//free + exit
-		exit (1);
-		// l->status = -1;
-		// return ;
+		l->multi_line = 1;
+		return (0);
 	}	
 	if (l->c == EOF)
 	{
 		printf("minishell: syntax error expected %c\n", c);
-		//free + exit
-		exit (1);
+		l->multi_line = 1;
+		return (0);
+	}
+	return (1);
+}
+
+
+int	is_valid_id(char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i] != '\0')
+	{
+		if (!ft_isalpha(str[i]) && str[i] == '_')
+			return (0);
 	}
 	return (1);
 }

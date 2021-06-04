@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 15:50:20 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 11:30:30 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ char *check_string(t_lexer *l, char *str, int i)
 			// if (peek_char(l) == DOLLAR)
 			else
 			{
-				printf("in\n");
 				readchar(l);
 				temp = str;
 				str = ft_strjoinchar(str, l->c);

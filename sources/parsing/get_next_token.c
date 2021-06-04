@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 19:40:42 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 12:00:40 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char	*tokenize_dquoted_text(t_lexer *l)
 
 	readchar(l);
 	if (l->c == EOF)
-		multi_lines(l, DQUOTE);
+		if (!multi_lines(l, DQUOTE))
+			return (NULL);
 	str = ft_strdup("");
 	while (l->c != DQUOTE && l->c != EOF)
 	{
@@ -67,7 +68,8 @@ char	*tokenize_dquoted_text(t_lexer *l)
 		}
 		free(temp);
 	}
-	multi_lines(l, DQUOTE);
+	if (!multi_lines(l, DQUOTE))
+		return (NULL);
 	readchar(l);
 	return (str);
 }
@@ -91,7 +93,8 @@ char	*tokenize_squoted_text(t_lexer *l)
 	if (l->c == SQUOTE)
 		s += 1;
 	if (l->c == EOF && s == 0)
-		multi_lines(l, SQUOTE);
+		if (!multi_lines(l, SQUOTE))
+			return (NULL);
 	readchar(l);
 	return (str);
 }
@@ -100,17 +103,27 @@ t_token	*string_token(t_lexer *l)
 {
 	char	*str;
 	char	*temp;
+	char	*s;
 
 	str = ft_strdup("");
 	while (l->curpos <= l->bufsize && l->c != PIPE && l->c != SEMICOLON
 			&& l->c != GREAT && l->c != LESS && l->c != EOF)
 	{
-		
 		temp = str;
 		if (l->c == DQUOTE)
-			str = ft_strjoin(str, tokenize_dquoted_text(l));
+		{
+			s = tokenize_dquoted_text(l);
+			if (!s && l->multi_line == 1)
+				return (NULL);
+			str = ft_strjoin(str, s);
+		}
 		else if (l->c == SQUOTE)
-			str = ft_strjoin(str, tokenize_squoted_text(l));
+		{
+			s = tokenize_squoted_text(l);
+			if (!s && l->multi_line == 1)
+				return (NULL);
+			str = ft_strjoin(str, s);
+		}
 		else
 			str = ft_strjoin(str, tokenize_text(l, NULL));
 		free(temp);

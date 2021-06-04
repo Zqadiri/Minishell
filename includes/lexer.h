@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 15:47:42 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 11:52:45 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ typedef enum t_token_type
 
 typedef struct s_lexer
 {   
-	char *buffer;       // the input text
-	int bufsize;        // size of the input text
-	int curpos;         // absolute char position in source
-	int readpos;        // after current pos
-	char c;             // current char under examination
+	char	*buffer;       // the input text
+	int		bufsize;        // size of the input text
+	int		curpos;         // absolute char position in source
+	int		readpos;        // after current pos
+	char	c;             // current char under examination
+	int		multi_line;    // is true --> multiple_lines
 }               t_lexer;
 
 typedef struct s_token
@@ -88,5 +89,6 @@ t_token	*ret_str(t_lexer *l, char *s, int type);
 int		ftstrcmp(char *s1, char *s2);
 char	*ft_strjoinchar(char *s, char c);
 int		multi_lines(t_lexer *l, char c);
+int		is_valid_id(char *str);
 
 #endif
