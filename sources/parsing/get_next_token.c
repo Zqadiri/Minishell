@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 20:09:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 20:38:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*tokenize_text(t_lexer *l, char *s)
 {
 	char	*str;
 	char	*temp;
-	char	*p;
 
 	if (!s)
 		str = ft_strdup("");
@@ -28,10 +27,7 @@ char	*tokenize_text(t_lexer *l, char *s)
 		while (l->c == 32 && l->c != EOF)
 			readchar(l);
 		if (l->c == BSLASH || l->c == DOLLAR)
-		{
-			p = check_string(l, str, 2);
-			str = ft_strjoin(str, p);
-		}
+			str = ft_strjoin(str, check_string(l, str, 2));
 		else if (l->c == EOF)
 		{
 			free(temp);
@@ -43,6 +39,7 @@ char	*tokenize_text(t_lexer *l, char *s)
 			readchar(l);
 		}
 		free(temp);
+		printf("f:tokenize_text str = [%s]\n", str);
 	}
 	// if (!ft_strcmp(str, " "))
 	// 	return (NULL);
@@ -131,11 +128,8 @@ t_token	*string_token(t_lexer *l)
 			free(s);
 		}
 		else
-		{
-			s = tokenize_text(l, NULL);
-			str = ft_strjoin(str, s);
-			free(s);
-		}
+			str = ft_strjoin(str, tokenize_text(l, NULL));
+		printf("f:string_token str = [%s]\n", str);
 		free(temp);
 		if (l->c == 32)
 			return (ret_str(l, str, id));

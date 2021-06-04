@@ -309,3 +309,32 @@ echo $PWD; echo $PWD;
 echo $PWD; echo $PWD;
 check_string(l, str, 2)
 echo $a
+echo $PWD;
+echo $a
+echo $USER
+echo $a
+echo $a
+echo $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n 
+export A='a' unset A; echo $A\n 
+echo ok >
+echo $USER
+echo $a
+echo $PWD; echo $PWD;
+echo $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n 
+export A='a' unset A; echo $A\n 
+export a='daafd' unset a; echo $a\n
+export A='a' unset A; echo $A\n 
+export A='a' unset A; echo $a\n
+export A='a' unset A; echo $a
+echo a; echo b; echo c; echo d; echo e; echo f; echo g; echo h; echo i;echo j; ech...
+export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C\n
+export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $a$b$c\n
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+>> test echo > je bonjour > suis\n
+>> test echo > je bonjour > suis\n
+check_string(l, str, 2);
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+>> test echo > je bonjour > suis\n 
+echo > test'sticked' bonjour\n

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 19:36:19 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 20:33:19 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_parser	*init_parser(t_lexer *l)
 
 int	parse_expected_token(t_parser *p, e_token_type type)
 {
-	printf("f:parse_expected_token\tcurr before = [%s][%u]\n", p->curr_token->value, p->curr_token->type);
 	if (p->curr_token->type == type)
 	{
 		// p->prev_token = p->curr_token;
