@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 20:10:43 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/04 20:59:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*envar_token(t_lexer *l)
 
 char *check_string(t_lexer *l, char *str, int i)
 {
-	char *temp;
+	// char *temp;
 
 	if (i == 1)
 	{
@@ -90,10 +90,8 @@ char *check_string(t_lexer *l, char *str, int i)
 			if (peek_char(l) == DQUOTE || peek_char(l) == DOLLAR
 				|| peek_char(l) == BSLASH)
 			{
-				// temp = str;
 				readchar(l);
 				str = ft_strjoinchar(str, l->c);
-				// free(temp);
 			}
 		}
 	}
@@ -107,16 +105,12 @@ char *check_string(t_lexer *l, char *str, int i)
 			{
 				readchar(l);
 				str = ft_strjoinchar(str, l->c);
-			}	
+			}
 			readchar(l);
 			return (str);
 		}
 		if (l->c == DOLLAR)
-		{
-			temp = str;
 			str = ft_strjoin(str, envar_token(l));
-			// free(temp);
-		}
 	}
 	return (str);
 }
