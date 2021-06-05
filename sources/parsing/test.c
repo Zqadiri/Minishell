@@ -1,4 +1,3 @@
-
 // todo
 // * echo $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n                                                   
 // * echo $PWD; echo $PWD; cd ..; pwd; echo $PWD; echo $PWD\n                                                  
@@ -61,7 +60,7 @@
 // * eCHo bonjour\n                                                                                                  
 // * EcHo bonjour\n                                                                                                  
 // * eChO bonjour\n                                                                                                  
-// * echo -n -n -n -n bonjour\n                                                                                      
+// * echo -n -n -n -n bonjour\n
 // * echo -nnnnnnnnnnnnnnnnnnnnn bonjour\n                                                                           
 // * echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n                                                            
 // * Cd .\n                                                                                                          
@@ -704,4 +703,4 @@
 // * \n                                                                                                              
 // *                                           \n                                                                    
 // * \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n                                                                    
-// *             \t\t\t           \t\t\t       \n                                                                    
+// *             \t\t\t           \t\t\t       \n

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 10:02:53 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/10/23 19:36:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/05 16:03:11 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t			ft_strln(const char *str)
+size_t	ft_strln(const char *str)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -22,7 +22,7 @@ size_t			ft_strln(const char *str)
 	return (i);
 }
 
-char			*ft_substri(char const *s, unsigned int start, size_t len)
+char	*ft_substri(char const *s, unsigned int start, size_t len)
 {
 	size_t		i;
 	char		*p;
@@ -45,7 +45,7 @@ char			*ft_substri(char const *s, unsigned int start, size_t len)
 	return (p);
 }
 
-char			*ft_strchar(char *save, char c)
+char	*ft_strchar(char *save, char c)
 {
 	size_t	i;
 
@@ -61,7 +61,7 @@ char			*ft_strchar(char *save, char c)
 
 unsigned int	ft_strlength(char *save)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (save[i] != '\n')
@@ -69,7 +69,7 @@ unsigned int	ft_strlength(char *save)
 	return (i);
 }
 
-int				free_ptr(char **ptr, char **buff, int f, int r)
+int	free_ptr(char **ptr, char **buff, int f, int r)
 {
 	free(*ptr);
 	*ptr = 0;

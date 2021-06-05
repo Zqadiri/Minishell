@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 20:47:07 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 17:14:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef enum t_token_type
 	greater,
 	less,
 	id,
-	illegal,
 	eof
 }			e_token_type;
 
@@ -59,7 +58,6 @@ typedef struct s_token
 	e_token_type type;
 }               t_token;
 
-
 //get_next_token.c
 
 t_token	*get_next_token(t_lexer *l);
@@ -70,9 +68,9 @@ char	*tokenize_text(t_lexer *l, char *s);
 
 //lexer.c
 
-t_token	*init_token(e_token_type type, char *s);
 t_lexer *init_lexer(char *line);
 int     valid_envar(char c);
+char	*invalid_envar(t_lexer *l, char *str);
 char    *envar_token(t_lexer *l);
 char	*check_string(t_lexer *l, char *str, int i);
 
@@ -86,6 +84,7 @@ t_token	*ret_str(t_lexer *l, char *s, int type);
 
 //utils.c
 
+t_token	*init_token(e_token_type type, char *s);
 int		ftstrcmp(char *s1, char *s2);
 char	*ft_strjoinchar(char *s, char c);
 int		multi_lines(t_lexer *l, char c);

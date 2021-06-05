@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 17:03:18 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 17:01:41 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_parser	*init_parser(t_lexer *l);
 int			parse_expected_token(t_parser *p, e_token_type type);
 int			syntax_error_pipe_semi(t_parser *p);
 int			is_redirection(t_token *t);
+void		free_parser(t_parser *p);
 
 /*
 ** parser.c
@@ -77,4 +78,7 @@ t_token		*check_token(t_parser *p);
 t_ast		*init_ast(e_ast_type type);
 void		visitor(t_ast *ast);
 t_ast		*free_tree(t_ast *ast);
+t_ast		*free_pip_args(t_ast *ast);
+void		is_notempty(void *ptr);
+
 #endif

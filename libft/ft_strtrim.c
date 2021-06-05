@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 23:26:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2019/10/25 02:08:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/05 16:01:56 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	cherch(const char *set, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (set[i])
@@ -26,7 +26,7 @@ static int	cherch(const char *set, int c)
 	return (0);
 }
 
-char		*ft_strtrim(char const *s, char const *set)
+char	*ft_strtrim(char const *s, char const *set)
 {
 	int		debut;
 	int		fin;

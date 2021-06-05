@@ -6,36 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 16:57:21 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 14:26:35 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// t_ast	*tree_allocation(t_ast *ast, t_parser *p, int i)
-// {
-// 	if (i == 1)
-// 	{
-// 		ast = init_ast(arg_ast);
-// 		ast->args = (t_token**)malloc(sizeof(t_token*));
-// 		if (!ast->args)
-// 			return (NULL);
-// 		if (ast->args_size == 0)
-// 		{
-// 			ast->args[ast->args_size] = malloc(sizeof(t_token));
-// 			ast->args[ast->args_size] = p->curr_token;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		ast = init_ast(pipe_ast);
-// 		ast->pipecmd_values = (t_ast**)malloc(sizeof(t_ast*));
-// 		if (!ast->pipecmd_values)
-// 			return (NULL);
-// 		ast->pipecmd_size = 1;
-// 	}
-// 	return (ast);
-// }
 
 t_token	*check_token(t_parser *p)
 {
@@ -53,7 +28,6 @@ t_ast	*parse_args(t_parser *p)
 {
 	t_ast	*ast;
 
-	// tree_allocation(ast, p, 1);
 	ast = init_ast(arg_ast);
 	ast->args = (t_token**)malloc(sizeof(t_token*));
 	if (!ast->args)
@@ -69,12 +43,11 @@ t_ast	*parse_args(t_parser *p)
 		ast->args = realloc(ast->args, (ast->args_size + 1) * sizeof(t_token));
 		p->prev_token = p->curr_token;
 		p->curr_token = get_next_token(p->lexer);
-		if (p->curr_token->type == eof)
-			break ;
 		ast->args[ast->args_size] = check_token(p);
 		if (!ast->args[ast->args_size])
 			return (NULL);
-		if (ast->args[ast->args_size]->type == pip
+		if (ast->args[ast->args_size]->type == eof
+			|| ast->args[ast->args_size]->type == pip
 			|| ast->args[ast->args_size]->type == semi)
 			break ;
 	}
@@ -87,8 +60,6 @@ t_ast	*parse_pipe(t_parser *p)
 {
 	t_ast	*ast;
 
-	// ast = NULL;
-	// tree_allocation(ast, p, 2);
 	ast = init_ast(pipe_ast);
 	ast->pipecmd_values = (t_ast**)malloc(sizeof(t_ast*));
 	if (!ast->pipecmd_values)

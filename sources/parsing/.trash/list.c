@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:40:10 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/23 19:12:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 16:17:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,21 @@ void push(t_cmdlist **l, t_token *cmd, int pipe)
 	}
 }
 
-// void print_cmd(t_cmdlist *l)
-// {
-// 	t_cmdlist *temp;
-// 	int i;
+void print_cmd(t_cmdlist *l)
+{
+	t_cmdlist *temp;
+	int i;
 
-// 	i = 0;
-// 	temp = l;
-// 	while(temp)
-// 	{
-// 		printf("pipe = %d\n", temp->pipe);
-// 		while(temp->tokens[i])
-// 		{
-// 			printf("token[%d]={type:%s, value:%s}\n", i, temp->tokens[i]->type, temp->tokens[i]->value);
-// 			i++;
-// 		}
-// 	}
-// 	printf("\n");
-// }
+	i = 0;
+	temp = l;
+	while(temp)
+	{
+		printf("pipe = %d\n", temp->pipe);
+		while(temp->tokens[i])
+		{
+			printf("token[%d]={type:%s, value:%s}\n", i, temp->tokens[i]->type, temp->tokens[i]->value);
+			i++;
+		}
+	}
+	printf("\n");
+}

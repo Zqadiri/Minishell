@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 15:50:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2019/10/24 23:30:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:54:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	slen(long n)
 	return (len);
 }
 
-char		*ft_itoa(int c)
+char	*ft_itoa(int c)
 {
 	char	*p;
 	int		len;

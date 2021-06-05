@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 21:16:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 16:15:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ char	*tokenize_text(t_lexer *l, char *s)
 			readchar(l);
 		}
 	}
-	// if (!ft_strcmp(str, " "))
-	// 	return (NULL);
 	return (str);
 }
 
@@ -106,7 +104,7 @@ t_token	*string_token(t_lexer *l)
 
 	str = ft_strdup("");
 	while (l->curpos <= l->bufsize && l->c != PIPE && l->c != SEMICOLON
-			&& l->c != GREAT && l->c != LESS && l->c != EOF)
+		&& l->c != GREAT && l->c != LESS && l->c != EOF)
 	{
 		temp = str;
 		if (l->c == DQUOTE)
@@ -157,5 +155,4 @@ t_token	*get_next_token(t_lexer *l)
 			return (string_token(l));
 	}
 	return (ret_char(l, l->c, eof));
-	// return (ret_str(l, "newline", eof));
 }

@@ -6,11 +6,23 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/04 11:56:26 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 17:13:55 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+t_token	*init_token(e_token_type type, char *s)
+{
+	t_token	*t;
+
+	t = malloc(sizeof(t_token));
+	if (!t)
+		return (NULL);
+	t->value = ft_strdup(s);
+	t->type = type;
+	return (t);
+}
 
 int	ftstrcmp(char *s1, char *s2)
 {
@@ -36,31 +48,26 @@ char	*ft_strjoinchar(char *s, char c)
 		str[i] = s[i];
 	str[i] = c;
 	str[i + 1] = '\0';
-	// free(s);
 	return (str);
 }
 
 int	multi_lines(t_lexer *l, char c)
 {
-	if (l->c == BSLASH)
+	if (l->c == BSLASH || l->c == EOF)
 	{
-		printf("minishell: syntax error multiple lines\n");
-		l->multi_line = 1;
-		return (0);
-	}	
-	if (l->c == EOF)
-	{
-		printf("minishell: syntax error expected %c\n", c);
+		if (l->c == BSLASH)
+			printf("minishell: syntax error multiple lines\n");
+		if (l->c == EOF)
+			printf("minishell: syntax error expected %c\n", c);
 		l->multi_line = 1;
 		return (0);
 	}
 	return (1);
 }
 
-
 int	is_valid_id(char *str)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (str[++i] != '\0')
