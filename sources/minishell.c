@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 16:33:41 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:43:45 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int main(int argc, char **argv, char **env)
 		ft_putstr_fd("\nminishell-1.0$ ", 0);
 		// l = read_cmd();
 		l = history();
-		// printf("\nl->buffer --%s--\n", l->buffer);
-		// printf("l->bufsize --->|%d|\n", l->bufsize);
+		printf("\nl->buffer --%s--\n", l->buffer);
+		printf("l->bufsize --->|%d|\n", l->bufsize);
 		if(!l->buffer)
 			continue;
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
@@ -79,7 +79,7 @@ int main(int argc, char **argv, char **env)
 		visitor(ast);
 		if (ast)
 			free_tree(ast);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	//free before exit
 	// exit(EXIT_SUCCESS);
