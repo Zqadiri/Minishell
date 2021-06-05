@@ -436,3 +436,13 @@ echo a ;; echo b\n
 ; ;\n
 echo a ;; echo b\n
 echo a ; ; echo b\n
+cd ; cd Desktop/Minishell
+export A=a B=b C=c; echo $A$B$C\n
+export 'AH@'=nop\n
+export TEST='A=a' export $TEST\n 
+; echo\n
+echo ; ; \n
+echo ; ; \n
+echo ; ; \n
+echo a ; ;\n
+echo a ; ; echo b\n 
