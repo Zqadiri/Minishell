@@ -6,13 +6,13 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 17:13:55 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:41:42 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_token	*init_token(e_token_type type, char *s)
+t_token	*init_token(t_token_type type, char *s)
 {
 	t_token	*t;
 

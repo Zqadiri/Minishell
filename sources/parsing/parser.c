@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 18:57:08 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:22:56 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_ast	*parse_args(t_parser *p)
 		ast->args[ast->args_size] = p->curr_token;
 		if (p->curr_token->type == pip || p->curr_token->type == semi)
 		{
-			printf("minishell: syntax error near  unexpected token '%s'\n",
+			printf("minishell: syntax error near unexpected token '%s'\n",
 				p->curr_token->value);
 			return (NULL);
 		}

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 17:15:30 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:25:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_parser	*init_parser(t_lexer *l)
 ** the order of tokens by checking the type of the next token.
 */
 
-int	parse_expected_token(t_parser *p, e_token_type type)
+int	parse_expected_token(t_parser *p, t_token_type type)
 {
 	if (p->curr_token->type == type)
 		return (1);

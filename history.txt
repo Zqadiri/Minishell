@@ -446,3 +446,9 @@ echo ; ; \n
 echo ; ; \n
 echo a ; ;\n
 echo a ; ; echo b\n 
+; >> a\n
+>> a ; a\n
+echo $_\n
+export A=a; echo $_\n
+echo ok ; ; ok
+echo ok

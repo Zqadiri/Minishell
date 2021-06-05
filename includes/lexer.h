@@ -6,32 +6,31 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 17:14:22 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:41:58 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
-#define LEXER_H
+# define LEXER_H
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include "../libft/libft.h"
+# include <stdlib.h>
+# include <string.h>
+# include <ctype.h>
+# include "../libft/libft.h"
 
-#define PIPE 124
-#define GREAT 62
-#define GREATER 63 //">>"
-#define LESS 60
-#define DQUOTE 34
-#define SQUOTE 39
-#define SEMICOLON 59
-#define SPACE 32
-#define DOLLAR 36
-#define BSLASH 92
-#define TILDE 126
+# define PIPE 124
+# define GREAT 62
+# define GREATER 63 //">>"
+# define LESS 60
+# define DQUOTE 34
+# define SQUOTE 39
+# define SEMICOLON 59
+# define SPACE 32
+# define DOLLAR 36
+# define BSLASH 92
+# define TILDE 126
 
-
-typedef enum t_token_type
+typedef enum e_token_type
 {
 	pip,
 	semi,
@@ -40,25 +39,36 @@ typedef enum t_token_type
 	less,
 	id,
 	eof
-}			e_token_type;
+}			t_token_type;
+
+/*
+** lexer->buffer		: the input text
+** lexer->bufsize		: size of the input text
+** lexer->curpos		: absolute char position in source
+** lexer->readpos		: after current pos
+** lexer->c				: current char under examination
+** lexer->multi_line	: is true --> multiple_lines
+*/
 
 typedef struct s_lexer
-{   
-	char	*buffer;       // the input text
-	int		bufsize;        // size of the input text
-	int		curpos;         // absolute char position in source
-	int		readpos;        // after current pos
-	char	c;             // current char under examination
-	int		multi_line;    // is true --> multiple_lines
-}               t_lexer;
+{
+	char	*buffer;
+	int		bufsize;
+	int		curpos;
+	int		readpos;
+	char	c;
+	int		multi_line;
+}				t_lexer;
 
 typedef struct s_token
 {
-	char *value;
-	e_token_type type;
-}               t_token;
+	char			*value;
+	t_token_type	type;
+}				t_token;
 
-//get_next_token.c
+/*
+** get_next_token.c
+*/
 
 t_token	*get_next_token(t_lexer *l);
 t_token	*string_token(t_lexer *l);
@@ -66,25 +76,31 @@ char	*tokenize_squoted_text(t_lexer *l);
 char	*tokenize_dquoted_text(t_lexer *l);
 char	*tokenize_text(t_lexer *l, char *s);
 
-//lexer.c
+/*
+** lexer.c
+*/
 
-t_lexer *init_lexer(char *line);
-int     valid_envar(char c);
+t_lexer	*init_lexer(char *line);
+int		valid_envar(char c);
 char	*invalid_envar(t_lexer *l, char *str);
-char    *envar_token(t_lexer *l);
+char	*envar_token(t_lexer *l);
 char	*check_string(t_lexer *l, char *str, int i);
 
-//lexer_utlis.c
+/*
+** lexer_utlis.c
+*/
 
 void	readchar(t_lexer *l);
-int     peek_char(t_lexer *l);
+int		peek_char(t_lexer *l);
 void	skip_space(t_lexer *l);
-t_token	*ret_char(t_lexer *l, char c, e_token_type type);
+t_token	*ret_char(t_lexer *l, char c, t_token_type type);
 t_token	*ret_str(t_lexer *l, char *s, int type);
 
-//utils.c
+/*
+** utils.c
+*/
 
-t_token	*init_token(e_token_type type, char *s);
+t_token	*init_token(t_token_type type, char *s);
 int		ftstrcmp(char *s1, char *s2);
 char	*ft_strjoinchar(char *s, char c);
 int		multi_lines(t_lexer *l, char c);

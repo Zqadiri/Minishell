@@ -6,13 +6,13 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 17:03:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:25:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_ast	*init_ast(e_ast_type type)
+t_ast	*init_ast(t_ast_type type)
 {
 	t_ast	*ast;
 
@@ -45,8 +45,7 @@ void	visitor(t_ast *ast)
 		{
 			visitor(ast->comp_values[i]);
 			if (ast->comp_size >= 2)
-				// printf("f:visitor\ttoken -> [;][semi]\n");
-				printf(";;;;;;;;;;;;;;\n");
+				printf("f:visitor\ttoken -> [;][semi]\n");
 		}
 	}
 	if (ast->type == pipe_ast)
@@ -57,8 +56,7 @@ void	visitor(t_ast *ast)
 		{
 			visitor(ast->pipecmd_values[j]);
 			if (ast->pipecmd_size >= 2)
-				// printf("f:visitor\ttoken -> [|][pipe]\n");
-				printf("||||||||||||||\n");
+				printf("f:visitor\ttoken -> [|][pipe]\n");
 		}
 	}
 	if (ast->type == arg_ast)

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 17:22:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:09:48 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 	return (init_token(type, s));
 }
 
-t_token	*ret_char(t_lexer *l, char c, e_token_type type)
+t_token	*ret_char(t_lexer *l, char c, t_token_type type)
 {
 	char	*str;
 
