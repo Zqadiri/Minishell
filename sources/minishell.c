@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/02 14:40:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/03 17:05:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// add new line 
+//* add new line 
 
 t_lexer	*read_cmd(void)
 {
@@ -47,8 +47,6 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv; 
 	(void)env;
-	// if (argc != 1)
-	// 	exit(EXIT_FAILURE);
 	while(1)
 	{
 		ft_putstr_fd("\nminishell-1.0$ ", 0);

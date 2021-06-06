@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/02 17:40:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/02 17:42:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,9 +165,6 @@ t_lexer *history(void)
 		}
 		else if (m.buf[0] == '\n')
 		{
-			printf ("[line : %s]\n", m.line);
-			printf ("[buffer : %s]\n", l->buffer);
-			printf ("[bufsize : %d]\n", l->bufsize);
 			m.cursor =	len(m.history);
 			ft_putchar_fd('\n', 0);
 			if (m.line[0] != '\n')
@@ -176,7 +173,6 @@ t_lexer *history(void)
 		}
 		else
 		{
-			printf ("out\n");
 			tmp = m.line;
 			m.line = ft_strjoinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);
@@ -184,7 +180,6 @@ t_lexer *history(void)
 			free (tmp);
 			ft_putchar_fd(m.buf[0], 0);
 		}
-		// clean_term(&m);
 	}
 	close(m.fd);
 	return (l);

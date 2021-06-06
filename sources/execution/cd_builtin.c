@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 10:43:52 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 19:12:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/02 17:45:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int    set_env_var(char *key, char *new_path)
 		return (0);
 	index = find_env(key);
 	if (index == -1)
-		return (1); // OLDPWD not set
+		return (1);
 	else
 	{
 		tmp = ft_strjoin(key, "=");
@@ -109,7 +109,6 @@ int change_dir(char *path)
 
 int cd_builtin(char **arg)
 {
-	printf ("start cd >"); 
 	char *home_path;
 
 	home_path = NULL;
