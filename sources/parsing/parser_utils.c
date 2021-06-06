@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 19:25:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:18:49 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,3 @@ int	is_redirection(t_token *t)
 	return (0);
 }
 
-void	free_parser(t_parser *p)
-{
-	if (p->lexer)
-	{
-		is_notempty(p->lexer->buffer);
-		free(p->lexer);
-		p->lexer = NULL;
-	}
-	if (p->prev_token)
-	{
-		is_notempty(p->prev_token->value);
-		free(p->prev_token);
-		p->prev_token = NULL;
-	}
-	if (p->curr_token)
-	{
-		is_notempty(p->curr_token->value);
-		free(p->curr_token);
-		p->curr_token = NULL;
-	}
-}

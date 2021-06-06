@@ -52,14 +52,14 @@
 // * echo -n a '' b '' c '' d\n                                                                                      
 // * echo -n a "" b "" c "" d\n                                                                                      
 // * echo '' '' ''\n                                                                                                 
-// * Echo bonjour\n                                                                                                  
-// * eCho bonjour\n                                                                                                  
-// * ecHo bonjour\n                                                                                                  
-// * echO bonjour\n                                                                                                  
-// * EchO bonjour\n                                                                                                  
-// * eCHo bonjour\n                                                                                                  
-// * EcHo bonjour\n                                                                                                  
-// * eChO bonjour\n                                                                                                  
+// * Echo bonjour\n 
+// * eCho bonjour\n 
+// * ecHo bonjour\n 
+// * echO bonjour\n 
+// * EchO bonjour\n 
+// * eCHo bonjour\n 
+// * EcHo bonjour\n 
+// * eChO bonjour\n 
 // * echo -n -n -n -n bonjour\n
 // * echo -nnnnnnnnnnnnnnnnnnnnn bonjour\n                                                                           
 // * echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n                                                            
@@ -417,25 +417,25 @@
 // * export SHLVL=' '\t\f\r 3'' echo $SHLVL\n                                                                     
 // * export SHLVL=' '3 '' echo $SHLVL\n                                                                           
 // * export SHLVL=' '3\t'' echo $SHLVL\n                                                                          
-// * export SHLVL=' '3\r'' echo $SHLVL\n                                                                          
-// * export SHLVL=' '3\t\f\r '' echo $SHLVL\n                                                                     
-// * export SHLVL=' '3     a'' echo $SHLVL\n                                                                      
-// * export SHLVL=' '3\t\t\ta'' echo $SHLVL\n                                                                     
-// * export SHLVL=' 0' echo $SHLVL\n                                                                              
-// * export SHLVL=' -0' echo $SHLVL\n                                                                             
-// * export SHLVL=' -1' echo $SHLVL\n                                                                             
-// * export SHLVL=' 255' echo $SHLVL\n                                                                            
-// * export SHLVL=' 256' echo $SHLVL\n                                                                            
-// * export SHLVL=' 2000000' echo $SHLVL\n                                                                        
-// * export SHLVL=' -2000000' echo $SHLVL\n                                                                       
-// * export SHLVL=' 2147483647' echo $SHLVL\n                                                                     
-// * export SHLVL=' -2147483648' echo $SHLVL\n                                                                    
-// * export SHLVL=' 2147483648' echo $SHLVL\n                                                                     
-// * export SHLVL=' -2147483649' echo $SHLVL\n                                                                    
-// * export SHLVL=' 3147483648' echo $SHLVL\n                                                                     
-// * export SHLVL=' -3147483649' echo $SHLVL\n                                                                    
-// * export SHLVL=' 4294967295' echo $SHLVL\n                                                                     
-// * export SHLVL=' 4294967296' echo $SHLVL\n                                                                     
+// * export SHLVL=' '3\r'' echo $SHLVL\n                              
+// * export SHLVL=' '3\t\f\r '' echo $SHLVL\n      
+// * export SHLVL=' '3     a'' echo $SHLVL\n       
+// * export SHLVL=' '3\t\t\ta'' echo $SHLVL\n      
+// * export SHLVL=' 0' echo $SHLVL\n               
+// * export SHLVL=' -0' echo $SHLVL\n              
+// * export SHLVL=' -1' echo $SHLVL\n              
+// * export SHLVL=' 255' echo $SHLVL\n             
+// * export SHLVL=' 256' echo $SHLVL\n             
+// * export SHLVL=' 2000000' echo $SHLVL\n         
+// * export SHLVL=' -2000000' echo $SHLVL\n        
+// * export SHLVL=' 2147483647' echo $SHLVL\n      
+// * export SHLVL=' -2147483648' echo $SHLVL\n     
+// * export SHLVL=' 2147483648' echo $SHLVL\n      
+// * export SHLVL=' -2147483649' echo $SHLVL\n     
+// * export SHLVL=' 3147483648' echo $SHLVL\n      
+// * export SHLVL=' -3147483649' echo $SHLVL\n     
+// * export SHLVL=' 4294967295' echo $SHLVL\n      
+// * export SHLVL=' 4294967296' echo $SHLVL\n      
 // * export SHLVL=' -9223372036854775808' echo $SHLVL\n                                                           
 // * export SHLVL=' 9223372036854775807' echo $SHLVL\n                                                            
 // * export SHLVL=' -9223372036854775809' echo $SHLVL\n                                                           

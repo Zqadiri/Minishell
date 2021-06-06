@@ -452,3 +452,13 @@ echo $_\n
 export A=a; echo $_\n
 echo ok ; ; ok
 echo ok
+ echo bonjour\n 
+echo ok 
+ec hook
+echo ok 
+echo ok ko
+echo $?
+echo $?
+echo echo $PWD;
+export a="    ls   -la    "
+echo ok

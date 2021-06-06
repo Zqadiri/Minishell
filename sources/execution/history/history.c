@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/04 11:53:21 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:09:39 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ t_lexer *history(void)
 			{
 				delete_char(&m);
 				l->bufsize--;
-				tmp = m.line;
+				tmp = l->buffer;
 				m.line = ft_substr(m.line, 0, l->bufsize);
 				l->buffer = ft_strdup(m.line);
 				free (tmp);				

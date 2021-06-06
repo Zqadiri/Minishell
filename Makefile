@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/06/05 16:17:34 by iidzim           ###   ########.fr        #
+#    Updated: 2021/06/06 21:14:19 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/parser_utils.c\
 					./sources/parsing/ast.c\
 					./sources/parsing/utils.c\
-					./sources/parsing/parser.c
+					./sources/parsing/parser.c\
+					./sources/parsing/free.c
 					
 					
 LIBFT_PATH 		= 	./libft
@@ -54,7 +55,7 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g
+				@$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g -fsanitize=address
 				
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}

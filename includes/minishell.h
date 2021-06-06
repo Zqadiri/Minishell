@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 19:16:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:59:59 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@
 
 # define PATH_MAX 15000
 
-t_lexer	*read_cmd(void);
+
+
+
+// t_lexer	*read_cmd(void);
 
 /*
 ** History
