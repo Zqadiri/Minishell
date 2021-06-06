@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   parser_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 09:18:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/05 15:57:51 by iidzim           ###   ########.fr       */
+/*   Created: 2021/06/03 14:55:09 by iidzim            #+#    #+#             */
+/*   Updated: 2021/06/03 15:14:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+t_ast   *parse_compound(t_parser *p)
 {
-	while ((*s1 && *s2) && (*s1 == *s2))
+	t_ast	*ast;
+	t_ast	*ast_semi;
+	char	*str;
+
+	if (!p)
+		return (NULL);
+	str = ft_strdup("");
+	while (p->curr_token->type != eof)
 	{
-		s1++;
-		s2++;
+		ast = parse_pipe(p, &str);
+		if (!ast)
+			return (NULL);
+		ast_semi = init_ast(compound);
+		ast_semi->comp_values = (t_ast**)malloc(sizeof(t_ast*));
+		if (!)
+		
 	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	return (ast);
 }

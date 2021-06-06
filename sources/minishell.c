@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/03 17:05:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/06 12:30:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int main(int argc, char **argv, char **env)
 	(void)env;
 	while(1)
 	{
+		// ? set return value to $? = 0  //!pipeline
 		ft_putstr_fd("\nminishell-1.0$ ", 0);
 		// l = read_cmd();
 		l = history();
@@ -69,7 +70,14 @@ int main(int argc, char **argv, char **env)
 		}
 		p = init_parser(l);
 		ast = parse_compound(p);
-		// print_tree(ast);
+			
+		// ? set exit status  $? = 258 (syntax error)
+		// if (!ast)
+			// $? = 258
+		visitor(ast);
+		if (ast)
+			free_tree(ast);
+		system("leaks minishell");
 	}
 	//free before exit
 	// exit(EXIT_SUCCESS);
@@ -130,3 +138,12 @@ int main(int argc, char **argv, char **env)
 //? f:tokenize_token         last char = [;]
 //? 00000f:tokenize_token   l->c = [;]
 //? f:tokenize_text str = []
+
+
+// ! filename -> cmd or delim
+// ! previous -> current token
+// ? l->buffer = |echo ok > |
+// * semicolon at the end of line -> valid
+
+
+//! tab  = 4 spaces

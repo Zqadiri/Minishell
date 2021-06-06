@@ -6,13 +6,13 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 20:08:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/04/25 16:50:58 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 16:02:37 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strduplicate(const char *src)
+char	*ft_strduplicate(const char *src)
 {
 	int		size;
 	char	*p;
@@ -33,7 +33,7 @@ char		*ft_strduplicate(const char *src)
 	return (p);
 }
 
-char		*ft_join(char *s1, char *s2)
+char	*ft_join(char *s1, char *s2)
 {
 	int			i;
 	int			j;
@@ -60,7 +60,7 @@ char		*ft_join(char *s1, char *s2)
 	return (NULL);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char		*save;
 	int				r;

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/02 17:42:39 by zqadiri          ###   ########.fr       */
+=======
+/*   Updated: 2021/06/04 11:53:21 by iidzim           ###   ########.fr       */
+>>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +91,7 @@ t_lexer	*init(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
+	l->multi_line = 0;
 	return (l);
 }
 
@@ -165,6 +170,9 @@ t_lexer *history(void)
 		}
 		else if (m.buf[0] == '\n')
 		{
+			// printf ("\n[line : %s]\n", m.line);
+			// printf ("[buffer : %s]\n", l->buffer);
+			// printf ("[bufsize : %d]\n", l->bufsize);
 			m.cursor =	len(m.history);
 			ft_putchar_fd('\n', 0);
 			if (m.line[0] != '\n')
@@ -173,6 +181,10 @@ t_lexer *history(void)
 		}
 		else
 		{
+<<<<<<< HEAD
+=======
+			// printf ("out\n");
+>>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
 			tmp = m.line;
 			m.line = ft_strjoinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);

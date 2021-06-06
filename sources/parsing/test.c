@@ -1,4 +1,3 @@
-
 // todo
 // * echo $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n                                                   
 // * echo $PWD; echo $PWD; cd ..; pwd; echo $PWD; echo $PWD\n                                                  
@@ -61,106 +60,106 @@
 // * eCHo bonjour\n                                                                                                  
 // * EcHo bonjour\n                                                                                                  
 // * eChO bonjour\n                                                                                                  
-// * echo -n -n -n -n bonjour\n                                                                                      
+// * echo -n -n -n -n bonjour\n
 // * echo -nnnnnnnnnnnnnnnnnnnnn bonjour\n                                                                           
 // * echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n                                                            
-// *Cd .\n                                                                                                          
-// *cD .\n                                                                                                          
-// *export PATH='/bin:/usr/bin' Cd .\n                                                                           
-// *export PATH='/bin:/usr/bin' cD .\n                                                                           
-// *export PATH='/bin:/usr/bin' Echo bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' eCho bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' ecHo bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' echO bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' EchO bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' eCHo bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' EcHo bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' eChO bonjour\n                                                                   
-// *export PATH='/bin:/usr/bin' eChO 'bonjo\nur'\n                                                            
+// * Cd .\n                                                                                                          
+// * cD .\n                                                                                                          
+// * export PATH='/bin:/usr/bin' Cd .\n                                                                           
+// * export PATH='/bin:/usr/bin' cD .\n                                                                           
+// * export PATH='/bin:/usr/bin' Echo bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' eCho bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' ecHo bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' echO bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' EchO bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' eCHo bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' EcHo bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' eChO bonjour\n                                                                   
+// * export PATH='/bin:/usr/bin' eChO 'bonjo\nur'\n                                                            
 
-// *env\n                                                                                                                                                                            
-// *Env\n                                                                                                           
-// *enV\n                                                                                                           
+// * env\n                                                                                                                                                                            
+// * Env\n                                                                                                           
+// * enV\n                                                                                                           
 
-// *exit\n                                                                                                          
-// *exit 1\n                                                                                                        
-// *exit 2\n                                                                                                        
-// *exit 3\n                                                                                                        
-// *exit ' 3'\n                                                                                                     
-// *exit '\t3'\n                                                                                                    
-// *exit '\t\f\r 3'\n                                                                                               
-// *exit '3 '\n                                                                                                     
-// *exit '3\t'\n                                                                                                    
-// *exit '3\r'\n                                                                                                    
-// *exit '3\t\f\r '\n                                                                                               
-// *exit '3     a'\n                                                                                                
-// *exit '3\t\t\ta'\n                                                                                               
-// *exit 0\n                                                                                                        
-// *exit -0\n                                                                                                       
-// *exit -1\n                                                                                                       
-// *exit 255\n                                                                                                      
-// *exit 256\n                                                                                                      
-// *exit 2000000\n                                                                                                  
-// *exit -2000000\n                                                                                                 
-// *exit 2147483647\n                                                                                               
-// *exit -2147483648\n                                                                                              
-// *exit 2147483648\n                                                                                               
-// *exit -2147483649\n                                                                                              
-// *exit 3147483648\n                                                                                               
-// *exit -3147483649\n                                                                                              
-// *exit 4294967295\n                                                                                               
-// *exit 4294967296\n                                                                                               
-// *exit -9223372036854775808\n                                                                                     
-// *exit 9223372036854775807\n                                                                                      
-// *exit -9223372036854775809\n                                                                                     
-// *exit 9223372036854775808\n                                                                                      
-// *exit 18446744073709551615\n                                                                                     
-// *exit 18446744073709551616\n                                                                                     
-// *exit +1\n                                                                                                       
-// *exit +2\n                                                                                                       
-// *exit +3\n                                                                                                       
-// *exit +0\n                                                                                                       
-// *exit +255\n                                                                                                     
-// *exit +256\n                                                                                                     
-// *exit +2000000\n                                                                                                 
-// *exit +2147483647\n                                                                                              
-// *exit ++1\n                                                                                                      
-// *exit ++2\n                                                                                                      
-// *exit ++3\n                                                                                                      
-// *exit ++0\n                                                                                                      
-// *exit ++255\n                                                                                                    
-// *exit ++256\n                                                                                                    
-// *exit ++2000000\n                                                                                                
-// *exit ++2147483647\n                                                                                             
-// *exit --1\n                                                                                                      
-// *exit --2\n                                                                                                      
-// *exit --3\n                                                                                                      
-// *exit --0\n                                                                                                      
-// *exit --255\n                                                                                                    
-// *exit --256\n                                                                                                    
-// *exit --2000000\n                                                                                                
-// *exit --2147483647\n                                                                                             
-// *exit bonjour\n                                                                                                  
-// *exit 0_\n                                                                                                       
-// *exit _0\n                                                                                                       
-// *exit 0123456789\n                                                                                               
-// *exit -0123456789\n                                                                                              
-// *exit 00000000000000000000000000000000000000000000001\n                                                          
-// *exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001\n           
-// *exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\n           
-// *exit -0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001\n          
-// *exit -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\n                
-// *exit 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\n                 
-// *exit 0 bonjour\n                                                                                                
-// *exit bonjour 0\n                                                                                                
-// *exit 0 1\n                                                                                                      
-// *exit 0 1 2 3 4 5 6 7 8 9\n                                                                                      
-// *exit Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas mole... 
-// *exit bonjoru; echo should have exited\n                                                                         
-// *exit 99999999999999999999999999999999999999999999999999999; echo should have exited\n                           
-// *exit 9999; echo should have exited\n                                                                            
-// *Exit; echo a\n                                                                                                  
-// *exiT; echo a\n      
+// * exit\n                                                                                                          
+// * exit 1\n                                                                                                        
+// * exit 2\n                                                                                                        
+// * exit 3\n                                                                                                        
+// * exit ' 3'\n                                                                                                     
+// * exit '\t3'\n                                                                                                    
+// * exit '\t\f\r 3'\n                                                                                               
+// * exit '3 '\n                                                                                                     
+// * exit '3\t'\n                                                                                                    
+// * exit '3\r'\n                                                                                                    
+// * exit '3\t\f\r '\n                                                                                               
+// * exit '3     a'\n                                                                                                
+// * exit '3\t\t\ta'\n                                                                                               
+// * exit 0\n                                                                                                        
+// * exit -0\n                                                                                                       
+// * exit -1\n                                                                                                       
+// * exit 255\n                                                                                                      
+// * exit 256\n                                                                                                      
+// * exit 2000000\n                                                                                                  
+// * exit -2000000\n                                                                                                 
+// * exit 2147483647\n                                                                                               
+// * exit -2147483648\n                                                                                              
+// * exit 2147483648\n                                                                                               
+// * exit -2147483649\n                                                                                              
+// * exit 3147483648\n                                                                                               
+// * exit -3147483649\n                                                                                              
+// * exit 4294967295\n                                                                                               
+// * exit 4294967296\n                                                                                               
+// * exit -9223372036854775808\n                                                                                     
+// * exit 9223372036854775807\n                                                                                      
+// * exit -9223372036854775809\n                                                                                     
+// * exit 9223372036854775808\n                                                                                      
+// * exit 18446744073709551615\n                                                                                     
+// * exit 18446744073709551616\n                                                                                     
+// * exit +1\n                                                                                                       
+// * exit +2\n                                                                                                       
+// * exit +3\n                                                                                                       
+// * exit +0\n                                                                                                       
+// * exit +255\n                                                                                                     
+// * exit +256\n                                                                                                     
+// * exit +2000000\n                                                                                                 
+// * exit +2147483647\n                                                                                              
+// * exit ++1\n                                                                                                      
+// * exit ++2\n                                                                                                      
+// * exit ++3\n                                                                                                      
+// * exit ++0\n                                                                                                      
+// * exit ++255\n                                                                                                    
+// * exit ++256\n                                                                                                    
+// * exit ++2000000\n                                                                                                
+// * exit ++2147483647\n                                                                                             
+// * exit --1\n                                                                                                      
+// * exit --2\n                                                                                                      
+// * exit --3\n                                                                                                      
+// * exit --0\n                                                                                                      
+// * exit --255\n                                                                                                    
+// * exit --256\n                                                                                                    
+// * exit --2000000\n                                                                                                
+// * exit --2147483647\n                                                                                             
+// * exit bonjour\n                                                                                                  
+// * exit 0_\n                                                                                                       
+// * exit _0\n                                                                                                       
+// * exit 0123456789\n                                                                                               
+// * exit -0123456789\n                                                                                              
+// * exit 00000000000000000000000000000000000000000000001\n                                                          
+// * exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001\n           
+// * exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\n           
+// * exit -0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001\n          
+// * exit -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\n                
+// * exit 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\n                 
+// * exit 0 bonjour\n                                                                                                
+// * exit bonjour 0\n                                                                                                
+// * exit 0 1\n                                                                                                      
+// * exit 0 1 2 3 4 5 6 7 8 9\n                                                                                      
+// * exit Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas mole... 
+// * exit bonjoru; echo should have exited\n                                                                         
+// * exit 99999999999999999999999999999999999999999999999999999; echo should have exited\n                           
+// * exit 9999; echo should have exited\n                                                                            
+// * Exit; echo a\n                                                                                                  
+// * exiT; echo a\n      
 
 // * export PATH='/bin:/usr/bin' Exit; echo a\n                                                                   
 // * export PATH='/bin:/usr/bin' exiT; echo a\n                                                                   
@@ -344,7 +343,7 @@
 // * echo $?\n                                                                                                       
 // * echo; echo $?\n                                                                                                 
 // * notfound; echo $?\n                                                                                             
-// * cat < doesntexist; echo $?\n                                                                                    
+// * cat < doesntexist ; echo $?\n                                                                                    
 // * SETUP echo bonjour > noperm; chmod 000 noperm cat < noperm; echo $?\n                                         
 // * echo\n                                                                                                          
 // * notfound\n                                                                                                      
@@ -704,4 +703,4 @@
 // * \n                                                                                                              
 // *                                           \n                                                                    
 // * \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n                                                                    
-// *             \t\t\t           \t\t\t       \n                                                                    
+// *             \t\t\t           \t\t\t       \n

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/01 14:54:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:09:48 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	peek_char(t_lexer *l)
 void	skip_space(t_lexer *l)
 {
 	if (!l || !l->buffer)
-		return ; //error
+		return ;
 	while (l->readpos <= l->bufsize && (l->c == 32
 			|| l->c == '\t' || l->c == '\n'))
 		readchar(l);
@@ -50,7 +50,7 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 	return (init_token(type, s));
 }
 
-t_token	*ret_char(t_lexer *l, char c, e_token_type type)
+t_token	*ret_char(t_lexer *l, char c, t_token_type type)
 {
 	char	*str;
 

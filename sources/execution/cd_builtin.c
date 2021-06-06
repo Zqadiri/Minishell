@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 10:43:52 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/02 17:45:25 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/06 12:30:54 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int cd_builtin(char **arg)
 	if (arg[2])
 	{
 	 	ft_putstr_fd("cd: too many arguments\n", 2);
-		return (1);       
+		return (1);
 	}
 	if (!arg[1] || ft_strequ(arg[1], "~") || ft_strequ(arg[1], "--"))
 	{

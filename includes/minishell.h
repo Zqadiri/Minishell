@@ -3,47 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/05/31 15:28:55 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/05 19:16:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <errno.h>
-#include "./exec.h"
-#include "lexer.h"
-#include "parser.h"
+# include <stdlib.h>
+# include <string.h>
+# include <ctype.h>
+# include <errno.h>
+# include "./exec.h"
+# include "lexer.h"
+# include "parser.h"
 
+# define PATH_MAX 15000
 
-#define PATH_MAX 15000
-
-void print_prompt();
-t_lexer *read_cmd();
-t_ast *init_ast(e_ast_type type);
-void print_tree(t_ast *ast);
-
-
-// /!\ update linked list function - new struct AST
-// int list_size(t_cmdlist *l);
-// t_cmdlist *create(t_token *cmd, int pipe);
-// void add_back(t_cmdlist **l, t_token *cmd, int pipe);
-// void push(t_cmdlist **l, t_token *cmd, int pipe);
-// void print_cmd(t_cmdlist *l);
-
+t_lexer	*read_cmd(void);
 
 /*
 ** History
 */
 
-
-t_lexer *history();
+t_lexer	*history(void);
 void	move_up(t_index *m, t_lexer *l);
 void	move_down(t_index *m, t_lexer *l);
 
