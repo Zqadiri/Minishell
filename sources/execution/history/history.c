@@ -6,7 +6,15 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/06 20:09:39 by iidzim           ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2021/06/02 17:42:39 by zqadiri          ###   ########.fr       */
+=======
+/*   Updated: 2021/06/04 11:53:21 by iidzim           ###   ########.fr       */
+>>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
+>>>>>>> da133498370b039815421eaf02ab501eeed5388e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +185,10 @@ t_lexer *history(void)
 		}
 		else
 		{
+<<<<<<< HEAD
+=======
 			// printf ("out\n");
+>>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
 			tmp = m.line;
 			m.line = ft_strjoinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);
@@ -185,7 +196,6 @@ t_lexer *history(void)
 			free (tmp);
 			ft_putchar_fd(m.buf[0], 0);
 		}
-		// clean_term(&m);
 	}
 	close(m.fd);
 	return (l);

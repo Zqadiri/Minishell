@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/06 21:41:48 by iidzim           ###   ########.fr       */
+=======
+/*   Updated: 2021/06/06 12:30:45 by zqadiri          ###   ########.fr       */
+>>>>>>> da133498370b039815421eaf02ab501eeed5388e
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// add new line 
+//* add new line 
 
 t_lexer	*read_cmd(void)
 {
@@ -48,8 +52,6 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv; 
 	(void)env;
-	// if (argc != 1)
-	// 	exit(EXIT_FAILURE);
 	while(1)
 	{
 		// ? set return value to $? = 0  //!pipeline

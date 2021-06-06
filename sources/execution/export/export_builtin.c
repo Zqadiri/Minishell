@@ -6,12 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/24 16:01:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/02 17:44:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
 
 void    sort_and_print(void)
 {
@@ -37,12 +36,6 @@ void    sort_and_print(void)
 		}
 		i++;
 	}
-	// int k = 0;
-	// while (dup[k])
-	// {
-	// 	printf ("%s\n", dup[k]);
-	// 	k++; 
-	// }
 	print_sorted_env(dup);
 }
 
@@ -59,7 +52,6 @@ void    sort_and_print(void)
 
 int		is_valid_env_key(char *arg)
 {
-	// printf ("is_valid_name{%s}\n", arg);
 	int i;
 	int alpha;
 
@@ -105,28 +97,21 @@ void	set_new_env(char *arg)
 		env = ft_substr(arg, 0, ft_strlen(arg));
 		g_env_var[env_count() - 1] = env;
 		g_env_var[index] = 0;
-		// printf ("in set new [%s]\n", g_env_var[env_count()]);
-		// env_builtin();
 	}
 }
 
 void	set_or_modify(char *arg)
 {
-	// printf ("%s\n", arg);
 	int	is_set;
 	int		i;
 	char	*key;
 
-	// get the key
 	if (arg == NULL)
 		return ;
 	i = get_str_by_char(arg, '=');
-	// printf ("iiiii[%d]\n", i);
 	if (i == -1)
 		i = ft_strlen(arg);
 	key = ft_substr(arg, 0, i);
-	// printf ("[%d]\n", i);
-	// printf("---> key[%s]\n", key);
 	is_set = find_env(key);
 	if (is_set == -1)
 		set_new_env(arg);
@@ -146,7 +131,6 @@ int     export_builtin(char **args)
 	}
 	while (args[i++])
 	{
-		// printf ("export builtin %s\n", args[i]);
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
 			ft_putstr_fd("export: `", 2);

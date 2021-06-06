@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 15:27:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/24 14:49:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/02 17:45:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	**dup_env(void)
 
 void	modify_env(char *arg, char *key)
 {
-	// printf ("modify \n");
 	int i;
 	char	*new_value;
 	char	*tmp;
