@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/07 15:48:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 21:03:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_ast
 	struct s_ast	**pipecmd_values;
 	int				pipecmd_size;
 	t_token			**args;
+	int				redir_nbr;
 	int				args_size;
 }					t_ast;
 
@@ -73,7 +74,7 @@ int			is_redirection(t_token *t);
 t_ast		*parse_compound(t_parser *p);
 t_ast		*parse_pipe(t_parser *p);
 t_ast		*parse_args(t_parser *p);
-t_token		*check_token(t_parser *p);
+t_token		*check_token(t_parser *p, t_ast *ast);
 
 /*
 ** ast.c
@@ -89,7 +90,7 @@ void		print_cmd(t_cmd *z);
 */
 
 void		is_notempty(void *ptr);
-t_ast		*free_pip_args(t_ast *ast);
+t_ast		*free_args(t_ast *ast);
 t_ast		*free_tree(t_ast *ast);
 void		free_parser(t_parser *p);
 

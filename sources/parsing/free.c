@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/06 20:18:54 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 21:03:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	is_notempty(void *ptr)
 	}
 }
 
-t_ast	*free_pip_args(t_ast *ast)
+t_ast	*free_args(t_ast *ast)
 {
 	int	k;
 
@@ -63,7 +63,7 @@ t_ast	*free_tree(t_ast *ast)
 		}
 		is_notempty(ast->pipecmd_values);
 	}
-	return (free_pip_args(ast));
+	return (free_args(ast));
 }
 
 void	free_parser(t_parser *p)

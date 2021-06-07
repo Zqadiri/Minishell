@@ -513,3 +513,66 @@ echo a b c > d
 echo a b c > d
 echo a b c > d
 echo a b c > d
+echo a b c > d
+echo a b c 
+echo a b c > file
+echo hello world 1337 /. file
+echo hello world 1337 > file
+echo hello world 1337 > file
+echo hello world 1337 > file
+echo hello people 1337 > file
+echo bonjour > test > je > suis\n
+echo bonjour > test > je 
+echo bonjour > test > je
+echo bonjour > test > je
+echo bonjour > test > je ; echo a b c
+echo bonjour > test > je
+echo bonjour > test > je
+echo bonjour > test > je
+echo bonjour > test > je
+echo bonjour > test > je
+		printf("f:visitor\targs size = [%d]\n", ast->args_size);
+echo bonjour > test > je
+echo bonjour > test > je
+echo bonjour > test > je
+echo bonjour > test > je > hi > oo
+echo bonjour > test > je
+echo bonjour > test > je > file1
+echo bonjour > test > je > file1 > file2
+echo bonjour > test > je > file2 > file3
+echo bonjour >> test > je >> suis\n
+>> test echo > je bonjour > suis\n
+echo a; echo b; echo c; echo d; echo e; echo f; echo g; echo h;
+echo a; echo b; echo c; echo d; echo e;
+echo a; echo b; echo c;
+echo a; echo b; echo c;
+echo a; echo b; echo c;
+echo a; echo  b ; echo c ;
+echo a; echo  b ; echo c ;
+echo a > b ; echo b > c ; echo c > d
+echo a > b ; echo b > c ; echo c > d
+echo a > b ; echo b > c ; echo c > d
+echo a > b ; echo b > c ; echo c > d
+echo a > b ; echo b > c ; echo c > d
+echo bonjour; ls doesnotexists\n
+export PATH='/usr/bin' wHoAMi\n
+echo bonjour >> test'yo'"sticked"\n 
+export A=a=a=a=a=a; echo $A\n 
+echo a > b ; echo b > c ; echo c > d
+echo a > b ; echo b > c ; echo c > d
+echo a > b ; echo b > c ; echo c > d > e > f
+echo a > b ; echo b > c ; echo c > d | cat e
+echo a > b | cat b
+echo a > b | cat b
+echo a > b | cat b
+echo a > b | cat b
+echo ok > file | cat file
+ echo ok > file | cat file
+ echo ok > file | |  cat file
+ echo ok > file | cat file;
+echo ok > file ; cat file
+echo ok > file ; cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
