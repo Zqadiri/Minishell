@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/06 21:31:59 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 16:01:49 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	print_tree(t_ast *ast)
 	}
 }
 
-t_zineb	*visitor(t_ast *ast)
+t_cmd	*visitor(t_ast *ast)
 {
-	t_zineb *z;
+	t_cmd *z;
 	int		i;
 	int		j;
 	int		k;
@@ -81,12 +81,15 @@ t_zineb	*visitor(t_ast *ast)
 
 	if (!ast)
 		return (NULL);
+	n = 0;
 	if (ast->type == compound)
 	{
 		i = -1;
 		while (++i < ast->comp_size)
 		{
-			visitor(ast->comp_values[i]);
+			printf("f:visitor\tcheck compound size = [%d]\n", ast->comp_size);
+			z = visitor(ast->comp_values[i]);
+			z[n].type = semi;
 			if (ast->comp_size >= 2)
 				printf("f:visitor\ttoken -> [;][semi]\n");
 		}
@@ -94,42 +97,51 @@ t_zineb	*visitor(t_ast *ast)
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
-		while (++j < ast->pipecmd_size)
+		while (++j <= ast->pipecmd_size)
 		{
-			visitor(ast->pipecmd_values[j]);
+			printf("f:visitor\tcheck pipe size = [%d]\n", ast->pipecmd_size);
+			z = visitor(ast->pipecmd_values[j]);
+			z[n].type = pip;
 			if (ast->pipecmd_size >= 2)
 				printf("f:visitor\ttoken -> [|][pipe]\n");
-		}
-	}
-	z = NULL;
-	l = -1;
-	m = 0;
-	n = 0;
-	if (ast->type == arg_ast)
-	{
-		k = -1;
-		printf("f:visitor args size = [%d]\n", ast->args_size);
-		while (++k < ast->args_size)
-		{
-			// printf("f:visitor\ttoken -> [%s][%u]\n", ast->args[k]->value,
-			// 	ast->args[k]->type);
-			printf("f:visitor\t");
-			if (is_redirection(ast->args[k - 1]) && k >= 1)
-			{
-				z[n].r[m].type = ast->args[k - 1]->type;
-				z[n].r[m].filename = ast->args[k]->value;
-				m++;
-			}
-			// if (!is_redirection((ast->args[k])))
-			else 
-				z[n].argvs[++l] = ast->args[k]->value;
 			n++;
 		}
+	}
+	l = 0;
+	m = 0;
+	if (ast->type == arg_ast)
+	{
+		k = 0;
+		printf("f:visitor\targs size = [%d]\n", ast->args_size);
+		z[n].argvs = malloc(sizeof(char*) * ast->args_size);
+		while (k < ast->args_size)
+		{
+			if (!is_redirection((ast->args[k])))
+			{
+				z[n].argvs[l] = ft_strdup(ast->args[k]->value);
+				printf("f:visitor\targument num [%d] >> [%s]\n", l, z[n].argvs[l]);
+				l++;
+				k++;
+			}
+			else
+			{
+				k += 1;
+				if (is_redirection(ast->args[k - 1]) && k >= 1)
+				{
+					printf("f:visitor\t [%s] is redirection \n", ast->args[k - 1]->value);
+					z[n].r[m].type = ast->args[k - 1]->type;
+					z[n].r[m].filename = ast->args[k]->value;
+					m++;
+				}
+				k++;
+			}
+		}
+		printf(">>>>>>>>>>> [%s]\n", z[n].argvs[l]);
 	}
 	return (z);
 }
 
-void	print_zineb(t_zineb *z)
+void	print_cmd(t_cmd *z)
 {
 	int i;
 	int j;
@@ -142,4 +154,5 @@ void	print_zineb(t_zineb *z)
 	j = -1;
 	while (z->argvs[++j])
 		printf("f:printzineb\t arg %d = [%s]\n", j, z->argvs[j]);
+	printf("f:printzineb\t type = [%u]\n", z->type);
 }

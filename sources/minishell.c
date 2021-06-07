@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/06/06 21:41:48 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/06/06 12:30:45 by zqadiri          ###   ########.fr       */
->>>>>>> da133498370b039815421eaf02ab501eeed5388e
+/*   Updated: 2021/06/07 15:48:10 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +43,7 @@ int main(int argc, char **argv, char **env)
 	t_lexer *l;
 	t_parser *p;
 	t_ast *ast;
-	t_zineb *z;
+	t_cmd *z;
 
 	(void)argc;
 	(void)argv; 
@@ -79,12 +75,12 @@ int main(int argc, char **argv, char **env)
 		// ? set exit status  $? = 258 (syntax error)
 		// if (!ast)
 			// $? = 258
-		print_tree(ast);
-		(void)z;
+		// print_tree(ast);
+		// (void)z;
 		z = visitor(ast);
 		if (!z)
 			return (0);
-		print_zineb(z);
+		// print_cmd(z);
 		if (ast)
 			free_tree(ast);
 		// system("leaks minishell");

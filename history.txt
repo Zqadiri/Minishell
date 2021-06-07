@@ -462,3 +462,50 @@ echo $?
 echo echo $PWD;
 export a="    ls   -la    "
 echo ok
+echo ok 
+echo ok
+echo ok > 
+echo ok >  
+echo ok>
+echo ok    >
+echo ok >     
+echo ok |    
+echo ok | ;
+echo ok > <
+echo ok > file << 
+echo ok > file < file2 > < 
+echo  a b c
+echo a b c
+echo a b c
+echo a b c
+echo a b c
+echo a b c
+echo a b c
+echo bonjour > test\n
+echo a b c
+cho a b c
+echo a b c
+echo a b c
+ a b c
+echo a b c
+echo a b c
+echo a b c
+echo a b c
+
+echo ok > 
+
+
+echo a b c
+
+echo a b c
+echo a b c
+echo a b c
+echo a b c
+cho a b c
+echo a b c
+echo a b c
+echo a b c
+echo a b c
+echo a b c > d
+echo a b c > d
+cho a b c > d
