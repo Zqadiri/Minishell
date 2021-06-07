@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/02 17:38:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/07 13:22:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,35 @@ int     get_history_file(t_index *m)
 int	get_str_cmd(t_index *m)
 {
 	/* DELETE */
-
 	m->tc_cmd.cmd_dm = tgetstr("dm", NULL);
 	m->tc_cmd.cmd_dl = tgetstr("dl", NULL);
 	m->tc_cmd.cmd_ed = tgetstr("ed", NULL);
 	m->tc_cmd.cmd_dc = tgetstr("dc", NULL);
 
 	/* INSERT */
-
 	m->tc_cmd.cmd_im = tgetstr("im", NULL);
 	m->tc_cmd.cmd_ic = tgetstr("ic", NULL);
 	m->tc_cmd.cmd_ei = tgetstr("ei", NULL);
 
 	/* cursor & clear */
-	
 	m->tc_cmd.cmd_ce = tgetstr("ce", NULL);
 	m->tc_cmd.cmd_le = tgetstr("le", NULL);
-
-	// m->tc_cmd.cmd_cm = tgetstr("cm", NULL);
-
 	return (1);
 }
 
 int ft_putc(int c)
 {
 	return write(1, &c, 1);
+}
+
+int	is_printable(t_index *m)
+{
+	if (m->buf[0] == '\t' || m->buf[0] == '\v' || m->buf[0] == '\f' || m->buf[0] == '\r')
+	{
+		m->buf[0] = ' ';
+		return (1);
+	}
+	return (0);
 }
 
 void	delete_char(t_index *m)
@@ -109,6 +113,7 @@ void	move_up(t_index *m, t_lexer *l)
 	m->tc_cmd.cmd_ed = tigetstr("rmdc");
 	tputs(m->tc_cmd.cmd_ed, 1, ft_putc);
 	// printf("{%d}\n", len(m->history));
+	// printf("{%d}\n", m->cursor);
 	if (m->cursor - 1 != 0)
 	{
 		m->cursor--;

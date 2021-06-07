@@ -6,12 +6,16 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/07 10:12:44 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 21:21:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+// ToDo
+// ! check if the history_file is empty
+// ! check if the char is printbale
+ 
 int	init_term(t_index *m)
 {
 	(void)m;
@@ -171,13 +175,19 @@ t_lexer *history(void)
 			// printf ("[bufsize : %d]\n", l->bufsize);
 			m.cursor =	len(m.history);
 			ft_putchar_fd('\n', 0);
-			if (m.line[0] != '\n')
+			if (m.line[0] == '\n' || m.line[0] == '\0')
+				break ;
+			else
 				ft_putendl_fd(m.line, m.fd);
-			break ;
+			break;
 		}
 		else
 		{
+<<<<<<< HEAD
 			// printf ("out\n");
+=======
+			is_printable(&m);
+>>>>>>> 417683395469d2617952ec50395cbcd41216d60e
 			tmp = m.line;
 			m.line = ft_strjoinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);
@@ -186,6 +196,7 @@ t_lexer *history(void)
 			ft_putchar_fd(m.buf[0], 0);
 		}
 	}
+	// printf ("out");
 	close(m.fd);
 	return (l);
 }

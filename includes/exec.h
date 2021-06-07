@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/07 10:10:45 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 21:21:42 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		launch(char **env, char **arg);
 ** Utils
 */
 
+int		is_printable(t_index *m);
 int		quit(void);
 int		len(char **env);
 int		alpha(char *key);

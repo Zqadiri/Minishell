@@ -79,8 +79,6 @@ echo ok ; ls > file | cat < file ; ls -la > fileee
 echo ok ; ls > file | cat < file;echo ok ; ls > file | cat < file;
 echo ok ; ls > file | cat < file;
 echo ok ; ls > file | cat < file;
-
-
 echo ok ; ls > file | cat < file;
 echo ok ; echo done > file | cat file
 echo ok ; echo done > file | cat file
@@ -99,8 +97,6 @@ echo >> test"sticked" bonjour\n
 echo > test"sticked" bonjour\n 
 echo > test"sticked" bonjour\n 
 echo > test"sticked" bonjour\n 
-
-
 echo > test"sticked" bonjour\n
 echo > test'yo'"sticked" bonjour\n 
 echo ok > 
@@ -127,16 +123,6 @@ echo bonjour >> test\n
 echo >> test bonjour\n
 abc def ; ghi jkl > mnl | opq rst
 echo > test bonjour\n
-echo > test bonjour\n
-echo > test bonjour\n
-echo > test bonjour\n
-echo > test bonjour\n
-	printf("f:check_token token [%s][%u]\n", p->curr_token->value, p->curr_token->type);
-echo > test bonjour\n
-echo > test bonjour\n
-echo > test bonjour\n
-echo > test bonjour\n
-> test echo bonjour\n
 echo bonjour >> test\n
 echo >> test bonjour\n
 >> test echo bonjour\n
@@ -230,15 +216,10 @@ export A======a; echo $A\n
 echo >>> hello
 echo bonjour > test > je > suis\n
 echo bonjour > test ; je > suis\n
-
 echo $?
 echo bonjour >> test > je >> suis\n
 echo bonjour >> test > je >> suis\n
 echo bonjour >> test > je << suis\n
-
-
-
-
 echo
 cjdbaen;fjkd
 clkksdcls
@@ -255,57 +236,15 @@ echo heello
 echooo ok
 echo hello world > file ; ls | cat file
 >> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n
 echo bonjour > test
 echo bonjour > test
 echo bonjour > file
 echo bonjour > test
 echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
-echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
 echo ok > 
-echo ok >
-echo ok>
-echo ok >
-echo ok > 
-echo ok >
 echo bonjour >
 echo $a
-echo $a
-echo $a
 echo $USER
-
-echo $a
-echo $USER
-echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
 echo $PWD; echo $PWD;
 check_string(l, str, 2)
 echo $a
@@ -324,8 +263,6 @@ echo $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n
 export A='a' unset A; echo $A\n 
 export a='daafd' unset a; echo $a\n
 export A='a' unset A; echo $A\n 
-export A='a' unset A; echo $a\n
-export A='a' unset A; echo $a
 echo a; echo b; echo c; echo d; echo e; echo f; echo g; echo h; echo i;echo j; ech...
 export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C\n
 export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $a$b$c\n
@@ -334,46 +271,21 @@ echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
 >> test echo > je bonjour > suis\n
 check_string(l, str, 2);
 >> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
->> test echo > je bonjour > suis\n 
 echo > test'sticked' bonjour\n
 echo bonjour >> test\n
-echo bonjour >> test\n
-echo bonjour >> test\n
-export A=' ' echo '@' $A'@'\n 
-export A=' ' echo '@' $A'@'\n 
 export A=' ' echo '@' $A'@'\n 
 echo bonjour\n
-echo bonjour\n 
 echo lalalala lalalalal alalalalal alalalala\n 
 echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
-echo $PWD; echo $PWD;
-\
-
-
-
-
-
 echo	fskjdf\
-
 echo\
 echo\
 exit 0 1 2 3 4 5 6 7 8 9\n/
 exit 0 1 2 3 4 5 6 7 8 9\\
 exit 0 1 2 3 4 5 6 7 8 9\
-exit 0 1 2 3 4 5 6 7 8 9\
-exit 0 1 2 3 4 5 6 7 8 9\
 export A='a' B='b' C='c' unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '\n
 export A='a' B='b' C='c' unset A\n  
 export A='' export\n
-
-\
-echo bo'njou\$r
-echo bo'njou\$r
-echo bo'njou\$r
-echo bo'njou\$r
 echo bo'njou\$r
 echo bo"njou\$r
 export __________________________=a; echo $__________________________\n 
@@ -393,46 +305,23 @@ echo $a
 echo ok
 >> | a\n 
 ;;;;;\n 
-;;;;;\n 
-;;;;;\n 
-;;;;;\n 
-
 echo bonjour; ls doesnotexists\n    
 < | a\n
 ; ; ;\n
 >> ; a\n
 echo a ; ;\n
 echo a ; ; echo b\n
-echo a ; ; echo b\n
-echo a ; ; echo b\n
-echo bonjour; echo je\n
 echo bonjour; echo je\n
 echo a ; ;\n 
 ;;;;;\n  
 echo a ; ;\n 
 echo a ;    ; \n
-
-
-
-
-
 echo a ; ;\n 
-				printf("f:visitor\ttoken -> [|][pipe]\n");
 echo a ; ;\n
-
-
-
-
-
-
-
 echo a ; ; ; ; ; echo b\n 
 echo a ;; echo b\n
 echo a ;;;;; echo b\n 
 echo a ;; echo b\n 
-echo a ;; echo b\n 
-echo a ;; echo b\n
-echo a ;; echo b\n
 ; ;\n
 echo a ;; echo b\n
 echo a ; ; echo b\n
@@ -441,8 +330,6 @@ export A=a B=b C=c; echo $A$B$C\n
 export 'AH@'=nop\n
 export TEST='A=a' export $TEST\n 
 ; echo\n
-echo ; ; \n
-echo ; ; \n
 echo ; ; \n
 echo a ; ;\n
 echo a ; ; echo b\n 
@@ -462,117 +349,4 @@ echo $?
 echo echo $PWD;
 export a="    ls   -la    "
 echo ok
-echo ok 
-echo ok
-echo ok > 
-echo ok >  
-echo ok>
-echo ok    >
-echo ok >     
-echo ok |    
-echo ok | ;
-echo ok > <
-echo ok > file << 
-echo ok > file < file2 > < 
-echo  a b c
-echo a b c
-echo a b c
-echo a b c
-echo a b c
-echo a b c
-echo a b c
-echo bonjour > test\n
-echo a b c
-cho a b c
-echo a b c
-echo a b c
- a b c
-echo a b c
-echo a b c
-echo a b c
-echo a b c
-
-echo ok > 
-
-
-echo a b c
-
-echo a b c
-echo a b c
-echo a b c
-echo a b c
-cho a b c
-echo a b c
-echo a b c
-echo a b c
-echo a b c
-echo a b c > d
-echo a b c > d
-cho a b c > d
-echo a b c > d
-echo a b c > d
-echo a b c > d
-echo a b c > d
-echo a b c > d
-echo a b c 
-echo a b c > file
-echo hello world 1337 /. file
-echo hello world 1337 > file
-echo hello world 1337 > file
-echo hello world 1337 > file
-echo hello people 1337 > file
-echo bonjour > test > je > suis\n
-echo bonjour > test > je 
-echo bonjour > test > je
-echo bonjour > test > je
-echo bonjour > test > je ; echo a b c
-echo bonjour > test > je
-echo bonjour > test > je
-echo bonjour > test > je
-echo bonjour > test > je
-echo bonjour > test > je
-		printf("f:visitor\targs size = [%d]\n", ast->args_size);
-echo bonjour > test > je
-echo bonjour > test > je
-echo bonjour > test > je
-echo bonjour > test > je > hi > oo
-echo bonjour > test > je
-echo bonjour > test > je > file1
-echo bonjour > test > je > file1 > file2
-echo bonjour > test > je > file2 > file3
-echo bonjour >> test > je >> suis\n
->> test echo > je bonjour > suis\n
-echo a; echo b; echo c; echo d; echo e; echo f; echo g; echo h;
-echo a; echo b; echo c; echo d; echo e;
-echo a; echo b; echo c;
-echo a; echo b; echo c;
-echo a; echo b; echo c;
-echo a; echo  b ; echo c ;
-echo a; echo  b ; echo c ;
-echo a > b ; echo b > c ; echo c > d
-echo a > b ; echo b > c ; echo c > d
-echo a > b ; echo b > c ; echo c > d
-echo a > b ; echo b > c ; echo c > d
-echo a > b ; echo b > c ; echo c > d
-echo bonjour; ls doesnotexists\n
-export PATH='/usr/bin' wHoAMi\n
-echo bonjour >> test'yo'"sticked"\n 
-export A=a=a=a=a=a; echo $A\n 
-echo a > b ; echo b > c ; echo c > d
-echo a > b ; echo b > c ; echo c > d
-echo a > b ; echo b > c ; echo c > d > e > f
-echo a > b ; echo b > c ; echo c > d | cat e
-echo a > b | cat b
-echo a > b | cat b
-echo a > b | cat b
-echo a > b | cat b
-echo ok > file | cat file
- echo ok > file | cat file
- echo ok > file | |  cat file
- echo ok > file | cat file;
-echo ok > file ; cat file
-echo ok > file ; cat file
-echo ok > file | cat file
-echo ok > file | cat file
-echo ok > file | cat file
-echo ok > file | cat file
+echo jfbe
