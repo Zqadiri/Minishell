@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/07 16:01:49 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 18:03:58 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ t_cmd	*visitor(t_ast *ast)
 		k = 0;
 		printf("f:visitor\targs size = [%d]\n", ast->args_size);
 		z[n].argvs = malloc(sizeof(char*) * ast->args_size);
+		// z[n].r = malloc(sizeof(t_redir));
 		while (k < ast->args_size)
 		{
 			if (!is_redirection((ast->args[k])))
@@ -128,9 +129,11 @@ t_cmd	*visitor(t_ast *ast)
 				k += 1;
 				if (is_redirection(ast->args[k - 1]) && k >= 1)
 				{
+					printf("f:visitor\tk = [%d]\n", k);
 					printf("f:visitor\t [%s] is redirection \n", ast->args[k - 1]->value);
 					z[n].r[m].type = ast->args[k - 1]->type;
 					z[n].r[m].filename = ast->args[k]->value;
+					// z[n].r = realloc(z[n].r, (m + 1) * sizeof(t_redir));
 					m++;
 				}
 				k++;

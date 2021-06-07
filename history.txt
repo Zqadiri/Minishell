@@ -509,3 +509,7 @@ echo a b c
 echo a b c > d
 echo a b c > d
 cho a b c > d
+echo a b c > d
+echo a b c > d
+echo a b c > d
+echo a b c > d
