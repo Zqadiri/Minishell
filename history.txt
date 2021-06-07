@@ -349,3 +349,4 @@ echo $?
 echo echo $PWD;
 export a="    ls   -la    "
 echo ok
+echo jfbe
