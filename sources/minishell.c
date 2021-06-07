@@ -6,7 +6,15 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/06 14:05:57 by zqadiri          ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2021/06/06 21:41:48 by iidzim           ###   ########.fr       */
+=======
+/*   Updated: 2021/06/06 12:30:45 by zqadiri          ###   ########.fr       */
+>>>>>>> da133498370b039815421eaf02ab501eeed5388e
+>>>>>>> 1f513b4f31624040a719ae2743b5e692135cbbfc
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +51,7 @@ int main(int argc, char **argv, char **env)
 	t_lexer *l;
 	t_parser *p;
 	t_ast *ast;
+	t_zineb *z;
 
 	(void)argc;
 	(void)argv; 
@@ -53,8 +62,8 @@ int main(int argc, char **argv, char **env)
 		ft_putstr_fd("\nminishell-1.0$ ", 0);
 		// l = read_cmd();
 		l = history();
-		printf("\nl->buffer --%s--\n", l->buffer);
-		printf("l->bufsize --->|%d|\n", l->bufsize);
+		// printf("\nl->buffer --%s--\n", l->buffer);
+		// printf("l->bufsize --->|%d|\n", l->bufsize);
 		if(!l->buffer)
 			continue;
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
@@ -74,7 +83,12 @@ int main(int argc, char **argv, char **env)
 		// ? set exit status  $? = 258 (syntax error)
 		// if (!ast)
 			// $? = 258
-		visitor(ast);
+		print_tree(ast);
+		(void)z;
+		z = visitor(ast);
+		if (!z)
+			return (0);
+		print_zineb(z);
 		if (ast)
 			free_tree(ast);
 		// system("leaks minishell");

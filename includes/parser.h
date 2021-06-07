@@ -6,7 +6,19 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/06 13:44:47 by zqadiri          ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2021/06/06 21:00:08 by iidzim           ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2021/06/03 17:00:42 by zqadiri          ###   ########.fr       */
+=======
+/*   Updated: 2021/06/05 19:13:32 by iidzim           ###   ########.fr       */
+>>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
+>>>>>>> da133498370b039815421eaf02ab501eeed5388e
+>>>>>>> 1f513b4f31624040a719ae2743b5e692135cbbfc
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +62,12 @@ typedef struct s_ast
 	int				args_size;
 }					t_ast;
 
+typedef struct s_zineb
+{
+    char    **argvs;
+    t_redir *r;
+}               t_zineb;
+
 /*
 ** parser_utils.c
 */
@@ -58,7 +76,6 @@ t_parser	*init_parser(t_lexer *l);
 int			parse_expected_token(t_parser *p, t_token_type type);
 int			syntax_error_pipe_semi(t_parser *p);
 int			is_redirection(t_token *t);
-void		free_parser(t_parser *p);
 
 /*
 ** parser.c
@@ -75,9 +92,18 @@ t_token		*check_token(t_parser *p);
 */
 
 t_ast		*init_ast(t_ast_type type);
-void		visitor(t_ast *ast);
-t_ast		*free_tree(t_ast *ast);
-t_ast		*free_pip_args(t_ast *ast);
+void		print_tree(t_ast *ast);
+t_zineb		*visitor(t_ast *ast);
+void		print_zineb(t_zineb *z);
+
+/*
+** free.c
+*/
+
 void		is_notempty(void *ptr);
+t_ast		*free_pip_args(t_ast *ast);
+t_ast		*free_tree(t_ast *ast);
+void		free_parser(t_parser *p);
+
 
 #endif
