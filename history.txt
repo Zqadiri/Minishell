@@ -350,3 +350,21 @@ echo echo $PWD;
 export a="    ls   -la    "
 echo ok
 echo jfbe
+echo ok > file | cat fil
+p->prev_token = p->curr_token;
+echo ok > file ; cat file
+echo ok > file | cat file
+echo ok > file ; cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file ; cat file
+echo ok | > file echo ok
+export A='a' B='b' C='c' unset A B C\n   
+echo bonjour >> test\n
+export TEST='bonjour' echo "|$TEST|"\n 
+export TEST='bonjour' echo '|$TEST_|'\n 
+| ; a\n 
+| >> a\n

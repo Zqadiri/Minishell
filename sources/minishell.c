@@ -6,11 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/06/07 20:59:28 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/06/07 13:45:12 by zqadiri          ###   ########.fr       */
->>>>>>> 417683395469d2617952ec50395cbcd41216d60e
+/*   Updated: 2021/06/07 21:39:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +72,8 @@ int main(int argc, char **argv, char **env)
 		p = init_parser(l);
 		ast = parse_compound(p);
 			
-		// ? set exit status  $? = 258 (syntax error)
-		// if (!ast)
-			// $? = 258
+		// ? if (!ast) set exit status  $? = 258 (syntax error)
 		// print_tree(ast);
-		// (void)z;
 		z = visitor(ast);
 		if (!z)
 			return (0);

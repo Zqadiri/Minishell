@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/07 21:20:07 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 21:42:20 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,16 @@ t_ast	*parse_pipe(t_parser *p)
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(p);
 		if (!ast->pipecmd_values[ast->pipecmd_size - 1])
 			return (NULL);
-		if (p->curr_token->type == pip || p->curr_token->type == semi)
+		if (p->curr_token->type == pip)
 		{
-			if (p->curr_token->type == pip)
-			{
-				ast->pipecmd_size += 1;
-				ast->pipecmd_values = realloc(ast->comp_values, ast->pipecmd_size
-						* sizeof(t_ast*));
-			}
+			ast->pipecmd_size += 1;
+			ast->pipecmd_values = realloc(ast->comp_values, ast->pipecmd_size
+					* sizeof(t_ast*));
+			//! p->prev_token = p->curr_token;			
+			//! p->curr_token = get_next_token(p->lexer);
+		}
+		if (p->curr_token->type == semi)
+		{
 			p->prev_token = p->curr_token;
 			p->curr_token = get_next_token(p->lexer);
 			break ;

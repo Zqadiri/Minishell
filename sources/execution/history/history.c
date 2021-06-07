@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/07 21:21:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 21:25:25 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,11 +183,7 @@ t_lexer *history(void)
 		}
 		else
 		{
-<<<<<<< HEAD
-			// printf ("out\n");
-=======
 			is_printable(&m);
->>>>>>> 417683395469d2617952ec50395cbcd41216d60e
 			tmp = m.line;
 			m.line = ft_strjoinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);

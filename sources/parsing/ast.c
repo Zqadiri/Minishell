@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/07 21:06:21 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/07 21:45:07 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ t_cmd	*visitor(t_ast *ast)
 	if (!ast)
 		return (NULL);
 	n = 0;
+	printf("f:ast type = [%u]\n", ast->type);
 	if (ast->type == compound)
 	{
 		i = -1;
@@ -132,7 +133,6 @@ t_cmd	*visitor(t_ast *ast)
 		{
 			printf("f:visitor\tcheck compound size = [%d]\n", ast->comp_size);
 			z = visitor(ast->comp_values[i]);
-			// printf("f:visitor\tcompound 2\n");
 			if (ast->comp_size >= 2)
 			{
 				z[n].type = semi;
@@ -148,8 +148,6 @@ t_cmd	*visitor(t_ast *ast)
 		{
 			printf("f:visitor\tcheck pipe size = [%d]\n", ast->pipecmd_size);
 			z = visitor(ast->pipecmd_values[j]);
-			// printf("f:visitor\tpipe 2\n");
-			// printf("f:visitor\t n = [%d]\n", n);
 			if (ast->pipecmd_size >= 2)
 			{
 				z[n].type = pip;
@@ -158,41 +156,7 @@ t_cmd	*visitor(t_ast *ast)
 			n++;
 		}
 	}
-	// l = 0;
-	// m = 0;
-	// if (ast->type == arg_ast)
-	// {
-	// 	k = 0;
-	// 	printf("f:visitor\targs size = [%d]\n", ast->args_size);
-	// 	printf("f:visitor\tredirection nbr = [%d]\n", ast->redir_nbr);
-	// 	z[n].argvs = malloc(sizeof(char*) * ast->args_size);
-	// 	z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
-	// 	while (k < ast->args_size)
-	// 	{
-	// 		// printf("f:visitor\t k = [%d]\n", k);
-	// 		if (!is_redirection((ast->args[k])))
-	// 		{
-	// 			z[n].argvs[l] = ft_strdup(ast->args[k]->value);
-	// 			printf("f:visitor\targument num [%d] >> [%s]\n", l, z[n].argvs[l]);
-	// 			l++;
-	// 			k++;
-	// 		}
-	// 		else
-	// 		{
-	// 			k += 1;
-	// 			if (is_redirection(ast->args[k - 1]) && k >= 1 && m < ast->redir_nbr)
-	// 			{
-	// 				printf("f:visitor\t [%s] is redirection \n", ast->args[k - 1]->value);
-	// 				printf("f:visitor\t [%s] is filename \n", ast->args[k]->value);
-	// 				// printf("f:visitor\t n = [%d] m = [%d]\n", n, m);
-	// 				z[n].r[m].type = ast->args[k - 1]->type;
-	// 				z[n].r[m].filename = ast->args[k]->value;
-	// 				m++;
-	// 			}
-	// 			k++;
-	// 		}
-	// 		// printf("f:visitor\t n = [%d] | type = [%u]\n", n, z[n].type);
-	// 	}
-	// }
-	return (visitor_args(ast, z, n));
+	if (ast->type == arg_ast)
+		z = visitor_args(ast, z, n);
+	return (z);
 }
