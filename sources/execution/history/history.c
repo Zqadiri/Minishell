@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/06/02 17:42:39 by zqadiri          ###   ########.fr       */
-=======
-/*   Updated: 2021/06/04 11:53:21 by iidzim           ###   ########.fr       */
->>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
+/*   Updated: 2021/06/07 13:20:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+// ToDo
+// ! check if the history_file is empty
+// ! check if the char is printbale
+ 
 int	init_term(t_index *m)
 {
 	(void)m;
@@ -175,16 +175,15 @@ t_lexer *history(void)
 			// printf ("[bufsize : %d]\n", l->bufsize);
 			m.cursor =	len(m.history);
 			ft_putchar_fd('\n', 0);
-			if (m.line[0] != '\n')
+			if (m.line[0] == '\n' || m.line[0] == '\0')
+				break ;
+			else
 				ft_putendl_fd(m.line, m.fd);
-			break ;
+			break;
 		}
 		else
 		{
-<<<<<<< HEAD
-=======
-			// printf ("out\n");
->>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
+			is_printable(&m);
 			tmp = m.line;
 			m.line = ft_strjoinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);
@@ -193,6 +192,7 @@ t_lexer *history(void)
 			ft_putchar_fd(m.buf[0], 0);
 		}
 	}
+	// printf ("out");
 	close(m.fd);
 	return (l);
 }

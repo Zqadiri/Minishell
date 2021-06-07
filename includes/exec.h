@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/06/06 12:27:22 by zqadiri          ###   ########.fr       */
-=======
-/*   Updated: 2021/06/05 19:21:44 by iidzim           ###   ########.fr       */
->>>>>>> d5fbec1f4e55babfe85120b05034b7f49fc7c868
+/*   Updated: 2021/06/07 13:22:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +78,7 @@ int		launch(char **env, char **arg);
 ** Utils
 */
 
+int		is_printable(t_index *m);
 int		quit(void);
 int		len(char **env);
 int		alpha(char *key);
