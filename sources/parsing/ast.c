@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/08 19:37:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/08 21:43:39 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,12 @@ t_cmd	*visitor(t_ast *ast)
 
 // void ft_nizar_realloc(void **chi, int size, int nb)
 // {
-// 	void *new;
+// 	char *new;
+// 	char *tmp;
+// 	int i;
 
 // 	new = malloc(size * nb);
-	
+// 	tmp = *chi;
+// 	i = -1;
+// 	while ((*))
 // }

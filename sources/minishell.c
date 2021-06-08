@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/08 19:26:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/08 21:48:49 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,44 @@ t_lexer	*read_cmd(void)
 	free(buffer);
 	return (init_lexer(line));
 }
+
+// char	*to_lower(char *s)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (s[i] != '\0')
+// 	{
+// 		if (s[i] >= 65 && s[i] <= 90)
+// 			s[i] += 32;
+// 		i++;
+// 	}
+// 	return (s);
+// }
+
+// int	execution(t_cmd	*z)
+// {
+// 	int		i;
+// 	char	*s;
+
+// 	if (!z)
+// 		return (NULL);
+// 	i = -1;
+// 	while (z[++i].argvs)
+// 	{
+// 		s = to_lower(z[i].argvs[0]);
+// 		if (is_builtin(s))
+// 			exec_cmd(z);
+// 		else if (is_cmdpath(s))
+// 			exec_cmd(z);
+// 		else
+// 		{
+// 			printf("minishell: %s: command not found\n", z[i].argvs[0]);
+// 			return (0);
+// 		}
+// 	}
+// 	return (1);
+// }
 
 int main(int argc, char **argv, char **env)
 {
@@ -78,6 +116,7 @@ int main(int argc, char **argv, char **env)
 		printf("------------------------------\n\n");
 		(void)z;
 		z = visitor(ast);
+		// execution(z);
 		if (ast)
 			free_tree(ast);
 		// system("leaks minishell");

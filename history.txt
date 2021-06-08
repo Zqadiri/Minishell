@@ -471,3 +471,4 @@ echo '' '' ''\n
 Echo bonjour\n 
 echo -n -n -n -n bonjour\n
 echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n
+echo ok
