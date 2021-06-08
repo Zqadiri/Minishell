@@ -368,3 +368,106 @@ export TEST='bonjour' echo "|$TEST|"\n
 export TEST='bonjour' echo '|$TEST_|'\n 
 | ; a\n 
 | >> a\n
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok | cat ok
+echo ok ; cat ok
+echo ok ; echi ko
+echo ok | cat ok 
+echo ok > a > b > c
+echo ok > a > b > c ;  echo ko 
+echo ok > b > c >d>>e
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''echo bonjour
+"echo '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"'"
+echo "\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'"
+echo "|$TEST_|"
+;; test
+;; test
+;; test
+| test
+echo > <
+echo | |
+echo | ok
+<
+>
+<<
+>>>
+>>>>
+>>>>>
+echo |;
+echo ||
+a b c | |
+echo |
+a b c | |
+echo |
+echo | |
+>>
+<<
+;; test
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo a | eho b
+echo a | echo b 
+echo a | echo b
+  printf("\n------------------------------\n");
+echo a | echo b
+echo a | echo b
+echo a | echo b
+eho ok ; echo ok
+echo ok | echo ko
+echo ok | echo ko
+echo ok ; echo ko
+echo ok ; echo ko
+echo ko | echo ok
+echo ok ; echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo a | echo b | echo c
+echo ok | echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo ok
+echo ook
+dssss fdf
+fggggggggggg fggg
+fgfg fgfgd
+trgeg rtgr
+jkjk jkjk
+dfsfdg dffffgg
+esdasd affdsff
+unset A; echo oop
+unset A; echo oop
+dfvsf fdgdfg
+dc dffffffff
+ggfdf dgd
+hgerhg erterfher
+rdfird iofhjr
+jwhfr rhjfgkj
+echo ok ; echo ko
+echo ok | echo ko 
+echo ok | echo ko 
+c cb | c n
+echo ok | echo ko
+echo ok | echo ko
+echo ok ; echo ko
+echo ok ; echo ko
+echo  ok | echo ko
+echo  ok | echo ko ;echo  ok | echo ko ; echo  ok | echo ko
+echo  ok | echo ko ;echo  ok | echo ko ; echo  ok | echo ko
+echo $PWD; echo $PWD;
+cho $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n 
+echo lalalala lalalalal alalalalal alalalala\n  
+echo a '' b '' c '' d\n 
+echo a "" b "" c "" d\n 
+echo -n a '' b '' c '' d\n
+echo '' '' ''\n
+Echo bonjour\n 
+echo -n -n -n -n bonjour\n
+echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n
