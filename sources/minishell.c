@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/08 21:48:49 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/09 19:51:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,17 +108,19 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		p = init_parser(l);
-		ast = parse_compound(p);
-			
-		// ? if (!ast) set exit status  $? = 258 (syntax error)
-		printf("\n------------------------------\n");
-		print_tree(ast);
-		printf("------------------------------\n\n");
-		(void)z;
-		z = visitor(ast);
-		// execution(z);
-		if (ast)
-			free_tree(ast);
+		if (p)
+		{
+			ast = parse_compound(p);
+			// ? if (!ast) set exit status  $? = 258 (syntax error)
+			// printf("\n------------------------------\n");
+			// print_tree(ast);
+			// printf("------------------------------\n\n");
+			(void)z;
+			z = visitor(ast);
+			// execution(z);
+			if (ast)
+				free_tree(ast);
+		}
 		// system("leaks minishell");
 	}
 	//free before exit

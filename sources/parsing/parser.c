@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/08 19:13:44 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/09 19:15:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,49 +63,12 @@ t_ast	*parse_args(t_parser *p)
 			break ;
 		}
 		if (ast->args[ast->args_size - 1]->type == eof)
-			break;
+			break ;
 	}
 	if (!syntax_error_pipe_semi(p))
 		return (NULL);
 	return (ast);
 }
-
-// t_ast	*parse_args(t_parser *p)
-// {
-// 	t_ast	*ast;
-// 	ast = init_ast(arg_ast);
-// 	ast->args = (t_token**)malloc(sizeof(t_token*));
-// 	if (!ast->args)
-// 		return (NULL);
-// 	if (ast->args_size == 0)
-// 	{
-// 		ast->args[ast->args_size] = malloc(sizeof(t_token));
-// 		ast->args[ast->args_size] = p->curr_token;
-// 		if (p->curr_token->type == pip || p->curr_token->type == semi)
-// 		{
-// 			printf("minishell: syntax error near unexpected token 0`%s'\n",
-// 				p->curr_token->value);
-// 			return (NULL);
-// 		}
-// 	}
-// 	while (p->curr_token->type != eof)
-// 	{
-// 		ast->args_size += 1;
-// 		ast->args = realloc(ast->args, (ast->args_size + 1) * sizeof(t_token));
-// 		p->prev_token = p->curr_token;
-// 		p->curr_token = get_next_token(p->lexer);
-// 		ast->args[ast->args_size] = check_token(p, ast);
-// 		if (!ast->args[ast->args_size])
-// 			return (NULL);
-// 		if (ast->args[ast->args_size]->type == eof
-// 			|| ast->args[ast->args_size]->type == pip
-// 			|| ast->args[ast->args_size]->type == semi)
-// 			break ;
-// 	}
-// 	if (!syntax_error_pipe_semi(p))
-// 		return (NULL);
-// 	return (ast);
-// }
 
 t_ast	*parse_pipe(t_parser *p)
 {
@@ -151,10 +114,7 @@ t_ast	*parse_compound(t_parser *p)
 		if (!ast->comp_values[ast->comp_size - 1])
 			return (free_tree(ast));
 		ast->comp_size += 1;
-		// ast->comp_values = realloc(ast->comp_values, ast->comp_size
-		// 		* sizeof(t_ast*));
 		ast->comp_values = realloc_ast_node(ast, ast->comp_size + 1);
-		printf("size >> [%d]\n", ast->comp_size);
 	}
 	ast->comp_size -= 1;
 	return (ast);

@@ -472,3 +472,96 @@ Echo bonjour\n
 echo -n -n -n -n bonjour\n
 echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n
 echo ok
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo ok ; echo ko
+echo ok ; echo ko
+echo ok 
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo ok ; echo ko
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+| echo ok;
+| echo ok;
+| echo ok;
+|echo ;
+echo ok ; echo ko | <file cat 
+echo ok ; echo ko | < file cat
+echo bonjour > test\n 
+echo bonjour >> test\n
+echo bonjour < file\n
+echo bonjour >> file
+echo bonjour > test
+echo bonjour < file
+echo bonjour < file
+echo bonjour < file
+echo bonjour < file
+echo bonjour > file
+printf("f:check_token\tp->prev = [%s]\n", p->prev_token->value);
+echo bonjour > test > je > suis\n
+echo bonjour < test
+> test echo bonjour > je > suis\n
+> test echo bonjour > je > suis\n
+echo >> test'sticked' bonjour\n 
+>> test'sticked' echo bonjour\n
+echo > test"sticked" bonjour\n
+echo > test'yo'"sticked" bonjour\n
+>> test'yo'"sticked" echo bonjour\n
+echo bonjour > test > je > suis\n
+echo bonjour < test < je < suis
+echo bonjour > test > je > suis\n
+echo bonjour > test > je > suis\n
+echo bonjour < test < je <  suis
+> test echo bonjour > je > suis\n
+> test echo bonjour > je
+echo < ok
+> ok
+>> ok
+< ok
+echo < ok
+echo < ok
+echo < ok
+echo ok  > ok
+echo > ok
+echo < ok
+echo < ok
+echo < ok
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo bonjour>test>je>suis\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+>\n
+>>\n
+echo >\n
+echo >>\n
+echo <\n
+> test\n
+>> test\n
+echo foo >>> bar\n
+echo foo >>> bar\n
+echo foo >>>> bar\n
+echo foo >>>>> bar\n
+cat < doesnotexist\n
+echo $?\n
+echo abc$?
+echo abc$?abc
+> file\n 
+echo; \n
+echo; \n
+; echo\n
+echo a ; ;\n
+;\n
+echo a ; echo b; echo c ;echo d     ;   echo e   ;echo f;
+echo a ; echo b; echo c ;echo d     ;   echo e   ;echo f;
+echo a ; ;\n
+echo a ; ; echo b\n
+;;;;;\n
+< | a\n
+ > | a\n
+>> | a\n
+>> | a\n
+>> | a\n
+echo $1USER
