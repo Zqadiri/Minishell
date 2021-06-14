@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/07 14:10:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/14 12:56:56 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,50 @@ t_lexer	*read_cmd(void)
 	return (init_lexer(line));
 }
 
+// char	*to_lower(char *s)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (s[i] != '\0')
+// 	{
+// 		if (s[i] >= 65 && s[i] <= 90)
+// 			s[i] += 32;
+// 		i++;
+// 	}
+// 	return (s);
+// }
+
+// int	execution(t_cmd	*z)
+// {
+// 	int		i;
+// 	char	*s;
+
+// 	if (!z)
+// 		return (NULL);
+// 	i = -1;
+// 	while (z[++i].argvs)
+// 	{
+// 		s = to_lower(z[i].argvs[0]);
+// 		if (is_builtin(s))
+// 			exec_cmd(z);
+// 		else if (is_cmdpath(s))
+// 			exec_cmd(z);
+// 		else
+// 		{
+// 			printf("minishell: %s: command not found\n", z[i].argvs[0]);
+// 			return (0);
+// 		}
+// 	}
+// 	return (1);
+// }
+
 int main(int argc, char **argv, char **env)
 {
 	t_lexer *l;
 	t_parser *p;
 	t_ast *ast;
-	t_zineb *z;
+	t_cmd *z;
 
 	(void)argc;
 	(void)argv; 
@@ -70,6 +108,7 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		p = init_parser(l);
+<<<<<<< HEAD
 		ast = parse_compound(p);
 			
 		// ? set exit status  $? = 258 (syntax error)
@@ -83,6 +122,21 @@ int main(int argc, char **argv, char **env)
 		// print_zineb(z);
 		if (ast)
 			free_tree(ast);
+=======
+		if (p)
+		{
+			ast = parse_compound(p);
+			// ? if (!ast) set exit status  $? = 258 (syntax error)
+			// printf("\n------------------------------\n");
+			// print_tree(ast);
+			// printf("------------------------------\n\n");
+			(void)z;
+			z = visitor(ast);
+			// execution(z);
+			if (ast)
+				free_tree(ast);
+		}
+>>>>>>> 33247f16c57bf3052f52c42993a68aea778d07c4
 		// system("leaks minishell");
 	}
 	//free before exit

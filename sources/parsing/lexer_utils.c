@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 19:09:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/09 15:51:11 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 {
 	if (type == greater)
 		readchar(l);
-	if (type == great || type == pip || type == semi || type == greater)
+	if (type == great || type == pip || type == semi || type == greater || type == less)
 		readchar(l);
 	return (init_token(type, s));
 }

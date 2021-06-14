@@ -350,4 +350,218 @@ echo echo $PWD;
 export a="    ls   -la    "
 echo ok
 echo jfbe
-echo
+echo ok > file | cat fil
+p->prev_token = p->curr_token;
+echo ok > file ; cat file
+echo ok > file | cat file
+echo ok > file ; cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok > file ; cat file
+echo ok | > file echo ok
+export A='a' B='b' C='c' unset A B C\n   
+echo bonjour >> test\n
+export TEST='bonjour' echo "|$TEST|"\n 
+export TEST='bonjour' echo '|$TEST_|'\n 
+| ; a\n 
+| >> a\n
+echo ok > file | cat file
+echo ok > file | cat file
+echo ok | cat ok
+echo ok ; cat ok
+echo ok ; echi ko
+echo ok | cat ok 
+echo ok > a > b > c
+echo ok > a > b > c ;  echo ko 
+echo ok > b > c >d>>e
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''echo bonjour
+"echo '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"'"
+echo "\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'\'"
+echo "|$TEST_|"
+;; test
+;; test
+;; test
+| test
+echo > <
+echo | |
+echo | ok
+<
+>
+<<
+>>>
+>>>>
+>>>>>
+echo |;
+echo ||
+a b c | |
+echo |
+a b c | |
+echo |
+echo | |
+>>
+<<
+;; test
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo ok | eho ok
+echo a | eho b
+echo a | echo b 
+echo a | echo b
+  printf("\n------------------------------\n");
+echo a | echo b
+echo a | echo b
+echo a | echo b
+eho ok ; echo ok
+echo ok | echo ko
+echo ok | echo ko
+echo ok ; echo ko
+echo ok ; echo ko
+echo ko | echo ok
+echo ok ; echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo a | echo b | echo c
+echo ok | echo ko
+echo ok | echo ko
+echo ok | echo ko
+echo ok
+echo ook
+dssss fdf
+fggggggggggg fggg
+fgfg fgfgd
+trgeg rtgr
+jkjk jkjk
+dfsfdg dffffgg
+esdasd affdsff
+unset A; echo oop
+unset A; echo oop
+dfvsf fdgdfg
+dc dffffffff
+ggfdf dgd
+hgerhg erterfher
+rdfird iofhjr
+jwhfr rhjfgkj
+echo ok ; echo ko
+echo ok | echo ko 
+echo ok | echo ko 
+c cb | c n
+echo ok | echo ko
+echo ok | echo ko
+echo ok ; echo ko
+echo ok ; echo ko
+echo  ok | echo ko
+echo  ok | echo ko ;echo  ok | echo ko ; echo  ok | echo ko
+echo  ok | echo ko ;echo  ok | echo ko ; echo  ok | echo ko
+echo $PWD; echo $PWD;
+cho $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n 
+echo lalalala lalalalal alalalalal alalalala\n  
+echo a '' b '' c '' d\n 
+echo a "" b "" c "" d\n 
+echo -n a '' b '' c '' d\n
+echo '' '' ''\n
+Echo bonjour\n 
+echo -n -n -n -n bonjour\n
+echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n
+echo ok
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo ok ; echo ko
+echo ok ; echo ko
+echo ok 
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo ok ; echo ko
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n
+| echo ok;
+| echo ok;
+| echo ok;
+|echo ;
+echo ok ; echo ko | <file cat 
+echo ok ; echo ko | < file cat
+echo bonjour > test\n 
+echo bonjour >> test\n
+echo bonjour < file\n
+echo bonjour >> file
+echo bonjour > test
+echo bonjour < file
+echo bonjour < file
+echo bonjour < file
+echo bonjour < file
+echo bonjour > file
+printf("f:check_token\tp->prev = [%s]\n", p->prev_token->value);
+echo bonjour > test > je > suis\n
+echo bonjour < test
+> test echo bonjour > je > suis\n
+> test echo bonjour > je > suis\n
+echo >> test'sticked' bonjour\n 
+>> test'sticked' echo bonjour\n
+echo > test"sticked" bonjour\n
+echo > test'yo'"sticked" bonjour\n
+>> test'yo'"sticked" echo bonjour\n
+echo bonjour > test > je > suis\n
+echo bonjour < test < je < suis
+echo bonjour > test > je > suis\n
+echo bonjour > test > je > suis\n
+echo bonjour < test < je <  suis
+> test echo bonjour > je > suis\n
+> test echo bonjour > je
+echo < ok
+> ok
+>> ok
+< ok
+echo < ok
+echo < ok
+echo < ok
+echo ok  > ok
+echo > ok
+echo < ok
+echo < ok
+echo < ok
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n 
+echo bonjour>test>je>suis\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+>\n
+>>\n
+echo >\n
+echo >>\n
+echo <\n
+> test\n
+>> test\n
+echo foo >>> bar\n
+echo foo >>> bar\n
+echo foo >>>> bar\n
+echo foo >>>>> bar\n
+cat < doesnotexist\n
+echo $?\n
+echo abc$?
+echo abc$?abc
+> file\n 
+echo; \n
+echo; \n
+; echo\n
+echo a ; ;\n
+;\n
+echo a ; echo b; echo c ;echo d     ;   echo e   ;echo f;
+echo a ; echo b; echo c ;echo d     ;   echo e   ;echo f;
+echo a ; ;\n
+echo a ; ; echo b\n
+;;;;;\n
+< | a\n
+ > | a\n
+>> | a\n
+>> | a\n
+>> | a\n
+echo $1USER

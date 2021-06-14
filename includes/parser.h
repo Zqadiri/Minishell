@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/07 13:51:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/08 19:19:52 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,16 @@ typedef struct s_ast
 	struct s_ast	**pipecmd_values;
 	int				pipecmd_size;
 	t_token			**args;
+	int				redir_nbr;
 	int				args_size;
 }					t_ast;
 
-typedef struct s_zineb
+typedef struct s_cmd
 {
-    char    **argvs;
-    t_redir *r;
-}               t_zineb;
+	char			**argvs;
+	t_redir			*r;
+	t_token_type	type;
+}               t_cmd;
 
 /*
 ** parser_utils.c
@@ -68,12 +70,12 @@ int			is_redirection(t_token *t);
 /*
 ** parser.c
 */
-
+t_ast		**realloc_ast_node(t_ast *ast, int size);
+t_token		**realloc_ast_args(t_ast *ast, int size);
 t_ast		*parse_compound(t_parser *p);
 t_ast		*parse_pipe(t_parser *p);
-t_ast		*parse_cmd(t_parser *p);
 t_ast		*parse_args(t_parser *p);
-t_token		*check_token(t_parser *p);
+t_token		*check_token(t_parser *p, t_ast *ast);
 
 /*
 ** ast.c
@@ -81,17 +83,16 @@ t_token		*check_token(t_parser *p);
 
 t_ast		*init_ast(t_ast_type type);
 void		print_tree(t_ast *ast);
-t_zineb		*visitor(t_ast *ast);
-void		print_zineb(t_zineb *z);
+t_cmd		*visitor(t_ast *ast);
+void		print_cmd(t_cmd *z);
 
 /*
 ** free.c
 */
 
 void		is_notempty(void *ptr);
-t_ast		*free_pip_args(t_ast *ast);
+t_ast		*free_args(t_ast *ast);
 t_ast		*free_tree(t_ast *ast);
 void		free_parser(t_parser *p);
-
 
 #endif
