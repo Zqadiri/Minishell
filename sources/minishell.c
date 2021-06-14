@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/07 13:45:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/07 14:10:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int main(int argc, char **argv, char **env)
 			// $? = 258
 		print_tree(ast);
 		(void)z;
-		z = visitor(ast);
-		if (!z)
-			return (0);
-		print_zineb(z);
+		// z = visitor(ast);
+		// if (!z)
+		// 	return (0);
+		// print_zineb(z);
 		if (ast)
 			free_tree(ast);
 		// system("leaks minishell");
