@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/08 19:19:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 10:56:33 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ typedef struct s_ast
 typedef struct s_cmd
 {
 	char			**argvs;
+	int				args_size;
 	t_redir			*r;
+	int				redir_nbr;
 	t_token_type	type;
 }               t_cmd;
 
@@ -70,6 +72,7 @@ int			is_redirection(t_token *t);
 /*
 ** parser.c
 */
+
 t_ast		**realloc_ast_node(t_ast *ast, int size);
 t_token		**realloc_ast_args(t_ast *ast, int size);
 t_ast		*parse_compound(t_parser *p);

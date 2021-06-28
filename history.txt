@@ -565,3 +565,40 @@ echo a ; ; echo b\n
 >> | a\n
 >> | a\n
 echo $1USER
+echo ok > file
+echo ok > file
+echo ok > file
+echo ok > file
+echo ok > file
+echo ok > file
+echo ok > file
+echo $PWD; echo $PWD; cd //home; pwd; echo $PWD; echo $PWD\n
+echo a '' b '' c '' d\n
+echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n 
+export A=a B=b C=c D=d E=e F=f G=g H=h I=i J=j K=k L=lM=m N=n O=o P=p Q=q R=r S=s T=t U=u V=v W=w X=x Y=y Z=...
+export bO_nJq123o__1ju_je3234sui__a=a; echo $bO_nJq123o__1ju_je3234sui__a\n
+echo bonjour >> test'yo'"sticked"\n
+echo bonjour >> test'yo'"sticked"\n
+echo bonjour >> test'yo'"sticked"\n
+echo bonjour >> test'yo'"sticked"\n
+>> test'yo'"sticked" echo bonjour\n
+echo bonjour > test > je > suis\n
+echo bonjour > test > je > suis\n
+echo bonjour >> test > je >> suis\n 
+echo bonjour >> test > je >> suis\n testtest
+echo bonjour>test>je>suis\n 
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'\n
+>\n 
+>>\n
+<\n
+echo >\n
+echo >>\n
+echo foo >>> bar\n
+echo foo >>>> bar\n
+echo foo >>>>> bar\n
+cat < doesnotexist\n
+echo $?\n
+echo; echo $?\n 
+notfound; echo $?\n
+cat < doesntexist ; echo $?\n
+SETUP echo bonjour > noperm; chmod 000 noperm cat < noperm; echo $?\n

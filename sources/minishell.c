@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/14 12:56:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/28 10:19:00 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,21 +108,6 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		p = init_parser(l);
-<<<<<<< HEAD
-		ast = parse_compound(p);
-			
-		// ? set exit status  $? = 258 (syntax error)
-		// if (!ast)
-			// $? = 258
-		print_tree(ast);
-		(void)z;
-		// z = visitor(ast);
-		// if (!z)
-		// 	return (0);
-		// print_zineb(z);
-		if (ast)
-			free_tree(ast);
-=======
 		if (p)
 		{
 			ast = parse_compound(p);
@@ -136,7 +121,6 @@ int main(int argc, char **argv, char **env)
 			if (ast)
 				free_tree(ast);
 		}
->>>>>>> 33247f16c57bf3052f52c42993a68aea778d07c4
 		// system("leaks minishell");
 	}
 	//free before exit
