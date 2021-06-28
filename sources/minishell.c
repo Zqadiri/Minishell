@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 10:19:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 11:35:30 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,16 @@ t_lexer	*read_cmd(void)
 // 	return (1);
 // }
 
+void	execution(t_cmd *z)
+{
+	int i;
+
+	i = -1;
+	while (z->argvs[++i] != NULL)
+		printf("f:test\t %s\n", z->argvs[i]);
+	// printf("f:test\tend\n");
+}
+
 int main(int argc, char **argv, char **env)
 {
 	t_lexer *l;
@@ -117,7 +127,7 @@ int main(int argc, char **argv, char **env)
 			// printf("------------------------------\n\n");
 			(void)z;
 			z = visitor(ast);
-			// execution(z);
+			execution(z);
 			if (ast)
 				free_tree(ast);
 		}

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 11:14:19 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 11:32:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 		k = 0;
 		// printf("f:visitor\targs size = [%d]\n", ast->args_size);
 		// printf("f:visitor\tredirection nbr = [%d]\n\n", ast->redir_nbr);
-		z[n].argvs = malloc(sizeof(char*) * ast->args_size);
+		z[n].argvs = malloc(sizeof(char*) * (ast->args_size + 1));
 		z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
 		z[n].redir_nbr = ast->redir_nbr;
 		z[n].args_size = ast->args_size - (z[n].redir_nbr * 2) - 1;
@@ -107,6 +107,7 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 				k++;
 			}
 		}
+		z[n].argvs[l] = NULL;
 	}
 	return (z);
 }
