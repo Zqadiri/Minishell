@@ -604,3 +604,18 @@ cat < doesntexist ; echo $?\n
 SETUP echo bonjour > noperm; chmod 000 noperm cat < noperm; echo $?\n
 echo ok ko 
 echo ok ko > file
+echo ok ; echo ko
+echo ok ; ecjo ko ;;
+; ech ok
+|; echo 
+echo |; echo
+exit
+echo "\"
+cho "\"
+echo "$USER"
+echo "\""
+echo "\"
+echo "\"
+echo "\""
+ echo '"$USER"'
+ echo "'$USER'"

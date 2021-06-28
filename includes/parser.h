@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 10:56:33 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 13:16:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_redir
 
 typedef enum e_ast_type
 {
-	compound,
 	pipe_ast,
 	arg_ast
 }			t_ast_type;
@@ -42,8 +41,6 @@ typedef enum e_ast_type
 typedef struct s_ast
 {
 	t_ast_type		type;
-	struct s_ast	**comp_values;
-	int				comp_size;
 	struct s_ast	**pipecmd_values;
 	int				pipecmd_size;
 	t_token			**args;
@@ -66,7 +63,7 @@ typedef struct s_cmd
 
 t_parser	*init_parser(t_lexer *l);
 int			parse_expected_token(t_parser *p, t_token_type type);
-int			syntax_error_pipe_semi(t_parser *p);
+int			syntax_error_pipe(t_parser *p);
 int			is_redirection(t_token *t);
 
 /*

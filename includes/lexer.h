@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/09 20:30:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 13:17:32 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # define GREAT 62
 # define GREATER 63 //">>"
 # define LESS 60
+// # define LESS 60
 # define DQUOTE 34
 # define SQUOTE 39
-# define SEMICOLON 59
 # define SPACE 32
 # define DOLLAR 36
 # define BSLASH 92
@@ -37,6 +37,7 @@ typedef enum e_token_type
 	great,
 	greater,
 	less,
+	here_doc,
 	id,
 	eof
 }			t_token_type;

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/08 13:37:17 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 13:17:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,8 @@ t_ast	*free_args(t_ast *ast)
 
 t_ast	*free_tree(t_ast *ast)
 {
-	int	i;
 	int	j;
 
-	if (ast->type == compound)
-	{
-		i = -1;
-		while (++i < ast->comp_size)
-		{
-			if (ast->comp_values[i])
-				free_tree(ast->comp_values[i]);
-		}
-		is_notempty(ast->comp_values);
-	}
 	if (ast->type == pipe_ast)
 	{
 		j = -1;

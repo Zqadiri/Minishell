@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/09 15:51:11 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 15:26:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	skip_space(t_lexer *l)
 
 t_token	*ret_str(t_lexer *l, char *s, int type)
 {
-	if (type == greater)
+	if (type == greater || type == here_doc)
 		readchar(l);
-	if (type == great || type == pip || type == semi || type == greater || type == less)
+	if (type == great || type == pip || type == here_doc
+		|| type == greater || type == less)
 		readchar(l);
 	return (init_token(type, s));
 }

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 11:32:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 15:36:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ t_ast	*init_ast(t_ast_type type)
 	if (!ast)
 		return (NULL);
 	ast->type = type;
-	ast->comp_values = (void*) 0;
-	ast->comp_size = 0;
-	ast->pipecmd_values = (void*) 0;
+	ast->pipecmd_values = (void *) 0;
 	ast->pipecmd_size = 0;
 	ast->args = 0;
 	ast->redir_nbr = 0;
@@ -32,19 +30,11 @@ t_ast	*init_ast(t_ast_type type)
 
 void	print_tree(t_ast *ast)
 {
-	int	i;
 	int	j;
 	int	k;
 
 	if (!ast)
 		return ;
-	if (ast->type == compound)
-	{
-		i = -1;
-		printf("f:print_tree compound size = [%d]\n", ast->comp_size);
-		while (++i < ast->comp_size)
-			print_tree(ast->comp_values[i]);
-	}
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
@@ -56,7 +46,7 @@ void	print_tree(t_ast *ast)
 	{
 		k = -1;
 		printf("f:print_tree args size = [%d]\n", ast->args_size);
-		while (++k < ast->args_size)// && ast->args[k]->type != eof)
+		while (++k < ast->args_size)
 			printf("f:print_tree\ttoken -> [%s][%u]\n", ast->args[k]->value,
 				ast->args[k]->type);
 	}
@@ -75,14 +65,14 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 		k = 0;
 		// printf("f:visitor\targs size = [%d]\n", ast->args_size);
 		// printf("f:visitor\tredirection nbr = [%d]\n\n", ast->redir_nbr);
-		z[n].argvs = malloc(sizeof(char*) * (ast->args_size + 1));
+		z[n].argvs = malloc(sizeof(char *) * (ast->args_size + 1));
 		z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
 		z[n].redir_nbr = ast->redir_nbr;
 		z[n].args_size = ast->args_size - (z[n].redir_nbr * 2) - 1;
-		printf("***f:visitor\targs size = [%d]\n",z[n].args_size);
-		printf("***f:visitor\tredirection nbr = [%d]\n",z[n].redir_nbr);
+		printf("***f:visitor\targs size = [%d]\n", z[n].args_size);
+		printf("***f:visitor\tredirection nbr = [%d]\n", z[n].redir_nbr);
 		while (k < ast->args_size && (ast->args[k]->type != eof
-			|| ast->args[k]->type != pip || ast->args[k]->type != semi))
+				|| ast->args[k]->type != pip))
 		{
 			if (ast->args[k]->type == id)
 			{
@@ -115,25 +105,12 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 t_cmd	*visitor(t_ast *ast)
 {
 	t_cmd	*z;
-	int		i;
 	int		j;
 	int		n;
 
 	if (!ast)
 		return (NULL);
 	n = 0;
-	if (ast->type == compound)
-	{
-		i = -1;
-		while (++i < ast->comp_size)
-		{
-			printf("\n\nf:visitor\tcheck compound size = [%d]\n", ast->comp_size);
-			z = visitor(ast->comp_values[i]);
-			if (ast->comp_size >= 2)
-				z[n].type = semi;
-			n++;
-		}
-	}
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
