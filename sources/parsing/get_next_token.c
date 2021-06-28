@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 16:31:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 19:48:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_token	*string_token(t_lexer *l)
 {
 	char	*str;
 	char	*temp;
-	char	*s;
+	// char	*s;
 
 	str = ft_strdup("");
 	while (l->curpos <= l->bufsize && l->c != PIPE && l->c != GREAT
@@ -111,7 +111,10 @@ t_token	*string_token(t_lexer *l)
 		{
 			s = tokenize_dquoted_text(l);
 			if (!s && l->multi_line == 1)
-				return (NULL);
+			{
+				printf("error>>>\n");
+				return (ret_str(l, NULL, illegal));
+			}
 			str = ft_strjoin(str, s);
 			free(s);
 		}
@@ -119,7 +122,7 @@ t_token	*string_token(t_lexer *l)
 		{
 			s = tokenize_squoted_text(l);
 			if (!s && l->multi_line == 1)
-				return (NULL);
+				return (ret_str(l, NULL, illegal));
 			str = ft_strjoin(str, s);
 			free(s);
 		}
@@ -154,7 +157,15 @@ t_token	*get_next_token(t_lexer *l)
 			return (ret_char(l, l->c, less));
 		}
 		else
+		{
+			// t_token *ret = string_token(l);
+			// printf("in\n");
+			// if (ret->type == illegal)
+			// 	return (ret_char(l, l->c, illegal));
+			// printf("ret->value = [%s], ret->type = [%u]\n", ret->value, ret->type);
+			// return (ret);
 			return (string_token(l));
+		}
 	}
 	return (ret_char(l, l->c, eof));
 }

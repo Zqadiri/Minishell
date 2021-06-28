@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 15:32:47 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 18:53:24 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_token	*check_token(t_parser *p, t_ast *ast)
 {
+	if (p->curr_token->type == illegal)
+		return (NULL);
 	if (!syntax_error_pipe(p))
 		return (NULL);
 	if (is_redirection(p->prev_token))
@@ -55,8 +57,7 @@ t_ast	*parse_args(t_parser *p)
 		ast->args[ast->args_size - 1] = check_token(p, ast);
 		if (!ast->args[ast->args_size - 1])
 			return (NULL);
-		if (ast->args[ast->args_size - 1]->type == pip
-			|| ast->args[ast->args_size - 1]->type == semi)
+		if (ast->args[ast->args_size - 1]->type == pip)
 		{
 			p->prev_token = p->curr_token;
 			p->curr_token = get_next_token(p->lexer);

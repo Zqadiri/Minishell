@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 13:17:32 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 18:49:11 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@
 typedef enum e_token_type
 {
 	pip,
-	semi,
 	great,
 	greater,
 	less,
 	here_doc,
 	id,
-	eof
+	eof,
+	illegal
 }			t_token_type;
 
 /*
