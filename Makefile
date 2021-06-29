@@ -6,7 +6,11 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2021/06/28 11:24:34 by zqadiri          ###   ########.fr        #
+=======
+#    Updated: 2021/06/28 19:40:56 by iidzim           ###   ########.fr        #
+>>>>>>> c5663b6b68b98a83c83aa901dbcae7da1f76abe2
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +29,7 @@ SRCS 			=	./sources/minishell.c\
 					
 LIBFT_PATH 		= 	./libft
 
+# SRCB			=	./sources/parsing/handle_quotes_bonus.c
 
 SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/cd_builtin.c\
@@ -43,7 +48,7 @@ LIBFT_PATH 		= 	./libft
 
 OBJS			= 	${SRCS:.c=.o}
 OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
-
+# OBJB			=	$(SRCB:.c=.o)
 # fix header
 
 INCLUDE 		= 	-I includes -L includes
@@ -56,12 +61,18 @@ all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
 				@$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g
+
+# bonus:			${OBJS} ${OBJB}
+# 				@$(CC) -o $(NAME) $(SRCS) $(SRCB) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g
 				
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
+
 fclean:			libft_fclean clean
 				@${RM} ${NAME}
+
 re:				fclean all
+
 run:			re
 				./minishell
 

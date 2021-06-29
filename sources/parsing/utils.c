@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 19:41:42 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 18:47:47 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_token	*init_token(t_token_type type, char *s)
 	t = malloc(sizeof(t_token));
 	if (!t)
 		return (NULL);
-	t->value = ft_strdup(s);
+	if (s)
+		t->value = ft_strdup(s);
+	else
+		t->value = NULL;
 	t->type = type;
 	return (t);
 }

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/29 15:33:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/29 15:34:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int main(int argc, char **argv, char **env)
 		p = init_parser(l);
 		if (p)
 		{
-			ast = parse_compound(p);
+			ast = parse_pipe(p);
 			// ? if (!ast) set exit status  $? = 258 (syntax error)
 			printf("\n------------------------------\n");
 			print_tree(ast);
@@ -151,42 +151,42 @@ int main(int argc, char **argv, char **env)
 // check if there is nay syntax error (eg: >>> or |; ...)
 // implement functions (map) for linked list
 // example :							 output
-// √- echo c'o\'u'cou'					-> co\ucou 
-// √- ec"ho" bon"'j'o'u"r				-> bon'j'o'ur
-// √- ec"ho" bon"j'o\'u"r				-> bonj'o\'ur
-// √- echo co'c"o"u'					-> coc"o"u
-// √- echo co'"c\"o"u'					-> co"c\"o"u
-// √- ec"ho" bon"jo"u"r					-> add " f next line ->bonjour
-// √- ec"ho" bon"jo\"u"r					-> bonjo"ur
-// √- echo bo'njou\$r					-> add ' f next line ->bonjou\$r
-// √- echo bo"njou\$r					-> add " f next line ->bonjou$r
-// √- ec"ho" bon"jo\"u"r					-> bonjo"ur
-// √- echo "\\"							-> \
-// √- bash-3.2$ echo A B C
-// >>A B C
-// √- bash-3.2$ echo A''B''C
-// >>ABC
-// - bash-3.2$ echo A '' B '' C
-// >>A  B  C
-// - bash-3.2$ echo A  B  C
-// >>A B C
+//* √- echo c'o\'u'cou'					-> co\ucou 
+//* √- ec"ho" bon"'j'o'u"r				-> bon'j'o'ur
+//* √- ec"ho" bon"j'o\'u"r				-> bonj'o\'ur
+//* √- echo co'c"o"u'					-> coc"o"u
+//* √- echo co'"c\"o"u'					-> co"c\"o"u
+//* √- ec"ho" bon"jo"u"r					-> add " f next line ->bonjour
+//* √- ec"ho" bon"jo\"u"r					-> bonjo"ur
+//* √- echo bo'njou\$r					-> add ' f next line ->bonjou\$r
+//* √- echo bo"njou\$r					-> add " f next line ->bonjou$r
+//* √- ec"ho" bon"jo\"u"r					-> bonjo"ur
+//* √- echo "\\"							-> \
+//* √- bash-3.2$ echo A B C
+//* >>A B C
+//* √- bash-3.2$ echo A''B''C
+//* >>ABC
+//* - bash-3.2$ echo A '' B '' C
+//* >>A  B  C
+//* - bash-3.2$ echo A  B  C
+//* >>A B C
 
-// /!\ A single quote may not occur between single quotes, even when preceded by a backslash.
+// !/!\ A single quote may not occur between single quotes, even when preceded by a backslash.
 
-// bash-3.2$ echo $SHELL
-// /bin/zsh
-// bash-3.2$ echo $_
-// /bin/zsh
-// bash-3.2$ echo $?
-// 0
+//* bash-3.2$ echo $SHELL
+//* /bin/zsh
+//* bash-3.2$ echo $_
+//* /bin/zsh
+//* bash-3.2$ echo $?
+//* 0
 
-//bash-3.2$ export number="0 1  2       3"
-// bash-3.2$ env | less
-// bash-3.2$ echo "$number"
-// 0 1  2       3
-// bash-3.2$ echo $number - trim environment variable
-// 0 1 2 3
-// -> $IFS default separators used for field splitting 
+//* bash-3.2$ export number="0 1  2       3"
+//* bash-3.2$ env | less
+//* bash-3.2$ echo "$number"
+//* 0 1  2       3
+//* bash-3.2$ echo $number - trim environment variable
+//* 0 1 2 3
+//* -> $IFS default separators used for field splitting 
 
 
 // ! switch cmd name to lowercase before cmp

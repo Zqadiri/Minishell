@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/09 15:04:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/28 18:56:01 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_parser	*init_parser(t_lexer *l)
 	p->lexer = l;
 	p->curr_token = get_next_token(l);
 	p->prev_token = p->curr_token;
-	if (p->curr_token->type == pip || p->curr_token->type == semi)
+	if (p->curr_token->type == pip)
 	{
 		printf("minishell: syntax error near unexpected token 1`%s'\n",
 			p->curr_token->value);
@@ -52,22 +52,13 @@ int	parse_expected_token(t_parser *p, t_token_type type)
 	return (1);
 }
 
-int	syntax_error_pipe_semi(t_parser *p)
+int	syntax_error_pipe(t_parser *p)
 {
-	if ((p->prev_token->type == pip && p->curr_token->type == semi)
-		|| (p->prev_token->type == semi && p->curr_token->type == semi)
-		|| (p->prev_token->type == pip && p->curr_token->type == pip)
-		|| (p->prev_token->type == semi && p->curr_token->type == pip))
+	if ((p->prev_token->type == pip && p->curr_token->type == pip)
+		|| (p->prev_token->type == pip && p->curr_token->type == eof))
 	{
 		printf("minishell: syntax error near unexpected token 3`%s'\n",
 			p->curr_token->value);
-		free_parser(p);
-		return (0);
-	}
-	if (p->prev_token->type == pip && p->curr_token->type == eof)
-	{
-		printf("minishell: syntax error near unexpected token 4`%s'\n",
-			p->prev_token->value);
 		free_parser(p);
 		return (0);
 	}
@@ -82,7 +73,8 @@ int	syntax_error_pipe_semi(t_parser *p)
 
 int	is_redirection(t_token *t)
 {
-	if (t->type == great || t->type == greater || t->type == less)
+	if (t->type == great || t->type == greater || t->type == less
+		|| t->type == here_doc)
 		return (1);
 	return (0);
 }

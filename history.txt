@@ -602,7 +602,45 @@ echo; echo $?\n
 notfound; echo $?\n
 cat < doesntexist ; echo $?\n
 SETUP echo bonjour > noperm; chmod 000 noperm cat < noperm; echo $?\n
+<<<<<<< HEAD
 echo hi 
 echo heloor knsr
 ;skrg lnsrg
 echo -n bonjour -n\n   
+=======
+echo ok ko 
+echo ok ko > file
+echo ok ; echo ko
+echo ok ; ecjo ko ;;
+; ech ok
+|; echo 
+echo |; echo
+exit
+echo "\"
+cho "\"
+echo "$USER"
+echo "\""
+echo "\"
+echo "\"
+echo "\""
+ echo '"$USER"'
+ echo "'$USER'"
+echo "\""
+echo "\""
+echo "\""
+echo "\""
+echo "\""
+echo "\""
+echo "\""
+echo '\''
+echo '\''
+echo '\''
+echo '\''
+echo "\""
+echo "\""
+echo "\""
+echo "\"
+echo "\"""
+echo "\""
+echo "ok"
+>>>>>>> c5663b6b68b98a83c83aa901dbcae7da1f76abe2
