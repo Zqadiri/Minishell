@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/23 19:12:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/29 15:27:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int			check_builtin(char **args)
 
 	if (ft_strequ(args[0], "echo"))
 		return (echo_builtin(args));
-	// else if (ft_strequ(args[0], "cd"))
-	else if (args[0][0] == 'c' && args[0][1] == 'd')
+	else if (ft_strequ(args[0], "cd"))
 	{
 		printf ("arg[0]:%s\n", args[0]);
 		cd_builtin(args);
@@ -48,8 +47,13 @@ int			check_builtin(char **args)
 	return (0);
 }
 
-// int main(void)
-// {
-//     pwd_builtin();
-//     return (0);
-// }
+void	execution(t_cmd *cmd)
+{
+	int i = 0;
+	
+	while (i < cmd->args_size)
+	{
+		printf ("arg[%d] : %s\n", i, cmd->argvs[i]);
+		i++;
+	}
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 10:19:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/29 15:33:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,48 +76,66 @@ t_lexer	*read_cmd(void)
 // 	return (1);
 // }
 
+// char *readline (char *prompt);
+
+t_lexer	*init_l(t_lexer	*l)
+{
+	l = malloc(sizeof(t_lexer));
+	if (!l)
+		return (NULL);
+	l->buffer = NULL;
+	l->bufsize = 0;
+	l->c = ' ';
+	l->curpos = 0;
+	l->readpos = 0;
+	l->multi_line = 0;
+	return (l);
+}
+
 int main(int argc, char **argv, char **env)
 {
-	t_lexer *l;
-	t_parser *p;
-	t_ast *ast;
-	t_cmd *z;
+	t_lexer		*l;
+	t_parser	*p;
+	t_ast		*ast;
+	t_cmd 		*z;
+	char		*buff;
 
 	(void)argc;
 	(void)argv; 
 	(void)env;
+	buff = NULL;
+	l = NULL;
+	l = init_l(l);
 	while(1)
 	{
 		// ? set return value to $? = 0  //!pipeline
-		ft_putstr_fd("\nminishell-1.0$ ", 0);
-		// l = read_cmd();
-		l = history();
-		// printf("\nl->buffer --%s--\n", l->buffer);
-		// printf("l->bufsize --->|%d|\n", l->bufsize);
+		buff = readline("minishell-1.0$ ");
+		if (buff)
+		{
+			l->buffer = ft_strdup(buff);
+			l->bufsize = ft_strlen(l->buffer);
+			add_history(l->buffer);
+		}
+		free (buff);
 		if(!l->buffer)
 			continue;
+		printf("\nl->buffer --%s--\n", l->buffer);
+		printf("l->bufsize --->|%d|\n", l->bufsize);		
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
 		{
 			free(l);
 			continue;
-		}
-		if(strcmp(l->buffer, "exit") == 0)
-		{
-			printf("exit\n");
-			free(l);
-			break;
 		}
 		p = init_parser(l);
 		if (p)
 		{
 			ast = parse_compound(p);
 			// ? if (!ast) set exit status  $? = 258 (syntax error)
-			// printf("\n------------------------------\n");
-			// print_tree(ast);
-			// printf("------------------------------\n\n");
-			(void)z;
+			printf("\n------------------------------\n");
+			print_tree(ast);
+			printf("------------------------------\n\n");
 			z = visitor(ast);
-			// execution(z);
+			execution(z);
 			if (ast)
 				free_tree(ast);
 		}

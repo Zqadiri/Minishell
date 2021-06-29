@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 10:56:33 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/29 15:00:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,11 @@ void		is_notempty(void *ptr);
 t_ast		*free_args(t_ast *ast);
 t_ast		*free_tree(t_ast *ast);
 void		free_parser(t_parser *p);
+
+/*
+** exec
+*/
+
+void		execution (t_cmd *cmd);
 
 #endif

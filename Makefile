@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/06/28 10:58:05 by iidzim           ###   ########.fr        #
+#    Updated: 2021/06/28 11:24:34 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
 INCLUDE 		= 	-I includes -L includes
 CC				= 	gcc
-FLAGS           =  -Wall -Wextra -Werror -ltermcap -fsanitize=address
+FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -fsanitize=address
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
