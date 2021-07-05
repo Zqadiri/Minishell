@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 12:40:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 16:37:12 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	is_notempty(void *ptr)
 	}
 }
 
-t_ast	*free_tree(t_ast *ast)
+void	free_tree(t_ast *ast)
 {
 	int	j;
 	int	k;
@@ -46,7 +46,47 @@ t_ast	*free_tree(t_ast *ast)
 		}
 		is_notempty(ast->args);
 	}
-	return (NULL);
+}
+
+// void	free_tree3(t_token **token, int size)
+// {
+// 	int	i;
+// 	int j;
+
+// 	j = -1;
+// 	while (++j < size)
+// 	{
+// 		i = -1;
+// 		while (token[j][i].type)
+// 		{
+// 			if(token[j][i].type)
+// 			{
+// 				free(token[j][i].value);
+// 				token[j][i].value = NULL;
+// 			}
+// 		}
+// 		is_notempty(token[j]->value);
+// 	}
+// 	is_notempty(token);
+// }
+
+void	free_tree2(t_ast **ast)
+{
+	int	i;
+	int j;
+
+	j = -1;
+	while (++j < (*ast)->pipecmd_size)
+	{
+		i = -1;
+		while (++i < ast[j]->pipecmd_size)
+		{
+			if (ast[j]->pipecmd_values[i])
+				free_tree(ast[j]->pipecmd_values[i]);
+		}
+		is_notempty(ast[j]);
+	}
+	is_notempty(ast);
 }
 
 void	free_parser(t_parser *p)

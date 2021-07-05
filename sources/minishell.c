@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 13:02:32 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 18:34:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,28 @@ void	print_tree(t_ast *ast)
 
 	if (!ast)
 		return ;
+	printf("ast->type = [%u]\n", ast->type);
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
 		printf("f:print_tree pipe size = [%d]\n", ast->pipecmd_size);
 		while (++j < ast->pipecmd_size)
+		{
+			printf("cpt >> %d\n", j);
+			// printf("next type => [%u]\n", ast->pipecmd_values[j]->type);
 			print_tree(ast->pipecmd_values[j]);
+		}
 	}
 	if (ast->type == arg_ast)
 	{
 		k = -1;
 		printf("f:print_tree args size = [%d]\n", ast->args_size);
 		while (++k < ast->args_size)
+		{
+			printf("cpt args >> %d\n", k);
 			printf("f:print_tree\ttoken -> [%s][%u]\n", ast->args[k]->value,
 				ast->args[k]->type);
+		}
 	}
 }
 
@@ -124,11 +132,11 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv; 
 	(void)env;
-	buff = NULL;
-	l = NULL;
-	l = init_l(l);
 	while(1)
 	{
+		l = NULL;
+		l = init_l(l);
+		buff = NULL;
 		// ? set return value to $? = 0  //!pipeline
 		buff = readline("minishell-1.0$ ");
 		if (ft_strcmp(buff, "\0"))
@@ -144,11 +152,6 @@ int main(int argc, char **argv, char **env)
 		// 	continue;
 		// printf("\nl->buffer --%s--\n", l->buffer);
 		// printf("l->bufsize --->|%d|\n", l->bufsize);		
-		// if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
-		// {
-		// 	// free(l); //!\ heap-use-after-free
-		// 	continue;
-		// }
 		p = init_parser(l);
 		if (p)
 		{
@@ -162,6 +165,8 @@ int main(int argc, char **argv, char **env)
 			if (ast)
 				free_tree(ast);
 		}
+		free(l->buffer);
+		l->buffer = NULL;
 		// system("leaks minishell");
 	}
 	//free before exit

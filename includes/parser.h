@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 13:24:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 16:31:25 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,9 @@ t_cmd		*visitor(t_ast *ast);
 */
 
 void		is_notempty(void *ptr);
-t_ast		*free_args(t_ast *ast);
-t_ast		*free_tree(t_ast *ast);
+void		free_tree(t_ast *ast);
+void		free_tree3(t_token **token, int size);
+void		free_tree2(t_ast **ast);
 void		free_parser(t_parser *p);
 
 /*

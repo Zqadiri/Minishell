@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 13:29:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 16:41:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ t_cmd	*visitor(t_ast *ast)
 	if (!ast)
 		return (NULL);
 	n = 0;
+	printf("f:visitor\tcheck pipe size = [%d]\n\n", ast->pipecmd_size);
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
-		printf("f:visitor\tcheck pipe size = [%d]\n\n", ast->pipecmd_size);
 		while (++j < ast->pipecmd_size)
 		{
 			z = visitor(ast->pipecmd_values[j]);
