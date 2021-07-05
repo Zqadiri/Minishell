@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/29 15:34:20 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/05 11:03:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,11 @@ int main(int argc, char **argv, char **env)
 		free (buff);
 		if(!l->buffer)
 			continue;
-		printf("\nl->buffer --%s--\n", l->buffer);
-		printf("l->bufsize --->|%d|\n", l->bufsize);		
+		// printf("\nl->buffer --%s--\n", l->buffer);
+		// printf("l->bufsize --->|%d|\n", l->bufsize);		
 		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
 		{
-			free(l);
+			// free(l); //!\ heap-use-after-free
 			continue;
 		}
 		p = init_parser(l);
@@ -131,11 +131,11 @@ int main(int argc, char **argv, char **env)
 		{
 			ast = parse_pipe(p);
 			// ? if (!ast) set exit status  $? = 258 (syntax error)
-			printf("\n------------------------------\n");
-			print_tree(ast);
-			printf("------------------------------\n\n");
+			// printf("\n------------------------------\n");
+			// print_tree(ast);
+			// printf("------------------------------\n\n");
 			z = visitor(ast);
-			execution(z);
+			// execution(z);
 			if (ast)
 				free_tree(ast);
 		}

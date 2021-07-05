@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 15:36:14 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 10:32:38 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_cmd	*visitor(t_ast *ast)
 			if (ast->pipecmd_size >= 2)
 				z[n].type = pip;
 			n++;
+			printf("--------------\n");
 		}
 	}
 	if (ast->type == arg_ast)

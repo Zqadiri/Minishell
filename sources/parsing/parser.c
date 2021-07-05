@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 18:53:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 10:53:12 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_ast	*parse_pipe(t_parser *p)
 			ast->pipecmd_values = realloc_ast_node(ast, ast->pipecmd_size + 1);
 		}
 	}
+	printf("*******size >> %d\n", ast->pipecmd_size);
 	return (ast);
 }
 

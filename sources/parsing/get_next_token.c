@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 19:48:43 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/06/29 15:49:17 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_token	*string_token(t_lexer *l)
 {
 	char	*str;
 	char	*temp;
-	// char	*s;
+	char	*s;
 
 	str = ft_strdup("");
 	while (l->curpos <= l->bufsize && l->c != PIPE && l->c != GREAT
