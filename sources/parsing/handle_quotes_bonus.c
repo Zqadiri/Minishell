@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 19:35:00 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 19:41:11 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 12:30:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*tokenize_dquoted_text(t_lexer *l)
 			str = ft_strjoin(str, envar_token(l));
 		else
 		{
-			str = ft_strjoinchar(str, l->c);
+			str = ft_joinchar(str, l->c);
 			readchar(l);
 		}
 		free(temp);
@@ -53,7 +53,7 @@ char	*tokenize_squoted_text(t_lexer *l)
 	while (l->c != SQUOTE && l->c != EOF)
 	{
 		temp = str;
-		str = ft_strjoinchar(str, l->c);
+		str = ft_joinchar(str, l->c);
 		readchar(l);
 		free(temp);
 	}

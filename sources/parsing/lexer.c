@@ -6,95 +6,66 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/05 17:18:05 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 12:28:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_lexer	*init_lexer(char *line)
+void	skip_space(t_lexer *l)
 {
-	t_lexer	*l;
-
-	l = malloc(sizeof(t_lexer));
-	if (!l)
-		return (NULL);
-	l->buffer = ft_strdup(line);
-	l->bufsize = ft_strlen(line);
-	l->c = ' ';
-	l->curpos = 0;
-	l->readpos = 0;
-	return (l);
+	if (!l || !l->buffer)
+		return ;
+	while (l->readpos <= l->bufsize && (l->c == 32
+			|| l->c == '\t' || l->c == '\n'))
+		readchar(l);
 }
 
-int	valid_envar(char c)
+t_token	*ret_str(t_lexer *l, char *s, int type)
 {
-	if (ft_isalnum(c) || c == '_')
-		return (1);
-	return (0);
+	if (type == greater || type == here_doc)
+		readchar(l);
+	if (type == great || type == pip || type == here_doc
+		|| type == greater || type == less)
+		readchar(l);
+	return (init_token(type, s));
 }
 
-char	*invalid_envar(t_lexer *l, char *str)
-{
-	char	*temp;
-
-	temp = str;
-	if (l->c == '0')
-		str = ft_strjoin(str, "minishell");
-	if (l->c == '?')
-		str = ft_strjoin(str, "$?");
-	free(temp);
-	readchar(l);
-	return (tokenize_text(l, str));
-}
-
-char	*envar_token(t_lexer *l)
+t_token	*ret_char(t_lexer *l, char c, t_token_type type)
 {
 	char	*str;
-	char	*temp;
 
-	if (!l)
-		return (NULL);
-	str = ft_strdup("");
-	readchar(l);
-	if (ft_isdigit(l->c) || l->c == '?')
-		return (invalid_envar(l, str));
-	while (valid_envar(l->c) && l->c != EOF)
-	{
-		temp = str;
-		str = ft_strjoinchar(str, l->c);
-		readchar(l);
-		free(temp);
-	}
-	str = getenv(str);
+	str = malloc(sizeof(char) * 2);
 	if (!str)
-		str = ft_strdup("");
-	return (str);
+		return (NULL);
+	str[0] = c;
+	str[1] = '\0';
+	return (ret_str(l, str, type));
 }
 
-char	*check_string(t_lexer *l, char *str, int i)
+t_token	*get_next_token(t_lexer *l)
 {
-	if (i == 1 && l->c == BSLASH)
+	while (l->c != EOF && (l->curpos <= l->bufsize))
 	{
-		if (peek_char(l) == '\"' || peek_char(l) == '$' || peek_char(l) == '\\')
+		skip_space(l);
+		if (l->c == EOF)
+			break ;
+		if (l->c == PIPE)
+			return (ret_char(l, l->c, pip));
+		else if (l->c == GREAT)
 		{
-			readchar(l);
-			str = ft_strjoinchar(str, l->c);
+			if (peek_char(l) == GREAT)
+				return (ret_str(l, ">>", greater));
+			return (ret_char(l, l->c, great));
 		}
-	}
-	if (i == 2 && l->c == BSLASH)
-	{
-		if (peek_char(l) == EOF)
-			multi_lines(l, '\\');
+		else if (l->c == LESS)
+		{
+			if (peek_char(l) == LESS)
+				return (ret_str(l, "<<", here_doc));
+			return (ret_char(l, l->c, less));
+		}
 		else
-		{
-			readchar(l);
-			str = ft_strjoinchar(str, l->c);
-		}
-		readchar(l);
-		return (str);
+			return (string_token(l));
 	}
-	if (i == 2 && l->c == DOLLAR)
-		str = ft_strjoin(str, envar_token(l));
-	return (str);
+	return (ret_char(l, l->c, eof));
 }

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 15:26:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 12:30:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,47 @@ int	peek_char(t_lexer *l)
 		return (l->buffer[l->readpos]);
 }
 
-void	skip_space(t_lexer *l)
+int	valid_envar(char c)
 {
-	if (!l || !l->buffer)
-		return ;
-	while (l->readpos <= l->bufsize && (l->c == 32
-			|| l->c == '\t' || l->c == '\n'))
-		readchar(l);
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
 }
 
-t_token	*ret_str(t_lexer *l, char *s, int type)
+char	*invalid_envar(t_lexer *l, char *str)
 {
-	if (type == greater || type == here_doc)
-		readchar(l);
-	if (type == great || type == pip || type == here_doc
-		|| type == greater || type == less)
-		readchar(l);
-	return (init_token(type, s));
+	char	*temp;
+
+	temp = str;
+	if (l->c == '0')
+		str = ft_strjoin(str, "minishell");
+	if (l->c == '?')
+		str = ft_strjoin(str, "$?");
+	free(temp);
+	readchar(l);
+	return (tokenize_text(l, str));
 }
 
-t_token	*ret_char(t_lexer *l, char c, t_token_type type)
+char	*envar_token(t_lexer *l)
 {
 	char	*str;
+	char	*temp;
 
-	str = malloc(sizeof(char) * 2);
-	if (!str)
+	if (!l)
 		return (NULL);
-	str[0] = c;
-	str[1] = '\0';
-	return (ret_str(l, str, type));
+	str = ft_strdup("");
+	readchar(l);
+	if (ft_isdigit(l->c) || l->c == '?')
+		return (invalid_envar(l, str));
+	while (valid_envar(l->c) && l->c != EOF)
+	{
+		temp = str;
+		str = ft_joinchar(str, l->c);
+		readchar(l);
+		free(temp);
+	}
+	str = getenv(str);
+	if (!str)
+		str = ft_strdup("");
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/29 15:49:17 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 12:30:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,14 @@ char	*tokenize_text(t_lexer *l, char *s)
 	char	*str;
 	char	*temp;
 
-	if (!s)
-		str = ft_strdup("");
-	else
-		str = ft_strdup(s);
+	str = ft_strdup(s);
 	while (l->c != EOF && !ft_strchar("|>< \"\'", l->c))
 	{
 		temp = str;
 		while (l->c == 32 && l->c != EOF)
 			readchar(l);
-		if (l->c == BSLASH || l->c == DOLLAR)
-			str = check_string(l, str, 2);
+		if (l->c == DOLLAR)
+			str = ft_strjoin(str, envar_token(l));
 		else if (l->c == EOF)
 		{
 			free(temp);
@@ -35,10 +32,28 @@ char	*tokenize_text(t_lexer *l, char *s)
 		}
 		else
 		{
-			str = ft_strjoinchar(str, l->c);
+			str = ft_joinchar(str, l->c);
 			readchar(l);
 		}
+		free(temp);
 	}
+	return (str);
+}
+
+char	*dquoted_helper(t_lexer *l, char *str)
+{
+	char	*str2;
+	char	*temp;
+
+	if (l->c == EOF)
+	{
+		str2 = ft_strdup("\"");
+		temp = str2;
+		str2 = ft_strjoin(str2, str);
+		free(temp);
+		return (str2);
+	}
+	readchar(l);
 	return (str);
 }
 
@@ -48,50 +63,45 @@ char	*tokenize_dquoted_text(t_lexer *l)
 	char	*temp;
 
 	readchar(l);
-	if (l->c == EOF)
-		if (!multi_lines(l, DQUOTE))
-			return (NULL);
 	str = ft_strdup("");
 	while (l->c != DQUOTE && l->c != EOF)
 	{
 		temp = str;
-		// check_string(l, str, 1);
 		if (l->c == DOLLAR)
 			str = ft_strjoin(str, envar_token(l));
 		else
 		{
-			str = ft_strjoinchar(str, l->c);
+			str = ft_joinchar(str, l->c);
 			readchar(l);
 		}
 		free(temp);
 	}
-	if (!multi_lines(l, DQUOTE))
-		return (NULL);
-	readchar(l);
-	return (str);
+	return (dquoted_helper(l, str));
 }
 
 char	*tokenize_squoted_text(t_lexer *l)
 {
 	char	*str;
+	char	*str2;
 	char	*temp;
-	int		s;
 
-	s = 0;
 	readchar(l);
 	str = ft_strdup("");
 	while (l->c != SQUOTE && l->c != EOF)
 	{
 		temp = str;
-		str = ft_strjoinchar(str, l->c);
+		str = ft_joinchar(str, l->c);
 		readchar(l);
 		free(temp);
 	}
-	if (l->c == SQUOTE)
-		s += 1;
-	if (l->c == EOF && s == 0)
-		if (!multi_lines(l, SQUOTE))
-			return (NULL);
+	if (l->c == EOF)
+	{
+		str2 = ft_strdup("'");
+		temp = str2;
+		str2 = ft_strjoin(str2, str);
+		free(temp);
+		return (str2);
+	}
 	readchar(l);
 	return (str);
 }
@@ -99,8 +109,8 @@ char	*tokenize_squoted_text(t_lexer *l)
 t_token	*string_token(t_lexer *l)
 {
 	char	*str;
-	char	*temp;
 	char	*s;
+	char	*temp;
 
 	str = ft_strdup("");
 	while (l->curpos <= l->bufsize && l->c != PIPE && l->c != GREAT
@@ -108,64 +118,17 @@ t_token	*string_token(t_lexer *l)
 	{
 		temp = str;
 		if (l->c == DQUOTE)
-		{
-			s = tokenize_dquoted_text(l);
-			if (!s && l->multi_line == 1)
-			{
-				printf("error>>>\n");
-				return (ret_str(l, NULL, illegal));
-			}
-			str = ft_strjoin(str, s);
-			free(s);
-		}
+			str = ft_strjoin(str, tokenize_dquoted_text(l));
 		else if (l->c == SQUOTE)
-		{
-			s = tokenize_squoted_text(l);
-			if (!s && l->multi_line == 1)
-				return (ret_str(l, NULL, illegal));
-			str = ft_strjoin(str, s);
-			free(s);
-		}
+			str = ft_strjoin(str, tokenize_squoted_text(l));
 		else
-			str = ft_strjoin(str, tokenize_text(l, NULL));
+		{
+			s = ft_strdup("");
+			str = ft_strjoin(str, tokenize_text(l, s));
+		}
 		free(temp);
 		if (l->c == 32)
 			return (ret_str(l, str, id));
 	}
 	return (ret_str(l, str, id));
-}
-
-t_token	*get_next_token(t_lexer *l)
-{
-	while (l->c != EOF && (l->curpos <= l->bufsize))
-	{
-		skip_space(l);
-		if (l->c == EOF)
-			break ;
-		if (l->c == PIPE)
-			return (ret_char(l, l->c, pip));
-		else if (l->c == GREAT)
-		{
-			if (peek_char(l) == GREAT)
-				return (ret_str(l, ">>", greater));
-			return (ret_char(l, l->c, great));
-		}
-		else if (l->c == LESS)
-		{
-			if (peek_char(l) == LESS)
-				return (ret_str(l, "<<", here_doc));
-			return (ret_char(l, l->c, less));
-		}
-		else
-		{
-			// t_token *ret = string_token(l);
-			// printf("in\n");
-			// if (ret->type == illegal)
-			// 	return (ret_char(l, l->c, illegal));
-			// printf("ret->value = [%s], ret->type = [%u]\n", ret->value, ret->type);
-			// return (ret);
-			return (string_token(l));
-		}
-	}
-	return (ret_char(l, l->c, eof));
 }

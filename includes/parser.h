@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/29 15:49:17 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 13:24:31 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,30 @@ typedef struct s_cmd
 	t_token_type	type;
 }               t_cmd;
 
+void		print_tree(t_ast *ast);
+
 /*
 ** parser_utils.c
 */
 
 t_parser	*init_parser(t_lexer *l);
+t_token		*check_token(t_parser *p, t_ast *ast);
 int			parse_expected_token(t_parser *p, t_token_type type);
 int			syntax_error_pipe(t_parser *p);
-int			is_redirection(t_token *t);
+int			is_redic(t_token *t);
 
 /*
 ** parser.c
 */
 
-t_ast		**realloc_ast_node(t_ast *ast, int size);
-t_token		**realloc_ast_args(t_ast *ast, int size);
-t_ast		*parse_compound(t_parser *p);
 t_ast		*parse_pipe(t_parser *p);
-t_ast		*parse_args(t_parser *p);
-t_token		*check_token(t_parser *p, t_ast *ast);
 
 /*
 ** ast.c
 */
 
 t_ast		*init_ast(t_ast_type type);
-void		print_tree(t_ast *ast);
 t_cmd		*visitor(t_ast *ast);
-void		print_cmd(t_cmd *z);
 
 /*
 ** free.c

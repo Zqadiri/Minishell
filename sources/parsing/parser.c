@@ -6,28 +6,57 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 10:53:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 13:17:52 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_token	*check_token(t_parser *p, t_ast *ast)
+t_ast	**realloc_ast_node(t_ast *ast, int size)
 {
-	if (p->curr_token->type == illegal)
-		return (NULL);
-	if (!syntax_error_pipe(p))
-		return (NULL);
-	if (is_redirection(p->prev_token))
+	t_ast	**new;
+	int		i;
+
+	if (ast->type == pipe_ast)
 	{
-		if (!parse_expected_token(p, id))
-			return (NULL);
-		ast->redir_nbr += 1;
+		new = (t_ast **)malloc(sizeof(t_ast *) * size);
+		i = 0;
+		while (ast->pipecmd_values[i])
+		{
+			new[i] = ast->pipecmd_values[i];
+			i++;
+		}
+		new[++i] = NULL;
+		ast->pipecmd_values = NULL;
+		// free_tree(ast->pipecmd_values);
+		return (new);
 	}
-	return (p->curr_token);
+	return (NULL);
 }
 
-t_ast	*parse_args(t_parser *p)
+t_token	**realloc_ast_args(t_ast *ast, int size)
+{
+	t_token	**new;
+	int		i;
+
+	if (ast->type == arg_ast)
+	{
+		new = (t_token **)malloc(sizeof(t_token *) * size);
+		i = 0;
+		while (ast->args[i])
+		{
+			new[i] = ast->args[i];
+			i++;
+		}
+		new[++i] = NULL;
+		ast->args = NULL;
+		// free_tree(ast->pipecmd_values);
+		return (new);
+	}
+	return (NULL);
+}
+
+t_ast	*parse_args_helper(t_parser *p)
 {
 	t_ast	*ast;
 
@@ -48,6 +77,14 @@ t_ast	*parse_args(t_parser *p)
 		}
 		ast->args_size += 1;
 	}
+	return (ast);
+}
+
+t_ast	*parse_args(t_parser *p)
+{
+	t_ast	*ast;
+
+	ast = parse_args_helper(p);
 	while (p->curr_token->type != eof)
 	{
 		ast->args_size += 1;
@@ -92,50 +129,5 @@ t_ast	*parse_pipe(t_parser *p)
 			ast->pipecmd_values = realloc_ast_node(ast, ast->pipecmd_size + 1);
 		}
 	}
-	printf("*******size >> %d\n", ast->pipecmd_size);
 	return (ast);
-}
-
-t_ast	**realloc_ast_node(t_ast *ast, int size)
-{
-	t_ast	**new;
-	int		i;
-
-	if (ast->type == pipe_ast)
-	{
-		new = (t_ast **)malloc(sizeof(t_ast *) * size);
-		i = 0;
-		while (ast->pipecmd_values[i])
-		{
-			new[i] = ast->pipecmd_values[i];
-			i++;
-		}
-		new[++i] = NULL;
-		ast->pipecmd_values = NULL;
-		// free_tree(ast->pipecmd_values);
-		return (new);
-	}
-	return (NULL);
-}
-
-t_token	**realloc_ast_args(t_ast *ast, int size)
-{
-	t_token	**new;
-	int		i;
-
-	if (ast->type == arg_ast)
-	{
-		new = (t_token **)malloc(sizeof(t_token *) * size);
-		i = 0;
-		while (ast->args[i])
-		{
-			new[i] = ast->args[i];
-			i++;
-		}
-		new[++i] = NULL;
-		ast->args = NULL;
-		// free_tree(ast->pipecmd_values);
-		return (new);
-	}
-	return (NULL);
 }

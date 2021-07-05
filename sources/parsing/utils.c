@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 18:47:47 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 12:30:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ftstrcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-char	*ft_strjoinchar(char *s, char c)
+char	*ft_joinchar(char *s, char c)
 {
 	int		i;
 	char	*str;
@@ -52,20 +52,6 @@ char	*ft_strjoinchar(char *s, char c)
 	str[i] = c;
 	str[i + 1] = '\0';
 	return (str);
-}
-
-int	multi_lines(t_lexer *l, char c)
-{
-	if (l->c == BSLASH || l->c == EOF)
-	{
-		if (l->c == BSLASH)
-			printf("minishell: syntax error multiple lines\n");
-		if (l->c == EOF)
-			printf("minishell: syntax error expected %c\n", c);
-		l->multi_line = 1;
-		return (0);
-	}
-	return (1);
 }
 
 int	is_valid_id(char *str)

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 13:17:18 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 12:40:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,10 @@ void	is_notempty(void *ptr)
 	}
 }
 
-t_ast	*free_args(t_ast *ast)
-{
-	int	k;
-
-	if (ast->type == arg_ast)
-	{
-		k = -1;
-		while (++k < ast->args_size)
-		{
-			is_notempty(ast->args[k]->value);
-			is_notempty(ast->args[k]);
-		}
-		is_notempty(ast->args);
-	}
-	return (NULL);
-}
-
 t_ast	*free_tree(t_ast *ast)
 {
 	int	j;
+	int	k;
 
 	if (ast->type == pipe_ast)
 	{
@@ -52,7 +36,17 @@ t_ast	*free_tree(t_ast *ast)
 		}
 		is_notempty(ast->pipecmd_values);
 	}
-	return (free_args(ast));
+	if (ast->type == arg_ast)
+	{
+		k = -1;
+		while (++k < ast->args_size)
+		{
+			is_notempty(ast->args[k]->value);
+			is_notempty(ast->args[k]);
+		}
+		is_notempty(ast->args);
+	}
+	return (NULL);
 }
 
 void	free_parser(t_parser *p)

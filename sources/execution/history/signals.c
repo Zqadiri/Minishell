@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 13:48:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/07 13:22:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/05 12:30:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int     get_history_file(t_index *m)
 		if (m->buf[0] == '\n')
 			counter++;
 		pfree = line;
-		line = ft_strjoinchar(line, m->buf[0]);
+		line = ft_joinchar(line, m->buf[0]);
 		free (pfree);
 	}
 	m->cursor = counter;

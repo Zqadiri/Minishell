@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/28 18:56:01 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 13:24:31 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ t_parser	*init_parser(t_lexer *l)
 ** the order of tokens by checking the type of the next token.
 */
 
+t_token	*check_token(t_parser *p, t_ast *ast)
+{
+	if (!syntax_error_pipe(p))
+		return (NULL);
+	if (is_redic(p->prev_token))
+	{
+		if (!parse_expected_token(p, id))
+			return (NULL);
+		ast->redir_nbr += 1;
+	}
+	return (p->curr_token);
+}
+
 int	parse_expected_token(t_parser *p, t_token_type type)
 {
 	if (p->curr_token->type == type)
@@ -62,7 +75,7 @@ int	syntax_error_pipe(t_parser *p)
 		free_parser(p);
 		return (0);
 	}
-	if (is_redirection(p->prev_token) && p->curr_token->type == eof)
+	if (is_redic(p->prev_token) && p->curr_token->type == eof)
 	{
 		printf("minishell: syntax error near unexpected token `newline'\n");
 		free_parser(p);
@@ -71,7 +84,7 @@ int	syntax_error_pipe(t_parser *p)
 	return (1);
 }
 
-int	is_redirection(t_token *t)
+int	is_redic(t_token *t)
 {
 	if (t->type == great || t->type == greater || t->type == less
 		|| t->type == here_doc)

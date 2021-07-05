@@ -6,37 +6,35 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 11:03:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 13:02:32 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//* add new line 
+// t_lexer	*read_cmd(void)
+// {
+// 	size_t	r;
+// 	char	*line;
+// 	char	*buffer;
 
-t_lexer	*read_cmd(void)
-{
-	size_t	r;
-	char	*line;
-	char	*buffer;
-
-	buffer = malloc(sizeof(char) * 2);
-	r = read(0, buffer, 1);
-	line = malloc(sizeof(char) * 2);
-	if (!buffer || !line)
-		return (NULL);
-	line[0] = '\0';
-	while (r > 0)
-	{
-		buffer[1] = 0;
-		if (buffer[0] == '\n')
-			break ;
-		line = ft_strjoinchar(line, buffer[0]);
-		r = read(0, buffer, 1);
-	}
-	free(buffer);
-	return (init_lexer(line));
-}
+// 	buffer = malloc(sizeof(char) * 2);
+// 	r = read(0, buffer, 1);
+// 	line = malloc(sizeof(char) * 2);
+// 	if (!buffer || !line)
+// 		return (NULL);
+// 	line[0] = '\0';
+// 	while (r > 0)
+// 	{
+// 		buffer[1] = 0;
+// 		if (buffer[0] == '\n')
+// 			break ;
+// 		line = ft_joinchar(line, buffer[0]);
+// 		r = read(0, buffer, 1);
+// 	}
+// 	free(buffer);
+// 	return (init_lexer(line));
+// }
 
 // char	*to_lower(char *s)
 // {
@@ -78,6 +76,30 @@ t_lexer	*read_cmd(void)
 
 // char *readline (char *prompt);
 
+void	print_tree(t_ast *ast)
+{
+	int	j;
+	int	k;
+
+	if (!ast)
+		return ;
+	if (ast->type == pipe_ast)
+	{
+		j = -1;
+		printf("f:print_tree pipe size = [%d]\n", ast->pipecmd_size);
+		while (++j < ast->pipecmd_size)
+			print_tree(ast->pipecmd_values[j]);
+	}
+	if (ast->type == arg_ast)
+	{
+		k = -1;
+		printf("f:print_tree args size = [%d]\n", ast->args_size);
+		while (++k < ast->args_size)
+			printf("f:print_tree\ttoken -> [%s][%u]\n", ast->args[k]->value,
+				ast->args[k]->type);
+	}
+}
+
 t_lexer	*init_l(t_lexer	*l)
 {
 	l = malloc(sizeof(t_lexer));
@@ -88,7 +110,6 @@ t_lexer	*init_l(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
-	l->multi_line = 0;
 	return (l);
 }
 
@@ -110,22 +131,24 @@ int main(int argc, char **argv, char **env)
 	{
 		// ? set return value to $? = 0  //!pipeline
 		buff = readline("minishell-1.0$ ");
-		if (buff)
+		if (ft_strcmp(buff, "\0"))
 		{
 			l->buffer = ft_strdup(buff);
 			l->bufsize = ft_strlen(l->buffer);
 			add_history(l->buffer);
 		}
-		free (buff);
-		if(!l->buffer)
+		else
 			continue;
+		free (buff);
+		// if(!l->buffer)
+		// 	continue;
 		// printf("\nl->buffer --%s--\n", l->buffer);
 		// printf("l->bufsize --->|%d|\n", l->bufsize);		
-		if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
-		{
-			// free(l); //!\ heap-use-after-free
-			continue;
-		}
+		// if(l->buffer[0] == '\0' || strcmp(l->buffer, "\n") == 0)
+		// {
+		// 	// free(l); //!\ heap-use-after-free
+		// 	continue;
+		// }
 		p = init_parser(l);
 		if (p)
 		{

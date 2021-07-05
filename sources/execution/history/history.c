@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:42:49 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/29 15:12:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/05 12:52:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ t_lexer	*init(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
-	l->multi_line = 0;
 	return (l);
 }
 
@@ -185,7 +184,7 @@ t_lexer *history(void)
 		{
 			is_printable(&m);
 			tmp = m.line;
-			m.line = ft_strjoinchar(m.line, m.buf[0]);
+			m.line = ft_joinchar(m.line, m.buf[0]);
 			l->buffer = ft_strdup(m.line);
 			l->bufsize = ft_strlen(m.line);
 			free (tmp);
