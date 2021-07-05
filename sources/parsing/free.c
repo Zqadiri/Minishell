@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 16:37:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 18:38:56 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	free_tree(t_ast *ast)
 void	free_tree2(t_ast **ast)
 {
 	int	i;
-	int j;
+	int	j;
 
 	j = -1;
 	while (++j < (*ast)->pipecmd_size)

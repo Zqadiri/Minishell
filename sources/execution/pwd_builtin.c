@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/05 10:42:54 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 19:03:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ int			check_builtin(char **args)
 
 void	execution(t_cmd *cmd)
 {
-	int i = 0;
-	
-	
-	while (i < cmd->args_size)
-	{
+	int i;
+
+	i = -1;
+	printf("***args size = [%d]\n", cmd->args_size);
+	while (++i < cmd->args_size - 1)
 		printf ("arg[%d] : %s\n", i, cmd->argvs[i]);
-		i++;
-	}
+	i = -1;
+	printf("***redirection size = [%d]\n", cmd->redir_nbr);
+	while (++i < cmd->redir_nbr)
+		printf ("filename [%s] : type [%u]\n", cmd->r[i].filename, cmd->r[i].type);
 }

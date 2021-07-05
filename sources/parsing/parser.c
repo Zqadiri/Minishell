@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 18:29:57 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/05 19:26:47 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ t_ast	*parse_args(t_parser *p)
 	t_ast	*ast;
 
 	ast = parse_args_helper(p);
+	if (!ast)
+		return (NULL);
 	while (p->curr_token->type != eof)
 	{
 		ast->args_size += 1;
