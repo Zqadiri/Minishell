@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/05 19:03:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/06 10:00:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,38 @@ int			check_builtin(char **args)
 	return (0);
 }
 
-void	execution(t_cmd *cmd)
-{
-	int i;
+// void	execution(t_cmd *cmd)
+// {
+// 	int i;
 
-	i = -1;
-	printf("***args size = [%d]\n", cmd->args_size);
-	while (++i < cmd->args_size - 1)
-		printf ("arg[%d] : %s\n", i, cmd->argvs[i]);
-	i = -1;
-	printf("***redirection size = [%d]\n", cmd->redir_nbr);
-	while (++i < cmd->redir_nbr)
-		printf ("filename [%s] : type [%u]\n", cmd->r[i].filename, cmd->r[i].type);
-}
+// 	printf("\n***args size = [%d]\n", cmd->args_size);
+// 	i = -1;
+// 	// while (cmd->argvs[++i])
+// 	while (++i < cmd->args_size)
+// 		printf ("arg[%d] : |%s|\n", i, cmd->argvs[i]);
+// 	printf("i = %d\n", i);
+// 	i = -1;
+// 	printf("***redirection size = [%d]\n", cmd->redir_nbr);
+// 	while (++i < cmd->redir_nbr)
+// 		printf ("filename [%s] : type [%u]\n", cmd->r[i].filename, cmd->r[i].type);
+// }
+
+
+// void execution(t_cmd *cmd)
+// {
+// 	int	i, j;
+
+// 	printf("\n*****************\n");
+// 	i = 0;
+// 	while (cmd->type != eof)
+// 	{
+// 		j = -1;
+// 		while (++j < cmd[i].args_size)
+// 			printf("arg[%d] = [%s]\n", j, cmd[i].argvs[j]);
+// 		j = -1;
+// 		while (++j < cmd->redir_nbr)
+// 			printf("file[%s] = type[%u]\n", cmd[i].r[j].filename, cmd[i].r[j].type);
+// 		i++;
+// 	}
+// 	printf("*****************\n");
+// }
