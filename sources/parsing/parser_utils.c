@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 13:24:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/06 09:08:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_parser	*init_parser(t_lexer *l)
 	{
 		printf("minishell: syntax error near unexpected token 1`%s'\n",
 			p->curr_token->value);
+		free_parser(p);
 		return (NULL);
 	}
 	return (p);

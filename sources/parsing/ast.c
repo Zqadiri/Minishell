@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 19:28:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/06 09:41:11 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ t_ast	*init_ast(t_ast_type type)
 
 void	init_cmd(t_ast *ast, t_cmd *z, int n)
 {
-	z[n].argvs = malloc(sizeof(char *) * ast->args_size);
-	printf("%d\n", ast->redir_nbr);
 	z[n].redir_nbr = ast->redir_nbr;
-	z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
 	z[n].args_size = ast->args_size - (z[n].redir_nbr * 2) - 1;
+	z[n].argvs = malloc(sizeof(char *) * (z[n].args_size + 1));
+	z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
 }
 
 t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
@@ -89,14 +88,16 @@ t_cmd	*visitor(t_ast *ast)
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
+		printf("pipe size = %d\n", ast->pipecmd_size);
 		while (++j < ast->pipecmd_size)
 		{
-			// inittt(z[n]);
+			inittt(z[n]);
 			z = visitor(ast->pipecmd_values[j]);
 			if (ast->pipecmd_size >= 2)
 				z[n].type = pip;
 			n++;
 		}
+		printf("n = %d\n", n);
 	}
 	if (ast->type == arg_ast)
 		z = visitor_args(ast, z, n);
