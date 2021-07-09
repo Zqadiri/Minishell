@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 12:52:06 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/09 21:09:36 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum e_token_type
 	less,
 	here_doc,
 	id,
+	illegal,
 	eof
 }			t_token_type;
 
@@ -47,6 +48,7 @@ typedef enum e_token_type
 ** lexer->curpos		: absolute char position in source
 ** lexer->readpos		: after current pos
 ** lexer->c				: current char under examination
+** lexer->multi_line	: is true --> multiple_lines
 */
 
 typedef struct s_lexer
@@ -56,6 +58,7 @@ typedef struct s_lexer
 	int		curpos;
 	int		readpos;
 	char	c;
+	int		multi_line;
 }				t_lexer;
 
 typedef struct s_token

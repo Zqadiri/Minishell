@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/06 09:08:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/09 21:34:32 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ t_parser	*init_parser(t_lexer *l)
 		free_parser(p);
 		return (NULL);
 	}
+	if (p->curr_token->type == illegal)
+	{
+		free_parser(p);
+		return (NULL);
+	}
 	return (p);
 }
 
@@ -41,7 +46,9 @@ t_parser	*init_parser(t_lexer *l)
 
 t_token	*check_token(t_parser *p, t_ast *ast)
 {
-	if (!syntax_error_pipe(p))
+	if (p->curr_token->type == illegal)
+		return (NULL);
+	if (!syntax_error(p))
 		return (NULL);
 	if (is_redic(p->prev_token))
 	{
@@ -66,7 +73,7 @@ int	parse_expected_token(t_parser *p, t_token_type type)
 	return (1);
 }
 
-int	syntax_error_pipe(t_parser *p)
+int	syntax_error(t_parser *p)
 {
 	if ((p->prev_token->type == pip && p->curr_token->type == pip)
 		|| (p->prev_token->type == pip && p->curr_token->type == eof))

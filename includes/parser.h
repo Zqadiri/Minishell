@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 16:31:25 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/09 21:26:20 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		print_tree(t_ast *ast);
 t_parser	*init_parser(t_lexer *l);
 t_token		*check_token(t_parser *p, t_ast *ast);
 int			parse_expected_token(t_parser *p, t_token_type type);
-int			syntax_error_pipe(t_parser *p);
+int			syntax_error(t_parser *p);
 int			is_redic(t_token *t);
 
 /*

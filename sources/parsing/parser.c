@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/06 09:20:44 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/09 21:51:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_ast	*parse_args(t_parser *p)
 		if (ast->args[ast->args_size - 1]->type == eof)
 			break ;
 	}
-	if (!syntax_error_pipe(p))
+	if (!syntax_error(p))
 		return (NULL);
 	return (ast);
 }
