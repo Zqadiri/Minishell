@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/09 21:34:32 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/09 21:59:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ int	syntax_error(t_parser *p)
 	{
 		printf("minishell: syntax error near unexpected token 3`%s'\n",
 			p->curr_token->value);
-		free_parser(p);
+		// free_parser(p);
 		return (0);
 	}
-	if (is_redic(p->prev_token) && p->curr_token->type == eof)
-	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
-		free_parser(p);
-		return (0);
-	}
+	// if (is_redic(p->prev_token) && p->curr_token->type == eof)
+	// {
+	// 	printf("minishell: syntax error near unexpected token `newline'\n");
+	// 		free_parser(p);
+	// 	return (0);
+	// }
 	return (1);
 }
 
