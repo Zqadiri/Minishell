@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 16:46:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 18:00:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ int     pwd_builtin()
 	return (1);
 }
 
+// ! check lowercASE and test MORE
+
 int			check_builtin(t_cmd *cmd)
 {
 	char **args;
 
 	args = cmd->argvs;
-	printf ("--->%s\n", args[0]);
 	if (ft_strequ(args[0], "pwd"))
     	return (pwd_builtin());
 	else if (ft_strequ(args[0], "echo"))
@@ -37,13 +38,10 @@ int			check_builtin(t_cmd *cmd)
 		return (env_builtin());
 	else if (ft_strequ(args[0], "export"))
 		return (export_builtin(args));
-	// else if (ft_strequ(args[0], "cd"))
-	// {
-	// 	printf ("arg[0]:%s\n", args[0]);
-	// 	cd_builtin(args);
-	// }
-	// else if (ft_strequ(args[0], "unset"))
-	// 	return (unset_builtin(args));
+	else if (ft_strequ(args[0], "unset"))
+		return (unset_builtin(args));
+	else if (ft_strequ(args[0], "cd"))
+		cd_builtin(args);
 	// else if (ft_strequ(args[0], "exit"))
 	// 	exit_builtin(args);
 	return (0);
@@ -58,13 +56,6 @@ int		exec_single_cmd(t_cmd *cmd)
 void	execution(t_cmd *cmd, char **env)
 {
 	(void)env;
-	g_global = malloc(sizeof(t_global));
-	dup_env_var(env);
 	if (cmd->type == eof)
-	{
-		printf("-->f:execution\ttype = [%u]\n", cmd->type);
 		exec_single_cmd(cmd);
-	}
-	else
-		printf("f:execution\t4type = [%u]\n", cmd->type);
 }

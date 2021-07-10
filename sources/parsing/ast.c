@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 16:46:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 17:54:06 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 		if (ast->args[k]->type == id)
 		{
 			z[n].argvs[l++] = ft_strdup(ast->args[k++]->value);
-			printf("args[%d] = [%s]\n", l - 1, z[n].argvs[l - 1]);
 		}
 		else
 		{
@@ -60,12 +59,9 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 			{
 				z[n].r[m].type = ast->args[k - 1]->type;
 				z[n].r[m++].filename = ast->args[k++]->value;
-				printf("[%s] - [%u]\n", z[n].r[m - 1].filename, z[n].r[m - 1].type);
 			}
 		}
-		// printf("f:visitor_args\tpipe**** ==> [%u]\n", z[n].redir_nbr);
 	}
-	// printf("f:visitor_args\tpipe-------- ==> [%u]\n", z[n].redir_nbr);
 	z[n].argvs[l] = NULL;
 	return (z);
 }
