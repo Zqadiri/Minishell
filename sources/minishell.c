@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 19:58:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 20:22:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,18 @@ t_lexer	*init_l(t_lexer	*l)
 	return (l);
 }
 
+int	is_white_space(char *buff)
+{
+	int	i;
+
+	i = 0;
+	while (buff[i] == 32 || buff[i] == '\t')
+		i++;
+	if (buff[i] == '\0')
+		return (1);
+	return (0);
+}
+
 int main(int argc, char **argv, char **env)
 {
 	t_lexer		*l;
@@ -83,7 +95,7 @@ int main(int argc, char **argv, char **env)
 			write(1, "exit\n", 5);
 			exit(g_global->exit_status);
 		}
-		else if (ft_strcmp(buff, "\0"))
+		else if (!is_white_space(buff) && ft_strcmp(buff, "\0"))
 		{
 			l->buffer = ft_strdup(buff);
 			l->bufsize = ft_strlen(l->buffer);
@@ -106,7 +118,12 @@ int main(int argc, char **argv, char **env)
 	return (0);
 }
 
-
+//? << stp
+//? << stp cat
+//? << 'stp' cat
+//? << st'p' cat
+//? << st'p cat
+//? << $PWD cat
 
 
 
