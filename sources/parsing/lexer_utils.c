@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 12:30:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 19:35:06 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,43 @@ char	*invalid_envar(t_lexer *l, char *str)
 
 	temp = str;
 	if (l->c == '0')
+	{
 		str = ft_strjoin(str, "minishell");
+		free(temp);
+	}
 	if (l->c == '?')
-		str = ft_strjoin(str, "$?");
-	free(temp);
+	{
+		str = ft_strjoin(str, ft_itoa(g_global->exit_status));
+		free(temp);
+	}
 	readchar(l);
 	return (tokenize_text(l, str));
+}
+
+char	*ft_getenv(char **env, char *str)
+{
+	char	**env_var;
+	char	*value;
+	char	*temp;
+	int		i;
+
+	i = 0;
+	value = ft_strdup("");
+	while (env[i])
+	{
+		env_var = ft_split(env[i], '=');
+		if (!ft_strcmp(env_var[0], str))
+		{
+			temp = value;
+			value = ft_strdup(env_var[1]);
+			printf("str = [%s]\n", value);
+			free(temp);
+			break ;
+		}
+		else
+			i++;
+	}
+	return (value);
 }
 
 char	*envar_token(t_lexer *l)
@@ -71,7 +102,7 @@ char	*envar_token(t_lexer *l)
 		readchar(l);
 		free(temp);
 	}
-	str = getenv(str);
+	str = ft_getenv(g_global->env_var, str);
 	if (!str)
 		str = ft_strdup("");
 	return (str);
