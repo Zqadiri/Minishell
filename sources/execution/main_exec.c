@@ -27,7 +27,6 @@ char	**get_path(void)
 		free(tmp);
 		return (NULL);
 	}
-	
 	return (path);
 }
 
@@ -40,69 +39,12 @@ int		dup_env_var(char **env)
 	if (g_global->env_var == NULL)
 		exit(EXIT_FAILURE);
 	g_global->env_var[len(env)] = 0;
-	while (env[++i])
+	while (env[i])
 	{
-		if (!(g_global->env_var[i] = ft_strdup(env[i])))
-			quit();
+		g_global->env_var[i] = ft_strdup(env[i]);
+			// quit();
+		i++;
 	}
+	// g_global->env_var[i] = NULL;
 	return (1);
 }
-
-int	launch(char **env, char **arg)
-{	
-	int i;
-	pid_t pid;
-
-	i = 0;
-	pid = fork();
-	dup_env_var(env);
-	if (arg == NULL)
-		return (1);
-	// if (pid == 0)
-	// {
-	// 	//child	process
-	// }
-	// else if (pid < 0)
-	// {
-	// 	//fail
-	// }
-	// else
-	// {
-	// 	//parent process
-	// }
-	return (1);
-}
-
-// int		main(int argc, char  **argv, char **env)
-// {
-// 	char **args;
-// 	char *line;
-// 	int r = 0;
-
-	// (void)argc;
-	// (void)argv;
-	// dup_env_var(env);
-	// while (1)
-	// {
-	// 	line = malloc(sizeof(char) * 1024);
-	// 	if (!line)
-	// 		return(-1);
-	// 	r = read(0, line, 1023);
-	// 	line[r] = '\0';
-	// 	args = ft_split(line, ' ');
-	// 	int i = 0;
-	// 	while (args[i])
-	// 	{
-	// 		printf ("[%s]\n", args[i]);
-	// 		i++;
-	// 	}
-	// 	check_builtin(args);
-	// }
-	// char **path = get_path();
-	// while (path[r])
-	// {
-	// 	ft_putendl_fd(path[r], 1);
-	// 	r++;
-	// }
-	// return (1);
-// }

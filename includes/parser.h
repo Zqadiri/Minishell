@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 09:38:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 11:56:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void		free_parser(t_parser *p);
 ** exec
 */
 
-void		execution (t_cmd *cmd);
+void		execution (t_cmd *cmd, char **env);
 
 #endif

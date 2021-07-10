@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 11:53:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 12:55:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int			check_builtin(t_cmd *cmd)
 	char **args;
 
 	args = cmd->argvs;
+	printf ("--->%s\n", args[0]);
 	if ((ft_strequ(args[0], "pwd") || ft_strequ(args[0], "PWD")))
 	{
         pwd_builtin();
@@ -37,6 +38,8 @@ int			check_builtin(t_cmd *cmd)
 		return (echo_builtin(args));
 	else if (ft_strequ(args[0], "env"))
 		return (env_builtin());
+	else if (ft_strequ(args[0], "export"))
+		return (export_builtin(args));
 	// else if (ft_strequ(args[0], "cd"))
 	// {
 	// 	printf ("arg[0]:%s\n", args[0]);
@@ -44,23 +47,27 @@ int			check_builtin(t_cmd *cmd)
 	// }
 	// else if (ft_strequ(args[0], "unset"))
 	// 	return (unset_builtin(args));
-	// else if (ft_strequ(args[0], "export"))
-	// 	return (export_builtin(args));
 	// else if (ft_strequ(args[0], "exit"))
 	// 	exit_builtin(args);
 	return (0);
 }
 
-int		exec_simple_cmd(t_cmd *cmd)
+int		exec_single_cmd(t_cmd *cmd)
 {
-	if (!check_builtin(cmd))
-		return(0);
+	check_builtin(cmd);
 	return (1);
 }
 
-void	execution(t_cmd *cmd)
+void	execution(t_cmd *cmd, char **env)
 {
-	g_global = malloc(sizeof(t_global));
-	if (!cmd->redir_nbr)
-		exec_simple_cmd(cmd);
+	g_global = (t_global *)malloc(sizeof(t_global));
+	dup_env_var(env);
+
+	// printf("f:execution\tpipe ==> [%u]\n", cmd->type);
+	// printf("f:execution\tpipe ==> [%u]\n", cmd->args_size);
+	// printf("f:execution\tpipe ==> [%u]\n", cmd->redir_nbr);
+	if (cmd->type == eof)
+		exec_single_cmd(cmd);
+	// else
+	// 	printf("f:execution\tpipe ==> [%u]\n", cmd->type);
 }
