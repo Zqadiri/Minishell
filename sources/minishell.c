@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 17:53:22 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 18:02:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,19 @@ int main(int argc, char **argv, char **env)
 		{
 			ast = parse_pipe(p);
 			z = visitor(ast);
-			execution(z, env);
+			if (z)
+				execution(z, env);
 			if (ast)
 				free_tree(ast);
 		}
-		free(l->buffer);
-		l->buffer = NULL;
 	}
 	return (0);
 }
+
+
+
+
+
 
 // ToDo List:
 // read cmdline √

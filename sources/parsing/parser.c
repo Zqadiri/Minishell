@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/09 21:58:39 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 17:16:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ t_ast	*parse_pipe(t_parser *p)
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(p);
 		if (!ast->pipecmd_values[ast->pipecmd_size - 1])
 		{
+			free_parser(p);
 			free_tree(ast);
 			return (NULL);
 		}
