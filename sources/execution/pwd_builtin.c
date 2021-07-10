@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 11:53:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 13:01:27 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ int		exec_simple_cmd(t_cmd *cmd)
 void	execution(t_cmd *cmd)
 {
 	g_global = malloc(sizeof(t_global));
-	if (!cmd->redir_nbr)
+	if (cmd->type == eof)
+	{
+		printf("f:execution\ttype = [%u]\n", cmd->type);
 		exec_simple_cmd(cmd);
+	}
+	else
+		printf("f:execution\ttype = [%u]\n", cmd->type);
 }

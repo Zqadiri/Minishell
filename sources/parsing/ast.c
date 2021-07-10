@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 11:49:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 13:12:09 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,14 @@ t_cmd	*visitor(t_ast *ast)
 		{
 			inittt(z[n]);
 			z = visitor(ast->pipecmd_values[j]);
-			if (ast->pipecmd_size >= 2)
+			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
 				z[n].type = pip;
+			else
+			{
+				z[n].type = eof;
+				printf("type = [%u]\n", z[n].type);
+			}
+			printf("f:visitor\ttype = [%u]\n", z[n].type);
 			n++;
 		}
 	}
