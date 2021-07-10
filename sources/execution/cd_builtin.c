@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 10:43:52 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/07 11:44:45 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 10:13:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char    *get_env_var_by_key(char *key)
 	index = find_env(key);
 	if (index == -1)
 		return (NULL);
-	value = return_value(g_env_var[index], '=');
+	value = return_value(g_global->env_var[index], '=');
 	return (value);
 }
 
@@ -75,8 +75,8 @@ int    set_env_var(char *key, char *new_path)
 	{
 		tmp = ft_strjoin(key, "=");
 		tmp = ft_strjoin(tmp, new_path);
-		free(g_env_var[index]);
-        g_env_var[index] = tmp;
+		free(g_global->env_var[index]);
+        g_global->env_var[index] = tmp;
 	}
 	return (1);
 }

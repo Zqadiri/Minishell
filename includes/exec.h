@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/07 21:21:42 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 09:48:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@
 # include <curses.h>
 # include <term.h>
 # include <signal.h>
-
-# define HISTSIZE 30000
-# define HISTFILE "history.txt"
-
-char					**g_env_var;
 
 typedef struct s_tc_cmd
 {
@@ -71,7 +66,6 @@ int		env_builtin(void);
 void	exit_builtin(char **arg);
 int		unset_builtin(char **args);
 int		export_builtin(char **arg);
-int		check_builtin(char **args);
 int		launch(char **env, char **arg);
 
 /*

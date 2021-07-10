@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 15:27:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/02 17:45:03 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 10:13:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	env_count(void)
 	int	i;
 
 	i = 0;
-	while (g_env_var[i])
+	while (g_global->env_var[i])
 		i++;
 	return (i);
 }
@@ -65,7 +65,7 @@ char	**dup_env(void)
 	i--;
 	while (i != -1)
 	{
-		dup[i] = ft_strdup(g_env_var[i]);
+		dup[i] = ft_strdup(g_global->env_var[i]);
 		i--;
 	}
 	return (dup);
@@ -83,8 +83,8 @@ void	modify_env(char *arg, char *key)
 	else
 	{
 		new_value = ft_strdup(arg);
-		tmp = g_env_var[i];
-		g_env_var[i] = new_value;
+		tmp = g_global->env_var[i];
+		g_global->env_var[i] = new_value;
 		free (tmp);
 	}
 }

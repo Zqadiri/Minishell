@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/06/29 15:01:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 09:51:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 /*
 ** History
 */
+
+typedef struct s_global
+{
+	char	**env_var;
+	int		exit_status;
+}	t_global;
+
+t_global	*g_global;
 
 t_lexer	*history(void);
 void	move_up(t_index *m, t_lexer *l);

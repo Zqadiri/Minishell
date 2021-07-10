@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/24 21:52:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 10:13:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void free_old_env()
 	int i;
 
 	i = 0;
-	while (g_env_var[i])
+	while (g_global->env_var[i])
 	{
-		free(g_env_var[i]);
-		g_env_var[i] = NULL;
+		free(g_global->env_var[i]);
+		g_global->env_var[i] = NULL;
 		i++;
 	}
-	free (g_env_var);
-	g_env_var = NULL;
+	free (g_global->env_var);
+	g_global->env_var = NULL;
 }
 
 int get_str_by_char(char *str, char c)
@@ -50,14 +50,14 @@ int     find_env(char *key)
 	sub_env = NULL;
 	if (!key)
 		return (-1);
-	while (g_env_var[i])
+	while (g_global->env_var[i])
 	{
-		index = get_str_by_char(g_env_var[i], '=');
+		index = get_str_by_char(g_global->env_var[i], '=');
 		if (index == -1)
-			index = ft_strlen(g_env_var[i]);
+			index = ft_strlen(g_global->env_var[i]);
 		else
 		{
-			sub_env = ft_substr(g_env_var[i], 0, index);
+			sub_env = ft_substr(g_global->env_var[i], 0, index);
 			// printf ("sub_env[%s]\n", sub_env);
 			// printf ("key[%s]\n", key);
 			if (sub_env == NULL)
@@ -83,9 +83,9 @@ char    **realloc_new_env(int env_num)
 	new_env = (char **)malloc(sizeof(char *) * (env_num + 1));
 	if (!new_env)
 		return (NULL);
-	while (g_env_var[i] && i < env_num)
+	while (g_global->env_var[i] && i < env_num)
 	{
-		new_env[i] = ft_strdup(g_env_var[i]);
+		new_env[i] = ft_strdup(g_global->env_var[i]);
 		i++;
 	}
 	new_env[env_num] = 0;
@@ -100,14 +100,14 @@ char    **remove_env_by_key(int index)
 	register    int i;
 
 	i = index;
-	while (g_env_var[i + 1])
+	while (g_global->env_var[i + 1])
 	{
-		next_env = ft_strdup(g_env_var[i + 1]);
-		free(g_env_var[i]);
-		g_env_var[i] = next_env;
+		next_env = ft_strdup(g_global->env_var[i + 1]);
+		free(g_global->env_var[i]);
+		g_global->env_var[i] = next_env;
 		i++;
 	}
-	new_one = realloc_new_env(len(g_env_var) - 1);
+	new_one = realloc_new_env(len(g_global->env_var) - 1);
 	return (new_one);
 }
 
@@ -129,7 +129,7 @@ int     unset_builtin(char **args)
 	{
 		env_index = find_env(args[i]);
 		if (env_index != -1)
-		   g_env_var = remove_env_by_key(env_index);
+		   g_global->env_var = remove_env_by_key(env_index);
 		else
 		{
 			if (alpha(args[1]) == -1)

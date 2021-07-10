@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/02 17:44:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 10:13:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ void	set_new_env(char *arg)
 	else
 	{
 		index = (env_count() + 1);
-		g_env_var = realloc_new_env(index);
+		g_global->env_var = realloc_new_env(index);
 		env = ft_substr(arg, 0, ft_strlen(arg));
-		g_env_var[env_count() - 1] = env;
-		g_env_var[index] = 0;
+		g_global->env_var[env_count() - 1] = env;
+		g_global->env_var[index] = 0;
 	}
 }
 
@@ -149,6 +149,6 @@ int     export_builtin(char **args)
 // 	argv++;
 // 	dup_env_var(envv);
 // 	export_builtin(argv);
-// 	env_builtin(g_env_var);
+// 	env_builtin(g_global->env_var);
 // 	return (1);
 // }

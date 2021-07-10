@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/22 10:42:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 11:52:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,50 @@
 
 int		check_n_option(char **args)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
+	int	nb_options;
 
-	i = 0;
-	while (args[++i])
+	i = 1;
+	nb_options = 0;
+	while (args[i])
 	{
-		j = 0;
-		if (args[i][j++] == '-' && args[i][j] && args[i][j] == 'n')
+	 	j = 0;
+		nb_options++;
+		if (args[i][j] && args[i][j] == '-')
 		{
-			while (args[i][j] == 'n')
-				j++;
-			if (args[i][j] && args[i][j] != 'n')
-				return (0);
+			j++;
+			while (args[i][j])
+			{
+				if (args[i][j] && args[i][j] != 'n')
+					return (nb_options);
+				else
+					j++;				
+			}
 		}
 		else
-			return (i);
+			return (nb_options);
+		i++;
 	}
-	return (i);
-}
+	return (nb_options);
+}	
 
 int		echo_builtin(char **args)
 {
 	register int	i;
 	int				is_n;
 
-	i = 0;	
+	i = 1;
 	if (!args[1])
 	{
 		ft_putchar_fd('\n', 1);
 		return(1);
 	}
-	is_n = check_n_option(args);
+	if (args[i][0] == '-')
+	{
+		is_n = check_n_option(args);
+		i = is_n;		
+	}
 	while (args[i])
 	{
 		ft_putstr_fd(args[i], 1);
@@ -54,6 +66,7 @@ int		echo_builtin(char **args)
 			ft_putchar_fd(' ', 1);
 	}
 	if (is_n)
-		ft_putchar_fd('\n', 1);
+		return (1);	
+	ft_putchar_fd('\n', 1);
 	return (1);	
 }

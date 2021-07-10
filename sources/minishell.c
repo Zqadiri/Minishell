@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/09 21:45:10 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 10:44:36 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int main(int argc, char **argv, char **env)
 		l = init_l(l);
 		buff = NULL;
 		// ? set return value to $? = 0  //!pipeline
-		buff = readline("minishell-1.0$ ");
+		buff = readline("minishell-1.0> ");
 		if (ft_strcmp(buff, "\0"))
 		{
 			l->buffer = ft_strdup(buff);
@@ -121,7 +121,7 @@ int main(int argc, char **argv, char **env)
 			// print_tree(ast);
 			// printf("------------------------------\n\n");
 			z = visitor(ast);
-			// execution(z);
+			execution(z);
 			if (ast)
 				free_tree(ast);
 		}

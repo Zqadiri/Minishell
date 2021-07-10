@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 10:00:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 11:53:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,62 +23,44 @@ int     pwd_builtin()
 	return (1);
 }
 
-int			check_builtin(char **args)
+int			check_builtin(t_cmd *cmd)
 {
-	printf ("in check\n");
+	char **args;
 
-	if (ft_strequ(args[0], "echo"))
-		return (echo_builtin(args));
-	else if (ft_strequ(args[0], "cd"))
+	args = cmd->argvs;
+	if ((ft_strequ(args[0], "pwd") || ft_strequ(args[0], "PWD")))
 	{
-		printf ("arg[0]:%s\n", args[0]);
-		cd_builtin(args);
+        pwd_builtin();
+		return (1);		
 	}
-	else if (ft_strequ(args[0], "unset"))
-		return (unset_builtin(args));
-	else if (ft_strequ(args[0], "export"))
-		return (export_builtin(args));
-	else if (ft_strequ(args[0], "exit"))
-		exit_builtin(args);
-	else if (ft_strequ(args[0], "pwd"))
-            pwd_builtin();
+	else if (ft_strequ(args[0], "echo"))
+		return (echo_builtin(args));
 	else if (ft_strequ(args[0], "env"))
 		return (env_builtin());
+	// else if (ft_strequ(args[0], "cd"))
+	// {
+	// 	printf ("arg[0]:%s\n", args[0]);
+	// 	cd_builtin(args);
+	// }
+	// else if (ft_strequ(args[0], "unset"))
+	// 	return (unset_builtin(args));
+	// else if (ft_strequ(args[0], "export"))
+	// 	return (export_builtin(args));
+	// else if (ft_strequ(args[0], "exit"))
+	// 	exit_builtin(args);
 	return (0);
 }
 
-// void	execution(t_cmd *cmd)
-// {
-// 	int i;
+int		exec_simple_cmd(t_cmd *cmd)
+{
+	if (!check_builtin(cmd))
+		return(0);
+	return (1);
+}
 
-// 	printf("\n***args size = [%d]\n", cmd->args_size);
-// 	i = -1;
-// 	// while (cmd->argvs[++i])
-// 	while (++i < cmd->args_size)
-// 		printf ("arg[%d] : |%s|\n", i, cmd->argvs[i]);
-// 	printf("i = %d\n", i);
-// 	i = -1;
-// 	printf("***redirection size = [%d]\n", cmd->redir_nbr);
-// 	while (++i < cmd->redir_nbr)
-// 		printf ("filename [%s] : type [%u]\n", cmd->r[i].filename, cmd->r[i].type);
-// }
-
-
-// void execution(t_cmd *cmd)
-// {
-// 	int	i, j;
-
-// 	printf("\n*****************\n");
-// 	i = 0;
-// 	while (cmd->type != eof)
-// 	{
-// 		j = -1;
-// 		while (++j < cmd[i].args_size)
-// 			printf("arg[%d] = [%s]\n", j, cmd[i].argvs[j]);
-// 		j = -1;
-// 		while (++j < cmd->redir_nbr)
-// 			printf("file[%s] = type[%u]\n", cmd[i].r[j].filename, cmd[i].r[j].type);
-// 		i++;
-// 	}
-// 	printf("*****************\n");
-// }
+void	execution(t_cmd *cmd)
+{
+	g_global = malloc(sizeof(t_global));
+	if (!cmd->redir_nbr)
+		exec_simple_cmd(cmd);
+}

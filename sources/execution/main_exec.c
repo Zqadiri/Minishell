@@ -20,7 +20,7 @@ char	**get_path(void)
 
 	if ((ret = find_env("PATH")) == -1)
 		return (NULL);
-	tmp = ft_strdup(g_env_var[ret]);
+	tmp = ft_strdup(g_global->env_var[ret]);
 	tmp = return_value(tmp, '=');
 	if (!(path = ft_split(tmp, ':')))
 	{
@@ -36,13 +36,13 @@ int		dup_env_var(char **env)
 	int i;
 
 	i = -1;
-	g_env_var = (char **)malloc(sizeof(char *) * (len(env) + 1));
-	if (g_env_var == NULL)
+	g_global->env_var = (char **)malloc(sizeof(char *) * (len(env) + 1));
+	if (g_global->env_var == NULL)
 		exit(EXIT_FAILURE);
-	g_env_var[len(env)] = 0;
+	g_global->env_var[len(env)] = 0;
 	while (env[++i])
 	{
-		if (!(g_env_var[i] = ft_strdup(env[i])))
+		if (!(g_global->env_var[i] = ft_strdup(env[i])))
 			quit();
 	}
 	return (1);
