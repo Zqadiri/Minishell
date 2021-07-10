@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 19:31:55 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 19:58:02 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,12 @@ int main(int argc, char **argv, char **env)
 		l = init_l(l);
 		buff = NULL;
 		buff = readline("minishell-1.0> ");
-		if (ft_strcmp(buff, "\0"))
+		if (!buff)
+		{
+			write(1, "exit\n", 5);
+			exit(g_global->exit_status);
+		}
+		else if (ft_strcmp(buff, "\0"))
 		{
 			l->buffer = ft_strdup(buff);
 			l->bufsize = ft_strlen(l->buffer);

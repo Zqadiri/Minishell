@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 17:19:46 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 19:55:28 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ t_parser	*init_parser(t_lexer *l)
 	{
 		printf("minishell: syntax error near unexpected token 1`%s'\n",
 			p->curr_token->value);
+		g_global->exit_status = 258;
 		return (NULL);
 	}
 	if (p->curr_token->type == illegal)
 	{
 		free_parser(p);
+		g_global->exit_status = 258;
 		return (NULL);
 	}
 	return (p);
@@ -46,7 +48,10 @@ t_parser	*init_parser(t_lexer *l)
 t_token	*check_token(t_parser *p, t_ast *ast)
 {
 	if (p->curr_token->type == illegal)
+	{
+		g_global->exit_status = 258;
 		return (NULL);
+	}
 	if (!syntax_error(p))
 		return (NULL);
 	if (is_redic(p->prev_token))
@@ -66,6 +71,7 @@ int	parse_expected_token(t_parser *p, t_token_type type)
 	{
 		printf("minishell: syntax error near unexpected token 2`%s'\n",
 			p->curr_token->value);
+		g_global->exit_status = 258;
 		return (0);
 	}
 	return (1);
@@ -78,11 +84,13 @@ int	syntax_error(t_parser *p)
 	{
 		printf("minishell: syntax error near unexpected token 3`%s'\n",
 			p->prev_token->value);
+		g_global->exit_status = 258;
 		return (0);
 	}
 	if (is_redic(p->prev_token) && p->curr_token->type == eof)
 	{
 		printf("minishell: syntax error near unexpected token `newline'\n");
+		g_global->exit_status = 258;
 		return (0);
 	}
 	return (1);
