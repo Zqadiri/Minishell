@@ -46,3 +46,25 @@ int		dup_env_var(char **env)
 	g_global->env_var[i] = 0;
 	return (1);
 }
+
+int		exec_single_cmd(t_cmd *cmd)
+{
+	char	**path;
+
+	if (check_builtin(cmd))
+		return (1);
+	path = get_path();
+	// find_path ()
+	return (1);
+}
+
+void	execution(t_cmd *cmd, char **env)
+{
+	(void)env;
+	if (cmd->type == eof)
+	{
+		printf ("%d\n", cmd->redir_nbr);
+		exec_single_cmd(cmd);
+	}
+}
+

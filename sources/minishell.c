@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 20:22:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 20:27:11 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int main(int argc, char **argv, char **env)
 	return (0);
 }
 
+<<<<<<< HEAD
 //? << stp
 //? << stp cat
 //? << 'stp' cat
@@ -127,6 +128,8 @@ int main(int argc, char **argv, char **env)
 
 
 
+=======
+>>>>>>> 77f0ecadc077815365e207461bcd8e35582a8290
 
 // ToDo List:
 // read cmdline √
@@ -188,6 +191,5 @@ int main(int argc, char **argv, char **env)
 // ! previous -> current token
 // ? l->buffer = |echo ok > |
 // * semicolon at the end of line -> valid
-
 
 //! tab  = 4 spaces
