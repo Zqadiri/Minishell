@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 18:02:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 18:03:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,6 @@ int main(int argc, char **argv, char **env)
 }
 
 
-
-
-
-
 // ToDo List:
 // read cmdline √
 // check if there is nay syntax error (eg: >>> or |; ...)
@@ -166,6 +162,5 @@ int main(int argc, char **argv, char **env)
 // ! previous -> current token
 // ? l->buffer = |echo ok > |
 // * semicolon at the end of line -> valid
-
 
 //! tab  = 4 spaces

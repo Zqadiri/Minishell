@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 09:48:00 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 18:59:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@
 # include <term.h>
 # include <signal.h>
 
-typedef struct s_tc_cmd
-{
-	char	*cmd_im; // Enter insert mode 
-	char	*cmd_ic; // Insert character
-	char	*cmd_ei; // end insert mode
-
-	char	*cmd_dm; // Enter delete mode
-	char	*cmd_dc; // Delete character
-	char	*cmd_ed; // End delete mode
-	char	*cmd_dl; // Delete line
-
-	char	*cmd_ce; // Clear to end of line
-	char	*cmd_le; // move cursor one left position
-
-	char	*cmd_ch; // Indicates screen relative cursor motion
-}				t_tc_cmd;
 
 typedef struct s_index
 {
@@ -52,7 +36,6 @@ typedef struct s_index
 	int					fd;
 	int					delete_cur;
 	char				*line;
-	t_tc_cmd			tc_cmd;
 }				t_index;
 
 /*

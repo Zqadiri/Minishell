@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 18:02:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 18:43:10 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@ int     pwd_builtin()
 
 int			check_builtin(t_cmd *cmd)
 {
-	char **args;
+	char	**args;
 
 	args = cmd->argvs;
+	// * accept any case
 	if (ft_strequ(args[0], "pwd"))
     	return (pwd_builtin());
 	else if (ft_strequ(args[0], "echo"))
 		return (echo_builtin(args));
 	else if (ft_strequ(args[0], "env"))
 		return (env_builtin());
+	// ? nope
 	else if (ft_strequ(args[0], "export"))
 		return (export_builtin(args));
 	else if (ft_strequ(args[0], "unset"))
@@ -45,17 +47,4 @@ int			check_builtin(t_cmd *cmd)
 	// else if (ft_strequ(args[0], "exit"))
 	// 	exit_builtin(args);
 	return (0);
-}
-
-int		exec_single_cmd(t_cmd *cmd)
-{
-	check_builtin(cmd);
-	return (1);
-}
-
-void	execution(t_cmd *cmd, char **env)
-{
-	(void)env;
-	if (cmd->type == eof)
-		exec_single_cmd(cmd);
 }
