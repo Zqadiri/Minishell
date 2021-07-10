@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/07/10 13:16:35 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/07/10 12:46:51 by zqadiri          ###   ########.fr       */
->>>>>>> 5e6eca20353cec6c67e99e8a7c390c5ec26ac121
+/*   Updated: 2021/07/10 16:46:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,29 +87,21 @@ t_cmd	*visitor(t_ast *ast)
 	if (!ast)
 		return (NULL);
 	n = 0;
+	z = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
+	z->nbr_cmd = ast->pipecmd_size;
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
-		printf("pipe size = %d\n", ast->pipecmd_size);
-		while (++j < ast->pipecmd_size)
+		while (++j < ast->pipecmd_size && n <= z->nbr_cmd)
 		{
 			inittt(z[n]);
-			z = visitor(ast->pipecmd_values[j]);
+			z = visitor_args(ast->pipecmd_values[j], z, n);
 			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
-			{
 				z[n].type = pip;
-				printf("type = [%u]\n", z[n].type);
-			}
 			else
-			{
 				z[n].type = eof;
-				printf("type = [%u]\n", z[n].type);
-			}
-			printf("f:visitor\t****type = [%u]\n", z[n].type);
 			n++;
 		}
 	}
-	if (ast->type == arg_ast)
-		z = visitor_args(ast, z, n);
 	return (z);
 }

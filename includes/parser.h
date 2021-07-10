@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 11:56:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 16:45:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_ast
 
 typedef struct s_cmd
 {
+	int				nbr_cmd;
 	char			**argvs;
 	int				args_size;
 	t_redir			*r;
@@ -96,6 +97,6 @@ void		free_parser(t_parser *p);
 ** exec
 */
 
-void		execution (t_cmd *cmd, char **env);
+void		execution(t_cmd *cmd, char **env);
 
 #endif

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/07/10 13:01:27 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/07/10 12:55:47 by zqadiri          ###   ########.fr       */
->>>>>>> 5e6eca20353cec6c67e99e8a7c390c5ec26ac121
+/*   Updated: 2021/07/10 16:46:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +29,8 @@ int			check_builtin(t_cmd *cmd)
 
 	args = cmd->argvs;
 	printf ("--->%s\n", args[0]);
-	if ((ft_strequ(args[0], "pwd") || ft_strequ(args[0], "PWD")))
-	{
-        pwd_builtin();
-		return (1);		
-	}
+	if (ft_strequ(args[0], "pwd"))
+    	return (pwd_builtin());
 	else if (ft_strequ(args[0], "echo"))
 		return (echo_builtin(args));
 	else if (ft_strequ(args[0], "env"))
@@ -64,12 +57,14 @@ int		exec_single_cmd(t_cmd *cmd)
 
 void	execution(t_cmd *cmd, char **env)
 {
+	(void)env;
 	g_global = malloc(sizeof(t_global));
+	dup_env_var(env);
 	if (cmd->type == eof)
 	{
-		printf("f:execution\ttype = [%u]\n", cmd->type);
-		exec_simple_cmd(cmd);
+		printf("-->f:execution\ttype = [%u]\n", cmd->type);
+		exec_single_cmd(cmd);
 	}
 	else
-		printf("f:execution\ttype = [%u]\n", cmd->type);
+		printf("f:execution\t4type = [%u]\n", cmd->type);
 }

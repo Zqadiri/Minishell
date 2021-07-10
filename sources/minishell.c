@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 13:19:17 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 13:44:51 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	(void)env;
 	while(1)
 	{
 		l = NULL;
@@ -120,6 +121,7 @@ int main(int argc, char **argv, char **env)
 			// print_tree(ast);
 			// printf("------------------------------\n\n");
 			z = visitor(ast);
+				printf ("--->%s\n", z->argvs[0]);
 			execution(z, env);
 			if (ast)
 				free_tree(ast);

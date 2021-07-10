@@ -34,17 +34,15 @@ int		dup_env_var(char **env)
 {
 	int i;
 
-	i = -1;
+	i = 0;
 	g_global->env_var = (char **)malloc(sizeof(char *) * (len(env) + 1));
 	if (g_global->env_var == NULL)
 		exit(EXIT_FAILURE);
-	g_global->env_var[len(env)] = 0;
-	while (env[i])
+	while (env[i] && g_global->env_var[i])
 	{
 		g_global->env_var[i] = ft_strdup(env[i]);
-			// quit();
 		i++;
 	}
-	// g_global->env_var[i] = NULL;
+	g_global->env_var[i] = 0;
 	return (1);
 }
