@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 10:13:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 17:58:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int     find_env(char *key)
 		else
 		{
 			sub_env = ft_substr(g_global->env_var[i], 0, index);
-			// printf ("sub_env[%s]\n", sub_env);
-			// printf ("key[%s]\n", key);
 			if (sub_env == NULL)
 				return (-1);
 			if (ft_strequ(key, sub_env))
@@ -143,16 +141,3 @@ int     unset_builtin(char **args)
 	}
 	return (1);
 }
-
-// int main(int argc, char **argv, char **env)
-// {
-//     int i = 1;
-// 	dup_env_var(env);
-//     // while (i < argc)
-//     // {
-//     //     unset_builtin(argv[i]);
-//     //     i++;
-//     // }
-//     env_builtin();
-//     return (1);
-// }

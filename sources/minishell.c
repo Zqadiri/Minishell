@@ -6,37 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 17:24:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 19:31:55 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// t_lexer	*read_cmd(void)
-// {
-// 	size_t	r;
-// 	char	*line;
-// 	char	*buffer;
-
-// 	buffer = malloc(sizeof(char) * 2);
-// 	r = read(0, buffer, 1);
-// 	line = malloc(sizeof(char) * 2);
-// 	if (!buffer || !line)
-// 		return (NULL);
-// 	line[0] = '\0';
-// 	while (r > 0)
-// 	{
-// 		buffer[1] = 0;
-// 		if (buffer[0] == '\n')
-// 			break ;
-// 		line = ft_joinchar(line, buffer[0]);
-// 		r = read(0, buffer, 1);
-// 	}
-// 	free(buffer);
-// 	return (init_lexer(line));
-// }
-
-// char *readline (char *prompt);
 
 void	print_tree(t_ast *ast)
 {
@@ -93,13 +67,16 @@ int main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	(void)env;
+	g_global = malloc(sizeof(t_global));
+	if (g_global == NULL)
+		return (EXIT_FAILURE);
+	dup_env_var(env);
+	g_global->exit_status = 0;
 	while(1)
 	{
 		l = NULL;
 		l = init_l(l);
 		buff = NULL;
-		// ? set return value to $? = 0  //!pipeline
 		buff = readline("minishell-1.0> ");
 		if (ft_strcmp(buff, "\0"))
 		{
@@ -114,10 +91,6 @@ int main(int argc, char **argv, char **env)
 		if (p)
 		{
 			ast = parse_pipe(p);
-			// ? if (!ast) set exit status  $? = 258 (syntax error)
-			// printf("\n------------------------------\n");
-			// print_tree(ast);
-			// printf("------------------------------\n\n");
 			z = visitor(ast);
 			if (z)
 				execution(z, env);
@@ -125,8 +98,6 @@ int main(int argc, char **argv, char **env)
 				free_tree(ast);
 		}
 	}
-	//free before exit
-	// exit(EXIT_SUCCESS);
 	return (0);
 }
 

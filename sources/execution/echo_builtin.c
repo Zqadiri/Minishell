@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 11:52:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 16:58:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		echo_builtin(char **args)
 	int				is_n;
 
 	i = 1;
+	is_n = 0;
 	if (!args[1])
 	{
 		ft_putchar_fd('\n', 1);
@@ -65,8 +66,7 @@ int		echo_builtin(char **args)
 		if (args[i])
 			ft_putchar_fd(' ', 1);
 	}
-	if (is_n)
-		return (1);	
-	ft_putchar_fd('\n', 1);
+	if (is_n == 0)
+		ft_putchar_fd('\n', 1);
 	return (1);	
 }

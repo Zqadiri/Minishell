@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 19:24:43 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 19:33:36 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ char	*envar_token(t_lexer *l)
 		readchar(l);
 		free(temp);
 	}
-	printf("str = [%s]\n", str);
-	printf("env_var = [%s]\n", g_global->env_var[0]);
 	str = ft_getenv(g_global->env_var, str);
 	// str = getenv(str);
 	if (!str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/09 21:48:56 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/10 17:32:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,99 +72,3 @@ char	*exit_status(char *s, int index)
 //         if (ft_strnstr(cmd->argvs[i], "$?", 2))
 //     }
 // }
-
-//!
-/*
-char	*tokenize_dquoted_text(t_lexer *l)
-{
-	char	*str;
-	char	*temp;
-
-	readchar(l);
-	if (l->c == EOF)
-		if (!multi_lines(l, DQUOTE))
-			return (NULL);
-	str = ft_strdup("");
-	while (l->c != DQUOTE && l->c != EOF)
-	{
-		temp = str;
-		// check_string(l, str, 1);
-		if (l->c == DOLLAR)
-			str = ft_strjoin(str, envar_token(l));
-		else
-		{
-			str = ft_strjoinchar(str, l->c);
-			readchar(l);
-		}
-		free(temp);
-	}
-	if (!multi_lines(l, DQUOTE))
-		return (NULL);
-	readchar(l);
-	return (str);
-}
-
-char	*tokenize_squoted_text(t_lexer *l)
-{
-	char	*str;
-	char	*temp;
-	int		s;
-
-	s = 0;
-	readchar(l);
-	str = ft_strdup("");
-	while (l->c != SQUOTE && l->c != EOF)
-	{
-		temp = str;
-		str = ft_strjoinchar(str, l->c);
-		readchar(l);
-		free(temp);
-	}
-	if (l->c == SQUOTE)
-		s += 1;
-	if (l->c == EOF && s == 0)
-		if (!multi_lines(l, SQUOTE))
-			return (NULL);
-	readchar(l);
-	return (str);
-}
-
-t_token	*string_token(t_lexer *l)
-{
-	char	*str;
-	char	*temp;
-	char	*s;
-
-	str = ft_strdup("");
-	while (l->curpos <= l->bufsize && l->c != PIPE && l->c != GREAT
-		&& l->c != LESS && l->c != EOF)
-	{
-		temp = str;
-		if (l->c == DQUOTE)
-		{
-			s = tokenize_dquoted_text(l);
-			if (!s && l->multi_line == 1)
-			{
-				printf("error>>>\n");
-				return (ret_str(l, NULL, illegal));
-			}
-			str = ft_strjoin(str, s);
-			free(s);
-		}
-		else if (l->c == SQUOTE)
-		{
-			s = tokenize_squoted_text(l);
-			if (!s && l->multi_line == 1)
-				return (ret_str(l, NULL, illegal));
-			str = ft_strjoin(str, s);
-			free(s);
-		}
-		else
-			str = ft_strjoin(str, tokenize_text(l, NULL));
-		free(temp);
-		if (l->c == 32)
-			return (ret_str(l, str, id));
-	}
-	return (ret_str(l, str, id));
-}
-*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 10:13:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 19:32:04 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,23 @@ void	set_new_env(char *arg)
 	while (arg[++i])
 		if (arg[i] == '=')
 			index = 1;
-	if (index == 0)
-		return ;
-	else
-	{
+	// if (index == 0)
+	// {
+		
+	// }
+	// else
+	// {
 		index = (env_count() + 1);
 		g_global->env_var = realloc_new_env(index);
 		env = ft_substr(arg, 0, ft_strlen(arg));
 		g_global->env_var[env_count() - 1] = env;
 		g_global->env_var[index] = 0;
-	}
+	// }
 }
 
 void	set_or_modify(char *arg)
 {
-	int	is_set;
+	int		is_set;
 	int		i;
 	char	*key;
 
@@ -123,7 +125,7 @@ int     export_builtin(char **args)
 {
 	int i;
 
-	i = -1;
+	i = 0;
 	if (!args[1])
 	{
 		sort_and_print();
@@ -142,13 +144,3 @@ int     export_builtin(char **args)
 	}
 	return (1);
 }
-
-// int		main(int argc, char **argv, char **envv)
-// {
-// 	(void)argc;
-// 	argv++;
-// 	dup_env_var(envv);
-// 	export_builtin(argv);
-// 	env_builtin(g_global->env_var);
-// 	return (1);
-// }
