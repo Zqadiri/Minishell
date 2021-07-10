@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 13:44:51 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 17:24:02 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ int main(int argc, char **argv, char **env)
 		else
 			continue;
 		free (buff);
-		// printf("\nl->buffer --%s--\n", l->buffer);
-		// printf("l->bufsize --->|%d|\n", l->bufsize);		
 		p = init_parser(l);
 		if (p)
 		{
@@ -121,19 +119,21 @@ int main(int argc, char **argv, char **env)
 			// print_tree(ast);
 			// printf("------------------------------\n\n");
 			z = visitor(ast);
-				printf ("--->%s\n", z->argvs[0]);
-			execution(z, env);
+			if (z)
+				execution(z, env);
 			if (ast)
 				free_tree(ast);
 		}
-		free(l->buffer);
-		l->buffer = NULL;
-		// system("leaks minishell");
 	}
 	//free before exit
 	// exit(EXIT_SUCCESS);
 	return (0);
 }
+
+
+
+
+
 
 // ToDo List:
 // read cmdline √

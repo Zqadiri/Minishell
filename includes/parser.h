@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 16:45:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 16:58:24 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ typedef struct s_ast
 typedef struct s_cmd
 {
 	int				nbr_cmd;
-	char			**argvs;
 	int				args_size;
-	t_redir			*r;
+	char			**argvs;
 	int				redir_nbr;
+	t_redir			*r;
 	t_token_type	type;
 }               t_cmd;
 

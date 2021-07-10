@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 16:46:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 17:15:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ void	execution(t_cmd *cmd, char **env)
 	dup_env_var(env);
 	if (cmd->type == eof)
 	{
-		printf("-->f:execution\ttype = [%u]\n", cmd->type);
+		printf("-->f:execution\t777type = [%u]\n", cmd->type);
 		exec_single_cmd(cmd);
 	}
 	else
-		printf("f:execution\t4type = [%u]\n", cmd->type);
+		printf("f:execution\t000type = [%u]\n", cmd->type);
+		// exec_pipe_cmd(cmd);
 }
