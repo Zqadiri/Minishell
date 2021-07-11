@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/10 18:54:47 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/07/11 16:29:06 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS_EXEC		=	./sources/execution/utils.c\
 					./sources/execution/env_builtin.c\
 					./sources/execution/exit_builtin.c\
 					./sources/execution/main_exec.c\
+					./sources/execution/exec_single_cmd.c\
 					./sources/execution/pwd_builtin.c\
 					./sources/execution/echo_builtin.c\
 					./sources/execution/unset_builtin.c\

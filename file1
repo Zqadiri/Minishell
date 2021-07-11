@@ -1,0 +1,17 @@
+total 456
+drwxr-xr-x  16 zqadiri  2019     544 Jul 11 15:45 .
+drwx------  11 zqadiri  2019     374 Jul 11 11:22 ..
+-rw-r--r--   1 zqadiri  2019    8196 Jul 11 12:18 .DS_Store
+drwxr-xr-x  15 zqadiri  2019     510 Jul 11 14:45 .git
+-rw-r--r--   1 zqadiri  2019     664 Jul 10 13:20 .gitignore
+-rw-r--r--   1 zqadiri  2019    2798 Jul 10 18:54 Makefile
+-rw-r--r--   1 zqadiri  2019    4193 Jul 10 13:20 README.md
+-rwx------   1 zqadiri  2019       0 Jul 11 15:45 file1
+-rwxr-xr-x   1 zqadiri  2019   15489 Jul 10 13:20 history.txt
+drwxr-xr-x   6 zqadiri  2019     204 Jul 10 18:01 includes
+drwxr-xr-x  87 zqadiri  2019    2958 Jul 11 15:45 libft
+-rw-r--r--   1 zqadiri  2019   33872 Jul 11 15:45 libft.a
+-rwxr-xr-x   1 zqadiri  2019  150864 Jul 11 15:45 minishell
+drwxr-xr-x   3 zqadiri  2019     102 Jul 11 13:44 minishell.dSYM
+-rwx------   1 zqadiri  2019       0 Jul 11 14:37 out
+drwxr-xr-x   7 zqadiri  2019     238 Jul 11 15:45 sources
