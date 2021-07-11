@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 17:32:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 16:54:06 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,82 @@ char	*exit_status(char *s, int index)
 	return (ret_value);
 }
 
-// char    *expander(t_cmd *cmd)
-// {
-//     int i;
+char	*invalid_envar_here_doc(char *buff, int i, char *str)
+{
+	char	*temp;
 
-//     i = -1;
-//     while (++i < cmd->args_size)
-//     {
-//         if (ft_strnstr(cmd->argvs[i], "$?", 2))
-//     }
-// }
+	temp = str;
+	if (buff[i] == '0')
+	{
+		str = ft_strjoin(str, "minishell");
+		free(temp);
+	}
+	if (buff[i] == '?')
+	{
+		str = ft_strjoin(str, ft_itoa(g_global->exit_status));
+		free(temp);
+	}
+	return (str);
+}
+
+char	*envar_here_doc(char *buff, int i)
+{
+	char	*str;
+	char	*temp;
+
+	str = ft_strdup("");
+	if (ft_isdigit(buff[i]) || buff[i] == '?')
+		return (invalid_envar_here_doc(buff, i, str));
+	while (valid_envar(buff[i]) && buff[i] != EOF)
+	{
+		temp = str;
+		str = ft_joinchar(str, buff[i]);
+		free(temp);
+		i++;
+	}
+	str = ft_getenv(g_global->env_var, str);
+	if (!str)
+		str = ft_strdup("");
+	return (str);
+}
+
+void	parse_here_doc(t_redir *r)
+{
+	char	*buff;
+	char	*str;
+	char	*temp;
+	char	*s;
+	int		i;
+	int		fd;
+
+	if (r->type == here_doc && r->is_quoted == 0)
+	{
+		fd = open("/temp/heredoc", O_RDONLY | O_WRONLY | O_CREAT | O_APPEND);
+		if (fd < -1)
+			return ; // ! error while opening the file
+		s = ft_strdup("");
+		while (1)
+		{	
+			buff = readline("> ");
+			i = -1;
+			str = ft_strdup("");
+			if (!ft_strcmp(buff, r->filename) || !buff)
+				break ;
+			while (buff[++i] != '\0')
+			{
+				temp = str;
+				if (buff[i] == DOLLAR)
+				{
+					str = ft_strjoin(str, envar_token_here_doc(buff, i+1));
+					// printf("i = %d\n", i);
+					// printf("str >>>>> %s\n", str);
+				}
+				else
+					str = ft_joinchar(str, buff[i]);
+				free(temp);
+			}
+			s = ft_strjoin(s, str);
+			ft_putendl_fd(s, fd);
+		}
+	}
+}
