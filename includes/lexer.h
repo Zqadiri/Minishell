@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 15:22:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 16:43:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,22 @@ typedef struct s_lexer
 	int		readpos;
 	char	c;
 	int		multi_line;
+	int		is_quoted;
 }				t_lexer;
 
 typedef struct s_token
 {
 	char			*value;
 	t_token_type	type;
+	int				is_quoted;
 }				t_token;
 
 /*
 ** get_next_token.c
 */
 char	*tokenize_text(t_lexer *l, char *s);
+char	*tokenize_dquoted_text(t_lexer *l);
+char	*tokenize_squoted_text(t_lexer *l);
 t_token	*string_token(t_lexer *l);
 
 /*
@@ -93,7 +97,7 @@ char	*envar_token(t_lexer *l);
 /*
 ** utils.c
 */
-t_token	*init_token(t_token_type type, char *s);
+t_token	*init_token(t_token_type type, char *s, t_lexer *l);
 int		ftstrcmp(char *s1, char *s2);
 char	*ft_joinchar(char *s, char c);
 int		is_valid_id(char *str);
