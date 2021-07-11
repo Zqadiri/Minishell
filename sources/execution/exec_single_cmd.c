@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 16:41:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 17:56:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,43 +76,45 @@ void	setup_infiles(t_cmd *cmd, t_red *redir)
 void	setup_outfiles(t_cmd *cmd, t_red *redir)
 {
 	int i;
+    int j;
 	int	bad_outfile;
 	int nbr;
 
 	i = 0;
+    j = 0;
 	bad_outfile = 0;
 	nbr = redir->greater_cpt + redir->great_cpt;
-	redir->outfile_fds = malloc(sizeof(int) * (nbr + 1));
+	redir->outfile_fds = malloc(sizeof(int) * (nbr));
 	while (i < cmd->redir_nbr)
 	{
+		printf ("fd: %d\n", nbr);
 		if (cmd->r[i].type == great)
 		{
-			redir->outfile_fds[i] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
-			if (redir->outfile_fds[i] < 0)
+            // printf ("is in\n");
+			redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
+			if (redir->outfile_fds[j] < 0)
 			{
 				bad_outfile = 1;
 				print_error(cmd->r[i].filename);
 				exit(1);
 			}
+            j++;
 		}
 		else if (cmd->r[i].type == greater)
 		{
-			redir->outfile_fds[i] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
-			if (redir->outfile_fds[i] < 0)
+			redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
+			if (redir->outfile_fds[j] < 0)
 			{
 				bad_outfile = 1;
 				print_error(cmd->r[i].filename);
 				exit(1);
 			}
+            j++;
 		}
 		i++;
 	}
 	if (!bad_outfile)
-	{
-		// printf ("fd: %d\n", redir->outfile_fds[nbr - 1]);
-		if (!dup2(redir->outfile_fds[nbr], 1))
-			printf("error? \n");
-	}
+		dup2(redir->outfile_fds[nbr - 1], 1);
 }
 
 int		setup_redirections(t_cmd *cmd, t_red *redir)
@@ -127,6 +129,8 @@ int		setup_redirections(t_cmd *cmd, t_red *redir)
 		setup_outfiles(cmd, redir);
 	return (1);	
 }
+
+// ? check builtin
 
 void		exec_single_cmd(t_cmd *cmd, t_red *redir)
 {
