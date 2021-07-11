@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 19:55:28 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 15:32:02 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_parser	*init_parser(t_lexer *l)
 {
 	t_parser	*p;
 
-	if (!l)
+	if (!l->buffer)
 		return (NULL);
 	p = malloc(sizeof(t_parser));
 	if (!p)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 21:49:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 14:39:45 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,14 @@ int main(int argc, char **argv, char **env)
 			write(1, "exit\n", 5);
 			exit(g_global->exit_status);
 		}
-		else if (!is_white_space(buff) && ft_strcmp(buff, "\0"))
+		else if (ft_strcmp(buff, "\0"))
 		{
-			l->buffer = ft_strdup(buff);
-			l->bufsize = ft_strlen(l->buffer);
-			add_history(l->buffer);
+			add_history(buff);
+			if (!is_white_space(buff))
+			{
+				l->buffer = ft_strdup(buff);
+				l->bufsize = ft_strlen(l->buffer);
+			}
 		}
 		else
 			continue;
@@ -118,6 +121,12 @@ int main(int argc, char **argv, char **env)
 	return (0);
 }
 
+//? << stp
+//? << stp cat
+//? << 'stp' cat
+//? << st'p' cat
+//? << st'p cat
+//? << $PWD cat
 
 // ToDo List:
 // read cmdline √

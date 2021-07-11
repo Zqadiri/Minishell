@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/09 20:48:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	skip_space(t_lexer *l)
 	while (l->readpos <= l->bufsize && (l->c == 32
 			|| l->c == '\t' || l->c == '\n'))
 		readchar(l);
+	l->is_quoted = 0;
 }
 
 t_token	*ret_str(t_lexer *l, char *s, int type)
@@ -28,7 +29,7 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 	if (type == great || type == pip || type == here_doc
 		|| type == greater || type == less)
 		readchar(l);
-	return (init_token(type, s));
+	return (init_token(type, s, l));
 }
 
 t_token	*ret_char(t_lexer *l, char c, t_token_type type)
