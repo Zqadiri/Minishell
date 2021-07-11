@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/07/11 18:28:00 by iidzim           ###   ########.fr       */
+=======
+/*   Updated: 2021/07/11 20:02:50 by zqadiri          ###   ########.fr       */
+>>>>>>> 502fcb2026664fe74ff613291cbb7175a133227c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +125,7 @@ void	set_or_modify(char *arg)
 		modify_env(arg, key);
 }
 
-int     export_builtin(char **args)
+int		export_builtin(char **args)
 {
 	int i;
 
