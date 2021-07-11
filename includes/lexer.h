@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/09 21:09:36 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 15:22:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef enum e_token_type
 	eof
 }			t_token_type;
 
+// ! 2 60 100 100
+// ! 1     
 /*
 ** lexer->buffer		: the input text
 ** lexer->bufsize		: size of the input text

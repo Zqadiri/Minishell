@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 12:29:00 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 16:30:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,8 @@ void	modify_env(char *arg, char *key);
 */
 
 int		check_signals(void);
+char	*find_path(char	*cmd, char **path);
+void		exec_single_cmd(t_cmd *cmd, t_red *redir);
+
 
 #endif

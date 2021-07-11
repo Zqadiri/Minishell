@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 13:20:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 15:45:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
-
 
 // ToDo List:
 // read cmdline √
