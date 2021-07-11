@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 21:48:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 12:05:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	init_redir(t_cmd *cmd, t_red *redir)
 
 void	print_error(char *file_error)
 {
-	write (2, "minishell : ", 7);
+	write (2, "minishell-1.0  :  ", 7);
 	write(2, file_error, ft_strlen(file_error));
 	perror(" ");
 }
@@ -121,13 +121,14 @@ void	setup_infiles(t_cmd *cmd, t_red *redir)
 	redir->infile_fds = malloc(sizeof(int) * redir->less_cpt);
 	while (i < cmd->redir_nbr)
 	{
-		if (cmd->r->type == less)
+		if (cmd->r[i].type == less)
 		{
 			redir->infile_fds[i] = open(cmd->r->filename, O_RDWR);
-			if (cmd->r->filename < 0)
-			{		
-				print_error(cmd->r->filename);
-				exit (0);
+			if (redir->infile_fds[i] < 0)
+			{
+					
+				print_error(cmd->r[i].filename);
+				// exit (0);
 			}
 		}
 		i++;
