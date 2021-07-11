@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 19:35:06 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 16:54:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,6 @@ int	valid_envar(char c)
 	return (0);
 }
 
-char	*invalid_envar(t_lexer *l, char *str)
-{
-	char	*temp;
-
-	temp = str;
-	if (l->c == '0')
-	{
-		str = ft_strjoin(str, "minishell");
-		free(temp);
-	}
-	if (l->c == '?')
-	{
-		str = ft_strjoin(str, ft_itoa(g_global->exit_status));
-		free(temp);
-	}
-	readchar(l);
-	return (tokenize_text(l, str));
-}
-
 char	*ft_getenv(char **env, char *str)
 {
 	char	**env_var;
@@ -82,6 +63,25 @@ char	*ft_getenv(char **env, char *str)
 			i++;
 	}
 	return (value);
+}
+
+char	*invalid_envar(t_lexer *l, char *str)
+{
+	char	*temp;
+
+	temp = str;
+	if (l->c == '0')
+	{
+		str = ft_strjoin(str, "minishell");
+		free(temp);
+	}
+	if (l->c == '?')
+	{
+		str = ft_strjoin(str, ft_itoa(g_global->exit_status));
+		free(temp);
+	}
+	readchar(l);
+	return (tokenize_text(l, str));
 }
 
 char	*envar_token(t_lexer *l)
