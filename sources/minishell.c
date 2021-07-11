@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 21:49:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 13:12:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,14 @@ int main(int argc, char **argv, char **env)
 		l = init_l(l);
 		buff = NULL;
 		buff = readline("minishell-1.0> ");
+		printf ("|%s|\n", buff);
 		if (!buff)
 		{
 			write(1, "exit\n", 5);
 			exit(g_global->exit_status);
 		}
 		else if (!is_white_space(buff) && ft_strcmp(buff, "\0"))
+		// if (ft_strcmp(buff, "\0"))
 		{
 			l->buffer = ft_strdup(buff);
 			l->bufsize = ft_strlen(l->buffer);

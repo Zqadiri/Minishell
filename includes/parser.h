@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/10 18:47:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 12:26:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ typedef struct s_parser
 	t_token	*prev_token;
 }				t_parser;
 
-typedef struct s_redir
-{
-	t_token_type	type;
-	char			*filename;
-}					t_redir;
-
 typedef enum e_ast_type
 {
 	pipe_ast,
@@ -48,15 +42,6 @@ typedef struct s_ast
 	int				args_size;
 }					t_ast;
 
-typedef struct s_cmd
-{
-	int				nbr_cmd;
-	int				args_size;
-	char			**argvs;
-	int				redir_nbr;
-	t_redir			*r;
-	t_token_type	type;
-}               t_cmd;
 
 void		print_tree(t_ast *ast);
 
@@ -99,5 +84,6 @@ void		free_parser(t_parser *p);
 
 int			check_builtin(t_cmd *cmd);
 void		execution(t_cmd *cmd, char **env);
-int			exec_single_cmd(t_cmd *cmd);
+int			setup_redirections(t_cmd *cmd, t_red *redir);
+
 #endif

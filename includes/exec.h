@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 18:59:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 12:29:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,32 @@
 # include <curses.h>
 # include <term.h>
 # include <signal.h>
+# include "lexer.h"
 
-
-typedef struct s_index
+typedef struct s_redir
 {
-	struct termios		*old_attr;
-	struct termios		*term;
-	char				*buf;
-	int					cursor;
-	char				**history;
-	int					fd;
-	int					delete_cur;
-	char				*line;
-}				t_index;
+	t_token_type	type;
+	char			*filename;
+}					t_redir;
+
+typedef struct s_cmd
+{
+	int				nbr_cmd;
+	int				args_size;
+	char			**argvs;
+	int				redir_nbr;
+	t_redir			*r;
+	t_token_type	type;
+}               t_cmd;
+
+typedef struct s_red
+{
+	int		*infile_fds;
+	int		*outfile_fds;
+	int		less_cpt;
+	int		great_cpt;
+	int		greater_cpt;
+}	t_red;
 
 /*
 ** Function Declarations for builtin shell commands
@@ -49,13 +62,11 @@ int		env_builtin(void);
 void	exit_builtin(char **arg);
 int		unset_builtin(char **args);
 int		export_builtin(char **arg);
-int		launch(char **env, char **arg);
 
 /*
 ** Utils
 */
 
-int		is_printable(t_index *m);
 int		quit(void);
 int		len(char **env);
 int		alpha(char *key);
@@ -82,10 +93,6 @@ void	modify_env(char *arg, char *key);
 ** Signals
 */
 
-void	reset_term(struct termios *old_attr);
 int		check_signals(void);
-int		get_history_file(t_index *m);
-void	delete_char(t_index *m);
-int		get_str_cmd(t_index *m);
 
 #endif
