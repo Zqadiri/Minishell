@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 16:54:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 18:36:20 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*ft_getenv(char **env, char *str)
 		{
 			temp = value;
 			value = ft_strdup(env_var[1]);
-			printf("str = [%s]\n", value);
 			free(temp);
 			break ;
 		}

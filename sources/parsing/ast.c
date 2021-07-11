@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 15:31:19 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 18:19:01 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 		if (ast->args[k]->type == id)
 		{
 			z[n].argvs[l++] = ft_strdup(ast->args[k++]->value);
-			printf("args[%d] = [%s]\n", l - 1, z[n].argvs[l - 1]);
+			// printf("args[%d] = [%s]\n", l - 1, z[n].argvs[l - 1]);
 		}
 		else
 		{
@@ -61,8 +61,8 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 				z[n].r[m].type = ast->args[k - 1]->type;
 				z[n].r[m].is_quoted = ast->args[k]->is_quoted;
 				z[n].r[m++].filename = ast->args[k++]->value;
-				printf("[%s] - [%u]\n", z[n].r[m - 1].filename, z[n].r[m - 1].type);
-				printf("f:visitor_args\t is quoted = %d\n", z[n].r[m-1].is_quoted);
+				// printf("[%s] - [%u]\n", z[n].r[m - 1].filename, z[n].r[m - 1].type);
+				// printf("f:visitor_args\t is quoted = %d\n", z[n].r[m-1].is_quoted);
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 19:32:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 18:28:00 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int     export_builtin(char **args)
 	{
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
-			ft_putstr_fd("export: `", 2);
+			ft_putstr_fd("minishell: export: `", 2);
 			ft_putstr_fd(args[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			continue ;

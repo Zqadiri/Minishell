@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 16:41:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 18:24:25 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,3 +147,14 @@ void		exec_single_cmd(t_cmd *cmd, t_red *redir)
 		exit(1);
 	}
 }
+
+//! minishell-1.0> /bin/wechohe
+//? new REPL without error message
+
+//! cd not working
+
+//!echo -nnnnnnnnnnnnnnnnnnnnnf bonjour\0000
+//? must print iin newline
+
+//!export
+
