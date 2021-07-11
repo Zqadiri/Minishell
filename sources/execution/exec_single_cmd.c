@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 17:56:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 20:08:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void		exec_single_cmd(t_cmd *cmd, t_red *redir)
 	if (cmd->redir_nbr != 0)
 		setup_redirections(cmd, redir);
 	if (check_builtin(cmd))
-		exit(1);
+		return ;
 	else
 	{
 		possible_path = find_path (cmd->argvs[0], path);
