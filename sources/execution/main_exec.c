@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/12 11:42:50 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 15:49:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,6 @@ int		is_builtin(t_cmd *cmd)
 	return (0);
 }
 
-void	init_m(t_data *m, t_cmd *cmd)
-{
-	m->saved_stdout = dup(1);
-	m->saved_stdin = dup(0);
-	m->redir = malloc(sizeof(t_red) * cmd->nbr_cmd); //*  * nbr_cmd
-	m->path = get_path();
-}
-
 void	execution(t_cmd *cmd, char **env)
 {
 	(void)env;
@@ -107,15 +99,17 @@ void	execution(t_cmd *cmd, char **env)
 	int		status;
 
 	// ! single cmd with no builtins 
-	m = malloc(sizeof(t_data));
-	init_m(m, cmd);
+	m = malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (cmd->type == eof && !is_builtin(cmd))
 	{
 		pid = fork();
 		if (pid < 0)
 			printf("Error\n");
 		if (pid == 0)
+		{
+			init_m(m);
 			exec_single_cmd(cmd, m);
+		}
 		else
 		{
 			waitpid(pid, &status, WCONTINUED);
@@ -126,6 +120,7 @@ void	execution(t_cmd *cmd, char **env)
 	// ! execve commands
 	else if (is_builtin(cmd) && cmd->type == eof)
 	{
+		init_m(m);
 		exec_single_cmd(cmd, m);
 		if (cmd->redir_nbr)
 			restore_std(m->saved_stdout, m->saved_stdin);		
@@ -134,4 +129,3 @@ void	execution(t_cmd *cmd, char **env)
 		exec_multiple_cmd(cmd, m);	
 	free (m);
 }
-

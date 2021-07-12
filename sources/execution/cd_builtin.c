@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 10:43:52 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 10:13:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 16:51:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int cd_builtin(char **arg)
 	char *home_path;
 
 	home_path = NULL;
-	if (arg[2])
+	if (len(arg) > 2)
 	{
-	 	ft_putstr_fd("cd: too many arguments\n", 2);
+	 	ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (1);
 	}
 	if (!arg[1] || ft_strequ(arg[1], "~") || ft_strequ(arg[1], "--"))
@@ -135,7 +135,6 @@ int cd_builtin(char **arg)
 	}
 	else
 		change_dir(arg[1]);
-	
 	return (1);
 }
 
