@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 11:46:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 13:13:41 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,32 @@ void	init_cmdargs(t_ast *ast, t_cmd *z, int n)
 
 t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 {
-	int	k;
-	int	l;
-	int	m;
+	t_index	x;
 
-	l = 0;
-	m = 0;
-	k = 0;
+	x = (t_index){.k = 0, .l = 0, .m = 0};
 	init_cmdargs(ast, z, n);
-	while (k < ast->args_size && (ast->args[k]->type != eof
-			|| ast->args[k]->type != pip))
+	while (x.k < ast->args_size && (ast->args[x.k]->type != eof
+			|| ast->args[x.k]->type != pip))
 	{
-		if (ast->args[k]->type == id)
-		{
-			z[n].argvs[l++] = ft_strdup(ast->args[k++]->value);
+		if (ast->args[x.k]->type == id)
+		// {
+			z[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
 			// printf("args[%d] = [%s]\n", l - 1, z[n].argvs[l - 1]);
-		}
+		// }
 		else
 		{
-			if (is_redic(ast->args[++k - 1]) && k >= 1 && m < ast->redir_nbr)
+			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1
+				&& x.m < ast->redir_nbr)
 			{
-				z[n].r[m].type = ast->args[k - 1]->type;
-				z[n].r[m].is_quoted = ast->args[k]->is_quoted;
-				z[n].r[m++].filename = ast->args[k++]->value;
+				z[n].r[x.m].type = ast->args[x.k - 1]->type;
+				z[n].r[x.m].is_quoted = ast->args[x.k]->is_quoted;
+				z[n].r[x.m++].filename = ast->args[x.k++]->value;
 				// printf("[%s] - [%u]\n", z[n].r[m - 1].filename, z[n].r[m - 1].type);
 				// printf("f:visitor_args\t is quoted = %d\n", z[n].r[m-1].is_quoted);
 			}
 		}
 	}
-	z[n].argvs[l] = NULL;
+	z[n].argvs[x.l] = NULL;
 	return (z);
 }
 

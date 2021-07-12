@@ -6,20 +6,22 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 14:44:26 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 12:34:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	skip_space(t_lexer *l)
+void	readchar(t_lexer *l)
 {
 	if (!l || !l->buffer)
-		return ;
-	while (l->readpos <= l->bufsize && (l->c == 32
-			|| l->c == '\t' || l->c == '\n'))
-		readchar(l);
-	l->is_quoted = 0;
+		printf("error\n");
+	if (l->readpos >= l->bufsize)
+		l->c = EOF;
+	else
+		l->c = l->buffer[l->readpos];
+	l->curpos = l->readpos;
+	l->readpos++;
 }
 
 t_token	*ret_str(t_lexer *l, char *s, int type)
@@ -42,6 +44,16 @@ t_token	*ret_char(t_lexer *l, char c, t_token_type type)
 	str[0] = c;
 	str[1] = '\0';
 	return (ret_str(l, str, type));
+}
+
+void	skip_space(t_lexer *l)
+{
+	if (!l || !l->buffer)
+		return ;
+	while (l->readpos <= l->bufsize && (l->c == 32
+			|| l->c == '\t' || l->c == '\n'))
+		readchar(l);
+	l->is_quoted = 0;
 }
 
 t_token	*get_next_token(t_lexer *l)

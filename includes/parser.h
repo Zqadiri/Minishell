@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 09:40:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 13:14:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_parser
 	t_token	*curr_token;
 	t_token	*prev_token;
 }				t_parser;
+
+typedef struct s_index
+{
+	int	k;
+	int	l;
+	int	m;
+}				t_index;
 
 typedef enum e_ast_type
 {
@@ -50,10 +57,10 @@ void		print_tree(t_ast *ast);
 */
 
 t_parser	*init_parser(t_lexer *l);
-t_token		*check_token(t_parser *p, t_ast *ast);
-int			parse_expected_token(t_parser *p, t_token_type type);
-int			syntax_error(t_parser *p);
+void		print_msg(char *str, char *var);
 int			is_redic(t_token *t);
+t_token		*check_token(t_parser *p, t_ast *ast);
+int			syntax_error(t_parser *p);
 
 /*
 ** parser.c
