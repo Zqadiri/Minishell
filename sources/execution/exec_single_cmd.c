@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 20:08:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 10:34:23 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ void	print_error(char *file_error)
 	perror(" ");
 }
 
-void	setup_infiles(t_cmd *cmd, t_red *redir)
+void	setup_infiles(t_cmd *cmd, t_data *m)
 {
 	int i;
 	int	bad_infile;
 
 	i = 0;
 	bad_infile = 0;
-	redir->infile_fds = malloc(sizeof(int) * redir->less_cpt);
+	m->redir->infile_fds = malloc(sizeof(int) * m->redir->less_cpt);
 	while (i < cmd->redir_nbr)
 	{
 		if (cmd->r[i].type == less)
 		{
-			redir->infile_fds[i] = open(cmd->r[i].filename, O_RDWR);
-			if (redir->infile_fds[i] < 0)
+			m->redir->infile_fds[i] = open(cmd->r[i].filename, O_RDWR);
+			if (m->redir->infile_fds[i] < 0)
 			{
 				bad_infile = 1;
 				print_error(cmd->r[i].filename);
@@ -70,10 +70,10 @@ void	setup_infiles(t_cmd *cmd, t_red *redir)
 		i++;
 	}
 	if (!bad_infile)
-		dup2(redir->infile_fds[redir->less_cpt - 1], 0);
+		dup2(m->redir->infile_fds[m->redir->less_cpt - 1], 0);
 }
 
-void	setup_outfiles(t_cmd *cmd, t_red *redir)
+void	setup_outfiles(t_cmd *cmd, t_data *m)
 {
 	int i;
     int j;
@@ -83,16 +83,14 @@ void	setup_outfiles(t_cmd *cmd, t_red *redir)
 	i = 0;
     j = 0;
 	bad_outfile = 0;
-	nbr = redir->greater_cpt + redir->great_cpt;
-	redir->outfile_fds = malloc(sizeof(int) * (nbr));
+	nbr = m->redir->greater_cpt + m->redir->great_cpt;
+	m->redir->outfile_fds = malloc(sizeof(int) * (nbr));
 	while (i < cmd->redir_nbr)
 	{
-		printf ("fd: %d\n", nbr);
 		if (cmd->r[i].type == great)
 		{
-            // printf ("is in\n");
-			redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
-			if (redir->outfile_fds[j] < 0)
+			m->redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
+			if (m->redir->outfile_fds[j] < 0)
 			{
 				bad_outfile = 1;
 				print_error(cmd->r[i].filename);
@@ -102,8 +100,8 @@ void	setup_outfiles(t_cmd *cmd, t_red *redir)
 		}
 		else if (cmd->r[i].type == greater)
 		{
-			redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
-			if (redir->outfile_fds[j] < 0)
+			m->redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
+			if (m->redir->outfile_fds[j] < 0)
 			{
 				bad_outfile = 1;
 				print_error(cmd->r[i].filename);
@@ -114,37 +112,35 @@ void	setup_outfiles(t_cmd *cmd, t_red *redir)
 		i++;
 	}
 	if (!bad_outfile)
-		dup2(redir->outfile_fds[nbr - 1], 1);
+		dup2(m->redir->outfile_fds[nbr - 1], 1);
 }
 
-int		setup_redirections(t_cmd *cmd, t_red *redir)
+int		setup_redirections(t_cmd *cmd, t_data *m)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	init_redir(cmd, redir);
-	if (redir->less_cpt != 0)
-		setup_infiles(cmd, redir);
-	if (redir->great_cpt != 0 || redir->greater_cpt != 0)
-		setup_outfiles(cmd, redir);
+	init_redir(cmd, m->redir);
+	if (m->redir->less_cpt != 0)
+		setup_infiles(cmd, m);
+	if ((m->redir->great_cpt != 0 )|| (m->redir->greater_cpt != 0))
+		setup_outfiles(cmd, m);
 	return (1);	
 }
 
 // ? check builtin
 
-void		exec_single_cmd(t_cmd *cmd, t_red *redir)
+void		exec_single_cmd(t_cmd *cmd, t_data *m)
 {
-	char	**path;
 	char 	*possible_path;
 
-	path = get_path();
 	if (cmd->redir_nbr != 0)
-		setup_redirections(cmd, redir);
+		setup_redirections(cmd, m);
 	if (check_builtin(cmd))
 		return ;
 	else
 	{
-		possible_path = find_path (cmd->argvs[0], path);
+		possible_path = find_path (cmd->argvs[0], m->path);
 		if (possible_path == NULL)
 			possible_path = ft_strdup(cmd->argvs[0]);
 		execve (possible_path, cmd->argvs, g_global->env_var);

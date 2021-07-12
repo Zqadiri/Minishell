@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 20:08:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 11:42:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,38 +91,47 @@ int		is_builtin(t_cmd *cmd)
 	return (0);
 }
 
+void	init_m(t_data *m, t_cmd *cmd)
+{
+	m->saved_stdout = dup(1);
+	m->saved_stdin = dup(0);
+	m->redir = malloc(sizeof(t_red) * cmd->nbr_cmd); //*  * nbr_cmd
+	m->path = get_path();
+}
+
 void	execution(t_cmd *cmd, char **env)
 {
 	(void)env;
 	int		pid;
-	t_red	*redir;
-	int		saved_stdout;
-	int		saved_stdin;
+	t_data	*m;
 	int		status;
 
-	saved_stdout = dup(1);
-	saved_stdin = dup(0);
-	redir = malloc(sizeof(t_red));
+	// ! single cmd with no builtins 
+	m = malloc(sizeof(t_data));
+	init_m(m, cmd);
 	if (cmd->type == eof && !is_builtin(cmd))
 	{
 		pid = fork();
 		if (pid < 0)
 			printf("Error\n");
 		if (pid == 0)
-			exec_single_cmd(cmd, redir);
+			exec_single_cmd(cmd, m);
 		else
 		{
 			waitpid(pid, &status, WCONTINUED);
 			if (cmd->redir_nbr)
-				restore_std(saved_stdout, saved_stdin);
+				restore_std(m->saved_stdout, m->saved_stdin);
 		}
 	}
-	else if (is_builtin(cmd))
+	// ! execve commands
+	else if (is_builtin(cmd) && cmd->type == eof)
 	{
-		exec_single_cmd(cmd, redir);
+		exec_single_cmd(cmd, m);
 		if (cmd->redir_nbr)
-			restore_std(saved_stdout, saved_stdin);		
+			restore_std(m->saved_stdout, m->saved_stdin);		
 	}
-	free (redir);
+	else
+		exec_multiple_cmd(cmd, m);	
+	free (m);
 }
 
