@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 17:58:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 18:28:08 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int     unset_builtin(char **args)
 		{
 			if (alpha(args[1]) == -1)
 			{
-				write (2, "unset: `", 8);
+				write (2, "minishell: unset: `", 8);
 				write (2, args[i], ft_strlen(args[i]));
 				write (2, "': not a valid identifier\n", 26);
 				break;

@@ -53,7 +53,7 @@
 // * echo -n a "" b "" c "" d\n                                                                                      
 // * echo '' '' ''\n                                                                                                 
 // * Echo bonjour\n 
-// * eCho bonjour\n 
+// * Echo bonjour\n 
 // * ecHo bonjour\n 
 // * echO bonjour\n 
 // * EchO bonjour\n 

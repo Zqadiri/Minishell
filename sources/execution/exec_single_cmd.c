@@ -6,9 +6,10 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/12 10:34:23 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 11:46:37 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -147,3 +148,18 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 		exit(1);
 	}
 }
+
+//! minishell-1.0> /bin/wechohe
+//? new REPL without error message
+
+//! cd not working
+
+//!echo -nnnnnnnnnnnnnnnnnnnnnf bonjour\0000
+//? must print iin newline
+
+//!export
+
+//! <Makefile < wrong_file cat
+//? minishell-1.0: wrong_file : No such file or directory + infinite loop
+//? minishell-1.0: wrong_file : Permission denied + infinite loop
+

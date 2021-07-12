@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 16:54:06 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 20:45:38 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	parse_here_doc(t_redir *r)
 	char	*buff;
 	char	*str;
 	char	*temp;
-	char	*s;
 	int		i;
 	int		fd;
 
@@ -114,8 +113,7 @@ void	parse_here_doc(t_redir *r)
 	{
 		fd = open("/temp/heredoc", O_RDONLY | O_WRONLY | O_CREAT | O_APPEND);
 		if (fd < -1)
-			return ; // ! error while opening the file
-		s = ft_strdup("");
+			return ;// ! error while opening the file
 		while (1)
 		{	
 			buff = readline("> ");
@@ -127,17 +125,12 @@ void	parse_here_doc(t_redir *r)
 			{
 				temp = str;
 				if (buff[i] == DOLLAR)
-				{
-					str = ft_strjoin(str, envar_token_here_doc(buff, i+1));
-					// printf("i = %d\n", i);
-					// printf("str >>>>> %s\n", str);
-				}
+					str = ft_strjoin(str, envar_token_here_doc(buff, i + 1));
 				else
 					str = ft_joinchar(str, buff[i]);
 				free(temp);
 			}
-			s = ft_strjoin(s, str);
-			ft_putendl_fd(s, fd);
+			ft_putendl_fd(str, fd);
 		}
 	}
 }

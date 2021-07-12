@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 16:55:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/11 18:08:49 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,8 @@ int main(int argc, char **argv, char **env)
 //* 0 1 2 3
 //* -> $IFS default separators used for field splitting 
 
-
 // ! switch cmd name to lowercase before cmp
 
-
 //? f:string_token  l-> = [;]
 //? f:tokenize_token         last char = [;]
 //? 00000f:tokenize_token   l->c = [;]
@@ -183,7 +181,6 @@ int main(int argc, char **argv, char **env)
 //? f:tokenize_token         last char = [;]
 //? 00000f:tokenize_token   l->c = [;]
 //? f:tokenize_text str = []
-
 
 // ! filename -> cmd or delim
 // ! previous -> current token
