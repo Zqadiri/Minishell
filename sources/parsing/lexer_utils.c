@@ -6,23 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 20:43:10 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 12:32:46 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	readchar(t_lexer *l)
-{
-	if (!l || !l->buffer)
-		printf("error\n");
-	if (l->readpos >= l->bufsize)
-		l->c = EOF;
-	else
-		l->c = l->buffer[l->readpos];
-	l->curpos = l->readpos;
-	l->readpos++;
-}
 
 int	peek_char(t_lexer *l)
 {

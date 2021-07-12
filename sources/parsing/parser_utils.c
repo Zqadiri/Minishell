@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 15:32:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 13:05:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ t_parser	*init_parser(t_lexer *l)
 	p->prev_token = p->curr_token;
 	if (p->curr_token->type == pip)
 	{
-		printf("minishell: syntax error near unexpected token 1`%s'\n",
+		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
-		g_global->exit_status = 258;
 		return (NULL);
 	}
 	if (p->curr_token->type == illegal)
@@ -45,6 +44,26 @@ t_parser	*init_parser(t_lexer *l)
 ** the order of tokens by checking the type of the next token.
 */
 
+void	print_msg(char *str, char *var)
+{
+	printf("%s", str);
+	if (var)
+	{
+		printf(" `");
+		printf("%s", var);
+		printf("'\n");
+	}
+	g_global->exit_status = 258;
+}
+
+int	is_redic(t_token *t)
+{
+	if (t->type == great || t->type == greater || t->type == less
+		|| t->type == here_doc)
+		return (1);
+	return (0);
+}
+
 t_token	*check_token(t_parser *p, t_ast *ast)
 {
 	if (p->curr_token->type == illegal)
@@ -56,25 +75,15 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 		return (NULL);
 	if (is_redic(p->prev_token))
 	{
-		if (!parse_expected_token(p, id))
+		if (p->curr_token->type != id)
+		{
+			print_msg("minishell: syntax error near unexpected token 2",
+				p->curr_token->value);
 			return (NULL);
+		}
 		ast->redir_nbr += 1;
 	}
 	return (p->curr_token);
-}
-
-int	parse_expected_token(t_parser *p, t_token_type type)
-{
-	if (p->curr_token->type == type)
-		return (1);
-	else
-	{
-		printf("minishell: syntax error near unexpected token 2`%s'\n",
-			p->curr_token->value);
-		g_global->exit_status = 258;
-		return (0);
-	}
-	return (1);
 }
 
 int	syntax_error(t_parser *p)
@@ -82,24 +91,15 @@ int	syntax_error(t_parser *p)
 	if ((p->prev_token->type == pip && p->curr_token->type == pip)
 		|| (p->prev_token->type == pip && p->curr_token->type == eof))
 	{
-		printf("minishell: syntax error near unexpected token 3`%s'\n",
+		print_msg("minishell: syntax error near unexpected token 3",
 			p->prev_token->value);
-		g_global->exit_status = 258;
 		return (0);
 	}
 	if (is_redic(p->prev_token) && p->curr_token->type == eof)
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
-		g_global->exit_status = 258;
+		print_msg("minishell: syntax error near unexpected token `newline'\n",
+			NULL);
 		return (0);
 	}
 	return (1);
-}
-
-int	is_redic(t_token *t)
-{
-	if (t->type == great || t->type == greater || t->type == less
-		|| t->type == here_doc)
-		return (1);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 20:16:59 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 13:04:37 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ int	multi_lines(t_lexer *l, char c)
 	if (l->c == BSLASH || l->c == EOF)
 	{
 		if (l->c == BSLASH)
-			printf("minishell: syntax error multiple lines\n");
+			print_msg("minishell: syntax error multiple lines\n", NULL);
 		if (l->c == EOF)
-			printf("minishell: syntax error expected %c\n", c);
+		{
+			if (c == DQUOTE)
+				print_msg("minishell: syntax error expected \"\n", NULL);
+			else
+				print_msg("minishell: syntax error expected \'\n", NULL);
+		}
 		l->multi_line = 1;
 		return (0);
 	}

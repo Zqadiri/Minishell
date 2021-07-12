@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 20:45:38 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 13:08:54 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	parse_here_doc(t_redir *r)
 		while (1)
 		{	
 			buff = readline("> ");
-			i = -1;
-			str = ft_strdup("");
 			if (!ft_strcmp(buff, r->filename) || !buff)
 				break ;
+			str = ft_strdup("");
+			i = -1;
 			while (buff[++i] != '\0')
 			{
 				temp = str;

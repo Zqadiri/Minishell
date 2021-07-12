@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 15:31:01 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 13:10:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_ast	*parse_args_helper(t_parser *p)
 		ast->args[0] = p->curr_token;
 		if (p->curr_token->type == pip)
 		{
-			printf("minishell: syntax error near unexpected token 0`%s'\n",
+			print_msg("minishell: syntax error near unexpected token 0",
 				p->curr_token->value);
 			return (NULL);
 		}
