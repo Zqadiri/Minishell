@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 13:01:21 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 13:14:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void		free_parser(t_parser *p);
 
 int			check_builtin(t_cmd *cmd);
 void		execution(t_cmd *cmd, char **env);
-int			setup_redirections(t_cmd *cmd, t_red *redir);
+int			setup_redirections(t_cmd *cmd, t_data *m);
 
 #endif

@@ -3,6 +3,8 @@
 
 ./parsing/.trash
 .vscode
+pipex
+
 ### C ###
 # Prerequisites
 *.d
