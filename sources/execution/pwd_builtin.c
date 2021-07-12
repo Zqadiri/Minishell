@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 20:27:26 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 16:45:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			check_builtin(t_cmd *cmd)
 	else if (ft_strequ(args[0], "unset"))
 		return (unset_builtin(args));
 	else if (ft_strequ(args[0], "cd"))
-		cd_builtin(args);
+		return(cd_builtin(args));
 	// else if (ft_strequ(args[0], "exit"))
 	// 	exit_builtin(args);
 	return (0);

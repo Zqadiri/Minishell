@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/12 17:51:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 20:54:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell.h"
 
 
-int		check_each_type(t_cmd *cmd, t_token_type type)
+int	check_each_type(t_cmd *cmd, t_token_type type)
 {
 	int	i;
 	int j;
@@ -27,14 +27,18 @@ int		check_each_type(t_cmd *cmd, t_token_type type)
 			j++;
 		i++;
 	}
+	printf("f:check_each_type\tn = %d\n", j);
 	return (j);
 }
 
-void	init_redir(t_cmd *cmd, t_red *redir)
+void	init_redir(t_cmd *cmd, t_data *m)
 {
-	redir->less_cpt = check_each_type(cmd, less);
-	redir->great_cpt = check_each_type(cmd, great);
-	redir->greater_cpt = check_each_type(cmd, greater);
+	m->redir->less_cpt = check_each_type(cmd, less);
+	m->redir->great_cpt = check_each_type(cmd, great);
+	// m->redir->greater_cpt = check_each_type(cmd, greater);
+	// int i = check_each_type(cmd, greater);
+	// printf("ok\n");
+	// redir->greater_cpt = i;
 }
 
 /*
@@ -84,7 +88,7 @@ void	setup_outfiles(t_cmd *cmd, t_data *m)
 	i = 0;
     j = 0;
 	bad_outfile = 0;
-	nbr = m->redir->greater_cpt + m->redir->great_cpt;
+	nbr = check_each_type(cmd, greater) + m->redir->great_cpt;
 	m->redir->outfile_fds = malloc(sizeof(int) * (nbr));
 	while (i < cmd->redir_nbr)
 	{
@@ -121,15 +125,13 @@ int		setup_redirections(t_cmd *cmd, t_data *m)
 	int	i;
 
 	i = 0;
-	init_redir(cmd, m->redir);
+	init_redir(cmd, m);
 	if (m->redir->less_cpt != 0)
 		setup_infiles(cmd, m);
-	if ((m->redir->great_cpt != 0 )|| (m->redir->greater_cpt != 0))
+	if ((m->redir->great_cpt != 0) || (check_each_type(cmd, greater)) != 0)
 		setup_outfiles(cmd, m);
 	return (1);	
 }
-
-// ? check builtin
 
 void		exec_single_cmd(t_cmd *cmd, t_data *m)
 {
@@ -144,8 +146,16 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 		possible_path = find_path (cmd->argvs[0], m->path);
 		if (possible_path == NULL)
 			possible_path = ft_strdup(cmd->argvs[0]);
-		execve (possible_path, cmd->argvs, g_global->env_var);
-		exit(1);
+		int fd = open(possible_path, O_RDONLY);
+		if (fd < 0)
+		{
+			write (2, "minishell: ", 11);
+			write(2, possible_path, ft_strlen(possible_path));
+			ft_putendl_fd(": command not found", 2);
+			exit (0);
+		}
+		if (execve (possible_path, cmd->argvs, g_global->env_var))
+			exit(1);
 	}
 }
 
@@ -153,13 +163,11 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 //? new REPL without error message
 
 //! cd not working
+//? cd -> 1 argument 
 
 //!echo -nnnnnnnnnnnnnnnnnnnnnf bonjour\0000
 //? must print iin newline
 
-//!export
-
 //! <Makefile < wrong_file cat
 //? minishell-1.0: wrong_file : No such file or directory + infinite loop
 //? minishell-1.0: wrong_file : Permission denied + infinite loop
-

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/12 11:36:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/12 15:26:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ typedef struct s_cmd
 
 typedef struct s_red
 {
-	int		*infile_fds;
-	int		*outfile_fds;
-	int		less_cpt;
-	int		great_cpt;
-	int		greater_cpt;
+	int				*infile_fds;
+	int				*outfile_fds;
+	int				less_cpt;
+	int				great_cpt;
+	int				greater_cpt;
 }	t_red;
 
 typedef struct s_data
 {
-	char	**path;
-	int		saved_stdout;
-	int		saved_stdin;
-	int		*pipe_fds;
-	pid_t	*pid;
-	t_red	*redir;
+	char			**path;
+	int				saved_stdout;
+	int				saved_stdin;
+	int				*pipe_fd;
+	pid_t			pid;
+	t_red			*redir;
 }	t_data;
 
 /*
@@ -109,5 +109,6 @@ char	*find_path(char	*cmd, char **path);
 void	exec_single_cmd(t_cmd *cmd, t_data *m);
 void    exec_multiple_cmd(t_cmd *cmd, t_data *m);
 int		is_builtin(t_cmd *cmd);
+void	init_m(t_data *m);
 
 #endif

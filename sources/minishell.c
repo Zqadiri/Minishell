@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 18:08:49 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/12 16:52:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int main(int argc, char **argv, char **env)
 		l = init_l(l);
 		buff = NULL;
 		buff = readline("minishell-1.0> ");
-		// printf ("|%s|\n", buff);
 		if (!buff)
 		{
 			write(1, "exit\n", 5);
