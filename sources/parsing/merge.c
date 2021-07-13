@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 13:08:54 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/13 15:43:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,6 @@ char	*to_lower(char *s)
 		i++;
 	}
 	return (s);
-}
-
-int	mixte(t_cmd	*z)
-{
-	int		i;
-	char	*s;
-
-	if (!z)
-		return (NULL);
-	i = -1;
-	while (z[++i].argvs)
-	{
-		s = to_lower(z[i].argvs[0]);
-		if (is_builtin(s))
-			exec_cmd(z);
-		else if (is_cmdpath(s))
-			exec_cmd(z);
-		else
-		{
-			printf("minishell: %s: command not found\n", z[i].argvs[0]);
-			return (0);
-		}
-	}
-	return (1);
 }
 
 char	*exit_status(char *s, int index)
