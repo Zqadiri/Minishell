@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 13:05:44 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/13 12:06:49 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 
 int	syntax_error(t_parser *p)
 {
-	if ((p->prev_token->type == pip && p->curr_token->type == pip)
-		|| (p->prev_token->type == pip && p->curr_token->type == eof))
+	if (p->prev_token->type == pip && p->curr_token->type == pip)
 	{
 		print_msg("minishell: syntax error near unexpected token 3",
 			p->prev_token->value);
 		return (0);
 	}
-	if (is_redic(p->prev_token) && p->curr_token->type == eof)
+	if ((is_redic(p->prev_token) && p->curr_token->type == eof)
+		|| (p->prev_token->type == pip && p->curr_token->type == eof))
 	{
 		print_msg("minishell: syntax error near unexpected token `newline'\n",
 			NULL);

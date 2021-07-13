@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 17:29:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/13 17:08:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,7 @@ char	*envar_token(t_lexer *l)
 		free(temp);
 	}
 	str = ft_getenv(g_global->env_var, str);
-	//? if (l->is_quoted == 0)
-	//? bash-3.2$ $a
-	//? hey
-	//? bash-3.2$ "$a"
-	//? bash:   echo   hey: command not found
+	// ? if (l->quoted == 0)
 	if (!str)
 		return (ft_strdup(""));
 	return (str);
