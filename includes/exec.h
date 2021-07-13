@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/13 15:35:29 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/13 17:45:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,7 @@ void	exec_single_cmd(t_cmd *cmd, t_data *m);
 void    exec_multiple_cmd(t_cmd *cmd, t_data *m);
 int		is_builtin(t_cmd *cmd);
 void	init_m(t_data *m);
+int		check_each_type(t_cmd *cmd, t_token_type type);
+void	print_error(char *file_error);
 
 #endif
