@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/11 15:32:18 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:17:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l)
 {
 	t_token	*t;
 
+	if (type == eof)
+	{
+		free(l->buffer);
+		l->buffer = NULL;
+	}
 	t = malloc(sizeof(t_token));
 	if (!t)
 		return (NULL);

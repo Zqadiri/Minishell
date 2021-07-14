@@ -6,10 +6,9 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/13 12:29:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:21:01 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/minishell.h"
 
@@ -60,7 +59,6 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 				z[n].r[x.m].is_quoted = ast->args[x.k]->is_quoted;
 				z[n].r[x.m++].filename = ast->args[x.k++]->value;
 				// printf("[%s] - [%u]\n", z[n].r[x.m - 1].filename, z[n].r[x.m - 1].type);
-				// printf("f:visitor_args\t is quoted = %d\n", z[n].r[x.m-1].is_quoted);
 			}
 		}
 	}
@@ -101,5 +99,6 @@ t_cmd	*visitor(t_ast *ast)
 			n++;
 		}
 	}
+	free_tree(ast);
 	return (z);
 }

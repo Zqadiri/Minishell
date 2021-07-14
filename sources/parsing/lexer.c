@@ -6,11 +6,23 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 12:34:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:30:38 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	print_msg(char *str, char *var)
+{
+	printf("%s", str);
+	if (var)
+	{
+		printf(" `");
+		printf("%s", var);
+		printf("'\n");
+	}
+	g_global->exit_status = 258;
+}
 
 void	readchar(t_lexer *l)
 {
@@ -34,18 +46,6 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 	return (init_token(type, s, l));
 }
 
-t_token	*ret_char(t_lexer *l, char c, t_token_type type)
-{
-	char	*str;
-
-	str = malloc(sizeof(char) * 2);
-	if (!str)
-		return (NULL);
-	str[0] = c;
-	str[1] = '\0';
-	return (ret_str(l, str, type));
-}
-
 void	skip_space(t_lexer *l)
 {
 	if (!l || !l->buffer)
@@ -64,21 +64,21 @@ t_token	*get_next_token(t_lexer *l)
 		if (l->c == EOF)
 			break ;
 		if (l->c == PIPE)
-			return (ret_char(l, l->c, pip));
+			return (ret_str(l, &(l->c), pip));
 		else if (l->c == GREAT)
 		{
 			if (peek_char(l) == GREAT)
 				return (ret_str(l, ">>", greater));
-			return (ret_char(l, l->c, great));
+			return (ret_str(l, &(l->c), great));
 		}
 		else if (l->c == LESS)
 		{
 			if (peek_char(l) == LESS)
 				return (ret_str(l, "<<", here_doc));
-			return (ret_char(l, l->c, less));
+			return (ret_str(l, &(l->c), less));
 		}
 		else
 			return (string_token(l));
 	}
-	return (ret_char(l, l->c, eof));
+	return (ret_str(l, NULL, eof));
 }

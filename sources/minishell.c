@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 16:52:16 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/14 15:20:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	print_tree(t_ast *ast)
 		printf("f:print_tree pipe size = [%d]\n", ast->pipecmd_size);
 		while (++j < ast->pipecmd_size)
 		{
-			printf("cpt >> %d\n", j);
 			// printf("next type => [%u]\n", ast->pipecmd_values[j]->type);
 			print_tree(ast->pipecmd_values[j]);
 		}
@@ -37,7 +36,6 @@ void	print_tree(t_ast *ast)
 		printf("f:print_tree args size = [%d]\n", ast->args_size);
 		while (++k < ast->args_size)
 		{
-			printf("cpt args >> %d\n", k);
 			printf("f:print_tree\ttoken -> [%s][%u]\n", ast->args[k]->value,
 				ast->args[k]->type);
 		}
@@ -92,7 +90,10 @@ int main(int argc, char **argv, char **env)
 		buff = readline("minishell-1.0> ");
 		if (!buff)
 		{
-			write(1, "exit\n", 5);
+			char *cm_cap = tgetstr("cl", NULL);
+			tputs(tgoto(cm_cap ,0, 0), 0, putchar);
+			printf("minishell-1.0> exit\n");
+			//write(1, "exit\n", 5);
 			exit(g_global->exit_status);
 		}
 		else if (ft_strcmp(buff, "\0"))
@@ -112,11 +113,12 @@ int main(int argc, char **argv, char **env)
 		{
 			ast = parse_pipe(p);
 			z = visitor(ast);
-			if (z)
-				execution(z, env);
-			if (ast)
-				free_tree(ast);
+			// if (z)
+			// 	execution(z, env);
+			// free_parser(p);
 		}
+		
+		system("leaks minishell");
 	}
 	return (0);
 }

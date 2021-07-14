@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/05 18:38:56 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:31:59 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	free_tree(t_ast *ast)
 				free_tree(ast->pipecmd_values[j]);
 		}
 		is_notempty(ast->pipecmd_values);
+		// is_notempty(ast);
 	}
 	if (ast->type == arg_ast)
 	{
@@ -50,24 +51,20 @@ void	free_tree(t_ast *ast)
 
 // void	free_tree3(t_token **token, int size)
 // {
-// 	int	i;
 // 	int j;
 
-// 	j = -1;
-// 	while (++j < size)
+// 	j = 0;
+// 	printf("size = %d\n", size);
+// 	while (j < size - 1)
 // 	{
-// 		i = -1;
-// 		while (token[j][i].type)
-// 		{
-// 			if(token[j][i].type)
-// 			{
-// 				free(token[j][i].value);
-// 				token[j][i].value = NULL;
-// 			}
-// 		}
+// 		printf("j = %d\n", j);
+// 		printf("token[%d] = %s\n", j, token[j]->value);
 // 		is_notempty(token[j]->value);
+// 		printf("token num %d is freed\n", j);
+// 		j++;
 // 	}
 // 	is_notempty(token);
+// 	printf("out\n");
 // }
 
 void	free_tree2(t_ast **ast)
