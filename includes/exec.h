@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/12 15:26:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/13 17:45:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_red
 {
 	int				*infile_fds;
 	int				*outfile_fds;
+	int				bad_infile;
+	int				bad_outfile;
 	int				less_cpt;
 	int				great_cpt;
 	int				greater_cpt;
@@ -54,12 +56,14 @@ typedef struct s_red
 
 typedef struct s_data
 {
+	// * env
 	char			**path;
 	int				saved_stdout;
 	int				saved_stdin;
 	int				*pipe_fd;
 	pid_t			pid;
 	t_red			*redir;
+	int				in;
 }	t_data;
 
 /*
@@ -110,5 +114,7 @@ void	exec_single_cmd(t_cmd *cmd, t_data *m);
 void    exec_multiple_cmd(t_cmd *cmd, t_data *m);
 int		is_builtin(t_cmd *cmd);
 void	init_m(t_data *m);
+int		check_each_type(t_cmd *cmd, t_token_type type);
+void	print_error(char *file_error);
 
 #endif
