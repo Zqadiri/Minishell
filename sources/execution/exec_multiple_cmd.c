@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/13 19:17:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/14 12:05:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int		check_if_builtin(t_cmd	*cmd, t_data *m, int in, int out)
 	(void)out;
 	return (1);
 }
-
-
 
 int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 {
@@ -99,53 +97,45 @@ int	setup_in(t_cmd *cmd, t_data *m, int is_first)
 	}
 	return (fd);
 }
+int		pipe_all(t_cmd *cmd, t_data *m)
+{
+	int i;
+
+	i = 0;
+	while (i < cmd->nbr_cmd - 1)
+	{
+		if (pipe(m[i].pipe_fd))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	fork_pipes(t_cmd *cmd, t_data *m)
 {
-	int		i;
-	char	*possible_path;
-	int		in;
-	int		is_first;
+	int i;
+	int in;
+	int	is_last;
 
 	i = 0;
-	// ! setup all the redirections
-	is_first = 1;
+	in = 0;
+	is_last = 0;
+	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		// * if infile exists in = infile_fd else in = 0 if fd < 0 skip  to the cmd in = -1
-		in = setup_in(&cmd[i], &m[i], is_first);
-			printf ("%d\n", in);
-		if (in == -2)
-			
-		is_first = 0;
-		if (pipe(m[i].pipe_fd))
-			return (0);
 		exec_proc(in, m[i].pipe_fd[1], &cmd[i], &m[i]);
 		close(m[i].pipe_fd[1]);
 		in = m[i].pipe_fd[0];
 		i++;
 	}
-	if (in != 0)
-		dup2(in, 0);
-	possible_path = find_path (cmd[i].argvs[0], m->path);
-	if (possible_path == NULL)
-		possible_path = ft_strdup(cmd[i].argvs[0]);
-	int fd = open(possible_path, O_RDONLY);
-	if (fd < 0)
-	{
-		write (2, "minishell: ", 11);
-		write(2, possible_path, ft_strlen(possible_path));
-		ft_putendl_fd(": command not found", 2);
-		exit (0);
-	}
-	if (execve (possible_path, cmd[i].argvs, g_global->env_var))
-		exit(1);
+	exec_proc(in, 1, &cmd[i], &m[i]);
 	return (1);
 }
 
 void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 {
 	int i;
+	int status;
 
 	i = 0;
 	while (i < cmd->nbr_cmd)
@@ -154,4 +144,5 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 		i++;
 	}
 	fork_pipes(cmd, m);
+	waitpid(m[i - 1].pid, &status, WCONTINUED);
 }
