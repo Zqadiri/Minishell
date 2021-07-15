@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/13 17:45:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 12:41:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_cmd
 
 typedef struct s_red
 {
+	// ! delete all that
 	int				*infile_fds;
 	int				*outfile_fds;
 	int				bad_infile;
@@ -52,6 +53,10 @@ typedef struct s_red
 	int				less_cpt;
 	int				great_cpt;
 	int				greater_cpt;
+	// ! new ones
+	int				infile;
+	int				outfile;
+	int				err;
 }	t_red;
 
 typedef struct s_data
@@ -65,7 +70,6 @@ typedef struct s_data
 	t_red			*redir;
 	int				in;
 }	t_data;
-
 /*
 ** Function Declarations for builtin shell commands
 */
