@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 16:31:30 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:20:35 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_parser	*init_parser(t_lexer *l)
 	p->prev_token = p->curr_token;
 	if (p->curr_token->type == pip)
 	{
+		free_parser(p);
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
 		return (NULL);
@@ -90,23 +91,4 @@ int	syntax_error(t_parser *p)
 		return (0);
 	}
 	return (1);
-}
-
-t_ast	**realloc_ast_node(t_ast *ast, int size)
-{
-	t_ast	**new;
-	int		i;
-
-	if (ast->type == pipe_ast)
-	{
-		new = (t_ast **)malloc(sizeof(t_ast *) * size);
-		i = -1;
-		while (++i < ast->pipecmd_size)
-			new[i] = ast->pipecmd_values[i];
-		new[i] = NULL;
-		free_tree2(ast->pipecmd_values);
-		ast->pipecmd_values = NULL;
-		return (new);
-	}
-	return (NULL);
 }

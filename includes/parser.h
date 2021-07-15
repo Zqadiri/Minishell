@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 16:31:45 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:16:45 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void		print_tree(t_ast *ast);
 */
 
 t_parser	*init_parser(t_lexer *l);
+void		print_msg(char *str, char *var);
 int			is_redic(t_token *t);
 t_token		*check_token(t_parser *p, t_ast *ast);
 int			syntax_error(t_parser *p);
-t_ast		**realloc_ast_node(t_ast *ast, int size);
 
 /*
 ** parser.c

@@ -6,12 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/15 14:50:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 15:34:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 void	init_m(t_data *m)
 {
@@ -27,15 +26,6 @@ void	init_m(t_data *m)
 	m->redir->err = 0;
 }
 
-int		check_if_builtin(t_cmd	*cmd, t_data *m, int in, int out)
-{
-	(void)cmd;
-	(void)m;
-	(void)in;
-	(void)out;
-	return (1);
-}
-
 int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 {
 	int i;
@@ -43,13 +33,15 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 
 	i = 0;
 	// ! check builtin
-	check_if_builtin(cmd, m, in, out);
+	// check_if_builtin(cmd, m, in, out);
 	if ((m->pid = fork()) == 0)
 	{
 		if (m->redir->infile && !m->redir->err)
 		{
 			dup2(m->redir->infile, 0);
 			close(m->redir->infile);
+			// close(m->pipe_fd[0]);
+			// close(m->pipe_fd[1]);
 		}
 		else if (in != 0)
 		{
@@ -77,6 +69,7 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 	}
 	return m->pid;
 }
+
 
 int		pipe_all(t_cmd *cmd, t_data *m)
 {

@@ -6,9 +6,10 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 14:26:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 15:06:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -84,6 +85,7 @@ t_cmd	*visitor(t_ast *ast)
 		return (NULL);
 	n = 0;
 	z = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
+	// z[ast->pipecmd_size] = NULL;
 	z->nbr_cmd = ast->pipecmd_size;
 	if (ast->type == pipe_ast)
 	{
