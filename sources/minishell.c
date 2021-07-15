@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 15:20:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/15 16:42:06 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int argc, char **argv, char **env)
 		{
 			char *cm_cap = tgetstr("cl", NULL);
 			tputs(tgoto(cm_cap ,0, 0), 0, putchar);
-			printf("minishell-1.0> exit\n");
+			printf("exit\n");
 			//write(1, "exit\n", 5);
 			exit(g_global->exit_status);
 		}
@@ -112,12 +112,15 @@ int main(int argc, char **argv, char **env)
 		if (p)
 		{
 			ast = parse_pipe(p);
+			printf("\n=============\n");
+			print_tree(ast);
+			printf("\n=============\n");
 			z = visitor(ast);
 			// if (z)
 			// 	execution(z, env);
 		}
 		
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }
