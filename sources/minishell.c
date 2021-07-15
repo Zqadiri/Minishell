@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 16:42:06 by mac              ###   ########.fr       */
+/*   Updated: 2021/07/15 17:20:08 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ int main(int argc, char **argv, char **env)
 		if (p)
 		{
 			ast = parse_pipe(p);
-			printf("\n=============\n");
-			print_tree(ast);
-			printf("\n=============\n");
+			// printf("\n=============\n");
+			// print_tree(ast);
+			// printf("\n=============\n");
 			z = visitor(ast);
-			// if (z)
-			// 	execution(z, env);
+			if (z)
+				execution(z, env);
+			// free_parser(p);
 		}
-		
 		// system("leaks minishell");
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/12 15:49:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 14:45:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	execution(t_cmd *cmd, char **env)
 	int		status;
 
 	// ! single cmd with no builtins 
-	m = malloc(sizeof(t_data) * cmd->nbr_cmd);
+	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd); 
 	if (cmd->type == eof && !is_builtin(cmd))
 	{
 		pid = fork();
@@ -127,5 +127,5 @@ void	execution(t_cmd *cmd, char **env)
 	}
 	else
 		exec_multiple_cmd(cmd, m);	
-	free (m);
+	// free (m);
 }
