@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 17:17:14 by mac              ###   ########.fr       */
+/*   Updated: 2021/07/15 17:35:25 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	init_cmdargs(t_ast *ast, t_cmd *z, int n)
 {
 	z[n].redir_nbr = ast->redir_nbr;
 	z[n].args_size = ast->args_size - (z[n].redir_nbr * 2) - 1;
-	printf("ast->args_size = %d\n", z[n].args_size);
-	printf("redirection nbr = %d\n", z[n].redir_nbr);
 	z[n].argvs = malloc(sizeof(char *) * (z[n].args_size + 1));
 	z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
 }
@@ -43,7 +41,6 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 {
 	t_index	x;
 
-	printf("ast->args_size = %d\n", ast->args_size);
 	x = (t_index){.k = 0, .l = 0, .m = 0};
 	init_cmdargs(ast, z, n);
 	while (x.k < ast->args_size && (ast->args[x.k]->type != eof

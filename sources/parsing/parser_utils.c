@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 16:30:09 by mac              ###   ########.fr       */
+/*   Updated: 2021/07/15 17:36:29 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ t_parser	*init_parser(t_lexer *l)
 		return (NULL);
 	p->lexer = l;
 	p->curr_token = get_next_token(l);
-	printf("get_next_token(l) = [%s]\n", p->curr_token->value);
 	p->prev_token = p->curr_token;
 	if (p->curr_token->type == pip)
 	{
-		printf("current_token = [%s]\n", p->curr_token->value);
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
 		// free_parser(p); //!heap-use-after-free

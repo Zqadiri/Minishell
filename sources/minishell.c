@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 17:20:08 by mac              ###   ########.fr       */
+/*   Updated: 2021/07/15 17:34:09 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ int main(int argc, char **argv, char **env)
 //? << $PWD cat
 
 // ToDo List:
-// read cmdline √
-// check if there is nay syntax error (eg: >>> or |; ...)
+// readline cmd √
+// check if there is any syntax error (eg: >>> or |; ...)
 // implement functions (map) for linked list
 // example :							 output
 //* √- echo c'o\'u'cou'					-> co\ucou 
