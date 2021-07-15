@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/15 17:52:33 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 19:16:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 			close(out);
 		}
 		// ! close_pipes(i, m);
+		if (!ft_strcmp(cmd->argvs[0], "\0"))
+			exit(0);
 		possible_path = find_path(cmd->argvs[0], m->path);
 		if (possible_path == NULL)
 			possible_path = ft_strdup(cmd->argvs[0]);

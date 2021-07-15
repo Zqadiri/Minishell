@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 17:34:09 by mac              ###   ########.fr       */
+/*   Updated: 2021/07/15 18:19:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int main(int argc, char **argv, char **env)
 		buff = readline("minishell-1.0> ");
 		if (!buff)
 		{
-			char *cm_cap = tgetstr("cl", NULL);
-			tputs(tgoto(cm_cap ,0, 0), 0, putchar);
+			// char *cm_cap = tgetstr("cl", NULL);
+			// tputs(tgoto(cm_cap ,0, 0), 0, putchar);
 			printf("exit\n");
 			//write(1, "exit\n", 5);
 			exit(g_global->exit_status);

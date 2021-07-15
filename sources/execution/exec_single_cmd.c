@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/15 14:47:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 19:16:33 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,15 +142,18 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 		return ;
 	else
 	{
+		if (!ft_strcmp(cmd->argvs[0], "\0"))
+			exit(0);
 		possible_path = find_path (cmd->argvs[0], m->path);
 		if (possible_path == NULL)
 			possible_path = ft_strdup(cmd->argvs[0]);
 		int fd = open(possible_path, O_RDONLY);
 		if (fd < 0)
 		{
-			write (2, "minishell: ", 11);
-			write(2, possible_path, ft_strlen(possible_path));
-			ft_putendl_fd(": command not found", 2);
+			// write (2, "minishell: ", 11);
+			// write(2, possible_path, ft_strlen(possible_path));
+			// ft_putendl_fd(": command not found", 2);
+			// print_error(possible_path);
 			exit (0);
 		}
 		if (execve (possible_path, cmd->argvs, g_global->env_var))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 17:36:29 by mac              ###   ########.fr       */
+/*   Updated: 2021/07/15 18:34:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ t_parser	*init_parser(t_lexer *l)
 		return (NULL);
 	}
 	if (p->curr_token->type == illegal)
-	{
-		free_parser(p);
-		g_global->exit_status = 258;
 		return (NULL);
-	}
 	return (p);
 }
 
