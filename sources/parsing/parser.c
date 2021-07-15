@@ -6,11 +6,30 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 16:34:33 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:20:30 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+t_ast	**realloc_ast_node(t_ast *ast, int size)
+{
+	t_ast	**new;
+	int		i;
+
+	if (ast->type == pipe_ast)
+	{
+		new = (t_ast **)malloc(sizeof(t_ast *) * size);
+		i = -1;
+		while (++i < ast->pipecmd_size)
+			new[i] = ast->pipecmd_values[i];
+		new[i] = NULL;
+		free_tree2(ast->pipecmd_values);
+		ast->pipecmd_values = NULL;
+		return (new);
+	}
+	return (NULL);
+}
 
 t_token	**realloc_ast_args(t_ast *ast, int size)
 {
@@ -34,14 +53,13 @@ t_ast	*parse_args_helper(t_parser *p)
 {
 	t_ast	*ast;
 
-	ast = init_ast(arg_ast); //!
+	ast = init_ast(arg_ast);
 	ast->args = (t_token **)malloc(sizeof(t_token *) * 2);
 	if (!ast->args)
 		return (NULL);
 	ast->args[1] = NULL;
 	if (ast->args_size == 0)
 	{
-		ast->args[0] = malloc(sizeof(t_token)); //!
 		ast->args[0] = p->curr_token;
 		if (p->curr_token->type == pip)
 		{
@@ -106,7 +124,6 @@ t_ast	*parse_pipe(t_parser *p)
 		{
 			free_parser(p);
 			free_tree(ast);
-			// ast = NULL;
 			return (NULL);
 		}
 		if (p->prev_token->type == pip)

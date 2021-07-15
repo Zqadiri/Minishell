@@ -6,9 +6,10 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 16:21:01 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:19:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -46,10 +47,10 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 			|| ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id)
-		// {
+		{
 			z[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
-			// printf("args[%d] = [%s]\n", x.l - 1, z[n].argvs[x.l - 1]);
-		// }
+			printf("args[%d] = [%s]\n", x.l - 1, z[n].argvs[x.l - 1]);
+		}
 		else
 		{
 			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1
@@ -58,7 +59,7 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 				z[n].r[x.m].type = ast->args[x.k - 1]->type;
 				z[n].r[x.m].is_quoted = ast->args[x.k]->is_quoted;
 				z[n].r[x.m++].filename = ast->args[x.k++]->value;
-				// printf("[%s] - [%u]\n", z[n].r[x.m - 1].filename, z[n].r[x.m - 1].type);
+				printf("[%s] - [%u]\n", z[n].r[x.m - 1].filename, z[n].r[x.m - 1].type);
 			}
 		}
 	}
@@ -84,6 +85,7 @@ t_cmd	*visitor(t_ast *ast)
 		return (NULL);
 	n = 0;
 	z = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
+	// z[ast->pipecmd_size] = NULL;
 	z->nbr_cmd = ast->pipecmd_size;
 	if (ast->type == pipe_ast)
 	{
@@ -100,5 +102,6 @@ t_cmd	*visitor(t_ast *ast)
 		}
 	}
 	free_tree(ast);
+	
 	return (z);
 }

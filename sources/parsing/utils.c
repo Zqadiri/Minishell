@@ -25,7 +25,10 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l)
 	if (!t)
 		return (NULL);
 	if (s)
+	{
 		t->value = ft_strdup(s);
+		free(s);
+	}
 	else
 		t->value = NULL;
 	t->type = type;

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 15:31:59 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:19:27 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_tree(t_ast *ast)
 				free_tree(ast->pipecmd_values[j]);
 		}
 		is_notempty(ast->pipecmd_values);
-		// is_notempty(ast);
+		is_notempty(ast);
 	}
 	if (ast->type == arg_ast)
 	{

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 16:34:48 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:20:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int main(int argc, char **argv, char **env)
 			z = visitor(ast);
 			// if (z)
 			// 	execution(z, env);
-			// free_parser(p);
 		}
 		
 		system("leaks minishell");
