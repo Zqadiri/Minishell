@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 14:55:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 17:34:09 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int argc, char **argv, char **env)
 		{
 			char *cm_cap = tgetstr("cl", NULL);
 			tputs(tgoto(cm_cap ,0, 0), 0, putchar);
-			printf("minishell-1.0> exit\n");
+			printf("exit\n");
 			//write(1, "exit\n", 5);
 			exit(g_global->exit_status);
 		}
@@ -112,10 +112,13 @@ int main(int argc, char **argv, char **env)
 		if (p)
 		{
 			ast = parse_pipe(p);
+			// printf("\n=============\n");
+			// print_tree(ast);
+			// printf("\n=============\n");
 			z = visitor(ast);
 			if (z)
 				execution(z, env);
-			free_parser(p);
+			// free_parser(p);
 		}
 		// system("leaks minishell");
 	}
@@ -130,8 +133,8 @@ int main(int argc, char **argv, char **env)
 //? << $PWD cat
 
 // ToDo List:
-// read cmdline √
-// check if there is nay syntax error (eg: >>> or |; ...)
+// readline cmd √
+// check if there is any syntax error (eg: >>> or |; ...)
 // implement functions (map) for linked list
 // example :							 output
 //* √- echo c'o\'u'cou'					-> co\ucou 

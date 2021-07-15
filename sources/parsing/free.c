@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 15:19:27 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/15 16:09:10 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_tree(t_ast *ast)
 				free_tree(ast->pipecmd_values[j]);
 		}
 		is_notempty(ast->pipecmd_values);
-		is_notempty(ast);
+		// is_notempty(ast);
 	}
 	if (ast->type == arg_ast)
 	{
@@ -106,4 +106,6 @@ void	free_parser(t_parser *p)
 		free(p->curr_token);
 		p->curr_token = NULL;
 	}
+	free(p);
+	p = NULL;
 }

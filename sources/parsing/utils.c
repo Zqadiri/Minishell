@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 15:05:14 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/15 17:19:09 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l)
 	if (!t)
 		return (NULL);
 	if (s)
-	// {
 		t->value = ft_strdup(s);
-		// free(s);
-	// }
 	else
 		t->value = NULL;
 	t->type = type;

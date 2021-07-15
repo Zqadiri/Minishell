@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 15:20:30 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/15 16:24:40 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_ast	*parse_args_helper(t_parser *p)
 		{
 			print_msg("minishell: syntax error near unexpected token 0",
 				p->curr_token->value);
+			free_parser(p);
 			return (NULL);
 		}
 		ast->args_size += 1;
