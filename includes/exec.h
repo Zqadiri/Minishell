@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/16 11:19:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/16 19:17:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <curses.h>
 # include <term.h>
 # include <signal.h>
+# include <dirent.h>
 # include "lexer.h"
 
 typedef struct s_redir

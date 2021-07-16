@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/minishell.h"
+#include "../../../includes/minishell.h"
 
-int			ft_strlen(const char *str)
+int	ft_strlen_new(const char *str)
 {
 	int		len;
 
@@ -24,6 +24,37 @@ int			ft_strlen(const char *str)
 	return (len);
 }
 
+int	add_var_to_env(char *key, char *new_path)
+{
+	int		index;
+	char	*tmp;
+
+	tmp = NULL;
+	if (!key || !new_path)
+		return (0);
+	index = find_env(key);
+	if (index == -1)
+		return (1);
+	else
+	{
+		tmp = ft_strjoin(key, "=");
+		tmp = ft_strjoin(tmp, new_path);
+		free(g_global->env_var[index]);
+		g_global->env_var[index] = tmp;
+	}
+	return (1);
+}
+
+void	*ft_memalloc(size_t size)
+{
+	void	*p;
+
+	if (!(p = malloc(size)))
+		return (NULL);
+	ft_bzero(p, size);
+	return (p);
+}
+
 char		*add_char_to_word(char *word, char c)
 {
 	char	*save_word;
@@ -32,17 +63,17 @@ char		*add_char_to_word(char *word, char c)
 	if (!word)
 	{
 		if (!(word = (char *)ft_memalloc(sizeof(char) * 2)))
-			return (ERROR);
+			return (NULL);
 		word[0] = c;
 		word[1] = '\0';
 		return (word);
 	}
-	new_word_len = ft_strlen(word) + 2;
+	new_word_len = ft_strlen_new(word) + 2;
 	save_word = word;
 	if (!(word = (char *)ft_memalloc(sizeof(char) * new_word_len)))
-		return (ERROR);
-	ft_memcpy(word, save_word, ft_strlen(save_word));
-	word[ft_strlen(save_word)] = c;
+		return (NULL);
+	ft_memcpy(word, save_word, ft_strlen_new(save_word));
+	word[ft_strlen_new(save_word)] = c;
 	return (word);
 }
 
@@ -52,7 +83,7 @@ int		get_pwd(char **pwd)
 
 	new_pwd = NULL;
 	if (!(new_pwd = (char *)malloc(sizeof(char) * 1025)))
-		return (ERROR);
+		return (-1);
 	ft_bzero(new_pwd, 1025);
 	if (getcwd(new_pwd, sizeof(char) * 1024) == NULL)
 	{
@@ -70,15 +101,13 @@ static int	move_to_dir(char *path)
 	char		*tmp;
 
 	old_pwd = get_env_var_by_key("PWD");
-	tmp = ft_strjoin("OLDPWD=", old_pwd);
-	add_var_to_env(tmp);
-    free (tmp);
+	add_var_to_env("PWD", old_pwd);
 	ret = chdir(path);
 	tmp = get_env_var_by_key("PWD");
-	if (!get_pwd(tmp) && (!ft_strcmp(".", path) || !ft_strcmp("./", path)))
+	if (!get_pwd(&tmp) && (!ft_strcmp(".", path) || !ft_strcmp("./", path)))
 	{
-		ft_printf(2, "cd: error retrieving current directory: %s%s\n",
-			"getcwd: cannot access parent directories: ", strerror(errno));
+		// fprintf(2, "cd: error retrieving current directory: %s%s\n",
+		// 	"getcwd: cannot access parent directories: ", strerror(errno));
 		tmp = add_char_to_word(tmp, '/');
 		old_pwd = tmp;
 		tmp = ft_strjoin(tmp, path);
@@ -88,8 +117,11 @@ static int	move_to_dir(char *path)
 
 int		error_path(const char *cmd, const char *path, int errnum)
 {
-	ft_printf(2, "minishell: %s: %s: %s\n",
-		cmd, path, strerror(errnum));
+	(void)cmd;
+	(void)path;
+	(void)errnum;
+	// fprintf(2, "minishell: %s: %s: %s\n",
+	// 	cmd, path, strerror(errnum));
 	return (1);
 }
 
@@ -109,20 +141,18 @@ static int	change_dir(char *path,int i,char **argv)
 	return (0);
 }
 
-static int	exec_cd(char *path,int i,char **arg)
+static int	exec_cd(char *path,int i,char **argv)
 {
 	char		*pwd;
-	char		*pwd_env;
 
 	if (change_dir(path, i, argv) != 0)
 		return (1); // error
 	pwd = get_env_var_by_key("PWD");
-	pwd_env = ft_strjoin("PWD=", pwd);
-	add_var_to_env(pwd_env);
+	add_var_to_env("PWD", pwd);
 	return (0);
 }
 
-int			cd(char **argv)
+int	cd_builtin(char **argv)
 {
 	char		*path;
 	int			i;
@@ -131,13 +161,13 @@ int			cd(char **argv)
 	if (len(argv) > 2)
 	{
         // arg error
-		ft_printf(2, "minishell: cd: to many arguments\n");
+		ft_putstr_fd("minishell: cd: to many arguments\n", 2);
 		return (1);
 	}
 	if (!argv[i++])
 	{
 		path = get_env_var_by_key("HOME");
-		if (!argv[i++] && ft_strlen(path) == 0)
+		if (!argv[i++] && ft_strlen_new(path) == 0)
 		{
             // error path not set
 			return (-1);
