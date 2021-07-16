@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 10:43:52 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/12 16:51:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/16 18:57:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 /*
 **  Change the working directoy and updates the environment variable
@@ -42,11 +42,11 @@ char	*return_value(const char *s, int c)
 	return (NULL);
 }
 
-char    *get_env_var_by_key(char *key)
+char	*get_env_var_by_key(char *key)
 {
-	int     index;
-	char    *value;
-	int     i;
+	int		index;
+	char	*value;
+	int		i;
 
 	value = NULL;
 	index = 0;
@@ -60,7 +60,7 @@ char    *get_env_var_by_key(char *key)
 	return (value);
 }
 
-int    set_env_var(char *key, char *new_path)
+int	set_env_var(char *key, char *new_path)
 {
 	int		index;
 	char	*tmp;
@@ -76,45 +76,59 @@ int    set_env_var(char *key, char *new_path)
 		tmp = ft_strjoin(key, "=");
 		tmp = ft_strjoin(tmp, new_path);
 		free(g_global->env_var[index]);
-        g_global->env_var[index] = tmp;
+		g_global->env_var[index] = tmp;
 	}
 	return (1);
 }
 
-int change_dir(char *path)
+int	change_dir(char *path)
 {
-    char *current_dir;
-    char *buf;
-    int size;
+	char	*current_dir;
+	char	*buf;
+	size_t	size;
 
-    size = 100;
+	size = 100;
 	current_dir = NULL;
-    buf = (char *)malloc((size_t)size);
-    if (buf == NULL)
+	buf = (char *)malloc(size);
+	if (buf == NULL)
 		return (0);
-    current_dir = getcwd(buf, (size_t)size);
-    if (!chdir(path))
-    {
-        set_env_var("OLDPWD", current_dir);
-	    current_dir = getcwd(buf, (size_t)size);
-        set_env_var("PWD", current_dir);
-        return (1);
-    }
-    else
-    {
-        printf("cd: %s: %s\n", path, strerror(errno));
-        return (1);
-    }
+	
+	current_dir = getcwd(buf, size);
+	if (!chdir(path))
+	{
+		set_env_var("OLDPWD", current_dir);
+		current_dir = getcwd(buf, size);
+		set_env_var("PWD", current_dir);
+		return (1);
+	}
+	else
+	{
+		printf("cd: %s: %s\n", path, strerror(errno));
+		return (1);
+	}
 }
 
-int cd_builtin(char **arg)
+static void	to_old_dir(char **arg)
 {
-	char *home_path;
+	(void)arg;
+	char	*home_path;
 
-	home_path = NULL;
+	home_path = get_env_var_by_key("OLDPWD");
+	if (home_path == NULL)
+	{
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+		return ;	
+	}
+	change_dir(home_path);
+}
+
+int	cd_builtin(char **arg)
+{
+	char	*home_path;
+
 	if (len(arg) > 2)
 	{
-	 	ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (1);
 	}
 	if (!arg[1] || ft_strequ(arg[1], "~") || ft_strequ(arg[1], "--"))
@@ -122,15 +136,14 @@ int cd_builtin(char **arg)
 		home_path = get_env_var_by_key("HOME");
 		if (home_path == NULL)
 		{
-        	ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (1);
 		}
 		change_dir(home_path);
 	}
 	else if (ft_strequ(arg[1], "-"))
 	{
-		home_path = get_env_var_by_key("OLDPWD");
-		change_dir(home_path);
+		to_old_dir(arg);
 		return (1);
 	}
 	else

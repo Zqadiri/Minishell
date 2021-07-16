@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/15 15:00:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/16 11:19:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		cd_builtin(char **arg);
 int		echo_builtin(char **arg);
 int		pwd_builtin(void);
 int		env_builtin(void);
-void	exit_builtin(char **arg);
+int		exit_builtin(char **args);
 int		unset_builtin(char **args);
 int		export_builtin(char **arg);
 
@@ -83,6 +83,7 @@ int		export_builtin(char **arg);
 ** Utils
 */
 
+int		env_count(void); // ? move it to utils
 int		quit(void);
 int		len(char **env);
 int		alpha(char *key);
@@ -97,12 +98,11 @@ int		set_env_var(char *key, char *new_path);
 ** Helpers 
 */
 
-void	set_new_env(char *arg);
-int		env_count(void);
 int		find_env(char *key);
 char	*get_env_var_by_key(char *key);
 char	*return_value(const char *s, int c);
 int		get_str_by_char(char *str, char c);
+int		is_valid_env_key(char *arg);
 void	modify_env(char *arg, char *key);
 
 /*
@@ -116,6 +116,6 @@ void    exec_multiple_cmd(t_cmd *cmd, t_data *m);
 int		is_builtin(t_cmd *cmd);
 void	init_m(t_data *m);
 void	print_error(char *file_error);
-int	check_each_type(t_cmd *cmd, t_token_type type);
+int		check_each_type(t_cmd *cmd, t_token_type type);
 
 #endif

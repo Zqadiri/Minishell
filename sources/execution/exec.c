@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/15 18:56:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/16 13:05:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,3 +131,6 @@ void	execution(t_cmd *cmd, char **env)
 		exec_multiple_cmd(cmd, m);	
 	// free (m);
 }
+
+// ! Redo cd 
+ 

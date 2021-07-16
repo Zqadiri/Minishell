@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mac <mac@student.42.fr>                    +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/15 17:16:55 by mac              ###   ########.fr        #
+#    Updated: 2021/07/16 18:54:39 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,18 +27,19 @@ LIBFT_PATH 		= 	./libft
 
 # SRCB			=	./sources/parsing/handle_quotes_bonus.c
 
-SRCS_EXEC		=	./sources/execution/utils.c\
-					./sources/execution/cd_builtin.c\
-					./sources/execution/env_builtin.c\
-					./sources/execution/exit_builtin.c\
-					./sources/execution/main_exec.c\
-					./sources/execution/exec_single_cmd.c\
-					./sources/execution/exec_multiple_cmd.c\
-					./sources/execution/pwd_builtin.c\
-					./sources/execution/echo_builtin.c\
-					./sources/execution/unset_builtin.c\
-					./sources/execution/export/helpers.c\
-					./sources/execution/export/export_builtin.c
+SRCS_EXEC		=	./sources/execution/builtins/cd_builtin.c\
+					./sources/execution/builtins/env_builtin.c\
+					./sources/execution/builtins/exit_builtin.c\
+					./sources/execution/builtins/pwd_builtin.c\
+					./sources/execution/builtins/echo_builtin.c\
+					./sources/execution/builtins/unset_builtin.c\
+					./sources/execution/builtins/export/helpers.c\
+					./sources/execution/builtins/export/export_builtin.c\
+					./sources/execution/exec.c\
+					./sources/execution/redirections.c\
+					./sources/execution/n_pipes.c\
+					./sources/execution/signals.c\
+					./sources/execution/utils.c
 
 
 OBJS			= 	${SRCS:.c=.o}

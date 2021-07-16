@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_multiple_cmd.c                                :+:      :+:    :+:   */
+/*   n_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/15 19:16:09 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/16 18:46:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,30 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 	// check_if_builtin(cmd, m, in, out);
 	if ((m->pid = fork()) == 0)
 	{
+		printf("%d\n", in);
 		if (m->redir->infile && !m->redir->err)
 		{
 			close(m->pipe_fd[0]);
 			dup2(m->redir->infile, 0);
 			close(m->redir->infile);
 		}
-		else if (in != 0)
+		else
 		{
 			dup2(in, 0);
 			close(in);
 		}
 		if (m->redir->outfile && !m->redir->err)
 		{
-			close(m->pipe_fd[1]);
+			close(m->pipe_fd[0]);
 			dup2(m->redir->outfile, 1);
 			close(m->redir->outfile);
 		}
-		else if (out != 1)
+		else
 		{
 			dup2(out, 1);
 			close(out);
 		}
-		// ! close_pipes(i, m);
+		// ! close_pipes
 		if (!ft_strcmp(cmd->argvs[0], "\0"))
 			exit(0);
 		possible_path = find_path(cmd->argvs[0], m->path);
@@ -167,11 +168,11 @@ void	setup_all_redirections(t_cmd *cmd, t_data *m)
 	{
 		if (check_each_type(&cmd[i], less) > 0)
 			setup_in(&cmd[i], &m[i]);
-		// printf ("redir in : %d \t %d \n", m[i].redir->infile, m[i].redir->err);
+		printf ("redir in : %d \t %d \n", m[i].redir->infile, m[i].redir->err);
 		if (check_each_type(&cmd[i], great) > 0 ||
 		check_each_type(&cmd[i], great) > 0)
 			setup_out(&cmd[i], &m[i]);
-		// printf ("redir out: %d \t %d \n", m[i].redir->outfile, m->redir->err);
+		printf ("redir out: %d \t %d \n", m[i].redir->outfile, m->redir->err);
 		i++;
 	}
 }

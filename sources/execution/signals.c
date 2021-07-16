@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_builtin.c                                      :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 15:56:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 16:59:30 by zqadiri          ###   ########.fr       */
+/*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
+/*   Updated: 2021/07/16 11:01:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*
-** env [without any options]
-** is used to print environment variables
-*/
-
-int env_builtin(void)
+void    interrupt_program(int sig)
 {
-    int i;
+	(void)sig;
+	printf("ctrl + c\n");
+}
 
-    i = 0; 
-    while (g_global->env_var[i] != NULL)
-    {
-        ft_putendl_fd(g_global->env_var[i], 1);
-        i++;
-    }
+void    quit_program(int sig)
+{
+	(void)sig;
+	printf("ctrl + \\ \n");
+}
+
+void    terminate_process(int sig)
+{
+	(void)sig;
+	printf("ctrl + d\n");
+}
+
+int	check_signals()
+{
+	// ctrl + c
+	signal(SIGINT, interrupt_program);
+	// ctrl + /
+	signal(SIGQUIT, quit_program);
+	// ctrl + d
+	signal(SIGTERM, terminate_process);
+	
 	return (1);
+
 }
