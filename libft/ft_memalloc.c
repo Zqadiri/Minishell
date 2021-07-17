@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_builtin.c                                      :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 15:56:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 16:59:30 by zqadiri          ###   ########.fr       */
+/*   Created: 2021/07/17 15:04:27 by zqadiri           #+#    #+#             */
+/*   Updated: 2021/07/17 15:05:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-/*
-** env [without any options]
-** is used to print environment variables
-*/
-
-int env_builtin(void)
+void	*ft_memalloc(size_t size)
 {
-    int i;
+	void	*p;
 
-    i = 0; 
-    while (g_global->env_var[i] != NULL)
-    {
-        ft_putendl_fd(g_global->env_var[i], 1);
-        i++;
-    }
-	return (1);
+	if (!(p = malloc(size)))
+		return (NULL);
+	ft_bzero(p, size);
+	return (p);
 }

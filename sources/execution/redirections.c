@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_single_cmd.c                                  :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/15 19:16:33 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/16 18:57:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
-
 
 int	check_each_type(t_cmd *cmd, t_token_type type)
 {
@@ -34,10 +32,6 @@ void	init_redir(t_cmd *cmd, t_data *m)
 {
 	m->redir->less_cpt = check_each_type(cmd, less);
 	m->redir->great_cpt = check_each_type(cmd, great);
-	// m->redir->greater_cpt = check_each_type(cmd, greater);
-	// int i = check_each_type(cmd, greater);
-	// printf("ok\n");
-	// redir->greater_cpt = i;
 }
 
 /*
@@ -153,7 +147,7 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 			// write (2, "minishell: ", 11);
 			// write(2, possible_path, ft_strlen(possible_path));
 			// ft_putendl_fd(": command not found", 2);
-			// print_error(possible_path);
+			print_error(possible_path);
 			exit (0);
 		}
 		if (execve (possible_path, cmd->argvs, g_global->env_var))
@@ -161,15 +155,5 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 	}
 }
 
-//! minishell-1.0> /bin/wechohe
-//? new REPL without error message
-
-//! cd not working
-//? cd -> 1 argument 
-
 //!echo -nnnnnnnnnnnnnnnnnnnnnf bonjour\0000
-//? must print iin newline
-
-//! <Makefile < wrong_file cat
-//? minishell-1.0: wrong_file : No such file or directory + infinite loop
-//? minishell-1.0: wrong_file : Permission denied + infinite loop
+//? must print a newline

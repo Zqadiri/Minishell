@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/05 16:03:47 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/07/17 15:05:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void				ft_addlst_back(t_list **aslt, t_list *new);
 char				*ft_strndup(const char *s, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strequ(const char *s1, const char *s2);
+void				*ft_memalloc(size_t size);
 
 # ifndef GET_NEXT_LINE_H
 #  define GET_NEXT_LINE_H
