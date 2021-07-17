@@ -12,19 +12,29 @@
 
 #include "../../../includes/minishell.h"
 
-int	ft_strlen_new(const char *str)
+char	*return_value(const char *s, int c)
 {
-	int		len;
+	char	*str;
+	char	val;
+	int		i;
 
-	len = 0;
-	if (!str)
-		return (0);
-	while (str[len])
-		len++;
-	return (len);
+	i = ft_strlen(s);
+	str = (char *)s;
+	val = (char)c;
+	while (i >= 0)
+	{
+		if (*str == val)
+		{
+			str++;
+			return (str);
+		}
+		str++;
+		i--;
+	}
+	return (NULL);
 }
 
-int	add_var_to_env(char *key, char *new_path)
+static int	add_var_to_env(char *key, char *new_path)
 {
 	int		index;
 	char	*tmp;
@@ -43,16 +53,6 @@ int	add_var_to_env(char *key, char *new_path)
 		g_global->env_var[index] = tmp;
 	}
 	return (1);
-}
-
-void	*ft_memalloc(size_t size)
-{
-	void	*p;
-
-	if (!(p = malloc(size)))
-		return (NULL);
-	ft_bzero(p, size);
-	return (p);
 }
 
 char		*add_char_to_word(char *word, char c)
@@ -101,33 +101,39 @@ static int	move_to_dir(char *path)
 	char		*tmp;
 
 	old_pwd = get_env_var_by_key("PWD");
-	add_var_to_env("PWD", old_pwd);
+	add_var_to_env("OLDPWD", old_pwd);
 	ret = chdir(path);
-	tmp = get_env_var_by_key("PWD");
-	if (!get_pwd(&tmp) && (!ft_strcmp(".", path) || !ft_strcmp("./", path)))
+	get_pwd(&tmp);
+	if (!tmp && (!ft_strcmp(".", path) || !ft_strcmp("./", path)))
 	{
-		// fprintf(2, "cd: error retrieving current directory: %s%s\n",
-		// 	"getcwd: cannot access parent directories: ", strerror(errno));
+		ft_putstr_fd("cd: error retrieving current directory: ", 2);
+		ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
+		printf("%s\n", strerror(errno));
+		tmp = get_env_var_by_key("PWD");
 		tmp = add_char_to_word(tmp, '/');
 		old_pwd = tmp;
 		tmp = ft_strjoin(tmp, path);
+		add_var_to_env("PWD", tmp);
+		return (1);
+	}
+	else
+	{
+		add_var_to_env("PWD", tmp);
+		return (1);
 	}
 	return (ret);
 }
 
 int		error_path(const char *cmd, const char *path, int errnum)
 {
-	(void)cmd;
-	(void)path;
-	(void)errnum;
-	// fprintf(2, "minishell: %s: %s: %s\n",
-	// 	cmd, path, strerror(errnum));
+	printf("minishell: %s: %s: %s\n",
+		cmd, path, strerror(errnum));
 	return (1);
 }
 
 static int	change_dir(char *path,int i,char **argv)
 {
-	DIR			*dir;
+	DIR		*dir;
 
 	dir = opendir(path);
 	if (!dir)
@@ -138,14 +144,14 @@ static int	change_dir(char *path,int i,char **argv)
 		if (move_to_dir(path) == -1)
 			return (error_path("cd", argv[i + 1], errno));
 	}
-	return (0);
+	return (1);
 }
 
-static int	exec_cd(char *path,int i,char **argv)
+static int	exec_cd(char *path, int i, char **argv)
 {
-	char		*pwd;
+	char	*pwd;
 
-	if (change_dir(path, i, argv) != 0)
+	if (change_dir(path, i, argv))
 		return (1); // error
 	pwd = get_env_var_by_key("PWD");
 	add_var_to_env("PWD", pwd);
@@ -154,22 +160,22 @@ static int	exec_cd(char *path,int i,char **argv)
 
 int	cd_builtin(char **argv)
 {
-	char		*path;
-	int			i;
+	char	*path;
+	int		i;
 
 	i = 0;
+	path = NULL;
 	if (len(argv) > 2)
 	{
-        // arg error
 		ft_putstr_fd("minishell: cd: to many arguments\n", 2);
 		return (1);
 	}
-	if (!argv[i++])
+	if (argv[i + 1] == NULL)
 	{
 		path = get_env_var_by_key("HOME");
 		if (!argv[i++] && ft_strlen_new(path) == 0)
 		{
-            // error path not set
+			ft_putstr_fd ("HOME PATH NOT SET", 2);
 			return (-1);
 		}
 	}

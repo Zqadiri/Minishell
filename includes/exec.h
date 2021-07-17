@@ -6,13 +6,14 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/16 19:17:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/17 15:06:54 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
+# include <stdio.h>
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
@@ -105,6 +106,8 @@ char	*return_value(const char *s, int c);
 int		get_str_by_char(char *str, char c);
 int		is_valid_env_key(char *arg);
 void	modify_env(char *arg, char *key);
+char	*get_env_var_by_key(char *key);
+int		ft_strlen_new(const char *str);
 
 /*
 ** Signals

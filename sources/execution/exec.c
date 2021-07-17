@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_exec.c                                        :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/16 13:05:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/17 13:43:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	execution(t_cmd *cmd, char **env)
 	// ! execve commands
 	else if (is_builtin(cmd) && cmd->type == eof)
 	{
+		printf ("in builtin\n");
 		init_m(m);
 		exec_single_cmd(cmd, m);
 		if (cmd->redir_nbr)
