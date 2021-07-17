@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/16 18:54:39 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/07/17 15:25:30 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS_EXEC		=	./sources/execution/builtins/cd_builtin.c\
 					./sources/execution/exec.c\
 					./sources/execution/redirections.c\
 					./sources/execution/n_pipes.c\
+					./sources/execution/n_pipes_red.c\
 					./sources/execution/signals.c\
 					./sources/execution/utils.c
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 15:06:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/17 17:49:10 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ int		is_valid_env_key(char *arg);
 void	modify_env(char *arg, char *key);
 char	*get_env_var_by_key(char *key);
 int		ft_strlen_new(const char *str);
+int		is_builtin(t_cmd *cmd);
+int		pipe_all(t_cmd *cmd, t_data *m);
+void	restore_std(int saved_stdout, int saved_stdin);
 
 /*
 ** Signals
@@ -121,5 +124,6 @@ int		is_builtin(t_cmd *cmd);
 void	init_m(t_data *m);
 void	print_error(char *file_error);
 int		check_each_type(t_cmd *cmd, t_token_type type);
+void    exec_pipe(t_cmd *cmd, t_data *m);
 
 #endif
