@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 17:51:25 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 16:30:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,12 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 
 void    exec_pipe(t_cmd *cmd, t_data *m)
 {
-	printf ("in pipe\n");
 	int		i;
 	pid_t	pid;
 	int		status;
 
 	i = 0;
 	fork_cmd_pipes(cmd, m);
-	// printf ("out");
    	while (i < cmd->nbr_cmd)
 	{
 		pid = waitpid(m[cmd->nbr_cmd - 1].pid, &status, 0);

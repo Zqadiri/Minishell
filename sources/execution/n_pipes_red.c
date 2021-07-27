@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 17:41:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 16:37:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,30 +96,30 @@ int		pipe_all(t_cmd *cmd, t_data *m)
 
 void	setup_in(t_cmd *cmd, t_data *m)
 {
-	int	count;
+	int	cpt;
 	int fd;
 
-	count = check_each_type(cmd, less);
-	if (count == 0)
+	cpt = (count(cmd, less));
+	if (cpt == 0)
 	{
 		m->redir->infile = 0;
 		return ;		
 	}
-	count = 0;
-	while (count < cmd->redir_nbr)
+	cpt = 0;
+	while (cpt < cmd->redir_nbr)
 	{
-		if (cmd->r[count].type == less)
+		if (cmd->r[cpt].type == less)
 		{
 			//* add close 
-			fd = open(cmd->r[count].filename, O_RDWR);
+			fd = open(cmd->r[cpt].filename, O_RDWR);
 			if (fd < 0)
 			{
-				print_error(cmd->r[count].filename);
+				print_error(cmd->r[cpt].filename);
 				m->redir->err = 1;
 				return ;
 			}
 		}
-		count++;
+		cpt++;
 	}
 	m->redir->infile = fd;
 }
@@ -162,11 +162,11 @@ void	setup_all_redirections(t_cmd *cmd, t_data *m)
 	i = 0;
 	while (i < cmd->nbr_cmd)
 	{
-		if (check_each_type(&cmd[i], less) > 0)
+		if (count(&cmd[i], less) > 0)
 			setup_in(&cmd[i], &m[i]);
 		printf ("redir in : %d \t %d \n", m[i].redir->infile, m[i].redir->err);
-		if (check_each_type(&cmd[i], great) > 0 ||
-		check_each_type(&cmd[i], great) > 0)
+		if (count(&cmd[i], great) > 0 ||
+		count(&cmd[i], great) > 0)
 			setup_out(&cmd[i], &m[i]);
 		printf ("redir out: %d \t %d \n", m[i].redir->outfile, m->redir->err);
 		i++;

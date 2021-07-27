@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 17:36:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 17:17:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 //   /* Execute the last stage with the current process. */
 //   return execvp (cmd [i].argv [0], (char * const *)cmd [i].argv);
 // }
+
 char	**get_path(void)
 {
 	char	**path;
@@ -132,7 +133,6 @@ void	execution(t_cmd *cmd, char **env)
 	t_data	*m;
 	int		status;
 
-	// ! single cmd with no builtins 
 	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd); 
 	if (cmd->type == eof && !is_builtin(cmd))
 	{

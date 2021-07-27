@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/16 18:57:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 17:18:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_each_type(t_cmd *cmd, t_token_type type)
+int	count(t_cmd *cmd, t_token_type type)
 {
 	int	i;
 	int j;
@@ -26,12 +26,6 @@ int	check_each_type(t_cmd *cmd, t_token_type type)
 		i++;
 	}
 	return (j);
-}
-
-void	init_redir(t_cmd *cmd, t_data *m)
-{
-	m->redir->less_cpt = check_each_type(cmd, less);
-	m->redir->great_cpt = check_each_type(cmd, great);
 }
 
 /*
@@ -49,48 +43,44 @@ void	print_error(char *file_error)
 void	setup_infiles(t_cmd *cmd, t_data *m)
 {
 	int i;
-	int	bad_infile;
+	int	fd;
 
 	i = 0;
-	bad_infile = 0;
-	m->redir->infile_fds = malloc(sizeof(int) * m->redir->less_cpt);
 	while (i < cmd->redir_nbr)
 	{
 		if (cmd->r[i].type == less)
 		{
-			m->redir->infile_fds[i] = open(cmd->r[i].filename, O_RDWR);
-			if (m->redir->infile_fds[i] < 0)
+			fd = open(cmd->r[i].filename, O_RDWR);
+			m->redir->infile = fd;
+			if (fd < 0)
 			{
-				bad_infile = 1;
+				m->redir->err = 1;
 				print_error(cmd->r[i].filename);
 			}
 		}
 		i++;
 	}
-	if (!bad_infile)
-		dup2(m->redir->infile_fds[m->redir->less_cpt - 1], 0);
+	if (!m->redir->err)
+		dup2(m->redir->infile, 0);
 }
 
 void	setup_outfiles(t_cmd *cmd, t_data *m)
 {
 	int i;
     int j;
-	int	bad_outfile;
-	int nbr;
+	int fd;
 
 	i = 0;
     j = 0;
-	bad_outfile = 0;
-	nbr = check_each_type(cmd, greater) + m->redir->great_cpt;
-	m->redir->outfile_fds = malloc(sizeof(int) * (nbr));
 	while (i < cmd->redir_nbr)
 	{
 		if (cmd->r[i].type == great)
 		{
-			m->redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
-			if (m->redir->outfile_fds[j] < 0)
+			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
+			m->redir->outfile = fd;
+			if (fd < 0)
 			{
-				bad_outfile = 1;
+				m->redir->err = 1;
 				print_error(cmd->r[i].filename);
 				exit(1);
 			}
@@ -98,10 +88,11 @@ void	setup_outfiles(t_cmd *cmd, t_data *m)
 		}
 		else if (cmd->r[i].type == greater)
 		{
-			m->redir->outfile_fds[j] = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
-			if (m->redir->outfile_fds[j] < 0)
+			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
+			m->redir->outfile = fd;
+			if (fd < 0)
 			{
-				bad_outfile = 1;
+				m->redir->err = 1;
 				print_error(cmd->r[i].filename);
 				exit(1);
 			}
@@ -109,8 +100,8 @@ void	setup_outfiles(t_cmd *cmd, t_data *m)
 		}
 		i++;
 	}
-	if (!bad_outfile)
-		dup2(m->redir->outfile_fds[nbr - 1], 1);
+	if (!m->redir->err)
+		dup2(m->redir->outfile, 1);
 }
 
 int		setup_redirections(t_cmd *cmd, t_data *m)
@@ -118,10 +109,12 @@ int		setup_redirections(t_cmd *cmd, t_data *m)
 	int	i;
 
 	i = 0;
-	init_redir(cmd, m);
-	if (m->redir->less_cpt != 0)
+	m->redir->err = 0;
+	m->redir->infile = 0;
+	m->redir->outfile = 0;
+	if (count(cmd, less) != 0)
 		setup_infiles(cmd, m);
-	if ((m->redir->great_cpt != 0) || (check_each_type(cmd, greater)) != 0)
+	if (((count(cmd, great) != 0) || (count(cmd, greater)) != 0) && !m->redir->err)
 		setup_outfiles(cmd, m);
 	return (1);	
 }
@@ -132,9 +125,7 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 
 	if (cmd->redir_nbr != 0)
 		setup_redirections(cmd, m);
-	if (check_builtin(cmd))
-		return ;
-	else
+	else if (!m->redir->err)
 	{
 		if (!ft_strcmp(cmd->argvs[0], "\0"))
 			exit(0);
@@ -144,16 +135,12 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 		int fd = open(possible_path, O_RDONLY);
 		if (fd < 0)
 		{
-			// write (2, "minishell: ", 11);
-			// write(2, possible_path, ft_strlen(possible_path));
-			// ft_putendl_fd(": command not found", 2);
-			print_error(possible_path);
+			write (2, "minishell: ", 11);
+			write(2, possible_path, ft_strlen(possible_path));
+			ft_putendl_fd(": command not found", 2);
 			exit (0);
 		}
 		if (execve (possible_path, cmd->argvs, g_global->env_var))
 			exit(1);
 	}
 }
-
-//!echo -nnnnnnnnnnnnnnnnnnnnnf bonjour\0000
-//? must print a newline

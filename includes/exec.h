@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 17:49:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 17:18:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # include <dirent.h>
 # include "lexer.h"
 
+# define IS_FIRST	0
+# define IS_LAST	1	
+# define IS_MIDDLE	2
+
 typedef struct s_redir
 {
 	t_token_type	type;
@@ -47,12 +51,6 @@ typedef struct s_cmd
 
 typedef struct s_red
 {
-	// ! delete all that
-	int				*infile_fds;
-	int				*outfile_fds;
-	int				less_cpt;
-	int				great_cpt;
-	int				greater_cpt;
 	// ! new ones
 	int				infile;
 	int				outfile;
@@ -69,6 +67,7 @@ typedef struct s_data
 	t_red			*redir;
 	int				in;
 }	t_data;
+
 /*
 ** Function Declarations for builtin shell commands
 */
@@ -123,7 +122,7 @@ void    exec_multiple_cmd(t_cmd *cmd, t_data *m);
 int		is_builtin(t_cmd *cmd);
 void	init_m(t_data *m);
 void	print_error(char *file_error);
-int		check_each_type(t_cmd *cmd, t_token_type type);
+int		count(t_cmd *cmd, t_token_type type);
 void    exec_pipe(t_cmd *cmd, t_data *m);
 
 #endif
