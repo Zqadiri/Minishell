@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 18:19:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/17 20:50:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,12 @@ int main(int argc, char **argv, char **env)
 		buff = readline("minishell-1.0> ");
 		if (!buff)
 		{
-			// char *cm_cap = tgetstr("cl", NULL);
-			// tputs(tgoto(cm_cap ,0, 0), 0, putchar);
+			char *cm_cap = tgetstr("left", NULL);
+			tputs(tgoto(cm_cap , 0, 0), 0, putchar);
+			char *cm_cap2 = tgetstr("left", NULL);
+			tputs(tgoto(cm_cap2 , 0, 0), 0, putchar);
+			// rl_on_new_line();
 			printf("exit\n");
-			//write(1, "exit\n", 5);
 			exit(g_global->exit_status);
 		}
 		else if (ft_strcmp(buff, "\0"))
@@ -118,7 +120,6 @@ int main(int argc, char **argv, char **env)
 			z = visitor(ast);
 			if (z)
 				execution(z, env);
-			// free_parser(p);
 		}
 		// system("leaks minishell");
 	}

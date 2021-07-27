@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 18:34:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/17 17:56:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,29 @@ t_parser	*init_parser(t_lexer *l)
 	return (p);
 }
 
-/*
-** expected_token() : primary purpose is to enforce the correctness of
-** the order of tokens by checking the type of the next token.
-*/
+char	*get_stop_word(t_parser *p)
+{
+	int		i;
+	char	*s;
+	char	*word;
+
+	i = p->lexer->curpos - 1;
+	s = ft_strdup(p->lexer->buffer);
+	if (p->curr_token->is_quoted == 0)
+	{
+		while (s[i] != 32 && s[i] != '<')
+			i--;
+		word = ft_substr(s, i + 1, p->lexer->curpos - i + 1);
+	}
+	else
+	{
+		i--;
+		while (s[i] != DQUOTE && s[i] != SQUOTE)
+			i--;
+		word = ft_substr(s, i + 1, p->lexer->curpos - i - 2);
+	}
+	return (word);
+}
 
 int	is_redic(t_token *t)
 {
@@ -51,6 +70,8 @@ int	is_redic(t_token *t)
 
 t_token	*check_token(t_parser *p, t_ast *ast)
 {
+	char	*temp;
+
 	if (p->curr_token->type == illegal)
 		return (NULL);
 	if (!syntax_error(p))
@@ -64,6 +85,12 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 			return (NULL);
 		}
 		ast->redir_nbr += 1;
+		if (p->prev_token->type == here_doc)
+		{
+			temp = p->curr_token->value;
+			p->curr_token->value = get_stop_word(p);
+			free(temp);
+		}
 	}
 	return (p->curr_token);
 }
