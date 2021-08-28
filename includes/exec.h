@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/27 17:18:22 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/28 12:40:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <fcntl.h>
-# include <termios.h>
-# include <curses.h>
 # include <term.h>
 # include <signal.h>
 # include <dirent.h>
@@ -51,7 +49,6 @@ typedef struct s_cmd
 
 typedef struct s_red
 {
-	// ! new ones
 	int				infile;
 	int				outfile;
 	int				err;
@@ -112,17 +109,19 @@ int		pipe_all(t_cmd *cmd, t_data *m);
 void	restore_std(int saved_stdout, int saved_stdin);
 
 /*
-** Signals
+** main
 */
 
 int		check_signals(void);
 char	*find_path(char	*cmd, char **path);
-void	exec_single_cmd(t_cmd *cmd, t_data *m);
 void    exec_multiple_cmd(t_cmd *cmd, t_data *m);
 int		is_builtin(t_cmd *cmd);
 void	init_m(t_data *m);
 void	print_error(char *file_error);
 int		count(t_cmd *cmd, t_token_type type);
-void    exec_pipe(t_cmd *cmd, t_data *m);
+void    exec_simple_pipe(t_cmd *cmd, t_data *m);
+
+void	exec_single_cmd(t_cmd *cmd, t_data *m);
+int		execute_regular_cmd(t_cmd *cmd);
 
 #endif

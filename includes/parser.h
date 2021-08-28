@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/14 15:16:45 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/08/28 10:48:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		free_parser(t_parser *p);
 */
 
 int			check_builtin(t_cmd *cmd);
-void		execution(t_cmd *cmd, char **env);
 int			setup_redirections(t_cmd *cmd, t_data *m);
+int			execution(t_cmd *cmd, char **env);
 
 #endif

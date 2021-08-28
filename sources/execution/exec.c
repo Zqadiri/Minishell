@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/27 17:17:50 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/28 12:30:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@
 //       /* No need for the write end of the pipe, the child will write here.  */
 //       close (fd [1]);
 
-//       /* Keep the read end of the pipe, the next child will read from there.  */
+//      // Keep the read end of the pipe, the next child will read from there.  */
 //       in = fd [0];
 //     }
 
-//   /* Last stage of the pipeline - set stdin be the read end of the previous pipe
-//      and output to the original file descriptor 1. */  
+//   Last stage of the pipeline - set stdin be the read end of the previous pipe
+//      and output to the original file descriptor 1. 
 //   if (in != 0)
 //     dup2 (in, 0);
 
@@ -126,39 +126,21 @@ int		is_builtin(t_cmd *cmd)
 	return (0);
 }
 
-void	execution(t_cmd *cmd, char **env)
+int		execution(t_cmd *cmd, char **env)
 {
 	(void)env;
-	int		pid;
 	t_data	*m;
-	int		status;
 
-	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd); 
-	if (cmd->type == eof && !is_builtin(cmd))
-	{
-		pid = fork();
-		if (pid < 0)
-			printf("Error\n");
-		if (pid == 0)
-		{
-			init_m(m);
-			exec_single_cmd(cmd, m);
-		}
-		else
-		{
-			waitpid(pid, &status, WCONTINUED);
-			if (cmd->redir_nbr)
-				restore_std(m->saved_stdout, m->saved_stdin);
-		}
-	}
-	else if (is_builtin(cmd) && cmd->type == eof)
+	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
+	if (cmd->redir_nbr == 0 && cmd->type == eof)
+		execute_regular_cmd(cmd);
+	else if (cmd->type == eof && cmd->redir_nbr > 0)
 	{
 		init_m(m);
 		exec_single_cmd(cmd, m);
-		if (cmd->redir_nbr)
-			restore_std(m->saved_stdout, m->saved_stdin);		
 	}
 	else
 		exec_multiple_cmd(cmd, m);
-	// restore_std(m->saved_stdout, m->saved_stdin);
+	restore_std(m->saved_stdout, m->saved_stdin);
+	return (1);
 }

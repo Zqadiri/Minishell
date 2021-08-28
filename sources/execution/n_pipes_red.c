@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/27 16:37:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/28 12:48:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		pipe_all(t_cmd *cmd, t_data *m)
 	{
 		if (pipe(m[i].pipe_fd))
 			return (0);
-		// printf ("%d - %d:%d\n", i, m[i].pipe_fd[0], m[i].pipe_fd[1]);
+		printf ("%d - %d:%d\n", i, m[i].pipe_fd[0], m[i].pipe_fd[1]);
 		i++;
 	}
 	return (1);
@@ -208,15 +208,9 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 			is_redir = 1;
 		i++;
 	}
-	i = 0;
-	while (i < cmd->nbr_cmd)
-	{
-		init_m(&m[i]);
-		i++;
-	}
 	if (!is_redir)
 	{
-		exec_pipe(cmd, m);
+		exec_simple_pipe(cmd, m);
 		return ;		
 	}
 	else

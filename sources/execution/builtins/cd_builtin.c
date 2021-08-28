@@ -152,7 +152,7 @@ static int	exec_cd(char *path, int i, char **argv)
 	char	*pwd;
 
 	if (change_dir(path, i, argv))
-		return (1); // error
+		return (1);
 	pwd = get_env_var_by_key("PWD");
 	add_var_to_env("PWD", pwd);
 	return (0);

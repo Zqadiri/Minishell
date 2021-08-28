@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/27 16:30:20 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/28 12:44:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 	char *possible_path;
 
 	i = 0;
-	// ! check builtin
 	if (is_builtin(cmd))
 	{
 		if (in != 0)
@@ -83,13 +82,22 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	return (1);
 }
 
-void    exec_pipe(t_cmd *cmd, t_data *m)
+/*
+**	exec_simple_pipe() execute commands with pipes only
+*/
+
+void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 {
 	int		i;
 	pid_t	pid;
 	int		status;
 
 	i = 0;
+	while (i < cmd->nbr_cmd)
+	{
+		init_m(&m[i]);
+		i++;
+	}
 	fork_cmd_pipes(cmd, m);
    	while (i < cmd->nbr_cmd)
 	{
