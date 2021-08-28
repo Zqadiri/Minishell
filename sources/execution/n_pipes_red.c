@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 12:48:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/28 17:31:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 
 	i = 0;
 	// ! check builtin
-	// check_if_builtin(cmd, m, in, out);
+	is_builtin(cmd);
 	if ((m->pid = fork()) == 0)
 	{
 		printf("%d\n", in);
@@ -110,7 +110,6 @@ void	setup_in(t_cmd *cmd, t_data *m)
 	{
 		if (cmd->r[cpt].type == less)
 		{
-			//* add close 
 			fd = open(cmd->r[cpt].filename, O_RDWR);
 			if (fd < 0)
 			{
@@ -179,6 +178,12 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	int in;
 
 	i = 0;
+	while (i < cmd->nbr_cmd)
+	{
+		init_m(&m[i]);
+		i++;
+	}
+	i = 0;
 	in = 0;
 	pipe_all(cmd, m);
 	setup_all_redirections(cmd, m);
@@ -216,11 +221,9 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 	else
 	{
 		fork_pipes(cmd, m);
-		i = 0;
-   		while (i < cmd->nbr_cmd)
-		{
-			pid = waitpid(m[i].pid, &status, 0);
-			i++;
-		}
+		while ((pid = wait(&status)) > 0);
 	}
 }
+
+//!  ifconfig | grep "192.168" > file c:217
+//!	 

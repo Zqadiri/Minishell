@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 12:44:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/28 16:33:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,5 @@ void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 		i++;
 	}
 	fork_cmd_pipes(cmd, m);
-   	while (i < cmd->nbr_cmd)
-	{
-		pid = waitpid(m[cmd->nbr_cmd - 1].pid, &status, 0);
-		i++;
-	}
+	while ((pid = wait(&status)) > 0);
 }

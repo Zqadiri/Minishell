@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 12:28:50 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/28 18:09:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,9 @@ int			execute_regular_cmd(t_cmd *cmd)
 		}
 		else if(child_pid==0)
 		{
-			execve(cmd->argvs[0], cmd->argvs,0);
-			return 1;
+			printf ("%s\n", cmd->argvs[0]);
+			execve(cmd->argvs[0], cmd->argvs,g_global->env_var);
+			// return 1;
 		}
 		else if(child_pid > 0)
 		{
