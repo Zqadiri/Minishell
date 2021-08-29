@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 12:53:23 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/29 15:19:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ int		is_builtin(t_cmd *cmd)
 	return (0);
 }
 
+/*
+** main function
+*/
+
 int		execution(t_cmd *cmd, char **env)
 {
 	(void)env;
@@ -99,7 +103,10 @@ int		execution(t_cmd *cmd, char **env)
 
 	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (cmd->redir_nbr == 0 && cmd->type == eof)
-		execute_regular_cmd(cmd);
+	{
+		init_m(m);
+		execute_regular_cmd(cmd, m);
+	}
 	else if (cmd->type == eof && cmd->redir_nbr > 0)
 	{
 		init_m(m);

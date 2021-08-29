@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 12:40:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/29 12:13:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ int		count(t_cmd *cmd, t_token_type type);
 void    exec_simple_pipe(t_cmd *cmd, t_data *m);
 
 void	exec_single_cmd(t_cmd *cmd, t_data *m);
-int		execute_regular_cmd(t_cmd *cmd);
+int		execute_regular_cmd(t_cmd *cmd, t_data *m);
 
 #endif

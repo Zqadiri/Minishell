@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 18:09:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/29 17:00:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,12 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m)
 ** redirections oe pipes
 */
 
-int			execute_regular_cmd(t_cmd *cmd)
+int			execute_regular_cmd(t_cmd *cmd, t_data *m)
 {
-	int child_pid;
-	int status;
-	pid_t thisChPID;
+	printf ("in regular !\n");
+	pid_t	child_pid;
+	int		status;
+	char 	*possible_path;
 
 	if (is_builtin(cmd))
 	{
@@ -193,35 +194,26 @@ int			execute_regular_cmd(t_cmd *cmd)
 			fprintf(stderr, "Fork fails: \n");
 			return 1;
 		}
-		else if(child_pid==0)
+		else if(child_pid == 0)
 		{
-			printf ("%s\n", cmd->argvs[0]);
-			execve(cmd->argvs[0], cmd->argvs,g_global->env_var);
-			// return 1;
+			if (!ft_strcmp(cmd->argvs[0], "\0"))
+				exit(0);
+			possible_path = find_path (cmd->argvs[0], m->path);
+			if (possible_path == NULL)
+				possible_path = ft_strdup(cmd->argvs[0]);
+			int fd = open(possible_path, O_RDONLY);
+			if (fd < 0)
+			{
+				write (2, "minishell: ", 11);
+				write(2, possible_path, ft_strlen(possible_path));
+				ft_putendl_fd(": command not found", 2);
+				exit (0);
+			}
+			if (execve (possible_path, cmd->argvs, g_global->env_var))
+				exit(1);		
 		}
 		else if(child_pid > 0)
-		{
-			do {
-				thisChPID = waitpid(child_pid, &status, WUNTRACED | WCONTINUED);
-				if (thisChPID == -1) {
-					perror("waitpid");
-					exit(EXIT_FAILURE);
-				}
-				if (WIFEXITED(status)) {
-					printf("exited, status=%d\n", WEXITSTATUS(status));
-					return 0;
-				} 
-				// else if (WIFSIGNALED(status)) {
-				// 	printf("killed by signal %d\n", WTERMSIG(status));
-				// } else if (WIFSTOPPED(status)) {
-				// 	printf("stopped by signal %d\n", WSTOPSIG(status));
-				// } else if (WIFCONTINUED(status)) {
-				// 	printf("continued\n");
-				// }
-			}
-			while (!WIFEXITED(status) && !WIFSIGNALED(status));
-			return 0;
-		}
+			waitpid(child_pid, &status, WCONTINUED);
 	}
 	return (1);
 }

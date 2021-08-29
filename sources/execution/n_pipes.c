@@ -6,16 +6,29 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 16:33:25 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/29 17:01:14 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	close_all_pipes(int **fd, int n)
+{
+	int	i;
+
+	i = -1;
+	while (++i < n)
+	{
+		close(fd[i][0]);
+		close(fd[i][1]);
+	}
+}
+
 int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 {
 	int i;
 	char *possible_path;
+
 
 	i = 0;
 	if (is_builtin(cmd))
@@ -88,8 +101,8 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 
 void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 {
+	printf ("Simple pipe !\n");
 	int		i;
-	pid_t	pid;
 	int		status;
 
 	i = 0;
@@ -99,5 +112,7 @@ void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 		i++;
 	}
 	fork_cmd_pipes(cmd, m);
-	while ((pid = wait(&status)) > 0);
+	while (wait(&status) != -1);
+	if (WIFEXITED(status))
+		g_global->exit_status = WEXITSTATUS(status);
 }

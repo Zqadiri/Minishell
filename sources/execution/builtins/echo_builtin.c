@@ -6,67 +6,60 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/28 11:13:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/29 17:15:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_n_option(char **args)
+void	check_n_option(char **av, int *i, int *option)
 {
-	int	i;
 	int	j;
-	int	nb_options;
 
-	i = 0;
-	nb_options = 0;
-	while (args[++i])
+	*i = 1;
+	if (av[1] && av[*i][0] == '-' && av[*i][1] == 'n')
 	{
-		j = 0;
-		nb_options++;
-		if (args[i][j] && args[i][j] == '-')
+
+		while (av[*i][0] == '-' && av[*i][1] == 'n')
 		{
-			j++;
-			while (args[i][j])
+			j = 1;
+			while (av[*i][j] != '\0')
 			{
-				if (args[i][j] && args[i][j] != 'n')
-					return (nb_options);
-				else
-					j++;
+				// printf ("->%d\n -> %c", *i, av[*i][j]);
+				if (av[*i][j] != 'n')
+					return ;
+				j++;
 			}
+			(*i)++;
+			*option = 1;
 		}
-		else
-			return (nb_options);
 	}
-	return (nb_options);
-}	
+}
 
 int	echo_builtin(char **args)
 {
-	register int	i;
-	int				is_n;
+	int		i;
+	int		option;
 
-	i = 1;
-	is_n = 0;
+	i = 0;
+	option = 0;
 	if (!args[1])
 	{
 		ft_putchar_fd('\n', 1);
 		return (1);
 	}
-	if (args[i][0] == '-')
-	{
-		is_n = check_n_option(args);
-		if (is_n != -1)
-			i = is_n;
-	}
+	check_n_option(args, &i, &option);
 	while (args[i])
 	{
-		ft_putstr_fd(args[i], 1);
+		write(1, args[i], ft_strlen(args[i]));
+		if (i < len(args) - 1)
+			write(1, " ", 1);
 		i++;
-		if (args[i])
-			ft_putchar_fd(' ', 1);
 	}
-	if (is_n <= 0)
-		ft_putchar_fd('\n', 1);
-	return (1);
+	// printf ("option %d\n", option);
+	if (option == 0)
+	{
+		write(1, "\n", 1);
+	}
+	return (0);
 }
