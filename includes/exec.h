@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/29 12:13:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/31 15:56:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_data
 	char			**path;
 	int				saved_stdout;
 	int				saved_stdin;
-	int				*pipe_fd;
+	int				**pipe_fd;
 	pid_t			pid;
 	t_red			*redir;
 	int				in;

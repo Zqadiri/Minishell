@@ -175,3 +175,9 @@ echo text > $PWD/file text2
 echo text$USER > file $USER 
 echo "text"$USER > file
 cat < README.md
+
+
+//* Pipes ND Redirections *//
+ifconfig | grep "." > file 
+cat < README.md | wc -l | xargs
+

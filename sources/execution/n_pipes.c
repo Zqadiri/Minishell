@@ -6,29 +6,16 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/29 17:01:14 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/31 16:46:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	close_all_pipes(int **fd, int n)
-{
-	int	i;
-
-	i = -1;
-	while (++i < n)
-	{
-		close(fd[i][0]);
-		close(fd[i][1]);
-	}
-}
-
 int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 {
 	int i;
 	char *possible_path;
-
 
 	i = 0;
 	if (is_builtin(cmd))
@@ -86,9 +73,9 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		exec_process(in, m[i].pipe_fd[1], &cmd[i], &m[i]);
-		close(m[i].pipe_fd[1]);
-		in = m[i].pipe_fd[0];
+		exec_process(in, m[i].pipe_fd[i][1], &cmd[i], &m[i]);
+		close(m[i].pipe_fd[i][1]);
+		in = m[i].pipe_fd[i][0];
 		i++;
 	}
 	exec_process(in, 1, &cmd[i], &m[i]);
@@ -101,16 +88,12 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 
 void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 {
-	printf ("Simple pipe !\n");
 	int		i;
 	int		status;
 
-	i = 0;
-	while (i < cmd->nbr_cmd)
-	{
+	i = -1;
+	while (++i < cmd->nbr_cmd)
 		init_m(&m[i]);
-		i++;
-	}
 	fork_cmd_pipes(cmd, m);
 	while (wait(&status) != -1);
 	if (WIFEXITED(status))

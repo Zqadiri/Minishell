@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/29 17:00:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/31 18:48:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int			execute_regular_cmd(t_cmd *cmd, t_data *m)
 		check_builtin(cmd);
 		return (1);
 	}
-	else
+	else 
 	{
 		child_pid = fork();
 		if(child_pid < 0 )

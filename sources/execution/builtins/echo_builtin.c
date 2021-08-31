@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/29 17:15:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/08/31 15:47:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	check_n_option(char **av, int *i, int *option)
 			j = 1;
 			while (av[*i][j] != '\0')
 			{
-				// printf ("->%d\n -> %c", *i, av[*i][j]);
 				if (av[*i][j] != 'n')
 					return ;
 				j++;
@@ -56,10 +55,7 @@ int	echo_builtin(char **args)
 			write(1, " ", 1);
 		i++;
 	}
-	// printf ("option %d\n", option);
 	if (option == 0)
-	{
 		write(1, "\n", 1);
-	}
 	return (0);
 }
