@@ -10,29 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
-
-char	*return_value(const char *s, int c)
-{
-	char	*str;
-	char	val;
-	int		i;
-
-	i = ft_strlen(s);
-	str = (char *)s;
-	val = (char)c;
-	while (i >= 0)
-	{
-		if (*str == val)
-		{
-			str++;
-			return (str);
-		}
-		str++;
-		i--;
-	}
-	return (NULL);
-}
+#include "../../../../includes/minishell.h"
 
 static int	add_var_to_env(char *key, char *new_path)
 {
@@ -52,45 +30,6 @@ static int	add_var_to_env(char *key, char *new_path)
 		free(g_global->env_var[index]);
 		g_global->env_var[index] = tmp;
 	}
-	return (1);
-}
-
-char		*add_char_to_word(char *word, char c)
-{
-	char	*save_word;
-	int		new_word_len;
-
-	if (!word)
-	{
-		if (!(word = (char *)ft_memalloc(sizeof(char) * 2)))
-			return (NULL);
-		word[0] = c;
-		word[1] = '\0';
-		return (word);
-	}
-	new_word_len = ft_strlen_new(word) + 2;
-	save_word = word;
-	if (!(word = (char *)ft_memalloc(sizeof(char) * new_word_len)))
-		return (NULL);
-	ft_memcpy(word, save_word, ft_strlen_new(save_word));
-	word[ft_strlen_new(save_word)] = c;
-	return (word);
-}
-
-int		get_pwd(char **pwd)
-{
-	char *new_pwd;
-
-	new_pwd = NULL;
-	if (!(new_pwd = (char *)malloc(sizeof(char) * 1025)))
-		return (-1);
-	ft_bzero(new_pwd, 1025);
-	if (getcwd(new_pwd, sizeof(char) * 1024) == NULL)
-	{
-		free(new_pwd);
-		return (0);
-	}
-	*pwd = new_pwd;
 	return (1);
 }
 
@@ -117,21 +56,11 @@ static int	move_to_dir(char *path)
 		return (1);
 	}
 	else
-	{
-		add_var_to_env("PWD", tmp);
-		return (1);
-	}
+		return (add_var_to_env("PWD", tmp));
 	return (ret);
 }
 
-int		error_path(const char *cmd, const char *path, int errnum)
-{
-	printf("minishell: %s: %s: %s\n",
-		cmd, path, strerror(errnum));
-	return (1);
-}
-
-static int	change_dir(char *path,int i,char **argv)
+static int	change_dir(char *path, int i, char **argv)
 {
 	DIR		*dir;
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/31 16:37:06 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/01 14:35:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ char	**get_path(void)
 	char	*tmp;
 	int		ret;
 
-	if ((ret = find_env("PATH")) == -1)
+	ret = find_env("PATH");
+	if (ret == -1)
 		return (NULL);
 	tmp = ft_strdup(g_global->env_var[ret]);
 	tmp = return_value(tmp, '=');
-	if (!(path = ft_split(tmp, ':')))
+	path = ft_split(tmp, ':');
+	if (!path)
 	{
 		free(tmp);
 		return (NULL);
@@ -30,9 +32,9 @@ char	**get_path(void)
 	return (path);
 }
 
-int		dup_env_var(char **env)
+int	dup_env_var(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	g_global->env_var = (char **)malloc(sizeof(char *) * (len(env) + 1));
@@ -65,11 +67,8 @@ char	*find_path(char	*cmd, char **path)
 		possible_path = ft_strjoin(temp, cmd);
 		free(temp);
 		fd = open(possible_path, O_RDONLY);
-		// printf ("fd : %d possible path : %s\n", fd, possible_path);
 		if (fd >= 0)
-		{
-			return (possible_path);			
-		}
+			return (possible_path);
 	}
 	return (NULL);
 }
@@ -82,14 +81,14 @@ void	restore_std(int saved_stdout, int saved_stdin)
 	close(saved_stdin);
 }
 
-int		is_builtin(t_cmd *cmd)
+int	is_builtin(t_cmd *cmd)
 {
 	char	**args;
 
 	args = cmd->argvs;
-	if ((ft_strequ(args[0], "pwd")) || (ft_strequ(args[0], "echo")) ||
-	(ft_strequ(args[0], "env")) || (ft_strequ(args[0], "env")) ||
-	(ft_strequ(args[0], "export")) || (ft_strequ(args[0], "unset")) ||
+	if ((ft_strequ(args[0], "pwd")) || (ft_strequ(args[0], "echo")) || \
+	(ft_strequ(args[0], "env")) || (ft_strequ(args[0], "env")) || \
+	(ft_strequ(args[0], "export")) || (ft_strequ(args[0], "unset")) || \
 	(ft_strequ(args[0], "cd")) || (ft_strequ(args[0], "exit")))
 		return (1);
 	return (0);
@@ -99,9 +98,8 @@ int		is_builtin(t_cmd *cmd)
 ** main function
 */
 
-int		execution(t_cmd *cmd, char **env)
+int	execution(t_cmd *cmd)
 {
-	(void)env;
 	t_data	*m;
 
 	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);

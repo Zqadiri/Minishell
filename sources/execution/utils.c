@@ -6,19 +6,29 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 15:03:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/01 14:46:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int quit(void)
+int	count(t_cmd *cmd, t_token_type type)
 {
-    write(1, "\n", 1);
-	exit(0);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < cmd->redir_nbr)
+	{
+		if (cmd->r[i].type == type)
+			j++;
+		i++;
+	}
+	return (j);
 }
 
-int		len(char **env)
+int	len(char **env)
 {
 	register int	len;
 
@@ -40,17 +50,17 @@ int	ft_strlen_new(const char *str)
 	return (len);
 }
 
-int		alpha(char *key)
+int	alpha(char *key)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (key[i] != '\0')
 	{
-        if (ft_isalpha(key[i]))
-		    i++;
-        else
-            return (-1);
+		if (ft_isalpha(key[i]))
+			i++;
+		else
+			return (-1);
 	}
 	return (1);
 }

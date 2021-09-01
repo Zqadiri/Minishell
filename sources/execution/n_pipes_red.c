@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/31 18:51:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:11:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,31 @@ void	init_m(t_data *m)
 	m->redir->err = 0;
 }
 
+int	exec_builtin(int in, int out, t_cmd *cmd, t_data *m)
+{
+	if (in != 0)
+	{
+		dup2(in, 0);
+		close(in);
+	}
+	if (out != 1)
+	{
+		dup2(out, 1);
+		close(out);
+	}
+	check_builtin(cmd);
+	restore_std(m->saved_stdout, m->saved_stdin);
+	return (1);
+}
+
 int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 {
-	int i;
-	char *possible_path;
+	int		i;
+	char	*possible_path;
 
 	i = 0;
-	// ! check builtin
+	if (is_builtin(cmd))
+		return (exec_builtin(in, out, cmd, m));
 	if ((m->pid = fork()) == 0)
 	{
 		if (m->redir->infile && !m->redir->err)
@@ -74,24 +92,24 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 			ft_putendl_fd(": command not found", 2);
 			exit (0);
 		}
-		//! close all pipes
 		if (execve (possible_path, cmd->argvs, g_global->env_var))
 			exit(1);
 	}
-	return m->pid;
+	return (m->pid);
 }
 
-int		pipe_all(t_cmd *cmd, t_data *m)
+int	pipe_all(t_cmd *cmd, t_data *m)
 {
-	int i;
+	int	i;
 
-	i = -1;
+	i = 0;
 	m->pipe_fd = (int **)malloc(sizeof(int *) * cmd->nbr_cmd - 1);
-	while (++i < cmd->nbr_cmd - 1)
+	while (i < cmd->nbr_cmd - 1)
 	{
 		m->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
-		if (pipe(m[i].pipe_fd[i]))
+		if (pipe(m->pipe_fd[i]))
 			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -99,7 +117,7 @@ int		pipe_all(t_cmd *cmd, t_data *m)
 void	setup_in(t_cmd *cmd, t_data *m)
 {
 	int	cpt;
-	int fd;
+	int	fd;
 
 	cpt = (count(cmd, less));
 	if (cpt == 0)
@@ -175,6 +193,7 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 {
 	int i;
 	int in;
+	int		status;
 
 	i = -1;
 	in = 0;
@@ -185,20 +204,21 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	while (++i < cmd->nbr_cmd - 1)
 	{
-		exec_proc(in, m[i].pipe_fd[i][1], &cmd[i], &m[i], i);
-		close(m[i].pipe_fd[i][1]);
-		in = m[i].pipe_fd[i][0];
+		exec_proc(in, m->pipe_fd[i][1], &cmd[i], &m[i], i);
+		close(m->pipe_fd[i][1]);
+		in = m->pipe_fd[i][0];
 	}
 	exec_proc(in, 1, &cmd[i], &m[i], i);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
+	while (wait(&status) != -1);
+	if (WIFEXITED(status))
+			g_global->exit_status = WEXITSTATUS(status);
 	return (1);
 }
 
 void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 {
 	int		i;
-	int		status;
-	// pid_t	pid;
 	int		is_redir;
 
 	i = 0;
@@ -219,8 +239,5 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 	{
 		printf ("Multiple cmd!\n");
 		fork_pipes(cmd, m);
-		while (wait(&status) != -1);
-	
 	}
 }
- 
