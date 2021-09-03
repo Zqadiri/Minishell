@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/01 18:11:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/02 17:01:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 {
 	int		i;
 	char	*possible_path;
+	int		fd;
 
 	i = 0;
 	if (is_builtin(cmd))
 		return (exec_builtin(in, out, cmd, m));
-	if ((m->pid = fork()) == 0)
+	m->pid = fork();
+	if (m->pid == 0)
 	{
 		if (m->redir->infile && !m->redir->err)
 		{
@@ -84,7 +86,7 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 		possible_path = find_path(cmd->argvs[0], m->path);
 		if (possible_path == NULL)
 			possible_path = ft_strdup(cmd->argvs[0]);
-		int fd = open(possible_path, O_RDONLY);
+		fd = open(possible_path, O_RDONLY);
 		if (fd < 0)
 		{
 			write (2, "minishell: ", 11);
@@ -123,7 +125,7 @@ void	setup_in(t_cmd *cmd, t_data *m)
 	if (cpt == 0)
 	{
 		m->redir->infile = 0;
-		return ;		
+		return ;
 	}
 	cpt = 0;
 	while (cpt < cmd->redir_nbr)
@@ -145,8 +147,8 @@ void	setup_in(t_cmd *cmd, t_data *m)
 
 void	setup_out(t_cmd *cmd, t_data *m)
 {
-	int i;
-	int fd;
+	int	i;
+	int	fd;
 
 	i = 0;
 	while (i < cmd->redir_nbr)
@@ -191,9 +193,10 @@ void	setup_all_redirections(t_cmd *cmd, t_data *m)
 
 int	fork_pipes(t_cmd *cmd, t_data *m)
 {
-	int i;
-	int in;
+	int		i;
+	int		in;
 	int		status;
+	int		signal;
 
 	i = -1;
 	in = 0;
@@ -210,9 +213,16 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	}
 	exec_proc(in, 1, &cmd[i], &m[i], i);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
-	while (wait(&status) != -1);
+	waitpid(-1, &status, WCONTINUED | WUNTRACED);
 	if (WIFEXITED(status))
 			g_global->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		signal = WTERMSIG(status);
+		if (signal == SIGQUIT)
+			ft_putstr_fd("quit!", 1);
+		g_global->exit_status = signal + 128;
+	}
 	return (1);
 }
 
@@ -231,13 +241,9 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 	}
 	if (!is_redir)
 	{
-		printf ("Pipes only !\n");
 		exec_simple_pipe(cmd, m);
 		return ;		
 	}
 	else
-	{
-		printf ("Multiple cmd!\n");
 		fork_pipes(cmd, m);
-	}
 }

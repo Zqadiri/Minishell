@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/08/28 10:48:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/01 14:35:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void		free_parser(t_parser *p);
 
 int			check_builtin(t_cmd *cmd);
 int			setup_redirections(t_cmd *cmd, t_data *m);
-int			execution(t_cmd *cmd, char **env);
+int			execution(t_cmd *cmd);
 
 #endif

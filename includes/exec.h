@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/08/31 15:56:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/01 14:48:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,22 @@ int		env_builtin(void);
 int		exit_builtin(char **args);
 int		unset_builtin(char **args);
 int		export_builtin(char **arg);
+char	*add_char_to_word(char *word, char c);
+int		get_pwd(char **pwd);
+char	*return_value(const char *s, int c);
+int		error_path(const char *cmd, const char *path, int errnum);
+
+/*
+** Error Functions
+*/
+
+void	print_error(char *file_error);
 
 /*
 ** Utils
 */
 
 int		env_count(void); // ? move it to utils
-int		quit(void);
 int		len(char **env);
 int		alpha(char *key);
 int		dup_env_var(char **env);
@@ -123,5 +132,6 @@ void    exec_simple_pipe(t_cmd *cmd, t_data *m);
 
 void	exec_single_cmd(t_cmd *cmd, t_data *m);
 int		execute_regular_cmd(t_cmd *cmd, t_data *m);
+void	close_all_pipes(int **fd, int n);
 
 #endif

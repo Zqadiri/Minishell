@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/08/29 15:23:00 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/09/01 14:49:53 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,10 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/parser.c\
 					./sources/parsing/free.c
 					
-					
 LIBFT_PATH 		= 	./libft
 
-# SRCB			=	./sources/parsing/handle_quotes_bonus.c
-
-SRCS_EXEC		=	./sources/execution/builtins/cd_builtin.c\
+SRCS_EXEC		=	./sources/execution/builtins/cd/cd_builtin.c\
+					./sources/execution/builtins/cd/helpers.c\
 					./sources/execution/builtins/env_builtin.c\
 					./sources/execution/builtins/exit_builtin.c\
 					./sources/execution/builtins/pwd_builtin.c\
@@ -38,6 +36,7 @@ SRCS_EXEC		=	./sources/execution/builtins/cd_builtin.c\
 					./sources/execution/main_exec.c\
 					./sources/execution/redirections.c\
 					./sources/execution/n_pipes.c\
+					./sources/execution/error_functions.c\
 					./sources/execution/n_pipes_red.c\
 					./sources/execution/signals.c\
 					./sources/execution/utils.c
@@ -45,7 +44,6 @@ SRCS_EXEC		=	./sources/execution/builtins/cd_builtin.c\
 
 OBJS			= 	${SRCS:.c=.o}
 OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
-# OBJB			=	$(SRCB:.c=.o)
 # fix header
 
 INCLUDE 		= 	-I includes -L includes
@@ -58,9 +56,6 @@ all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
 				@$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g
-
-# bonus:			${OBJS} ${OBJB}
-# 				@$(CC) -o $(NAME) $(SRCS) $(SRCB) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g
 				
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}

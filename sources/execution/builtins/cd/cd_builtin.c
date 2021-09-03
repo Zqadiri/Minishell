@@ -27,7 +27,7 @@ static int	add_var_to_env(char *key, char *new_path)
 	{
 		tmp = ft_strjoin(key, "=");
 		tmp = ft_strjoin(tmp, new_path);
-		free(g_global->env_var[index]);
+		// free(g_global->env_var[index]);
 		g_global->env_var[index] = tmp;
 	}
 	return (1);

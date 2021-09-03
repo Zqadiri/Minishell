@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/17 20:50:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/01 14:35:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int main(int argc, char **argv, char **env)
 			tputs(tgoto(cm_cap , 0, 0), 0, putchar);
 			char *cm_cap2 = tgetstr("left", NULL);
 			tputs(tgoto(cm_cap2 , 0, 0), 0, putchar);
-			// rl_on_new_line();
 			printf("exit\n");
 			exit(g_global->exit_status);
 		}
@@ -114,12 +113,9 @@ int main(int argc, char **argv, char **env)
 		if (p)
 		{
 			ast = parse_pipe(p);
-			// printf("\n=============\n");
-			// print_tree(ast);
-			// printf("\n=============\n");
 			z = visitor(ast);
 			if (z)
-				execution(z, env);
+				execution(z);
 		}
 		// system("leaks minishell");
 	}
