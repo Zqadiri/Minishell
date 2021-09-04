@@ -6,34 +6,83 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/01 18:10:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/04 18:31:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	interrupt_program(int sig)
+/*
+** void rl_replace_line (const char *text, int clear_undo)
+** Replace the contents of rl_line_buffer with text. The point and mark are preserved, if possible.
+** If clear_undo is non-zero, the undo list associated with the current line is cleared.
+*/
+
+/*
+** int rl_on_new_line (void)
+** Tell the update functions that we have moved onto
+** a new (empty) line, usually after outputting a newline.
+*/
+
+/*
+** void rl_redisplay (void)
+** Change what's displayed on the screen to reflect the current contents of rl_line_buffer.
+*/
+
+void	exit_child_process(int signum)
 {
-	(void)sig;
-	printf("ctrl + c\n");
+	if (signum == SIGINT)
+	{
+		ft_putchar_fd('\n', 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (signum == SIGQUIT)
+	{
+		ft_putchar_fd('\r', 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
-void	quit_program(int sig)
+void	is_child_process(int signum)
 {
-	(void)sig;
-	printf("ctrl + \\ \n");
+	if (!kill(g_global->pid, signum))
+	{
+		if (signum == SIGQUIT)
+		{
+			ft_putstr_fd("Quit\n", 1);
+			g_global->exit_status = 131;
+		}
+		else if (signum == SIGINT)
+		{
+			ft_putchar_fd('\n', 1);
+			g_global->exit_status = 130;
+		}
+	}
+	else
+		exit_child_process(signum);
 }
 
-void	terminate_process(int sig)
+void	sigint_handler(int signum)
 {
-	(void)sig;
-	printf("ctrl + d\n");
-}
-
-int	check_signals(void)
-{
-	signal(SIGINT, interrupt_program);
-	signal(SIGQUIT, quit_program);
-	signal(SIGTERM, terminate_process);
-	return (1);
+	if ((signum == SIGINT || signum == SIGQUIT) && g_global->pid != 0)
+		is_child_process(signum);
+	else
+	{
+		if (signum == SIGINT)
+		{
+			ft_putchar_fd('\n', 2);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		else if (signum == SIGQUIT)
+		{
+			ft_putchar_fd('\r', 2);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/02 17:15:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/04 13:39:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 	char *possible_path;
 
 	i = 0;
+	printf ("in: %d -> out : %d\n", in , out);
 	if (is_builtin(cmd))
 	{
 		if (in != 0)
@@ -31,7 +32,7 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 			close(out);
 		}
 		check_builtin(cmd);
-		restore_std(m->saved_stdout, m->saved_stdin);
+		// restore_std(m->saved_stdout, m->saved_stdin);
 		return (1);
 	}
 	else if ((m->pid = fork()) == 0)
@@ -68,16 +69,17 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	int		i;
 	int		in;
 
-	i = -1;
+	i = 0;
 	in = 0;
 	pipe_all(cmd, m);
-	while (++i < cmd->nbr_cmd - 1)
+	while (i < cmd->nbr_cmd - 1)
 	{
-		exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i]);
+		g_global->pid = exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i]);
 		close(m->pipe_fd[i][1]);
 		in = m->pipe_fd[i][0];
+		i++;
 	}
-	exec_process(in, 1, &cmd[i], &m[i]);
+	g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
 	return (1);
 }
 
@@ -96,7 +98,8 @@ void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 		init_m(&m[i]);
 	fork_cmd_pipes(cmd, m);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
-	waitpid(-1, &status, WCONTINUED | WUNTRACED);
+	g_global->pid =0;
+	waitpid(-1, &status, WCONTINUED);
 	if (WIFEXITED(status))
 			g_global->exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))

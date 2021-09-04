@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/02 17:01:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/04 13:38:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	pipe_all(t_cmd *cmd, t_data *m)
 		m->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
 		if (pipe(m->pipe_fd[i]))
 			return (0);
+		printf ("%d : %d -> %d\n", i, m->pipe_fd[i][0], m->pipe_fd[i][1]);
 		i++;
 	}
 	return (1);
@@ -207,11 +208,11 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	while (++i < cmd->nbr_cmd - 1)
 	{
-		exec_proc(in, m->pipe_fd[i][1], &cmd[i], &m[i], i);
+		g_global->pid = exec_proc(in, m->pipe_fd[i][1], &cmd[i], &m[i], i);
 		close(m->pipe_fd[i][1]);
 		in = m->pipe_fd[i][0];
 	}
-	exec_proc(in, 1, &cmd[i], &m[i], i);
+	g_global->pid = exec_proc(in, 1, &cmd[i], &m[i], i);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
 	waitpid(-1, &status, WCONTINUED | WUNTRACED);
 	if (WIFEXITED(status))
@@ -246,4 +247,5 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 	}
 	else
 		fork_pipes(cmd, m);
+	g_global->pid = 0;
 }

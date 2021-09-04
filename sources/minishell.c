@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/01 14:35:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/04 16:03:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_lexer	*init_l(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
+	signal(SIGINT, sigint_handler);
+	// signal(SIGTERM, terminate_process);
 	return (l);
 }
 
@@ -66,6 +68,7 @@ int	is_white_space(char *buff)
 		return (1);
 	return (0);
 }
+
 
 int main(int argc, char **argv, char **env)
 {
@@ -87,7 +90,7 @@ int main(int argc, char **argv, char **env)
 		l = NULL;
 		l = init_l(l);
 		buff = NULL;
-		buff = readline("minishell-1.0> ");
+		buff = readline("minishell$> ");
 		if (!buff)
 		{
 			char *cm_cap = tgetstr("left", NULL);

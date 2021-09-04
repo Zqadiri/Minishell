@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/01 14:35:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:55:21 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	is_builtin(t_cmd *cmd)
 
 	args = cmd->argvs;
 	if ((ft_strequ(args[0], "pwd")) || (ft_strequ(args[0], "echo")) || \
-	(ft_strequ(args[0], "env")) || (ft_strequ(args[0], "env")) || \
+	(ft_strequ(args[0], "env")) || (ft_strequ(args[0], "exit")) || \
 	(ft_strequ(args[0], "export")) || (ft_strequ(args[0], "unset")) || \
-	(ft_strequ(args[0], "cd")) || (ft_strequ(args[0], "exit")))
+	(ft_strequ(args[0], "cd")))
 		return (1);
 	return (0);
 }
