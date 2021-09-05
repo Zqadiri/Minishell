@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/04 13:16:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/05 14:41:58 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "./exec.h"
 # include "lexer.h"
 # include "parser.h"
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 

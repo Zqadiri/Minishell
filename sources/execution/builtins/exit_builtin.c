@@ -6,19 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/05 12:36:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/05 14:52:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-int	ft_isspace(char c)
-{
-	if (c == '\f' || c == '\t' || c == '\n' || c == '\r'
-		|| c == '\v' || c == ' ')
-		return (1);
-	return (0);
-}
 
 /*
 ** errors:
@@ -28,30 +20,60 @@ int	ft_isspace(char c)
 **
 */
 
-void	exit_helper(char *arg)
+long long	atoi_exit(const char *str)
+{
+	int					signe;
+	unsigned long long	r;
+
+	while (*str >= 9 && *str <= 32)
+		str++;
+	signe = 1;
+	if (*str == '-')
+	{
+		signe = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	r = 0;
+	while (*str >= 48 && *str <= 57)
+	{
+		r = r * 10 + *str - '0';
+		if ((unsigned long long )r > LLONG_MAX)
+		{
+			ft_putendl_fd("exit", 1);
+			exit(255);
+		}
+		str++;
+	}
+	r = r * signe;
+	return (r);
+}
+
+void	exit_number(char *arg)
 {
 	int	i;
 
 	i = 0;
-	while (arg[i] != '\0')
+	if (arg[i] != '\0')
 	{
-		if (arg[0] == '-' || arg[0] == '+')
+		while (arg[i])
+		{
+			if (arg[0] == '-' || arg[0] == '+')
+				i++;
+			if (arg[i] < 48 || arg[i] > 57)
+			{
+				ft_putendl_fd("exit", 1);
+				ft_putstr_fd("minishell: exit: ", 2);
+				ft_putstr_fd(arg, 2);
+				ft_putendl_fd(": numeric argument required", 2);
+				exit (255);
+			}
 			i++;
-		if (arg[i] < 48 || arg[i] > 57)
-		{
-			ft_putendl_fd("exit", 1);
-			ft_putstr_fd("minishell: exit: ", 2);
-			ft_putstr_fd(arg, 2);
-			ft_putendl_fd(": numeric argument required", 2);
-			exit (255);
-		}
-		else
-		{
-			// printf("%d\n", ft_atoi(arg));
-			ft_putendl_fd("exit", 1);
-			exit(ft_atoi(arg));
-		}	
-	}	
+		}		
+	}
+	ft_putendl_fd("exit", 1);
+	exit(atoi_exit(arg));	
 }
 
 int		exit_builtin(char **args)
@@ -70,7 +92,7 @@ int		exit_builtin(char **args)
 			ft_putendl_fd("exit", 1);
 			exit(0);
 		}
-		exit_helper(args[1]);
+		exit_number(args[1]);
 	}
 	else
 	{
