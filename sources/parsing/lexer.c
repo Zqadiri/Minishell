@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 19:07:19 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 23:35:53 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 t_token	*ret_char(t_lexer *l, char c, t_token_type type)
 {
 	char	*str;
+	t_token	*t;
 
 	str = malloc(sizeof(char) * 2);
 	if (!str)
 		return (NULL);
 	str[0] = c;
 	str[1] = '\0';
-	t_token *t;
 	t = ret_str(l, str, type);
 	free(str);
 	return (t);

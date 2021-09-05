@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 18:46:39 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 00:16:27 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	init_cmdargs(t_ast *ast, t_cmd *z, int n)
 {
 	z[n].redir_nbr = ast->redir_nbr;
 	z[n].args_size = ast->args_size - (z[n].redir_nbr * 2) - 1;
-	z[n].argvs = malloc(sizeof(char *) * (z[n].args_size + 1));
 	z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
+	if (z[n].args_size > 0)
+		z[n].argvs = malloc(sizeof(char *) * (z[n].args_size + 1));
 }
 
 t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
