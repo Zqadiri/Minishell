@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 17:19:09 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/05 16:05:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l)
 		t->value = NULL;
 	t->type = type;
 	t->is_quoted = l->is_quoted;
+	// free(s); //? bus on unknown address
 	return (t);
 }
 
@@ -57,6 +58,7 @@ char	*ft_joinchar(char *s, char c)
 		str[i] = s[i];
 	str[i] = c;
 	str[i + 1] = '\0';
+	free(s);
 	return (str);
 }
 
@@ -71,4 +73,14 @@ int	is_valid_id(char *str)
 			return (0);
 	}
 	return (1);
+}
+
+char	*ft_joinfree(char *s1, char *s2)
+{
+	char	*s;
+
+	s = ft_strjoin(s1, s2);
+	free(s1);
+	free(s2);
+	return (s);
 }

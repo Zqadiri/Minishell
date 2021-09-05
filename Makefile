@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
+#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/01 14:49:53 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/09/05 16:16:39 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS 			=	./sources/minishell.c\
 					./sources/parsing/ast.c\
 					./sources/parsing/utils.c\
 					./sources/parsing/parser.c\
+					./sources/parsing/realloc_ast.c\
 					./sources/parsing/free.c
 					
 LIBFT_PATH 		= 	./libft
@@ -48,7 +49,7 @@ OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
 INCLUDE 		= 	-I includes -L includes
 CC				= 	gcc
-FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g -fsanitize=address
+FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 

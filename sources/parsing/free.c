@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 16:09:10 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/05 16:14:00 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	free_tree(t_ast *ast)
 				free_tree(ast->pipecmd_values[j]);
 		}
 		is_notempty(ast->pipecmd_values);
-		// is_notempty(ast);
 	}
 	if (ast->type == arg_ast)
 	{
@@ -48,24 +47,6 @@ void	free_tree(t_ast *ast)
 		is_notempty(ast->args);
 	}
 }
-
-// void	free_tree3(t_token **token, int size)
-// {
-// 	int j;
-
-// 	j = 0;
-// 	printf("size = %d\n", size);
-// 	while (j < size - 1)
-// 	{
-// 		printf("j = %d\n", j);
-// 		printf("token[%d] = %s\n", j, token[j]->value);
-// 		is_notempty(token[j]->value);
-// 		printf("token num %d is freed\n", j);
-// 		j++;
-// 	}
-// 	is_notempty(token);
-// 	printf("out\n");
-// }
 
 void	free_tree2(t_ast **ast)
 {
@@ -108,4 +89,16 @@ void	free_parser(t_parser *p)
 	}
 	free(p);
 	p = NULL;
+}
+
+void	free_cmd(t_cmd *z)
+{
+	int	i;
+
+	i = -1;
+	while (z->argvs[++i])
+		is_notempty(z->argvs[i]);
+	is_notempty(z->argvs);
+	is_notempty(z->r);
+	is_notempty(z);
 }

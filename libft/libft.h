@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 15:05:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/04 17:57:13 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
+// void				ft_putnbr_fd(int n, int fd);
+void				ft_putnbr_fd(long long n, int fd);
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **aslt, t_list *new);
 int					ft_lstsize(t_list *lst);

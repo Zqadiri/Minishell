@@ -3,31 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 16:17:12 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/05 16:20:31 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	print_msg(char *str, char *var)
-{
-	printf("%s", str);
-	if (var)
-	{
-		printf(" `");
-		printf("%s", var);
-		printf("'\n");
-	}
-	g_global->exit_status = 258;
-}
-
 void	readchar(t_lexer *l)
 {
 	if (!l || !l->buffer)
-		printf("error\n");
+		return ;
 	if (l->readpos >= l->bufsize)
 		l->c = EOF;
 	else
@@ -50,9 +38,7 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 {
 	if (type == greater || type == here_doc)
 		readchar(l);
-	if (type == great || type == pip || type == here_doc
-		|| type == greater || type == less)
-		readchar(l);
+	readchar(l);
 	return (init_token(type, s, l));
 }
 

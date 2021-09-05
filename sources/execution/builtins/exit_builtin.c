@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/16 12:29:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/05 12:25:36 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int	ft_isspace(char c)
 ** errors:
 ** greater than LONG_MIN   -9223372036854775808
 ** greater than LONG_MAX
-**  non numeric arg
-**
+** non numeric arg
+** more then one arg
 */
+
+// unsigned ll
 
 long long	ft_atoi_exit(char *str)
 {

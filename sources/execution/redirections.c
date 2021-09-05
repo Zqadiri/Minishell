@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/01 15:03:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:01:08 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	exec_single_cmd(t_cmd *cmd, t_data *m)
 		}
 		if (child_pid == 0)
 		{
+			//*
 			if (!ft_strcmp(cmd->argvs[0], "\0"))
 				exit(0);
 			possible_path = find_path (cmd->argvs[0], m->path);
