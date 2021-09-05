@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/04 15:00:14 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/09/05 12:28:41 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) -o  $(NAME) -lreadline -ltermcap -L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
+				@$(CC) -o  $(NAME) -lreadline -ltermcap -L /Users/$(USER)/.brown/opt/readline/lib -I /Users/$(USER)/.brown/opt/readline/include $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
 				
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
@@ -66,7 +66,7 @@ fclean:			libft_fclean clean
 re:				fclean all
 
 run:			re
-				./minishell
+				./$(NAME)
 
 # make other makefiles compile with the -C flag
 # The -C flag makes you go to the appropriate path and do the asked command

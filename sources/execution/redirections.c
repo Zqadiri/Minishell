@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/01 15:03:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/05 12:24:37 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 	char	*possible_path;
 	int		fd;
 
-	printf ("in regular !\n");
+	// printf ("in regular !\n");
 	if (is_builtin(cmd))
 	{
 		check_builtin(cmd);
