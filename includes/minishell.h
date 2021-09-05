@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/04 18:30:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 17:42:10 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "./exec.h"
 # include "lexer.h"
 # include "parser.h"
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
@@ -33,6 +34,7 @@
 typedef struct s_global
 {
 	char	**env_var;
+	int		pid;
 	int		exit_status;
 }	t_global;
 

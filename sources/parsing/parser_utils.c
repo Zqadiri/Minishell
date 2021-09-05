@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 15:33:49 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 19:34:05 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ t_parser	*init_parser(t_lexer *l)
 	{
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
+		free(p->lexer->buffer);
+		free(p->curr_token->value);
+		free(p);
 		return (NULL);
 	}
 	if (p->curr_token->type == illegal)

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 16:20:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 19:07:19 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 	if (type == greater || type == here_doc)
 		readchar(l);
 	readchar(l);
+	// t_token *t;
+	// t = init_token(type, s, l);
+	// free(s);
+	// return (t);
 	return (init_token(type, s, l));
 }
 
@@ -51,7 +55,10 @@ t_token	*ret_char(t_lexer *l, char c, t_token_type type)
 		return (NULL);
 	str[0] = c;
 	str[1] = '\0';
-	return (ret_str(l, str, type));
+	t_token *t;
+	t = ret_str(l, str, type);
+	free(str);
+	return (t);
 }
 
 t_token	*get_next_token(t_lexer *l)

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 16:05:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 17:47:45 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l)
 	if (!t)
 		return (NULL);
 	if (s)
+	{
 		t->value = ft_strdup(s);
+		// free(s);//? bus on unknown address
+	}
 	else
 		t->value = NULL;
 	t->type = type;
 	t->is_quoted = l->is_quoted;
-	// free(s); //? bus on unknown address
 	return (t);
 }
 

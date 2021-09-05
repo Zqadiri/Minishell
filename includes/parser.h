@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 16:30:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 18:49:20 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		is_notempty(void *ptr);
 void		free_tree(t_ast *ast);
 void		free_tree2(t_ast **ast);
 void		free_parser(t_parser *p);
+void		free_parser2(t_parser *p);
 void		free_cmd(t_cmd *z);
 
 

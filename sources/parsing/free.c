@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 16:14:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 19:22:21 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_tree(t_ast *ast)
 			if (ast->pipecmd_values[j])
 				free_tree(ast->pipecmd_values[j]);
 		}
-		is_notempty(ast->pipecmd_values);
+		free(ast->pipecmd_values);
 	}
 	if (ast->type == arg_ast)
 	{
@@ -44,8 +44,9 @@ void	free_tree(t_ast *ast)
 			is_notempty(ast->args[k]->value);
 			is_notempty(ast->args[k]);
 		}
-		is_notempty(ast->args);
+		free(ast->args);
 	}
+	free(ast);
 }
 
 void	free_tree2(t_ast **ast)
@@ -68,6 +69,18 @@ void	free_tree2(t_ast **ast)
 }
 
 void	free_parser(t_parser *p)
+{
+	if (p->lexer)
+	{
+		is_notempty(p->lexer->buffer);
+		free(p->lexer);
+		p->lexer = NULL;
+	}
+	free(p);
+	p = NULL;
+}
+
+void	free_parser2(t_parser *p)
 {
 	if (p->lexer)
 	{
@@ -98,7 +111,7 @@ void	free_cmd(t_cmd *z)
 	i = -1;
 	while (z->argvs[++i])
 		is_notempty(z->argvs[i]);
-	is_notempty(z->argvs);
+	free(z->argvs);
 	is_notempty(z->r);
-	is_notempty(z);
+	free(z);
 }

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 16:15:59 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 19:33:48 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_ast	*parse_args_helper(t_parser *p)
 		{
 			print_msg("minishell: syntax error near unexpected token 0",
 				p->curr_token->value);
-			free_parser(p);
+			free_parser2(p);
+			free_tree(ast);
 			return (NULL);
 		}
 		ast->args_size += 1;
@@ -39,13 +40,16 @@ t_ast	*parse_args_helper(t_parser *p)
 	return (ast);
 }
 
-void	init_parse_args(t_ast *ast, t_parser *p)
+int	init_parse_args(t_ast *ast, t_parser *p)
 {
 	ast->args_size += 1;
 	ast->args = realloc_ast_args(ast, ast->args_size);
 	p->prev_token = p->curr_token;
 	p->curr_token = get_next_token(p->lexer);
 	ast->args[ast->args_size - 1] = check_token(p, ast);
+	if (!ast->args[ast->args_size - 1])
+		return (0);
+	return (1);
 }
 
 t_ast	*parse_args(t_parser *p)
@@ -57,9 +61,11 @@ t_ast	*parse_args(t_parser *p)
 		return (NULL);
 	while (p->curr_token->type != eof)
 	{
-		init_parse_args(ast, p);
-		if (!ast->args[ast->args_size - 1])
-			return (NULL);
+		if (!init_parse_args(ast, p))
+		{
+			// free_tree(ast); //!READ memory access
+			return  (NULL);
+		}
 		if (ast->args[ast->args_size - 1]->type == pip)
 		{
 			p->prev_token = p->curr_token;
@@ -92,7 +98,8 @@ t_ast	*parse_pipe(t_parser *p)
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(p);
 		if (!ast->pipecmd_values[ast->pipecmd_size - 1])
 		{
-			free_parser(p);
+			free_parser2(p);
+			free(*ast->pipecmd_values);
 			free_tree(ast);
 			return (NULL);
 		}
@@ -102,6 +109,6 @@ t_ast	*parse_pipe(t_parser *p)
 			ast->pipecmd_values = realloc_ast_node(ast, ast->pipecmd_size + 1);
 		}
 	}
-	// free_parser(p);
+	free_parser(p);
 	return (ast);
 }

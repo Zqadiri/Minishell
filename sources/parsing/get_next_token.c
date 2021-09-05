@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 16:05:38 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 17:59:54 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,17 @@ t_token	*string_token(t_lexer *l)
 		str = ft_joinfree(str, s);
 		free(temp2);
 		if (l->c == 32)
-			return (init_token(id, str, l));
+		{
+			t_token *t;
+			t = init_token(id, str, l);
+			free(str);
+			return (t);
+			// return (init_token(id, str, l));
+		}
 	}
-	return (init_token(id, str, l));
+	t_token *tok;
+	tok = init_token(id, str, l);
+	free(str);
+	return (tok);
+	// return (init_token(id, str, l));
 }

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/05 17:39:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 19:35:49 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	print_tree(t_ast *ast)
 
 	if (!ast)
 		return ;
-	printf("ast->type = [%u]\n", ast->type);
+	// printf("ast->type = [%u]\n", ast->type);
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
-		printf("f:print_tree pipe size = [%d]\n", ast->pipecmd_size);
+		// printf("f:print_tree pipe size = [%d]\n", ast->pipecmd_size);
 		while (++j < ast->pipecmd_size)
 		{
 			// printf("next type => [%u]\n", ast->pipecmd_values[j]->type);
@@ -52,6 +52,8 @@ t_lexer	*init_l(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
+	//? signal(SIGINT, sigint_handler);
+	// signal(SIGTERM, terminate_process);
 	return (l);
 }
 
@@ -66,6 +68,7 @@ int	is_white_space(char *buff)
 		return (1);
 	return (0);
 }
+
 
 int main(int argc, char **argv, char **env)
 {
@@ -87,7 +90,7 @@ int main(int argc, char **argv, char **env)
 		l = NULL;
 		l = init_l(l);
 		buff = NULL;
-		buff = readline("minishell-1.0> ");
+		buff = readline("minishell$> ");
 		if (!buff)
 		{
 			char *cm_cap = tgetstr("left", NULL);
@@ -97,7 +100,7 @@ int main(int argc, char **argv, char **env)
 			printf("exit\n");
 			exit(g_global->exit_status);
 		}
-		else if (ft_strcmp(buff, "\0"))
+		else //if (ft_strcmp(buff, "\0"))
 		{
 			add_history(buff);
 			if (!is_white_space(buff))
@@ -105,10 +108,11 @@ int main(int argc, char **argv, char **env)
 				l->buffer = ft_strdup(buff);
 				l->bufsize = ft_strlen(l->buffer);
 			}
+			free (buff);
 		}
-		else
-			continue;
-		free (buff);
+		// else
+		// 	continue;
+		
 		p = init_parser(l);
 		if (p)
 		{
@@ -164,8 +168,10 @@ int main(int argc, char **argv, char **env)
 
 
 
-//Todo :leaks
-//Todo lexer.c -> line 30 - ast.c -> line 97  -  utils.c -> line 33 -  parser.c -> line 142
-
 
 //* stty -echoctl
+
+
+//! Leaks : 
+//! cmd with pipeline 
+//! syntax error 

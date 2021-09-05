@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/05 16:16:39 by iidzim           ###   ########.fr        #
+#    Updated: 2021/09/05 19:34:09 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,14 @@ OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
 INCLUDE 		= 	-I includes -L includes
 CC				= 	gcc
-FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g
+FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g #-fsanitize=address
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) -o $(NAME) $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS) $(FLAGS) -g
+				@$(CC) -o  $(NAME) -lreadline -ltermcap -L /Users/$(USER)/.brown/opt/readline/lib -I /Users/$(USER)/.brown/opt/readline/include $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
 				
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
@@ -67,7 +67,7 @@ fclean:			libft_fclean clean
 re:				fclean all
 
 run:			re
-				./minishell
+				./$(NAME)
 
 # make other makefiles compile with the -C flag
 # The -C flag makes you go to the appropriate path and do the asked command

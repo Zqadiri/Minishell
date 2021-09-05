@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/03 17:36:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 17:41:03 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	is_builtin(t_cmd *cmd)
 
 	args = cmd->argvs;
 	if ((ft_strequ(args[0], "pwd")) || (ft_strequ(args[0], "echo")) || \
-	(ft_strequ(args[0], "env")) || (ft_strequ(args[0], "env")) || \
+	(ft_strequ(args[0], "env")) || (ft_strequ(args[0], "exit")) || \
 	(ft_strequ(args[0], "export")) || (ft_strequ(args[0], "unset")) || \
-	(ft_strequ(args[0], "cd")) || (ft_strequ(args[0], "exit")))
+	(ft_strequ(args[0], "cd")))
 		return (1);
 	return (0);
 }

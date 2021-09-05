@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/04 11:01:08 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 17:41:10 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 	char	*possible_path;
 	int		fd;
 
-	printf ("in regular !\n");
+	// printf ("in regular !\n");
 	if (is_builtin(cmd))
 	{
 		check_builtin(cmd);

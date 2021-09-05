@@ -6,24 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/05 12:25:36 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 17:40:58 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-void	ft_exit(void)
-{
-	exit(EXIT_SUCCESS);
-}
-
-int	ft_isspace(char c)
-{
-	if (c == '\f' || c == '\t' || c == '\n' || c == '\r'
-		|| c == '\v' || c == ' ')
-		return (1);
-	return (0);
-}
 
 /*
 ** errors:
@@ -33,79 +20,84 @@ int	ft_isspace(char c)
 ** more then one arg
 */
 
-// unsigned ll
-
-long long	ft_atoi_exit(char *str)
+long long	atoi_exit(const char *str)
 {
-	int			i;
-	int			j;
-	long		neg;
-	long long	result;
+	int					signe;
+	unsigned long long	r;
 
-	neg = 1;
-	i = 0;
-	j = 0;
-	result = 0;
-	if (str[i] && (str[i] == '-' || str[i] == '+'))
-		if (str[i++] == '-')
-			neg *= -1;
-	while (str[i] && (ft_isspace(str[i]) || str[i] == '0'))
-		i++;
-	while (str[i] >= '0' && str[i] <= '9' && ++j)
+	while (*str >= 9 && *str <= 32)
+		str++;
+	signe = 1;
+	if (*str == '-')
 	{
-		result = (result * 10) + (str[i] - 48);
-		i++;
+		signe = -1;
+		str++;
 	}
-	return (result * neg);
+	else if (*str == '+')
+		str++;
+	r = 0;
+	while (*str >= 48 && *str <= 57)
+	{
+		r = r * 10 + *str - '0';
+		if ((unsigned long long )r > LLONG_MAX)
+		{
+			ft_putendl_fd("exit", 1);
+			exit(255);
+		}
+		str++;
+	}
+	r = r * signe;
+	return (r);
 }
 
-void	exit_error(char *arg, char **args)
-{
-	(void)args;
-	ft_putstr_fd("exit", 2);
-	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": numeric argument required\n", 2);
-	ft_exit();
-}
-
-void	check_arg(char *arg, char **args)
+void	exit_number(char *arg)
 {
 	int	i;
 
 	i = 0;
-	if (arg[i] == '-' || arg[i] == '+')
-		i++;
-	while (arg[i])
+	if (arg[i] != '\0')
 	{
-		if (arg[i] != '\f' && arg[i] != '\t' && arg[i] != '\r'
-			&& arg[i] != '\v' && arg[i] != ' ')
+		while (arg[i])
 		{
+			if (arg[0] == '-' || arg[0] == '+')
+				i++;
 			if (arg[i] < 48 || arg[i] > 57)
-				exit_error(arg, args);
-		}
-		i++;
+			{
+				ft_putendl_fd("exit", 1);
+				ft_putstr_fd("minishell: exit: ", 2);
+				ft_putstr_fd(arg, 2);
+				ft_putendl_fd(": numeric argument required", 2);
+				exit (255);
+			}
+			i++;
+		}		
 	}
+	ft_putendl_fd("exit", 1);
+	exit(atoi_exit(arg));	
 }
 
-int	exit_builtin(char **args)
+int		exit_builtin(char **args)
 {
-	int			i;
-	long long	exit_code;
-
-	i = 0;
-	if (!args[1])
-		ft_exit();
-	check_arg(args[1], args);
-	while (args[i])
-		i++;
-	if (i > 2)
+	if (args[2] != NULL)
 	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		ft_exit();
+		ft_putendl_fd("exit", 1);
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		g_global->exit_status = 1;
+		return (0);
+	}
+	else if (args[1])
+	{
+		if (!ft_strcmp(args[1], "-9223372036854775808"))
+		{
+			ft_putendl_fd("exit", 1);
+			exit(0);
+		}
+		exit_number(args[1]);
 	}
 	else
-		exit_code = ft_atoi_exit(args[1]);
-	ft_exit();
+	{
+		ft_putendl_fd("exit", 1);
+		exit (0);
+	}
 	return (1);
 }

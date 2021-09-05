@@ -1,4 +1,5 @@
 //* echo *//
+!! 
 echo echo
 echo rhobebou
 echo stop barking
@@ -67,7 +68,7 @@ export | grep "OLDPWD"
 export | grep "PWD"
 export $?
 export TEST ; echo $TEST
-export TEST= ; echo $TEST  !!!!!!!! READ memory access -> ft_getenv lexer_utils.c:45
+export TEST= ; echo $TEST
 export TEST=123 ; echo $TEST
 export ___TEST=123 ; echo $TEST
 export ""=""
@@ -162,9 +163,9 @@ unset TEST | cat -e
 echo test | cat -e | cat -e | cat -e
 echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e
 ls -la | grep "."
+cat /dev/random | head -c 10
 
 !!!!!! Error
-cat /dev/random | head -c 10
 cat /dev/random | head -c 10 | wc -l
 cat /dev/random | head -c 10 | wc -c
 
