@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 00:43:34 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 12:15:13 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_lexer	*init_l(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
-	signal(SIGINT, sigint_handler);
+	// ?signal(SIGINT, sigint_handler);
 	// signal(SIGTERM, terminate_process);
 	return (l);
 }
@@ -121,8 +121,10 @@ int main(int argc, char **argv, char **env)
 			{
 				z = visitor(ast);
 				if (z)
-					execution(z);
+				{
+					// execution(z);
 					free_cmd(z);
+				}
 			}
 		}
 		system("leaks minishell");

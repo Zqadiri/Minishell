@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 00:38:58 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 12:16:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ int	init_parse_args(t_ast *ast, t_parser *p)
 	p->curr_token = get_next_token(p->lexer);
 	ast->args[ast->args_size - 1] = check_token(p, ast);
 	if (!ast->args[ast->args_size - 1])
-	{
-		// free(p->curr_token->value); //!pointer being freed was not allocated
-		// free(p->curr_token);
 		return (0);
-	}
 	return (1);
 }
 
@@ -67,7 +63,6 @@ t_ast	*parse_args(t_parser *p)
 	{
 		if (!init_parse_args(ast, p))
 		{
-			// free_parser(p);
 			free(ast->args);
 			free(ast);
 			return  (NULL);
@@ -82,10 +77,7 @@ t_ast	*parse_args(t_parser *p)
 			break ;
 	}
 	if (!syntax_error(p))
-	{
-		// free_parser2(p);
 		return (NULL);
-	}
 	return (ast);
 }
 

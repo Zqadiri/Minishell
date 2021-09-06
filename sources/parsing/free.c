@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 00:12:26 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 12:17:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ void	free_tree2(t_ast **ast)
 		is_notempty(ast[j]);
 	}
 	is_notempty(ast);
+}
+
+void	free_tree3(t_token **token, int size)
+{
+	int j;
+
+	j = -1;
+	while (++j < size - 1)
+		is_notempty(token[j]->value);
+	is_notempty(token);
 }
 
 void	free_parser(t_parser *p)

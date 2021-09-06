@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 00:41:50 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 11:55:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,14 @@ t_parser	*init_parser(t_lexer *l)
 			p->curr_token->value);
 		free(p->lexer->buffer);
 		free(p->curr_token->value);
-		free(p->curr_token); //?
+		free(p->curr_token);
 		free(p);
 		free(l);
 		return (NULL);
 	}
 	p->prev_token = p->curr_token;
 	if (p->curr_token->type == illegal)
-	{
-		// free(l);
 		return (NULL);
-	}
 	return (p);
 }
 
@@ -64,7 +61,7 @@ char	*get_stop_word(t_parser *p)
 			i--;
 		word = ft_substr(s, i + 1, p->lexer->curpos - i - 2);
 	}
-	printf("word = [%s]\n", word);
+	free(s);
 	return (word);
 }
 
