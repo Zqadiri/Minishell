@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 12:16:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 13:54:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char		*add_char_to_word(char *word, char c);
 int			get_pwd(char **pwd);
 char		*return_value(const char *s, int c);
 int			error_path(const char *cmd, const char *path, int errnum);
-void		error_exit(char *arg, int id);
+void		error_exit(char *arg);
 long long	atoi_exit(const char *str);
 /*
 ** Error Functions

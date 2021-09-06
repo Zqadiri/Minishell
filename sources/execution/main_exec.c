@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/05 17:41:03 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 17:07:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	dup_env_var(char **env)
 	g_global->env_var = (char **)malloc(sizeof(char *) * (len(env) + 1));
 	if (g_global->env_var == NULL)
 		exit(EXIT_FAILURE);
-	while (env[i] && g_global->env_var[i])
+	while (env[i])
 	{
 		g_global->env_var[i] = ft_strdup(env[i]);
 		i++;
@@ -58,6 +58,7 @@ char	*find_path(char	*cmd, char **path)
 	int		fd;
 
 	i = -1;
+	fd = 0;
 	if (path == NULL)
 		return (NULL);
 	while (path[++i])
@@ -68,7 +69,7 @@ char	*find_path(char	*cmd, char **path)
 		free(temp);
 		fd = open(possible_path, O_RDONLY);
 		if (fd >= 0)
-			return (possible_path);
+			return (possible_path);			
 	}
 	return (NULL);
 }
@@ -115,7 +116,7 @@ int	execution(t_cmd *cmd)
 	}
 	else
 		exec_multiple_cmd(cmd, m);
-	restore_std(m->saved_stdout, m->saved_stdin);
-	free(m);
+	// restore_std(m->saved_stdout, m->saved_stdin);
+	// free(m);
 	return (1);
 }

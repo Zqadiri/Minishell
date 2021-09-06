@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 13:35:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:47:04 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int main(int argc, char **argv, char **env)
 	dup_env_var(env);
 	g_global->exit_status = 0;
 	signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, sigint_handler);
 	while(1)
 	{
 		l = NULL;
@@ -122,11 +123,12 @@ int main(int argc, char **argv, char **env)
 				z = visitor(ast);
 				if (z)
 				{
-					// execution(z);
+					execution(z);
 					free_cmd(z);
 				}
 			}
 		}
+		// system("leaks minishell");
 	}
 	return (0);
 }
