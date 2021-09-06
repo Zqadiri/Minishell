@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/17 17:56:16 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 11:55:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,18 @@ t_parser	*init_parser(t_lexer *l)
 		return (NULL);
 	p->lexer = l;
 	p->curr_token = get_next_token(l);
-	p->prev_token = p->curr_token;
 	if (p->curr_token->type == pip)
 	{
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
-		// free_parser(p); //!heap-use-after-free
+		free(p->lexer->buffer);
+		free(p->curr_token->value);
+		free(p->curr_token);
+		free(p);
+		free(l);
 		return (NULL);
 	}
+	p->prev_token = p->curr_token;
 	if (p->curr_token->type == illegal)
 		return (NULL);
 	return (p);
@@ -57,6 +61,7 @@ char	*get_stop_word(t_parser *p)
 			i--;
 		word = ft_substr(s, i + 1, p->lexer->curpos - i - 2);
 	}
+	free(s);
 	return (word);
 }
 
@@ -82,6 +87,8 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 		{
 			print_msg("minishell: syntax error near unexpected token 2",
 				p->curr_token->value);
+			// free(p->curr_token->value); //!
+			// free(p->curr_token);
 			return (NULL);
 		}
 		ast->redir_nbr += 1;

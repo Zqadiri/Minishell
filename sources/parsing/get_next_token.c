@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 15:54:42 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 00:31:54 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ int	multi_lines(t_lexer *l, char c)
 {
 	if (l->c == EOF)
 	{
-		if (l->c == EOF)
-		{
-			if (c == DQUOTE)
-				print_msg("minishell: syntax error expected \"\n", NULL);
-			else
-				print_msg("minishell: syntax error expected \'\n", NULL);
-		}
+		if (c == DQUOTE)
+			print_msg("minishell: syntax error expected \"\n", NULL);
+		else
+			print_msg("minishell: syntax error expected \'\n", NULL);
 		l->multi_line = 1;
 		return (0);
 	}
@@ -32,27 +29,21 @@ int	multi_lines(t_lexer *l, char c)
 char	*tokenize_text(t_lexer *l, char *s)
 {
 	char	*str;
-	char	*temp;
 
 	str = ft_strdup(s);
 	while (l->c != EOF && !ft_strchar("|>< \"\'", l->c))
 	{
-		temp = str;
 		while (l->c == 32 && l->c != EOF)
 			readchar(l);
 		if (l->c == DOLLAR)
-			str = ft_strjoin(str, envar_token(l));
+			str = ft_joinfree(str, envar_token(l));
 		else if (l->c == EOF)
-		{
-			free(temp);
 			return (str);
-		}
 		else
 		{
 			str = ft_joinchar(str, l->c);
 			readchar(l);
 		}
-		free(temp);
 	}
 	return (str);
 }
@@ -60,21 +51,18 @@ char	*tokenize_text(t_lexer *l, char *s)
 char	*tokenize_dquoted_text(t_lexer *l)
 {
 	char	*str;
-	char	*temp;
 
 	readchar(l);
 	str = ft_strdup("");
 	while (l->c != DQUOTE && l->c != EOF)
 	{
-		temp = str;
 		if (l->c == DOLLAR)
-			str = ft_strjoin(str, envar_token(l));
+			str = ft_joinfree(str, envar_token(l));
 		else
 		{
 			str = ft_joinchar(str, l->c);
 			readchar(l);
 		}
-		free(temp);
 	}
 	if (!multi_lines(l, DQUOTE))
 		return (NULL);
@@ -86,22 +74,16 @@ char	*tokenize_dquoted_text(t_lexer *l)
 char	*tokenize_squoted_text(t_lexer *l)
 {
 	char	*str;
-	char	*temp;
 
 	readchar(l);
 	str = ft_strdup("");
 	while (l->c != SQUOTE && l->c != EOF)
 	{
-		temp = str;
 		str = ft_joinchar(str, l->c);
 		readchar(l);
-		free(temp);
 	}
-	if (l->c == EOF)
-	{
-		if (!multi_lines(l, SQUOTE))
-			return (NULL);
-	}
+	if (!multi_lines(l, SQUOTE))
+		return (NULL);
 	l->is_quoted = 1;
 	readchar(l);
 	return (str);
@@ -111,7 +93,6 @@ t_token	*string_token(t_lexer *l)
 {
 	char	*str;
 	char	*s;
-	char	*temp;
 	char	*temp2;
 
 	str = ft_strdup("");
@@ -129,15 +110,22 @@ t_token	*string_token(t_lexer *l)
 		if (!s && l->multi_line == 1)
 		{
 			free(temp2);
-			return (ret_str(l, NULL, illegal));
+			return (init_token(illegal, NULL, l));
 		}
-		temp = str;
-		str = ft_strjoin(str, s);
-		free(temp);
-		free(s);
+		str = ft_joinfree(str, s);
 		free(temp2);
 		if (l->c == 32)
-			return (ret_str(l, str, id));
+		{
+			t_token *t;
+			t = init_token(id, str, l);
+			free(str);
+			return (t);
+			// return (init_token(id, str, l));
+		}
 	}
-	return (ret_str(l, str, id));
+	t_token *tok;
+	tok = init_token(id, str, l);
+	free(str);
+	return (tok);
+	// return (init_token(id, str, l));
 }

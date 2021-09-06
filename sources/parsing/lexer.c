@@ -6,28 +6,16 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:44:58 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 16:17:12 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/05 23:35:53 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	print_msg(char *str, char *var)
-{
-	printf("%s", str);
-	if (var)
-	{
-		printf(" `");
-		printf("%s", var);
-		printf("'\n");
-	}
-	g_global->exit_status = 258;
-}
-
 void	readchar(t_lexer *l)
 {
 	if (!l || !l->buffer)
-		printf("error\n");
+		return ;
 	if (l->readpos >= l->bufsize)
 		l->c = EOF;
 	else
@@ -50,22 +38,27 @@ t_token	*ret_str(t_lexer *l, char *s, int type)
 {
 	if (type == greater || type == here_doc)
 		readchar(l);
-	if (type == great || type == pip || type == here_doc
-		|| type == greater || type == less)
-		readchar(l);
+	readchar(l);
+	// t_token *t;
+	// t = init_token(type, s, l);
+	// free(s);
+	// return (t);
 	return (init_token(type, s, l));
 }
 
 t_token	*ret_char(t_lexer *l, char c, t_token_type type)
 {
 	char	*str;
+	t_token	*t;
 
 	str = malloc(sizeof(char) * 2);
 	if (!str)
 		return (NULL);
 	str[0] = c;
 	str[1] = '\0';
-	return (ret_str(l, str, type));
+	t = ret_str(l, str, type);
+	free(str);
+	return (t);
 }
 
 t_token	*get_next_token(t_lexer *l)

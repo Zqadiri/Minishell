@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 13:32:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 13:34:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 ** errors:
 ** greater than LONG_MIN   -9223372036854775808
 ** greater than LONG_MAX
-**  non numeric arg
-**
+** non numeric arg
+** more then one arg
 */
 
 void	error_exit(char *arg, int id)

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/12 12:36:08 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/05 16:32:08 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@
 
 # define PIPE 124
 # define GREAT 62
-# define GREATER 63 //">>"
 # define LESS 60
-// # define LESS 60
 # define DQUOTE 34
 # define SQUOTE 39
 # define SPACE 32
 # define DOLLAR 36
 # define BSLASH 92
-# define TILDE 126
 
 typedef enum e_token_type
 {
@@ -41,9 +38,7 @@ typedef enum e_token_type
 	illegal,
 	eof
 }			t_token_type;
-
-// ! 2 60 100 100
-// ! 1     
+ 
 /*
 ** lexer->buffer		: the input text
 ** lexer->bufsize		: size of the input text
@@ -77,6 +72,7 @@ typedef struct s_token
 char	*tokenize_text(t_lexer *l, char *s);
 t_token	*string_token(t_lexer *l);
 
+
 /*
 ** lexer.c
 */
@@ -91,6 +87,7 @@ t_token	*get_next_token(t_lexer *l);
 int		peek_char(t_lexer *l);
 char	*envar_token(t_lexer *l);
 
+
 /*
 ** utils.c
 */
@@ -98,5 +95,6 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l);
 int		ftstrcmp(char *s1, char *s2);
 char	*ft_joinchar(char *s, char c);
 int		is_valid_id(char *str);
+char	*ft_joinfree(char *s1, char *s2);
 
 #endif

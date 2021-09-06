@@ -6,35 +6,29 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/07/15 17:35:25 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 00:16:27 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/minishell.h"
 
-t_ast	*init_ast(t_ast_type type)
+void	init_ast(t_ast *ast, t_ast_type type)
 {
-	t_ast	*ast;
-
-	ast = malloc(sizeof(t_ast));
-	if (!ast)
-		return (NULL);
 	ast->type = type;
 	ast->pipecmd_values = (void *) 0;
 	ast->pipecmd_size = 0;
 	ast->args = 0;
 	ast->redir_nbr = 0;
 	ast->args_size = 0;
-	return (ast);
 }
 
 void	init_cmdargs(t_ast *ast, t_cmd *z, int n)
 {
 	z[n].redir_nbr = ast->redir_nbr;
 	z[n].args_size = ast->args_size - (z[n].redir_nbr * 2) - 1;
-	z[n].argvs = malloc(sizeof(char *) * (z[n].args_size + 1));
 	z[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
+	if (z[n].args_size > 0)
+		z[n].argvs = malloc(sizeof(char *) * (z[n].args_size + 1));
 }
 
 t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
@@ -47,10 +41,7 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 			|| ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id)
-		// {
 			z[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
-			// printf("args[%d] = [%s]\n", x.l - 1, z[n].argvs[x.l - 1]);
-		// }
 		else
 		{
 			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1
@@ -59,7 +50,6 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 				z[n].r[x.m].type = ast->args[x.k - 1]->type;
 				z[n].r[x.m].is_quoted = ast->args[x.k]->is_quoted;
 				z[n].r[x.m++].filename = ast->args[x.k++]->value;
-				// printf("[%s] - [%u]\n", z[n].r[x.m - 1].filename, z[n].r[x.m - 1].type);
 			}
 		}
 	}
@@ -81,11 +71,10 @@ t_cmd	*visitor(t_ast *ast)
 	int		j;
 	int		n;
 
-	if (!ast)
+	z = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
+	if (!z)
 		return (NULL);
 	n = 0;
-	z = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
-	// z[ast->pipecmd_size] = NULL;
 	z->nbr_cmd = ast->pipecmd_size;
 	if (ast->type == pipe_ast)
 	{
@@ -101,6 +90,6 @@ t_cmd	*visitor(t_ast *ast)
 			n++;
 		}
 	}
-	//! free_tree(ast);
+	free_tree(ast);
 	return (z);
 }
