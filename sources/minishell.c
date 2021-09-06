@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 12:15:13 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 18:48:27 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ int main(int argc, char **argv, char **env)
 		}
 		// else
 		// 	continue;
-		
 		p = init_parser(l);
 		if (p)
 		{
@@ -120,11 +119,8 @@ int main(int argc, char **argv, char **env)
 			if (ast)
 			{
 				z = visitor(ast);
-				if (z)
-				{
-					// execution(z);
-					free_cmd(z);
-				}
+				// execution(z);
+				// free_cmd(z);
 			}
 		}
 		system("leaks minishell");
@@ -177,3 +173,4 @@ int main(int argc, char **argv, char **env)
 //! Leaks : 
 //! cmd with pipeline 
 //! syntax error 
+//? xthxrtj || trjrs

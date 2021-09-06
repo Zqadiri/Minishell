@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 12:17:22 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 18:46:55 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,22 +117,27 @@ void	free_parser2(t_parser *p)
 void	free_cmd(t_cmd *z)
 {
 	int	i;
-	// int	j;
+	int j;
 
-	i = -1;
-	// j = -1;
-	// while (z[++j].argvs)
-	// {
-		// while (z[j].argvs[++i])
-			// is_notempty(z[j].argvs[i]);
-	// }
-	while (z->argvs[++i])
-		is_notempty(z->argvs[i]);
-	is_notempty(z->r);
-	free(z->argvs);
-	// while (z[++i].argvs)
-	// 	is_notempty(z[i].argvs);
-	// while (z[++i].r)
-	// 	is_notempty(z[i].r);
+	i = 0;
+	while (i < z[i].nbr_cmd)
+	{
+		j = 0;
+		while (j < z[i].args_size)
+		{
+			free(z[i].argvs[j]);
+			z[i].argvs[j] = NULL;
+			j++;
+		}
+		free(z[i].argvs);
+		j = 0;
+		while (j < z[i].redir_nbr)
+		{
+			free(z[i].r[j].filename);
+			z[i].r[j].filename = NULL;
+			j++;
+		}
+		free(z[i].r);
+	}
 	free(z);
 }
