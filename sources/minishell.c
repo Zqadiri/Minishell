@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/09/06 18:48:27 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/09/06 16:47:04 by zqadiri          ###   ########.fr       */
->>>>>>> 83c5deb6e3f2e21afa13553febfbe22b8a571e50
+/*   Updated: 2021/09/06 18:56:28 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +120,11 @@ int main(int argc, char **argv, char **env)
 			if (ast)
 			{
 				z = visitor(ast);
-<<<<<<< HEAD
-				// execution(z);
-				// free_cmd(z);
-=======
 				if (z)
 				{
 					execution(z);
 					free_cmd(z);
 				}
->>>>>>> 83c5deb6e3f2e21afa13553febfbe22b8a571e50
 			}
 		}
 		// system("leaks minishell");
