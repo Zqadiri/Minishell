@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 18:22:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:27:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 		{
 			close(m->pipe_fd[id][0]);
 			dup2(m->redir->infile, 0);
-			close(m->redir->infile);
 		}
 		else if (in != 0)
 		{
@@ -79,11 +78,7 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 			close(in);
 		}
 		if (m->redir->outfile && !m->redir->err)
-		{
-			// close(m->pipe_fd[id][1]);
 			dup2(m->redir->outfile, 1);
-			close(m->redir->outfile);
-		}
 		else if (out != 1)
 		{
 			dup2(out, 1);
@@ -119,7 +114,7 @@ int	pipe_all(t_cmd *cmd, t_data *m)
 		m->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
 		if (pipe(m->pipe_fd[i]))
 			return (0);
-		// printf ("%d : %d -> %d\n", i, m->pipe_fd[i][0], m->pipe_fd[i][1]);
+		printf ("%d : %d -> %d\n", i, m->pipe_fd[i][0], m->pipe_fd[i][1]);
 		i++;
 	}
 	return (1);

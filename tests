@@ -163,9 +163,11 @@ unset TEST | cat -e
 echo test | cat -e | cat -e | cat -e
 echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e
 ls -la | grep "."
+cat /dev/random | head 
+cat /dev/random | head -c 10
+cat Makefile | head -c 10 | wc -l
 
 !!!!!! Error
-cat /dev/random | head -c 10
 cat /dev/random | head -c 10 | wc -l
 cat /dev/random | head -c 10 | wc -c
 

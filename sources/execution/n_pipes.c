@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 18:22:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:46:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m, int id)
 	char *possible_path;
 
 	i = 0;
+	printf ("in :%d -> out : %d\n", in, out);
 	if (is_builtin(cmd))
 	{
 		if (in != 0)
@@ -92,24 +93,24 @@ void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 {
 	int		i;
 	int		status;
-	// int		signal;
+	int		signal;
 
 	i = -1;
 	while (++i < cmd->nbr_cmd)
 		init_m(&m[i]);
 	fork_cmd_pipes(cmd, m);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
-	g_global->pid =0;
+	g_global->pid = 0;
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
 			g_global->exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+		{
+			signal = WTERMSIG(status);
+			if (signal == SIGQUIT)
+				ft_putstr_fd("quit!", 1);
+			g_global->exit_status = signal + 128;
+		}
 	}
-	// else if (WIFSIGNALED(status))
-	// {
-	// 	signal = WTERMSIG(status);
-	// 	if (signal == SIGQUIT)
-	// 		ft_putstr_fd("quit!", 1);
-	// 	g_global->exit_status = signal + 128;
-	// }		
 }
