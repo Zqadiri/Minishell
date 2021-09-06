@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/04 13:38:47 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:27:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_m(t_data *m)
 	m->saved_stdout = dup(1);
 	m->saved_stdin = dup(0);
 	m->path = get_path();
+	// printf ("%s\n", m->path[0]);
 	m->pid = 0;
 	m->in = 0;
 	m->redir = (t_red *)malloc(sizeof(t_red));
@@ -94,6 +95,8 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 			ft_putendl_fd(": command not found", 2);
 			exit (0);
 		}
+		if (id == 0)
+			close (m->pipe_fd[id][0]);
 		if (execve (possible_path, cmd->argvs, g_global->env_var))
 			exit(1);
 	}
@@ -214,15 +217,17 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	}
 	g_global->pid = exec_proc(in, 1, &cmd[i], &m[i], i);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
-	waitpid(-1, &status, WCONTINUED | WUNTRACED);
-	if (WIFEXITED(status))
-			g_global->exit_status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
+	while (waitpid(-1, &status, 0) > 0)
 	{
-		signal = WTERMSIG(status);
-		if (signal == SIGQUIT)
-			ft_putstr_fd("quit!", 1);
-		g_global->exit_status = signal + 128;
+		if (WIFEXITED(status))
+			g_global->exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+		{
+			signal = WTERMSIG(status);
+			if (signal == SIGQUIT)
+				ft_putstr_fd("quit!", 1);
+			g_global->exit_status = signal + 128;
+		}		
 	}
 	return (1);
 }

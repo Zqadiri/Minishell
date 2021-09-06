@@ -6,19 +6,19 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/04 13:39:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:46:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
+int	exec_process(int in, int out, t_cmd *cmd, t_data *m, int id)
 {
 	int i;
 	char *possible_path;
 
 	i = 0;
-	printf ("in: %d -> out : %d\n", in , out);
+	printf ("in :%d -> out : %d\n", in, out);
 	if (is_builtin(cmd))
 	{
 		if (in != 0)
@@ -32,8 +32,8 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 			close(out);
 		}
 		check_builtin(cmd);
-		// restore_std(m->saved_stdout, m->saved_stdin);
-		return (1);
+		restore_std(m->saved_stdout, m->saved_stdin);
+		return (0);
 	}
 	else if ((m->pid = fork()) == 0)
 	{
@@ -58,6 +58,8 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 			ft_putendl_fd(": command not found", 2);
 			exit (127);
 		}
+		if (id == 0)
+			close (m->pipe_fd[id][0]);
 		if (execve (possible_path, cmd->argvs, g_global->env_var))
 			exit(126);
 	}
@@ -74,12 +76,12 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i]);
+		g_global->pid = exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i], i);
 		close(m->pipe_fd[i][1]);
 		in = m->pipe_fd[i][0];
 		i++;
 	}
-	g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
+	g_global->pid = exec_process(in, 1, &cmd[i], &m[i], i);
 	return (1);
 }
 
@@ -98,15 +100,17 @@ void    exec_simple_pipe(t_cmd *cmd, t_data *m)
 		init_m(&m[i]);
 	fork_cmd_pipes(cmd, m);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
-	g_global->pid =0;
-	waitpid(-1, &status, WCONTINUED);
-	if (WIFEXITED(status))
-			g_global->exit_status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
+	g_global->pid = 0;
+	while (waitpid(-1, &status, 0) > 0)
 	{
-		signal = WTERMSIG(status);
-		if (signal == SIGQUIT)
-			ft_putstr_fd("quit!", 1);
-		g_global->exit_status = signal + 128;
+		if (WIFEXITED(status))
+			g_global->exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+		{
+			signal = WTERMSIG(status);
+			if (signal == SIGQUIT)
+				ft_putstr_fd("quit!", 1);
+			g_global->exit_status = signal + 128;
+		}
 	}
 }

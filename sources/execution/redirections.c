@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/05 17:41:10 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 15:06:14 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	setup_redirections(t_cmd *cmd, t_data *m)
 
 void	exec_single_cmd(t_cmd *cmd, t_data *m)
 {
+	
 	char	*possible_path;
 	pid_t	child_pid;
 	int		status;
@@ -159,7 +160,6 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 	char	*possible_path;
 	int		fd;
 
-	// printf ("in regular !\n");
 	if (is_builtin(cmd))
 	{
 		check_builtin(cmd);

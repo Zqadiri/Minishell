@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 10:51:33 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 13:36:21 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,60 +29,60 @@
 ** Change what's displayed on the screen to reflect the current contents of rl_line_buffer.
 */
 
-// void	exit_child_process(int signum)
-// {
-// 	if (signum == SIGINT)
-// 	{
-// 		ft_putchar_fd('\n', 1);
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// 	else if (signum == SIGQUIT)
-// 	{
-// 		ft_putchar_fd('\r', 1);
-// 		rl_on_new_line();
-// 		rl_redisplay();
-// 	}
-// }
+void	exit_child_process(int signum)
+{
+	if (signum == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (signum == SIGQUIT)
+	{
+		ft_putchar_fd('\r', 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
 
-// void	is_child_process(int signum)
-// {
-// 	if (!kill(g_global->pid, signum))
-// 	{
-// 		if (signum == SIGQUIT)
-// 		{
-// 			ft_putstr_fd("Quit\n", 1);
-// 			g_global->exit_status = 131;
-// 		}
-// 		else if (signum == SIGINT)
-// 		{
-// 			ft_putchar_fd('\n', 1);
-// 			g_global->exit_status = 130;
-// 		}
-// 	}
-// 	else
-// 		exit_child_process(signum);
-// }
+void	is_child_process(int signum)
+{
+	if (!kill(g_global->pid, signum))
+	{
+		if (signum == SIGQUIT)
+		{
+			ft_putstr_fd("Quit\n", 1);
+			g_global->exit_status = 131;
+		}
+		else if (signum == SIGINT)
+		{
+			ft_putchar_fd('\n', 1);
+			g_global->exit_status = 130;
+		}
+	}
+	else
+		exit_child_process(signum);
+}
 
-// void	sigint_handler(int signum)
-// {
-// 	if ((signum == SIGINT || signum == SIGQUIT) && g_global->pid != 0)
-// 		is_child_process(signum);
-// 	else
-// 	{
-// 		if (signum == SIGINT)
-// 		{
-// 			ft_putchar_fd('\n', 2);
-// 			rl_on_new_line();
-// 			rl_replace_line("", 0);
-// 			rl_redisplay();
-// 		}
-// 		else if (signum == SIGQUIT)
-// 		{
-// 			ft_putchar_fd('\r', 2);
-// 			rl_on_new_line();
-// 			rl_redisplay();
-// 		}
-// 	}
-// }
+void	sigint_handler(int signum)
+{
+	if ((signum == SIGINT || signum == SIGQUIT) && g_global->pid != 0)
+		is_child_process(signum);
+	else
+	{
+		if (signum == SIGINT)
+		{
+			ft_putchar_fd('\n', 2);
+			rl_replace_line("", 0);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+		else if (signum == SIGQUIT)
+		{
+			ft_putchar_fd('\r', 2);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+	}
+}

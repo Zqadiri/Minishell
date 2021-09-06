@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/05 17:40:58 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 13:54:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,26 @@
 ** more then one arg
 */
 
+void	error_exit(char *arg)
+{
+	ft_putendl_fd("exit", 1);
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(": numeric argument required", 2);
+	exit (255);
+}
+
 long long	atoi_exit(const char *str)
 {
 	int					signe;
 	unsigned long long	r;
+	char				*error_tmp;
 
+	error_tmp = (char *)str;
+	signe = 1;
+	r = 0;
 	while (*str >= 9 && *str <= 32)
 		str++;
-	signe = 1;
 	if (*str == '-')
 	{
 		signe = -1;
@@ -35,19 +47,15 @@ long long	atoi_exit(const char *str)
 	}
 	else if (*str == '+')
 		str++;
-	r = 0;
 	while (*str >= 48 && *str <= 57)
 	{
 		r = r * 10 + *str - '0';
-		if ((unsigned long long )r > LLONG_MAX)
-		{
-			ft_putendl_fd("exit", 1);
-			exit(255);
-		}
+		if (r > LLONG_MAX)
+			error_exit(error_tmp);
 		str++;
 	}
-	r = r * signe;
-	return (r);
+	ft_putendl_fd("exit", 1);
+	exit (r * signe);
 }
 
 void	exit_number(char *arg)
@@ -61,7 +69,7 @@ void	exit_number(char *arg)
 		{
 			if (arg[0] == '-' || arg[0] == '+')
 				i++;
-			if (arg[i] < 48 || arg[i] > 57)
+			if (arg[i] < 48 || arg[i] > 57 )
 			{
 				ft_putendl_fd("exit", 1);
 				ft_putstr_fd("minishell: exit: ", 2);
@@ -70,15 +78,14 @@ void	exit_number(char *arg)
 				exit (255);
 			}
 			i++;
-		}		
+		}	
 	}
-	ft_putendl_fd("exit", 1);
-	exit(atoi_exit(arg));	
+	atoi_exit(arg);
 }
 
-int		exit_builtin(char **args)
+int	exit_builtin(char **args)
 {
-	if (args[2] != NULL)
+	if (len(args) > 2)
 	{
 		ft_putendl_fd("exit", 1);
 		ft_putendl_fd("minishell: exit: too many arguments", 2);

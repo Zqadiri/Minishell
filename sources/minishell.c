@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/09/06 18:48:27 by iidzim           ###   ########.fr       */
+=======
+/*   Updated: 2021/09/06 16:47:04 by zqadiri          ###   ########.fr       */
+>>>>>>> 83c5deb6e3f2e21afa13553febfbe22b8a571e50
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +56,6 @@ t_lexer	*init_l(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
-	// ?signal(SIGINT, sigint_handler);
 	// signal(SIGTERM, terminate_process);
 	return (l);
 }
@@ -85,6 +88,8 @@ int main(int argc, char **argv, char **env)
 		return (EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
+	signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, sigint_handler);
 	while(1)
 	{
 		l = NULL;
@@ -119,11 +124,19 @@ int main(int argc, char **argv, char **env)
 			if (ast)
 			{
 				z = visitor(ast);
+<<<<<<< HEAD
 				// execution(z);
 				// free_cmd(z);
+=======
+				if (z)
+				{
+					execution(z);
+					free_cmd(z);
+				}
+>>>>>>> 83c5deb6e3f2e21afa13553febfbe22b8a571e50
 			}
 		}
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }
