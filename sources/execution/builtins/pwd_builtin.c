@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/02 17:03:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/05 16:06:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ int	pwd_builtin(void)
 
 	pwd = get_env_var_by_key("PWD");
 	ft_putstr_fd(pwd, 1);
-	// free(pwd);
 	ft_putchar_fd('\n', 1);
 	return (1);
 }
 
 /*
- **	check lowercase
- */
+**	check lowercase
+*/
 
 int	check_builtin(t_cmd *cmd)
 {

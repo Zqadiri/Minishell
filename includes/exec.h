@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/04 12:32:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/06 12:16:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,19 @@ typedef struct s_data
 ** Function Declarations for builtin shell commands
 */
 
-int		cd_builtin(char **arg);
-int		echo_builtin(char **arg);
-int		pwd_builtin(void);
-int		env_builtin(void);
-int		exit_builtin(char **args);
-int		unset_builtin(char **args);
-int		export_builtin(char **arg);
-char	*add_char_to_word(char *word, char c);
-int		get_pwd(char **pwd);
-char	*return_value(const char *s, int c);
-int		error_path(const char *cmd, const char *path, int errnum);
-
+int			cd_builtin(char **arg);
+int			echo_builtin(char **arg);
+int			pwd_builtin(void);
+int			env_builtin(void);
+int			exit_builtin(char **args);
+int			unset_builtin(char **args);
+int			export_builtin(char **arg);
+char		*add_char_to_word(char *word, char c);
+int			get_pwd(char **pwd);
+char		*return_value(const char *s, int c);
+int			error_path(const char *cmd, const char *path, int errnum);
+void		error_exit(char *arg, int id);
+long long	atoi_exit(const char *str);
 /*
 ** Error Functions
 */

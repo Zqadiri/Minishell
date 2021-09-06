@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/04 18:31:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/05 15:54:29 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	exit_child_process(int signum)
 {
 	if (signum == SIGINT)
 	{
-		ft_putchar_fd('\n', 1);
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -74,8 +74,8 @@ void	sigint_handler(int signum)
 		if (signum == SIGINT)
 		{
 			ft_putchar_fd('\n', 2);
-			rl_on_new_line();
 			rl_replace_line("", 0);
+			rl_on_new_line();
 			rl_redisplay();
 		}
 		else if (signum == SIGQUIT)

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/04 16:03:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/05 15:07:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_lexer	*init_l(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
-	signal(SIGINT, sigint_handler);
 	// signal(SIGTERM, terminate_process);
 	return (l);
 }
@@ -85,6 +84,7 @@ int main(int argc, char **argv, char **env)
 		return (EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
+	signal(SIGINT, sigint_handler);
 	while(1)
 	{
 		l = NULL;
@@ -120,7 +120,6 @@ int main(int argc, char **argv, char **env)
 			if (z)
 				execution(z);
 		}
-		// system("leaks minishell");
 	}
 	return (0);
 }
