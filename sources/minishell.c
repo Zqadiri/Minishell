@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/07 11:11:48 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/07 19:22:19 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,12 @@ int main(int argc, char **argv, char **env)
 				z = visitor(ast);
 				if (z)
 				{
-					execution(z);
+					// execution(z);
 					free_cmd(z);
 				}
 			}
 		}
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }
@@ -178,3 +178,4 @@ int main(int argc, char **argv, char **env)
 //! cmd with pipeline 
 //! syntax error 
 //? xthxrtj || trjrs
+

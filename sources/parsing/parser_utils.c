@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 18:27:42 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/07 19:19:29 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,16 @@ t_parser	*init_parser(t_lexer *l)
 	{
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
-		free(p->lexer->buffer);
-		free(p->curr_token->value);
-		free(p->curr_token);
-		free(p);
-		// free(l);
+		free_parser2(&p);
 		return (NULL);
 	}
-	p->prev_token = p->curr_token;
+	p->prev_token = NULL;
 	if (p->curr_token->type == illegal)
 	{
-		free(p->lexer->buffer);//?
-		free(p->curr_token->value);//?
-		free(p->curr_token);//?
-		free(p);//?
+		// free(p->lexer->buffer);//?
+		// free(p->curr_token->value);//?
+		// free(p->curr_token);//?
+		// free(p);//?
 		// free(l->buffer);//?
 		// free(l);//?
 		return (NULL);
@@ -87,6 +83,7 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 
 	if (p->curr_token->type == illegal)
 		return (NULL);
+	printf("3iiiiw\n");
 	if (!syntax_error(p))
 		return (NULL);
 	if (is_redic(p->prev_token))
@@ -95,13 +92,12 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 		{
 			print_msg("minishell: syntax error near unexpected token 2",
 				p->curr_token->value);
-			// free(p->curr_token->value); //!
-			// free(p->curr_token);
 			return (NULL);
 		}
 		ast->redir_nbr += 1;
 		if (p->prev_token->type == here_doc)
 		{
+			printf("**6\n");
 			temp = p->curr_token->value;
 			p->curr_token->value = get_stop_word(p);
 			free(temp);

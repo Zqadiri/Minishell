@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 22:06:28 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/07 19:21:57 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ t_ast	*parse_args_helper(t_parser *p)
 	ast->args[1] = NULL;
 	if (ast->args_size == 0)
 	{
-		ast->args[0] = p->curr_token;
+		ast->args[0] = p->curr_token;//??
 		if (p->curr_token->type == pip)
 		{
 			print_msg("minishell: syntax error near unexpected token 0",
 				p->curr_token->value);
-			free_parser2(p);
-			free_tree(ast);
+			free_parser2(&p);
+			free_tree(&ast);
 			return (NULL);
 		}
 		ast->args_size += 1;
@@ -53,6 +53,7 @@ int	init_parse_args(t_ast *ast, t_parser *p)
 	ast->args[ast->args_size - 1] = check_token(p, ast);
 	if (!ast->args[ast->args_size - 1])
 	{
+		// free_parser2(p);
 		// free(p->lexer->buffer);
 		// free(p->curr_token->value);
 		// free(p->curr_token);
@@ -76,26 +77,33 @@ t_ast	*parse_args(t_parser *p)
 	{
 		if (!init_parse_args(ast, p))
 		{
-			int i = ast->args_size + 1;//?
-			while (i-- > 0)//?
-				free(ast->args[i]);//?
-			free(ast->args);//?
-			free(ast);//?
+			free_tree(&ast);
 			return  (NULL);
 		}
 		if (ast->args[ast->args_size - 1]->type == pip)
 		{
+			if (p->prev_token)
+			{
+				printf("**5\n");
+				free(p->prev_token->value);
+				p->prev_token->value = NULL;
+				free(p->prev_token);
+				p->prev_token = NULL;
+			}
 			p->prev_token = p->curr_token;
-			// temp = p->curr_token;
 			p->curr_token = get_next_token(p->lexer);
-			// free(temp->value);
+			printf("prev -> <%s>, curr -> <%s>\n", p->prev_token->value, p->curr_token->value);
 			break ;
 		}
 		if (ast->args[ast->args_size - 1]->type == eof)
 			break ;
 	}
 	if (!syntax_error(p))
+	{
+		if (ast)
+			free_tree(&ast);	
 		return (NULL);
+	}
 	return (ast);
 }
 
@@ -117,9 +125,11 @@ t_ast	*parse_pipe(t_parser *p)
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(p);
 		if (!ast->pipecmd_values[ast->pipecmd_size - 1])
 		{
-			free_parser2(p);
-			free(*ast->pipecmd_values);
-			free_tree(ast);
+			// printf("here\n");
+			// free_parser(p);
+			// free(*ast->pipecmd_values);
+			// printf("here\n");
+			free_tree(&ast);
 			return (NULL);
 		}
 		if (p->prev_token->type == pip)
@@ -128,6 +138,7 @@ t_ast	*parse_pipe(t_parser *p)
 			ast->pipecmd_values = realloc_ast_node(ast, ast->pipecmd_size + 1);
 		}
 	}
-	free_parser(p);
+	// free_parser(temp);
+	free_parser(&p);
 	return (ast);
 }

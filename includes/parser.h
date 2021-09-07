@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 11:31:10 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/07 18:53:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ t_ast		**realloc_ast_node(t_ast *ast, int size);
 /*
 ** free.c
 */
-void		is_notempty(void *ptr);
-void		free_tree(t_ast *ast);
+void		is_notempty(void **ptr);
+void		free_tree(t_ast **astt);
 void		free_tree2(t_ast **ast);
 void	free_tree3(t_token **token, int size);
-void		free_parser(t_parser *p);
-void		free_parser2(t_parser *p);
+void		free_parser(t_parser **pp);
+void		free_parser2(t_parser **pp);
 void		free_cmd(t_cmd *z);
 
 
