@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 13:54:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 17:36:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,59 +82,62 @@ char		*return_value(const char *s, int c);
 int			error_path(const char *cmd, const char *path, int errnum);
 void		error_exit(char *arg);
 long long	atoi_exit(const char *str);
+
 /*
 ** Error Functions
 */
 
-void	print_error(char *file_error);
+void		print_error(char *file_error);
+void		setup_out(t_cmd *cmd, t_data *m);
+void		setup_in(t_cmd *cmd, t_data *m);
+void		wait_children(void);
 
 /*
 ** Utils
 */
 
-int		env_count(void); // ? move it to utils
-int		len(char **env);
-int		alpha(char *key);
-int		dup_env_var(char **env);
-char	**dup_env(void);
-char	**get_path(void);
-void	print_sorted_env(char **sorted_env);
-char	**realloc_new_env(int env_num);
-int		set_env_var(char *key, char *new_path);
+int			env_count(void); // ? move it to utils
+int			dup_env_var(char **env);
+char		**dup_env(void);
+char		**get_path(void);
+void		print_sorted_env(char **sorted_env);
+char		**realloc_new_env(int env_num);
+int			set_env_var(char *key, char *new_path);
 
 /*
 ** Helpers 
 */
 
-int		find_env(char *key);
-char	*get_env_var_by_key(char *key);
-char	*return_value(const char *s, int c);
-int		get_str_by_char(char *str, char c);
-int		is_valid_env_key(char *arg);
-void	modify_env(char *arg, char *key);
-char	*get_env_var_by_key(char *key);
-int		ft_strlen_new(const char *str);
-int		is_builtin(t_cmd *cmd);
-int		pipe_all(t_cmd *cmd, t_data *m);
-void	restore_std(int saved_stdout, int saved_stdin);
+int			exec_builtin(int in, int out, t_cmd *cmd, t_data *m);
+int			find_env(char *key);
+char		*get_env_var_by_key(char *key);
+char		*return_value(const char *s, int c);
+int			get_str_by_char(char *str, char c);
+int			is_valid_env_key(char *arg);
+void		modify_env(char *arg, char *key);
+char		*get_env_var_by_key(char *key);
+int			is_builtin(t_cmd *cmd);
+int			pipe_all(t_cmd *cmd, t_data *m);
+void		restore_std(int saved_stdout, int saved_stdin);
+void		exec_cmd_path(int in, t_cmd *cmd, t_data *m);
+void		check_valid_fd(t_data *m, char *file_error, int fd);
+void		find_cmd_path(t_cmd *cmd, t_data *m);
 
 /*
 ** main
 */
 
-int		check_signals(void);
-char	*find_path(char	*cmd, char **path);
-void    exec_multiple_cmd(t_cmd *cmd, t_data *m);
-int		is_builtin(t_cmd *cmd);
-void	init_m(t_data *m);
-void	print_error(char *file_error);
-int		count(t_cmd *cmd, t_token_type type);
-void    exec_simple_pipe(t_cmd *cmd, t_data *m);
+int			check_signals(void);
+char		*find_path(char	*cmd, char **path);
+void		exec_multiple_cmd(t_cmd *cmd, t_data *m);
+int			is_builtin(t_cmd *cmd);
+void		init_m(t_data *m);
+void		print_error(char *file_error);
+int			count(t_cmd *cmd, t_token_type type);
+void		exec_simple_pipe(t_cmd *cmd, t_data *m);
+void		exec_single_cmd(t_cmd *cmd, t_data *m);
+int			execute_regular_cmd(t_cmd *cmd, t_data *m);
+void		close_all_pipes(int **fd, int n);
+void		sigint_handler(int sig);
 
-void	exec_single_cmd(t_cmd *cmd, t_data *m);
-int		execute_regular_cmd(t_cmd *cmd, t_data *m);
-void	close_all_pipes(int **fd, int n);
-
-
-void	sigint_handler(int sig);
 #endif

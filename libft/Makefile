@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 12:11:32 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/17 15:06:22 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/09/07 12:02:19 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,9 @@ SRC = ft_memalloc.c\
 	  ft_putstr_fd.c\
 	  ft_putendl_fd.c\
 	  ft_putnbr_fd.c\
+	  len.c\
+	  ft_strlen_new.c\
+
 		  
 
 all:	$(NAME)

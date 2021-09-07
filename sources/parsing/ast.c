@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/07 18:07:47 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/07 19:23:24 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_cmd(t_cmd z)
 
 void	print_cmd(t_cmd *z, int n)
 {
-	printf("in\n");
+	// printf("in\n");
 	int i;
 	int j;
 
@@ -107,7 +107,7 @@ t_cmd	*visitor(t_ast *ast)
 		while (++j < ast->pipecmd_size && n < ast->pipecmd_size)
 		{
 			init_cmd(z[n]);
-			printf("cmd[%d] -------\n", n);
+			// printf("cmd[%d] -------\n", n);
 			visitor_args(ast->pipecmd_values[j], z, n);
 			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
 				z[n].type = pip;
@@ -116,7 +116,7 @@ t_cmd	*visitor(t_ast *ast)
 			n++;
 		}
 		int i = -1;
-		printf("n = %d\n", n);
+		// printf("n = %d\n", n);
 		while (++i < n)
 			z[i].nbr_cmd = n;
 	}

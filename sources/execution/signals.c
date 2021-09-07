@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 19:22:27 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/07 19:22:58 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 /*
 ** void rl_replace_line (const char *text, int clear_undo)
-** Replace the contents of rl_line_buffer with text. The point and mark are preserved, if possible.
-** If clear_undo is non-zero, the undo list associated with the current line is cleared.
+** Replace the contents of rl_line_buffer with text. The point and mark are 
+** preserved, if possible.If clear_undo is non-zero,
+** the undo list associated with the current line is cleared.
 */
 
 /*
@@ -25,8 +26,8 @@
 */
 
 /*
-** void rl_redisplay (void)
-** Change what's displayed on the screen to reflect the current contents of rl_line_buffer.
+** void rl_redisplay (void) Change what's displayed 
+** on the screen to reflect the current contents of rl_line_buffer.
 */
 
 void	exit_child_process(int signum)

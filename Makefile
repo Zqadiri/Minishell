@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/07 18:02:30 by iidzim           ###   ########.fr        #
+#    Updated: 2021/09/07 19:23:51 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRCS_EXEC		=	./sources/execution/builtins/cd/cd_builtin.c\
 					./sources/execution/builtins/export/helpers.c\
 					./sources/execution/builtins/export/export_builtin.c\
 					./sources/execution/main_exec.c\
+					./sources/execution/exec_helpers.c\
+					./sources/execution/regular_cmd.c\
 					./sources/execution/redirections.c\
 					./sources/execution/n_pipes.c\
 					./sources/execution/error_functions.c\
