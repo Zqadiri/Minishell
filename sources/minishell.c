@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 18:56:28 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/07 11:11:48 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main(int argc, char **argv, char **env)
 		return (EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
-	signal(SIGINT, sigint_handler);
+	signal(SIGINT, sigint_handler);//?
 	// signal(SIGQUIT, sigint_handler);
 	while(1)
 	{
@@ -127,7 +127,7 @@ int main(int argc, char **argv, char **env)
 				}
 			}
 		}
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	return (0);
 }

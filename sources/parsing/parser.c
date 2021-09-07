@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 18:02:38 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 22:06:28 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	init_parse_args(t_ast *ast, t_parser *p)
 		// free(p);
 		// ?free_tree3(ast->args, ast->args_size);
 		// ?free_tree(ast);
-
 		return (0);
 	}
 	return (1);
@@ -77,8 +76,11 @@ t_ast	*parse_args(t_parser *p)
 	{
 		if (!init_parse_args(ast, p))
 		{
-			free(ast->args);
-			free(ast);
+			int i = ast->args_size + 1;//?
+			while (i-- > 0)//?
+				free(ast->args[i]);//?
+			free(ast->args);//?
+			free(ast);//?
 			return  (NULL);
 		}
 		if (ast->args[ast->args_size - 1]->type == pip)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 18:46:55 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 21:35:25 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,28 +116,25 @@ void	free_parser2(t_parser *p)
 
 void	free_cmd(t_cmd *z)
 {
-	int	i;
 	int j;
 
-	i = 0;
-	while (i < z[i].nbr_cmd)
+	j = 0;
+	while (j < z->args_size)
 	{
-		j = 0;
-		while (j < z[i].args_size)
-		{
-			free(z[i].argvs[j]);
-			z[i].argvs[j] = NULL;
-			j++;
-		}
-		free(z[i].argvs);
-		j = 0;
-		while (j < z[i].redir_nbr)
-		{
-			free(z[i].r[j].filename);
-			z[i].r[j].filename = NULL;
-			j++;
-		}
-		free(z[i].r);
+		free(z->argvs[j]);
+		z->argvs[j] = NULL;
+		j++;
 	}
+	free(z->argvs);
+	z->argvs = NULL;
+	j = 0;
+	while (j < z->redir_nbr)
+	{
+		free(z->r[j].filename);
+		z->r[j].filename = NULL;
+		j++;
+	}
+	free(z->r);
+	z->r = NULL;
 	free(z);
 }
