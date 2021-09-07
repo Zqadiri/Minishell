@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 13:59:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:39:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	find_cmd_path(t_cmd *cmd, t_data *m)
+void	find_cmd_path(t_cmd *cmd, t_data *m)
 {
 	char	*possible_path;
 	int		fd;

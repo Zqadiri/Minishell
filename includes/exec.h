@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 14:14:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:39:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	restore_std(int saved_stdout, int saved_stdin);
 void	exec_cmd_path(int in, t_cmd *cmd, t_data *m);
 
 void	check_valid_fd(t_data *m, char *file_error, int fd);
+void	find_cmd_path(t_cmd *cmd, t_data *m);
 
 /*
 ** main
