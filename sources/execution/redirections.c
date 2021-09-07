@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 14:34:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:35:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	setup_outfiles(t_cmd *cmd, t_data *m)
 		dup2(m->redir->outfile, 1);
 }
 
-		printf ("here\n");
+		// printf ("here\n");
 int	setup_redirections(t_cmd *cmd, t_data *m)
 {
 	int	i;
