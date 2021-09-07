@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 00:16:27 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 21:55:36 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_cmdargs(t_ast *ast, t_cmd *z, int n)
 		z[n].argvs = malloc(sizeof(char *) * (z[n].args_size + 1));
 }
 
-t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
+void	visitor_args(t_ast *ast, t_cmd *z, int n)
 {
 	t_index	x;
 
@@ -41,7 +41,10 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 			|| ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id)
+		{
 			z[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
+			// printf("args[%d] = [%s]\n", x.l - 1, z[n].argvs[x.l - 1]);
+		}
 		else
 		{
 			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1
@@ -49,16 +52,17 @@ t_cmd	*visitor_args(t_ast *ast, t_cmd *z, int n)
 			{
 				z[n].r[x.m].type = ast->args[x.k - 1]->type;
 				z[n].r[x.m].is_quoted = ast->args[x.k]->is_quoted;
-				z[n].r[x.m++].filename = ast->args[x.k++]->value;
+				z[n].r[x.m++].filename = ft_strdup(ast->args[x.k++]->value);
+				// printf("[%s] - [%u]\n", z[n].r[x.m - 1].filename, z[n].r[x.m - 1].type);
 			}
 		}
 	}
 	z[n].argvs[x.l] = NULL;
-	return (z);
 }
 
-void	init_cmd(t_cmd z)
+void	init_cmd(t_cmd z, int size)
 {
+	z.nbr_cmd = size;
 	z.args_size = 0;
 	z.argvs = NULL;
 	z.redir_nbr = 0;
@@ -75,20 +79,21 @@ t_cmd	*visitor(t_ast *ast)
 	if (!z)
 		return (NULL);
 	n = 0;
-	z->nbr_cmd = ast->pipecmd_size;
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
-		while (++j < ast->pipecmd_size && n <= z->nbr_cmd)
+		while (++j < ast->pipecmd_size && n < ast->pipecmd_size)
 		{
-			init_cmd(z[n]);
-			z = visitor_args(ast->pipecmd_values[j], z, n);
+			init_cmd(z[n], ast->pipecmd_size);
+			visitor_args(ast->pipecmd_values[j], z, n);
 			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
 				z[n].type = pip;
 			else
 				z[n].type = eof;
 			n++;
 		}
+		z[n].nbr_cmd = 0;
+		
 	}
 	free_tree(ast);
 	return (z);

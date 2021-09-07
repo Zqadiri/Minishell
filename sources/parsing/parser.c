@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 12:16:16 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 22:06:28 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,32 @@ t_ast	*parse_args_helper(t_parser *p)
 
 int	init_parse_args(t_ast *ast, t_parser *p)
 {
+	// t_token	*t;
+
 	ast->args_size += 1;
 	ast->args = realloc_ast_args(ast, ast->args_size);
 	p->prev_token = p->curr_token;
+	// t = p->curr_token;
 	p->curr_token = get_next_token(p->lexer);
+	// free(t->value);
 	ast->args[ast->args_size - 1] = check_token(p, ast);
 	if (!ast->args[ast->args_size - 1])
+	{
+		// free(p->lexer->buffer);
+		// free(p->curr_token->value);
+		// free(p->curr_token);
+		// free(p);
+		// ?free_tree3(ast->args, ast->args_size);
+		// ?free_tree(ast);
 		return (0);
+	}
 	return (1);
 }
 
 t_ast	*parse_args(t_parser *p)
 {
-	t_ast	*ast;
+	t_ast		*ast;
+	// t_token		*temp;
 
 	ast = parse_args_helper(p);
 	if (!ast)
@@ -63,14 +76,19 @@ t_ast	*parse_args(t_parser *p)
 	{
 		if (!init_parse_args(ast, p))
 		{
-			free(ast->args);
-			free(ast);
+			int i = ast->args_size + 1;//?
+			while (i-- > 0)//?
+				free(ast->args[i]);//?
+			free(ast->args);//?
+			free(ast);//?
 			return  (NULL);
 		}
 		if (ast->args[ast->args_size - 1]->type == pip)
 		{
 			p->prev_token = p->curr_token;
+			// temp = p->curr_token;
 			p->curr_token = get_next_token(p->lexer);
+			// free(temp->value);
 			break ;
 		}
 		if (ast->args[ast->args_size - 1]->type == eof)

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 11:55:44 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 18:27:42 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,20 @@ t_parser	*init_parser(t_lexer *l)
 		free(p->curr_token->value);
 		free(p->curr_token);
 		free(p);
-		free(l);
+		// free(l);
 		return (NULL);
 	}
 	p->prev_token = p->curr_token;
 	if (p->curr_token->type == illegal)
+	{
+		free(p->lexer->buffer);//?
+		free(p->curr_token->value);//?
+		free(p->curr_token);//?
+		free(p);//?
+		// free(l->buffer);//?
+		// free(l);//?
 		return (NULL);
+	}
 	return (p);
 }
 

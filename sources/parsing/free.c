@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 12:17:22 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/06 21:35:25 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,23 +116,25 @@ void	free_parser2(t_parser *p)
 
 void	free_cmd(t_cmd *z)
 {
-	int	i;
-	// int	j;
+	int j;
 
-	i = -1;
-	// j = -1;
-	// while (z[++j].argvs)
-	// {
-		// while (z[j].argvs[++i])
-			// is_notempty(z[j].argvs[i]);
-	// }
-	while (z->argvs[++i])
-		is_notempty(z->argvs[i]);
-	is_notempty(z->r);
+	j = 0;
+	while (j < z->args_size)
+	{
+		free(z->argvs[j]);
+		z->argvs[j] = NULL;
+		j++;
+	}
 	free(z->argvs);
-	// while (z[++i].argvs)
-	// 	is_notempty(z[i].argvs);
-	// while (z[++i].r)
-	// 	is_notempty(z[i].r);
+	z->argvs = NULL;
+	j = 0;
+	while (j < z->redir_nbr)
+	{
+		free(z->r[j].filename);
+		z->r[j].filename = NULL;
+		j++;
+	}
+	free(z->r);
+	z->r = NULL;
 	free(z);
 }
