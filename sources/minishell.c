@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 16:47:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:05:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_lexer	*init_l(t_lexer	*l)
 	l->c = ' ';
 	l->curpos = 0;
 	l->readpos = 0;
-	// signal(SIGTERM, terminate_process);
 	return (l);
 }
 

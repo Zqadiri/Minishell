@@ -166,6 +166,7 @@ ls -la | grep "."
 cat /dev/random | head 
 cat /dev/random | head -c 10
 cat Makefile | head -c 10 | wc -l
+ls | cat | cat
 
 !!!!!! Error
 cat /dev/random | head -c 10 | wc -l

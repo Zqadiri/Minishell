@@ -6,20 +6,40 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 18:46:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:07:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exec_process(int in, int out, t_cmd *cmd, t_data *m, int id)
+void	exec_cmd_path(int in, t_cmd *cmd, t_data *m)
 {
-	int i;
-	char *possible_path;
+	int		fd;
+	char	*possible_path;
 
-	i = 0;
-	printf ("in :%d -> out : %d\n", in, out);
+	possible_path = find_path(cmd->argvs[0], m->path);
+	if (possible_path == NULL)
+		possible_path = ft_strdup(cmd->argvs[0]);
+	fd = open(possible_path, O_RDONLY);
+	if (fd < 0)
+	{
+		write (2, "minishell: ", 11);
+		write(2, possible_path, ft_strlen(possible_path));
+		ft_putendl_fd(": command not found", 2);
+		exit (127);
+	}
+	if (in == 0)
+		close (m->pipe_fd[in][0]);
+	if (execve (possible_path, cmd->argvs, g_global->env_var))
+		exit(126);
+}
+
+int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
+{
 	if (is_builtin(cmd))
+		return (exec_builtin(in, out, cmd, m));
+	m->pid = fork();
+	if (m->pid == 0)
 	{
 		if (in != 0)
 		{
@@ -31,39 +51,9 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m, int id)
 			dup2(out, 1);
 			close(out);
 		}
-		check_builtin(cmd);
-		restore_std(m->saved_stdout, m->saved_stdin);
-		return (0);
+		exec_cmd_path(in, cmd, m);
 	}
-	else if ((m->pid = fork()) == 0)
-	{
-		if (in != 0)
-		{
-			dup2(in, 0);
-			close(in);
-		}
-		if (out != 1)
-		{
-			dup2(out, 1);
-			close(out);
-		}
-		possible_path = find_path(cmd->argvs[0], m->path);
-		if (possible_path == NULL)
-			possible_path = ft_strdup(cmd->argvs[0]);
-		int fd = open(possible_path, O_RDONLY);
-		if (fd < 0)
-		{
-			write (2, "minishell: ", 11);
-			write(2, possible_path, ft_strlen(possible_path));
-			ft_putendl_fd(": command not found", 2);
-			exit (127);
-		}
-		if (id == 0)
-			close (m->pipe_fd[id][0]);
-		if (execve (possible_path, cmd->argvs, g_global->env_var))
-			exit(126);
-	}
-	return m->pid;
+	return (m->pid);
 }
 
 int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
@@ -76,12 +66,12 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i], i);
+		g_global->pid = exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i]);
 		close(m->pipe_fd[i][1]);
 		in = m->pipe_fd[i][0];
 		i++;
 	}
-	g_global->pid = exec_process(in, 1, &cmd[i], &m[i], i);
+	g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
 	return (1);
 }
 
@@ -89,7 +79,7 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 **	exec_simple_pipe() execute commands with pipes only
 */
 
-void    exec_simple_pipe(t_cmd *cmd, t_data *m)
+void	exec_simple_pipe(t_cmd *cmd, t_data *m)
 {
 	int		i;
 	int		status;

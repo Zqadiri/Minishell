@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 13:54:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:14:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ void	print_error(char *file_error);
 */
 
 int		env_count(void); // ? move it to utils
-int		len(char **env);
-int		alpha(char *key);
 int		dup_env_var(char **env);
 char	**dup_env(void);
 char	**get_path(void);
@@ -106,6 +104,7 @@ int		set_env_var(char *key, char *new_path);
 ** Helpers 
 */
 
+int		exec_builtin(int in, int out, t_cmd *cmd, t_data *m);
 int		find_env(char *key);
 char	*get_env_var_by_key(char *key);
 char	*return_value(const char *s, int c);
@@ -113,10 +112,12 @@ int		get_str_by_char(char *str, char c);
 int		is_valid_env_key(char *arg);
 void	modify_env(char *arg, char *key);
 char	*get_env_var_by_key(char *key);
-int		ft_strlen_new(const char *str);
 int		is_builtin(t_cmd *cmd);
 int		pipe_all(t_cmd *cmd, t_data *m);
 void	restore_std(int saved_stdout, int saved_stdin);
+void	exec_cmd_path(int in, t_cmd *cmd, t_data *m);
+
+void	check_valid_fd(t_data *m, char *file_error, int fd);
 
 /*
 ** main

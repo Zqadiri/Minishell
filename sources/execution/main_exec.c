@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 17:07:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:44:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,50 +49,12 @@ int	dup_env_var(char **env)
 	return (1);
 }
 
-char	*find_path(char	*cmd, char **path)
-{
-	char	*temp;
-	char	*possible_path;
-	char	*pfree;
-	int		i;
-	int		fd;
-
-	i = -1;
-	fd = 0;
-	if (path == NULL)
-		return (NULL);
-	while (path[++i])
-	{
-		temp = ft_strjoin(path[i], "/");
-		pfree = temp;
-		possible_path = ft_strjoin(temp, cmd);
-		free(temp);
-		fd = open(possible_path, O_RDONLY);
-		if (fd >= 0)
-			return (possible_path);			
-	}
-	return (NULL);
-}
-
 void	restore_std(int saved_stdout, int saved_stdin)
 {
 	dup2(saved_stdout, 1);
 	dup2(saved_stdin, 0);
 	close(saved_stdout);
 	close(saved_stdin);
-}
-
-int	is_builtin(t_cmd *cmd)
-{
-	char	**args;
-
-	args = cmd->argvs;
-	if ((ft_strequ(args[0], "pwd")) || (ft_strequ(args[0], "echo")) || \
-	(ft_strequ(args[0], "env")) || (ft_strequ(args[0], "exit")) || \
-	(ft_strequ(args[0], "export")) || (ft_strequ(args[0], "unset")) || \
-	(ft_strequ(args[0], "cd")))
-		return (1);
-	return (0);
 }
 
 /*
@@ -116,7 +78,5 @@ int	execution(t_cmd *cmd)
 	}
 	else
 		exec_multiple_cmd(cmd, m);
-	// restore_std(m->saved_stdout, m->saved_stdin);
-	// free(m);
 	return (1);
 }
