@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 14:14:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/07 17:34:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,67 +58,6 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 	return (m->pid);
 }
 
-void	setup_in(t_cmd *cmd, t_data *m)
-{
-	int	cpt;
-	int	fd;
-
-	cpt = (count(cmd, less));
-	if (cpt == 0)
-	{
-		m->redir->infile = 0;
-		return ;
-	}
-	cpt = 0;
-	while (cpt < cmd->redir_nbr)
-	{
-		if (cmd->r[cpt].type == less)
-		{
-			fd = open(cmd->r[cpt].filename, O_RDWR);
-			if (fd < 0)
-			{
-				print_error(cmd->r[cpt].filename);
-				m->redir->err = 1;
-				return ;
-			}
-		}
-		cpt++;
-	}
-	m->redir->infile = fd;
-}
-
-void	setup_out(t_cmd *cmd, t_data *m)
-{
-	int	i;
-	int	fd;
-
-	i = 0;
-	while (i < cmd->redir_nbr)
-	{
-		if (cmd->r[i].type == great)
-		{
-			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
-			if (fd < 0)
-			{
-				m->redir->err = 1;
-				print_error(cmd->r[i].filename);
-			}
-		}
-		else if (cmd->r[i].type == greater)
-		{
-			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
-			// check_valid_fd(m, cmd->r[i].filename, fd);
-			if (fd < 0)
-			{
-				m->redir->err = 1;
-				print_error(cmd->r[i].filename);
-			}
-		}
-		i++;
-	}
-	m->redir->outfile = fd;
-}
-
 void	setup_all_redirections(t_cmd *cmd, t_data *m)
 {
 	int	i;
@@ -138,8 +77,6 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 {
 	int		i;
 	int		in;
-	int		status;
-	int		signal;
 
 	i = -1;
 	in = 0;
@@ -156,18 +93,7 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	}
 	g_global->pid = exec_proc(in, 1, &cmd[i], &m[i], i);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
-	while (waitpid(-1, &status, 0) > 0)
-	{
-		if (WIFEXITED(status))
-			g_global->exit_status = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-		{
-			signal = WTERMSIG(status);
-			if (signal == SIGQUIT)
-				ft_putstr_fd("quit!", 1);
-			g_global->exit_status = signal + 128;
-		}		
-	}
+	wait_children();
 	return (1);
 }
 
