@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 14:21:18 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 17:54:15 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	is_notempty(void **ptr)
 	}
 }
 
-void	free_tree(t_ast **astt)
+void	free_tree(t_ast *ast)
 {
 	int	j;
 	int	k;
 
-	t_ast *ast;
-	ast = *astt;
+	// t_ast *ast;
+	// ast = *astt;
 	if (!ast)
 		return ;
 	// printf("%u\n", ast->type);
@@ -41,7 +41,8 @@ void	free_tree(t_ast **astt)
 		{
 			if (ast->pipecmd_values[j])
 			{
-				free_tree(&(ast->pipecmd_values[j]));
+				free_tree((ast->pipecmd_values[j]));
+				ast->pipecmd_values[j] = NULL;
 				printf("here2\n");
 			}
 		}
@@ -67,7 +68,7 @@ void	free_tree(t_ast **astt)
 		free(ast->args);
 	}
 	free(ast);
-	*astt = NULL;
+	// *astt = NULL;
 }
 
 void	free_tree2(t_ast **ast)
@@ -84,7 +85,10 @@ void	free_tree2(t_ast **ast)
 		while (++i < ast[j]->pipecmd_size)
 		{
 			if (ast[j]->pipecmd_values[i])
-				free_tree(&(ast[j]->pipecmd_values[i]));
+			{
+				free_tree((ast[j]->pipecmd_values[i]));
+				ast[j]->pipecmd_values[i] = NULL;
+			}
 		}
 		free(ast[j]);
 		ast[j] = NULL;
