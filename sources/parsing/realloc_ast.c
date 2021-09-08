@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc_ast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 17:04:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:41:40 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_ast	**realloc_ast_node(t_ast *ast, int size)
 		while (++i < ast->pipecmd_size)
 			new[i] = ast->pipecmd_values[i];
 		new[i] = NULL;
-		free_tree2(ast->pipecmd_values);
+		free(ast->pipecmd_values);
+		// free_tree2(ast->pipecmd_values);
 		ast->pipecmd_values = NULL;
 		return (new);
 	}
@@ -44,6 +45,7 @@ t_token	**realloc_ast_args(t_ast *ast, int size)
 			new[i] = ast->args[i];
 		new[i] = NULL;
 		free(ast->args);
+		ast->args = NULL;
 		return (new);
 	}
 	return (NULL);

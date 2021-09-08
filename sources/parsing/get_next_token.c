@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/06 13:11:40 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 17:11:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ char	*tokenize_dquoted_text(t_lexer *l)
 		}
 	}
 	if (!multi_lines(l, DQUOTE))
+	{
+		free(str);
 		return (NULL);
+	}
 	l->is_quoted = 1;
 	readchar(l);
 	return (str);
@@ -83,7 +86,10 @@ char	*tokenize_squoted_text(t_lexer *l)
 		readchar(l);
 	}
 	if (!multi_lines(l, SQUOTE))
+	{
+		free(str);
 		return (NULL);
+	}
 	l->is_quoted = 1;
 	readchar(l);
 	return (str);

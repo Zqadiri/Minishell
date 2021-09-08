@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/07 16:22:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:55:21 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ t_cmd	*visitor(t_ast *ast)
 		while (++j < ast->pipecmd_size && n < ast->pipecmd_size)
 		{
 			init_cmd(z[n]);
-			// printf("cmd[%d] -------\n", n);
 			visitor_args(ast->pipecmd_values[j], z, n);
 			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
 				z[n].type = pip;
@@ -116,11 +115,10 @@ t_cmd	*visitor(t_ast *ast)
 			n++;
 		}
 		int i = -1;
-		// printf("n = %d\n", n);
 		while (++i < n)
 			z[i].nbr_cmd = n;
 	}
-	// print_cmd(z, n);
+	print_tree(ast);
 	free_tree(ast);
 	return (z);
 }
