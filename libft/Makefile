@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 12:11:32 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/07 12:02:19 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/09/08 17:18:12 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,9 @@ AR = ar
 OBJ = $(SRC:.c=.o)
 OBJB = $(SRCB:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
-SRCB =  ft_lstlast_bonus.c\
-		ft_lstsize_bonus.c\
-		ft_lstadd_front_bonus.c\
-		ft_lstnew_bonus.c\
-		ft_lstadd_back_bonus.c\
 
 SRC = ft_memalloc.c\
+	  ft_is_white_space.c\
 	  ft_memset.c\
 	  ft_strequ.c\
 	  ft_strcmp.c\
@@ -51,7 +47,6 @@ SRC = ft_memalloc.c\
 	  ft_strdup.c\
 	  ft_substr.c\
 	  ft_strjoin.c\
-	  ft_strtrim.c\
 	  ft_split.c\
 	  ft_itoa.c\
 	  ft_strmapi.c\
@@ -60,6 +55,7 @@ SRC = ft_memalloc.c\
 	  ft_putendl_fd.c\
 	  ft_putnbr_fd.c\
 	  len.c\
+	  ft_strchar.c\
 	  ft_strlen_new.c\
 
 		  
@@ -71,12 +67,7 @@ $(NAME):
 	 	@$(AR) rsc $(NAME) $(OBJ)
 		@ranlib $(NAME)
 clean:
-		@rm -rf $(OBJ) $(OBJB)
-
-bonus:
-		@$(CC) $(CFLAGS) -c $(SRCB)
-	 	@$(AR) rsc $(NAME) $(OBJB)
-		@ranlib $(NAME)
+		@rm -rf $(OBJ)
 
 fclean: clean
 		@rm -rf $(NAME)

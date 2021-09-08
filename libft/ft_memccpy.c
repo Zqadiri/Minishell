@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:10:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/05 15:55:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 17:20:04 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	{
 		if (((unsigned char *)src)[i] == val)
 		{
-			((unsigned char*)dest)[i] = ((unsigned char *)src)[i];
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 			return (&((unsigned char *)dest)[i + 1]);
 		}
 		else

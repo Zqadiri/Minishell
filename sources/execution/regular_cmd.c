@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 16:39:00 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:02:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,22 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 {
 	pid_t	child_pid;
-	int		status;
 
 	if (is_builtin(cmd))
 		return (check_builtin(cmd));
 	else
 	{
 		child_pid = fork();
+		g_global->pid = child_pid;
 		if (child_pid < 0 )
-		{
-			fprintf(stderr, "Fork fails: \n");
-			return (1);
-		}
+			fork_failed();
 		else if (child_pid == 0)
 		{
 			if (!ft_strcmp(cmd->argvs[0], "\0"))
 				exit(0);
 			find_cmd_path(cmd, m);
 		}
-		else if (child_pid > 0)
-			waitpid(child_pid, &status, WCONTINUED);
+		wait_children();
 	}
 	return (1);
 }

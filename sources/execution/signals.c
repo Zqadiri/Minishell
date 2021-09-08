@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 14:34:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 15:03:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	is_child_process(int signum)
 	{
 		if (signum == SIGQUIT)
 		{
-			ft_putstr_fd("Quit\n", 1);
+			ft_putstr_fd("Quit: 3\n", 1);
 			g_global->exit_status = 131;
 		}
 		else if (signum == SIGINT)
