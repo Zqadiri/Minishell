@@ -107,7 +107,6 @@ t_cmd	*visitor(t_ast *ast)
 		while (++j < ast->pipecmd_size && n < ast->pipecmd_size)
 		{
 			init_cmd(z[n]);
-			// printf("cmd[%d] -------\n", n);
 			visitor_args(ast->pipecmd_values[j], z, n);
 			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
 				z[n].type = pip;
@@ -116,11 +115,10 @@ t_cmd	*visitor(t_ast *ast)
 			n++;
 		}
 		int i = -1;
-		// printf("n = %d\n", n);
 		while (++i < n)
 			z[i].nbr_cmd = n;
 	}
-	// print_cmd(z, n);
+	print_tree(ast);
 	free_tree(&ast);
 	return (z);
 }

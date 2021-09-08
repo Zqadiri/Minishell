@@ -24,7 +24,8 @@ t_ast	**realloc_ast_node(t_ast *ast, int size)
 		while (++i < ast->pipecmd_size)
 			new[i] = ast->pipecmd_values[i];
 		new[i] = NULL;
-		free_tree2(ast->pipecmd_values);
+		free(ast->pipecmd_values);
+		// free_tree2(ast->pipecmd_values);
 		ast->pipecmd_values = NULL;
 		return (new);
 	}

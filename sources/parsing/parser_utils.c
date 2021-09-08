@@ -22,15 +22,17 @@ t_parser	*init_parser(t_lexer *l)
 	if (!p)
 		return (NULL);
 	p->lexer = l;
+	p->prev_token = NULL;
 	p->curr_token = get_next_token(l);
 	if (p->curr_token->type == pip)
 	{
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
+		// free(p->curr_token->value);
+		// p->curr_token->value = NULL;
 		free_parser2(&p);
 		return (NULL);
 	}
-	p->prev_token = NULL;
 	if (p->curr_token->type == illegal)
 	{
 		// free(p->lexer->buffer);//?
@@ -39,6 +41,7 @@ t_parser	*init_parser(t_lexer *l)
 		// free(p);//?
 		// free(l->buffer);//?
 		// free(l);//?
+		free_parser2(&p);
 		return (NULL);
 	}
 	return (p);
@@ -83,7 +86,6 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 
 	if (p->curr_token->type == illegal)
 		return (NULL);
-	printf("3iiiiw\n");
 	if (!syntax_error(p))
 		return (NULL);
 	if (is_redic(p->prev_token))

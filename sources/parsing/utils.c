@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/07 19:09:24 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 16:59:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l)
 	if (!t)
 		return (NULL);
 	if (s)
-	{
-		printf("3iww %s\n", s);
 		t->value = ft_strdup(s);
-	}
 		// free(s);//? bus on unknown address
 	else
 		t->value = NULL;
@@ -82,6 +79,8 @@ char	*ft_joinfree(char *s1, char *s2)
 {
 	char	*s;
 
+	if (!s2)
+		return (s1);
 	s = ft_strjoin(s1, s2);
 	free(s1);
 	free(s2);

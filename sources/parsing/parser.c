@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/07 19:21:57 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 16:36:02 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ t_ast	*parse_args(t_parser *p)
 				printf("**5\n");
 				free(p->prev_token->value);
 				p->prev_token->value = NULL;
-				free(p->prev_token);
-				p->prev_token = NULL;
+				// free(p->prev_token);
+				// p->prev_token = NULL;
 			}
 			p->prev_token = p->curr_token;
 			p->curr_token = get_next_token(p->lexer);
-			printf("prev -> <%s>, curr -> <%s>\n", p->prev_token->value, p->curr_token->value);
+			// printf("prev -> <%s>, curr -> <%s>\n", p->prev_token->value, p->curr_token->value);
 			break ;
 		}
 		if (ast->args[ast->args_size - 1]->type == eof)
@@ -138,7 +138,6 @@ t_ast	*parse_pipe(t_parser *p)
 			ast->pipecmd_values = realloc_ast_node(ast, ast->pipecmd_size + 1);
 		}
 	}
-	// free_parser(temp);
 	free_parser(&p);
 	return (ast);
 }

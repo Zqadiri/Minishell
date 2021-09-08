@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/07 19:23:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 17:02:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,34 @@ int main(int argc, char **argv, char **env)
 		if (p)
 		{
 			ast = parse_pipe(p);
+			// p = NULL;
 			if (ast)
 			{
 				z = visitor(ast);
 				if (z)
 				{
-					// execution(z);
+					execution(z);
 					free_cmd(z);
 				}
 			}
+		}
+		// if (p)
+		// {
+		// 	printf("3333\n");
+		// 	if (p->prev_token == NULL)
+		// 	printf("3iw\n");
+		// }
+		if (p)
+		{
+			if (p->lexer)
+			{
+				if(p->lexer->buffer)
+					free(p->lexer->buffer);
+				p->lexer->buffer = NULL;
+				free(p->lexer);
+				p->lexer = NULL;
+			}
+			free(p);
 		}
 		// system("leaks minishell");
 	}
