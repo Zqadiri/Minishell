@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/07 19:19:29 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 18:38:56 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_parser	*init_parser(t_lexer *l)
 			p->curr_token->value);
 		// free(p->curr_token->value);
 		// p->curr_token->value = NULL;
-		free_parser2(&p);
+		free_parser2(p);
 		return (NULL);
 	}
 	if (p->curr_token->type == illegal)
@@ -41,7 +41,7 @@ t_parser	*init_parser(t_lexer *l)
 		// free(p);//?
 		// free(l->buffer);//?
 		// free(l);//?
-		free_parser2(&p);
+		free_parser2(p);
 		return (NULL);
 	}
 	return (p);
@@ -121,7 +121,7 @@ int	syntax_error(t_parser *p)
 	{
 		print_msg("minishell: syntax error near unexpected token `newline'\n",
 			NULL);
-		return (0);
+			return (0);
 	}
 	return (1);
 }

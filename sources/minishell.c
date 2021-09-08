@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 18:01:13 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 19:05:06 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int main(int argc, char **argv, char **env)
 		}
 		// else
 		// 	continue;
+		
 		p = init_parser(l);
 		if (p)
 		{
@@ -133,18 +134,9 @@ int main(int argc, char **argv, char **env)
 		// 	if (p->prev_token == NULL)
 		// 	printf("3iw\n");
 		// }
-		if (p)
-		{
-			// if (p->lexer)
-			// {
-			// 	if(p->lexer->buffer)
-			// 		free(p->lexer->buffer);
-			// 	p->lexer->buffer = NULL;
-			// 	free(p->lexer);
-			// 	p->lexer = NULL;
-			// }
-			// free(p);
-		}
+		// p = NULL;
+		// if (p)
+		// 	free_parser3(p);
 		system("leaks minishell");
 	}
 	return (0);

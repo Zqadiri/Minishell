@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 17:54:15 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 18:51:31 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,8 @@ void	free_tree3(t_token **token, int size)
 	is_notempty((void **)token);
 }
 
-void	free_parser(t_parser **pp)
+void	free_parser(t_parser *p)
 {
-	t_parser *p;
-
-	p = *pp;
 	if (!p)
 		return ;
 	if (p->lexer)
@@ -126,15 +123,11 @@ void	free_parser(t_parser **pp)
 		free(p->lexer);
 		p->lexer = NULL;
 	}
-	// free(p);
-	// *pp = NULL;
 }
 
-void	free_parser2(t_parser **pp)
+void	free_parser2(t_parser *p)
 {
-	t_parser *p;
 
-	p = *pp;
 	if (!p)
 		return ;
 	if (p->lexer)
@@ -147,7 +140,7 @@ void	free_parser2(t_parser **pp)
 	}
 	if (p->prev_token)
 	{
-		// printf("**3\n");
+		printf("**3\n");
 		if(p->prev_token->value)
 			free(p->prev_token->value);
 		p->prev_token->value = NULL;
@@ -156,15 +149,48 @@ void	free_parser2(t_parser **pp)
 	}
 	if (p->curr_token)
 	{
-		// printf("**4\n");
+		printf("**4\n");
 		if(p->curr_token->value)
 			free(p->curr_token->value);
 		p->curr_token->value = NULL;
 		free(p->curr_token);
 		p->curr_token = NULL;
 	}
-	free(*pp);
-	*pp = NULL;
+	free(p);
+}
+
+void	free_parser3(t_parser *p)
+{
+
+	if (!p)
+		return ;
+	if (p->lexer)
+	{
+		if(p->lexer->buffer)
+			free(p->lexer->buffer);
+		p->lexer->buffer = NULL;
+		free(p->lexer);
+		p->lexer = NULL;
+	}
+	// if (p->prev_token)
+	// {
+	// 	printf("**3\n");
+	// 	if(p->prev_token->value)
+	// 		free(p->prev_token->value);
+	// 	p->prev_token->value = NULL;
+		// free(p->prev_token);
+		// p->prev_token = NULL;
+	// }
+	if (p->curr_token)
+	{
+		printf("**4\n");
+		// if(p->curr_token->value)
+		// 	free(p->curr_token->value);
+		// p->curr_token->value = NULL;
+		free(p->curr_token);
+		p->curr_token = NULL;
+	}
+	free(p);
 }
 
 void	free_cmd(t_cmd *z)
