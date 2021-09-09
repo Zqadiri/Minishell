@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 15:41:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 16:52:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_tree(t_ast *ast)
 			{
 				free_tree((ast->pipecmd_values[j]));
 				ast->pipecmd_values[j] = NULL;
-				printf("here2\n");
+				// printf("here2\n");
 			}
 		}
 		free(ast->pipecmd_values);

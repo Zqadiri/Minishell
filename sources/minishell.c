@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/09/09 16:59:37 by iidzim           ###   ########.fr       */
+=======
+/*   Updated: 2021/09/09 16:51:24 by zqadiri          ###   ########.fr       */
+>>>>>>> 797b0fd95bec57a4f139cf405eef1e8a9c835b62
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +119,6 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
+
+// ! heap-buffer-overflow get_stop_word parser_utils.c:62 > cat << eof
+// ! < Makefile <<'EOF' |  sed 's/l/e/g'

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 12:06:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:26:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ void	free_m(t_data *m, int nbr_cmd)
 		free(m[j].redir);
 		free(m[j].path);
 	}
-	j = -1;
-	while (++j < nbr_cmd - 1)
-	{
-		i = -1;
-		while (m[j].pipe_fd[++i] != NULL)
-			free(m[j].pipe_fd[i]);
-		free (m[j].pipe_fd);
-	}
+	// j = -1;
+	// while (++j < nbr_cmd - 1)
+	// {
+	// 	i = -1;
+	// 	while (m[j].pipe_fd[++i] != NULL)
+	// 		free(m[j].pipe_fd[i]);
+	// 	free (m[j].pipe_fd);
+	// }
 	free (m);
 	m = NULL;
 }

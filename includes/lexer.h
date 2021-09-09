@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 16:58:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:43:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_token	*get_next_token(t_lexer *l);
 
 int		peek_char(t_lexer *l);
 char	*envar_token(t_lexer *l);
+int		valid_envar(char c);
 
 /*
 ** utils.c
@@ -97,5 +98,6 @@ int		ftstrcmp(char *s1, char *s2);
 char	*ft_joinchar(char *s, char c);
 int		is_valid_id(char *str);
 char	*ft_joinfree(char *s1, char *s2);
+char	*ft_getenv(char **env, char *str);
 
 #endif

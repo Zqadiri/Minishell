@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 14:10:16 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:44:23 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,3 @@ typedef struct s_global
 t_global	*g_global;
 
 #endif
-
-// RI
-// UP
