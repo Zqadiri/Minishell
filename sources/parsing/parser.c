@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:37:40 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 19:05:00 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 14:38:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,6 @@ int	init_parse_args(t_ast *ast, t_parser *p)
 	ast->args[ast->args_size - 1] = check_token(p, ast);
 	if (!ast->args[ast->args_size - 1])
 	{
-		// free_parser2(p);
-		// free(p->lexer->buffer);
-		// free(p->curr_token->value);
-		// free(p->curr_token);
-		// free(p);
-		// ?free_tree3(ast->args, ast->args_size);
-		// ?free_tree(ast);
 		return (0);
 	}
 	return (1);
@@ -100,7 +93,6 @@ t_ast	*parse_args(t_parser *p)
 				// temp = p->prev_token;
 				// free(temp->value);
 				// free (temp);
-				printf("**5\n");
 				// free(p->prev_token->value);
 				// p->prev_token->value = NULL;
 				// free(p->prev_token);
@@ -109,7 +101,6 @@ t_ast	*parse_args(t_parser *p)
 			
 			p->prev_token = p->curr_token;
 			p->curr_token = get_next_token(p->lexer);
-			// printf("**5\n");
 			// printf("prev -> <%s>, curr -> <%s>\n", p->prev_token->value, p->curr_token->value);
 			break ;
 		}
@@ -144,7 +135,6 @@ t_ast	*parse_pipe(t_parser *p)
 		if (!ast->pipecmd_values[ast->pipecmd_size - 1])
 		{
 			// printf("here\n");
-			// free_parser(p);
 			// free(*ast->pipecmd_values);
 			// printf("here\n");
 			free_tree(ast);

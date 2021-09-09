@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 19:11:08 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 14:40:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	free_tree(t_ast *ast)
 		free(ast->args);
 	}
 	free(ast);
-	// *astt = NULL;
+	//?ast = NULL;//
 }
 
 void	free_tree2(t_ast **ast)

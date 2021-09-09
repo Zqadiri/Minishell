@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   n_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 16:40:58 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:19:21 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	exec_cmd_path(int in, t_cmd *cmd, t_data *m)
 	int		fd;
 	char	*possible_path;
 
-	if (!ft_strcmp(cmd->argvs[0], "\0"))
+	if (!cmd->argvs)
 		exit(0);
 	possible_path = find_path(cmd->argvs[0], m->path);
 	if (possible_path == NULL)

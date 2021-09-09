@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 15:03:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:44:42 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ int	execution(t_cmd *cmd)
 	}
 	else
 		exec_multiple_cmd(cmd, m);
-	free_m(m, cmd->nbr_cmd);
+	// free_m(m, cmd->nbr_cmd);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 19:11:40 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 15:21:01 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	initialize(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
-	// signal(SIGINT, sigint_handler);
-	// signal(SIGQUIT, sigint_handler);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigint_handler);
 }
 
 void	quit_minishell(void)
@@ -76,6 +76,11 @@ void	parse(t_lexer *l)
 			}
 		}
 	}
+	if (p)
+	{
+		free(p);
+		p = NULL;
+	}
 }
 
 int	main(int argc, char **argv, char **env)
@@ -83,12 +88,12 @@ int	main(int argc, char **argv, char **env)
 	t_lexer		*l;
 	char		*buff;
 
-	l = NULL;
-	buff = NULL;
 	initialize(argc, argv, env);
 	while (1)
 	{
+		l = NULL;
 		l = init_l(l);
+		buff = NULL;
 		buff = readline("minishell$> ");
 		if (!buff)
 			quit_minishell();
@@ -103,6 +108,14 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
+		// free(l->buffer);
+		// l->buffer = NULL;
+		// if (l)
+		// {
+		// 	free(l);
+		// 	l = NULL;
+		// }
+		system("leaks minishell");
 	}
 	return (0);
 }
