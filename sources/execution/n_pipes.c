@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 16:40:58 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:22:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	{
 		g_global->pid = exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i]);
 		close(m->pipe_fd[i][1]);
+		if (in != 0)
+			close(in);
 		in = m->pipe_fd[i][0];
 		i++;
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/08 17:57:01 by iidzim           ###   ########.fr        #
+#    Updated: 2021/09/09 12:27:31 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS_EXEC		=	./sources/execution/builtins/cd/cd_builtin.c\
 					./sources/execution/error_functions.c\
 					./sources/execution/n_pipes_red.c\
 					./sources/execution/signals.c\
+					./sources/execution/merge.c\
 					./sources/execution/utils.c
 
 
@@ -51,7 +52,7 @@ OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
 INCLUDE 		= 	-I includes -L includes
 CC				= 	gcc
-FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g #-fsanitize=address
+FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g -fsanitize=address
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 

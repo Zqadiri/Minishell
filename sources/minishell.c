@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 19:11:40 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 12:50:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	initialize(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
-	// signal(SIGINT, sigint_handler);
-	// signal(SIGQUIT, sigint_handler);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigint_handler);
 }
 
 void	quit_minishell(void)
@@ -106,3 +106,6 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
+
+// ! heap-buffer-overflow get_stop_word parser_utils.c:62 > cat << eof
+// ! < Makefile <<'EOF' |  sed 's/l/e/g'

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 17:02:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:23:36 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 			fork_failed();
 		else if (child_pid == 0)
 		{
-			if (!ft_strcmp(cmd->argvs[0], "\0"))
+			if (!cmd->argvs)
 				exit(0);
 			find_cmd_path(cmd, m);
 		}

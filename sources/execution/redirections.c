@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 16:41:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 16:46:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 		{
 			fd = open(cmd->r[i].filename, O_RDWR);
 			m->redir->infile = fd;
-			if (fd < 0)
-			{
-				m->redir->err = 1;
-				print_error(cmd->r[i].filename);
-			}
+			check_valid_fd(m, cmd->r[i].filename, fd);
+		}
+		else if (cmd->r[i].type == here_doc)
+		{
+			printf ("|%s|\n", cmd->r->filename);
+			parse_here_doc(m);
 		}
 	}
 	if (!m->redir->err)
@@ -43,11 +44,9 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 void	setup_outfiles(t_cmd *cmd, t_data *m)
 {
 	int	i;
-	int	j;
 	int	fd;
 
 	i = -1;
-	j = 0;
 	while (++i < cmd->redir_nbr)
 	{
 		if (cmd->r[i].type == great && !m->redir->err)
@@ -55,14 +54,12 @@ void	setup_outfiles(t_cmd *cmd, t_data *m)
 			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
 			m->redir->outfile = fd;
 			check_valid_fd(m, cmd->r[i].filename, fd);
-			j++;
 		}
 		else if (cmd->r[i].type == greater && !m->redir->err)
 		{
 			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
 			m->redir->outfile = fd;
 			check_valid_fd(m, cmd->r[i].filename, fd);
-			j++;
 		}
 	}
 	if (!m->redir->err)
@@ -73,8 +70,8 @@ int	setup_redirections(t_cmd *cmd, t_data *m)
 {
 	int	i;
 
-	i = 0;
-	if (count(cmd, less) != 0)
+	i = 0;			
+	if ((count(cmd, less) != 0) || (count(cmd, here_doc) != 0))
 		setup_infiles(cmd, m);
 	if (((count(cmd, great) != 0) || (count(cmd, greater)) != 0) && \
 		!m->redir->err)

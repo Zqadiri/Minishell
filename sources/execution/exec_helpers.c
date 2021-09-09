@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:42:45 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 12:02:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 16:13:06 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,7 @@ void	init_m(t_data *m)
 	m->redir = (t_red *)malloc(sizeof(t_red));
 	m->redir->infile = 0;
 	m->redir->outfile = 0;
+	m->redir->in_heredoc = 0;
+	m->redir->filename_ = NULL;
 	m->redir->err = 0;
 }
