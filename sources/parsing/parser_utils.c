@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 16:02:25 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 18:13:03 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_parser	*init_parser(t_lexer *l)
 char	*get_stop_word(t_parser *p)
 {
 	int		i;
+	int		j;
 	char	*s;
 	char	*word;
 
@@ -51,9 +52,15 @@ char	*get_stop_word(t_parser *p)
 	s = ft_strdup(p->lexer->buffer);
 	if (p->curr_token->is_quoted == 0)
 	{
+		printf("end[%c]\n", s[i]);
+		j = i;
 		while (s[i] != 32 && s[i] != '<')
 			i--;
-		word = ft_substr(s, i + 1, p->lexer->curpos - i + 1);
+		i += 1;
+		printf("start |%c|\n", s[i]);
+		word = ft_substr(s, i, j);
+		printf("word = [%s]\n", word);
+		//? <<      abcdefghi
 	}
 	else
 	{
@@ -93,7 +100,6 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 		ast->redir_nbr += 1;
 		if (p->prev_token->type == here_doc)
 		{
-			printf("**6\n");
 			temp = p->curr_token->value;
 			p->curr_token->value = get_stop_word(p);
 			free(temp);

@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 14:45:23 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 17:05:51 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	visitor_args(t_ast *ast, t_cmd *z, int n)
 
 	x = (t_index){.k = 0, .l = 0, .m = 0};
 	init_cmdargs(ast, z, n);
-	while (x.k < ast->args_size && (ast->args[x.k]->type != eof
+	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof
 			|| ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id)
@@ -59,6 +59,7 @@ void	visitor_args(t_ast *ast, t_cmd *z, int n)
 	}
 	if (x.l == 0)
 	{
+		printf("k = %d\n", x.k);
 		free(z[n].argvs);
 		z[n].argvs = NULL;
 	}
@@ -118,7 +119,6 @@ t_cmd	*visitor(t_ast *ast)
 		{
 			init_cmd(z[n]);
 			visitor_args(ast->pipecmd_values[j], z, n);
-			printf("out\n");
 			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
 				z[n].type = pip;
 			else
