@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 19:10:16 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 15:49:12 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ t_token	*string_token(t_lexer *l)
 		if (!s && l->multi_line == 1)
 		{
 			free(temp2);
+			free(str);
 			return (init_token(illegal, NULL, l));
 		}
 		str = ft_joinfree(str, s);

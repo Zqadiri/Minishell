@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 12:50:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 16:51:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	parse(t_lexer *l)
 			}
 		}
 	}
+	if (p)
+		free(p);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -83,17 +85,23 @@ int	main(int argc, char **argv, char **env)
 	t_lexer		*l;
 	char		*buff;
 
-	l = NULL;
-	buff = NULL;
 	initialize(argc, argv, env);
 	while (1)
 	{
-		l = init_l(l);
+		buff = NULL;
 		buff = readline("minishell$> ");
 		if (!buff)
 			quit_minishell();
+		else if (buff[0] == '\0')
+		{
+			free(buff);
+			system("leaks minishell");
+			continue;
+		}
 		else
 		{
+			l = NULL;
+			l = init_l(l);
 			add_history(buff);
 			if (!is_white_space(buff))
 			{
@@ -103,6 +111,7 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
+		system("leaks minishell");
 	}
 	return (0);
 }

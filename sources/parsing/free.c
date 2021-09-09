@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 12:13:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 16:52:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	free_tree(t_ast *ast)
 		free(ast->args);
 	}
 	free(ast);
-	// *astt = NULL;
+	//?ast = NULL;//
 }
 
 void	free_tree2(t_ast **ast)
@@ -144,25 +144,15 @@ void	free_parser3(t_parser *p)
 		free(p->lexer);
 		p->lexer = NULL;
 	}
-	// if (p->prev_token)
-	// {
-	// 	printf("**3\n");
-	// 	if(p->prev_token->value)
-	// 		free(p->prev_token->value);
-	// 	p->prev_token->value = NULL;
-		// free(p->prev_token);
-		// p->prev_token = NULL;
-	// }
 	if (p->curr_token)
 	{
 		printf("**4\n");
-		// if(p->curr_token->value)
-		// 	free(p->curr_token->value);
-		// p->curr_token->value = NULL;
+		if(p->curr_token->value)
+			free(p->curr_token->value);
+		p->curr_token->value = NULL;
 		free(p->curr_token);
 		p->curr_token = NULL;
 	}
-	free(p);
 }
 
 void	free_cmd(t_cmd *z)
