@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 15:43:09 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 16:01:17 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,20 @@ int	main(int argc, char **argv, char **env)
 	initialize(argc, argv, env);
 	while (1)
 	{
-		l = NULL;
-		l = init_l(l);
 		buff = NULL;
 		buff = readline("minishell$> ");
 		if (!buff)
 			quit_minishell();
+		else if (buff[0] == '\0')
+		{
+			free(buff);
+			system("leaks minishell");
+			continue;
+		}
 		else
 		{
+			l = NULL;
+			l = init_l(l);
 			add_history(buff);
 			if (!is_white_space(buff))
 			{
@@ -105,13 +111,6 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
-		// free(l->buffer);
-		// l->buffer = NULL;
-		// if (l)
-		// {
-		// 	free(l);
-		// 	l = NULL;
-		// }
 		system("leaks minishell");
 	}
 	return (0);
