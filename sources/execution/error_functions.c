@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:46:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 16:45:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 16:39:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,10 @@ void	check_valid_fd(t_data *m, char *file_error, int fd)
 		perror(" ");
 		g_global->exit_status = 1;
 	}
+}
+
+void	fork_failed(void)
+{
+	write(2, "Fork failed", 11);
+	exit(EXIT_FAILURE);
 }

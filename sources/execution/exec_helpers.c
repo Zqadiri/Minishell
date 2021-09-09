@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:42:45 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 18:22:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 12:02:37 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*find_path(char	*cmd, char **path)
 {
 	char	*temp;
 	char	*possible_path;
-	char	*pfree;
 	int		i;
 	int		fd;
 
@@ -47,9 +46,7 @@ char	*find_path(char	*cmd, char **path)
 		return (NULL);
 	while (path[++i])
 	{
-		pfree = temp;
 		temp = ft_strjoin(path[i], "/");
-		// free(pfree);
 		possible_path = ft_strjoin(temp, cmd);
 		fd = open(possible_path, O_RDONLY);
 		if (fd >= 0)

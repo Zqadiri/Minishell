@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 12:01:51 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:17:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,41 +53,20 @@ void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *s1);
 char				*ft_substr(char const *s, int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
-// void				ft_putnbr_fd(int n, int fd);
 void				ft_putnbr_fd(long long n, int fd);
-t_list				*ft_lstnew(void *content);
-void				ft_lstadd_front(t_list **aslt, t_list *new);
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstlast(t_list *lst);
-void				ft_addlst_back(t_list **aslt, t_list *new);
 char				*ft_strndup(const char *s, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strequ(const char *s1, const char *s2);
 void				*ft_memalloc(size_t size);
 int					len(char **env);
 int					ft_strlen_new(const char *str);
-
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
-
-#  define BUFFER_SIZE 1024
-
-int					get_next_line(int fd, char **line);
-size_t				ft_strln(const char *s);
-unsigned int		ft_strlength(char *save);
-char				*ft_substri(char const *s, unsigned int start, size_t len);
-int					free_ptr(char **ptr, char **buff, int f, int r);
-int					ft_helper(char **line, char *save);
-char				*ft_join(char *s1, char *s2);
+int					is_white_space(char *buff);
 char				*ft_strchar(char *save, char c);
-char				*ft_strduplicate(const char *src);
 
-# endif
 #endif

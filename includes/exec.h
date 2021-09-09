@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/07 17:36:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:01:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_cmd
 	int				redir_nbr;
 	t_redir			*r;
 	t_token_type	type;
-}               t_cmd;
+}	t_cmd;
 
 typedef struct s_red
 {
@@ -91,18 +91,20 @@ void		print_error(char *file_error);
 void		setup_out(t_cmd *cmd, t_data *m);
 void		setup_in(t_cmd *cmd, t_data *m);
 void		wait_children(void);
+void		fork_failed(void);
 
 /*
 ** Utils
 */
 
-int			env_count(void); // ? move it to utils
+int			env_count(void);
 int			dup_env_var(char **env);
 char		**dup_env(void);
 char		**get_path(void);
 void		print_sorted_env(char **sorted_env);
 char		**realloc_new_env(int env_num);
 int			set_env_var(char *key, char *new_path);
+void		free_m(t_data *m, int nbr_cmd);
 
 /*
 ** Helpers 

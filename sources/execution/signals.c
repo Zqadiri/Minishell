@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 17:03:06 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 19:11:25 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 // 	{
 // 		if (signum == SIGQUIT)
 // 		{
-// 			ft_putstr_fd("Quit\n", 1);
+// 			ft_putstr_fd("Quit: 3\n", 1);
 // 			g_global->exit_status = 131;
 // 		}
 // 		else if (signum == SIGINT)

@@ -6,34 +6,19 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 20:17:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 18:51:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 19:11:08 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	is_notempty(void **ptr)
-{
-	char *s;
-
-	s = (char *)(*ptr);
-	if (s)
-	{
-		free(s);
-		*ptr = NULL;
-	}
-}
 
 void	free_tree(t_ast *ast)
 {
 	int	j;
 	int	k;
 
-	// t_ast *ast;
-	// ast = *astt;
 	if (!ast)
 		return ;
-	// printf("%u\n", ast->type);
 	if (ast->type == pipe_ast)
 	{
 		j = -1;
@@ -95,19 +80,6 @@ void	free_tree2(t_ast **ast)
 	}
 	free(*ast);
 	*ast = NULL;
-}
-
-void	free_tree3(t_token **token, int size)
-{
-	int j;
-
-	j = -1;
-	while (++j < size - 1)
-	{
-		// printf("**2\n");
-		is_notempty((void **)(token[j]->value));
-	}
-	is_notempty((void **)token);
 }
 
 void	free_parser(t_parser *p)

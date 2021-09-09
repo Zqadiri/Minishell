@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:04:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/17 15:05:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:20:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	*ft_memalloc(size_t size)
 {
 	void	*p;
 
-	if (!(p = malloc(size)))
+	p = malloc(size);
+	if (!p)
 		return (NULL);
 	ft_bzero(p, size);
 	return (p);

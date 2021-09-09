@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 22:52:00 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/05 15:59:05 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/08 17:20:58 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,13 @@ char	**ft_split(const char *s, char c)
 	i = -1;
 	k = 0;
 	nb_words = ft_nbwords((const char *)s, c);
-	if (!(tab = (char **)malloc(sizeof(*tab) * (nb_words + 1))))
-		return (NULL);
+	(tab = (char **)malloc(sizeof(*tab) * (nb_words + 1)));
 	while (s[++i] != '\0')
 	{
 		if (s[i] != c)
 		{
 			len = ft_wordlen(s, c, i);
-			if (!(tab[k++] = ft_substr(s, i, len)))
-				return (ft_free(tab, k));
+			tab[k++] = ft_substr(s, i, len);
 			i = i + len - 1;
 		}
 	}
