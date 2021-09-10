@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/09/09 16:59:37 by iidzim           ###   ########.fr       */
-=======
-/*   Updated: 2021/09/09 16:51:24 by zqadiri          ###   ########.fr       */
->>>>>>> 797b0fd95bec57a4f139cf405eef1e8a9c835b62
+/*   Updated: 2021/09/10 16:31:40 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +34,8 @@ void	initialize(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
-	// signal(SIGINT, sigint_handler);
-	// signal(SIGQUIT, sigint_handler);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigint_handler);
 }
 
 void	quit_minishell(void)
@@ -76,7 +72,8 @@ void	parse(t_lexer *l)
 			if (z)
 			{
 				execution(z);
-				free_cmd(z);
+				if (z)
+					free_cmd(z);
 			}
 		}
 	}
@@ -100,7 +97,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			free(buff);
 			// system("leaks minishell");
-			continue;
+			continue ;
 		}
 		else
 		{

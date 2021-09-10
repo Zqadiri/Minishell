@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/09 14:17:29 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/10 13:13:34 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exec_builtin(int in, int out, t_cmd *cmd, t_data *m)
 
 int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 {
-	if (cmd->argvs != NULL && is_builtin(cmd))//?
+	if (cmd->argvs != NULL && is_builtin(cmd))
 		return (exec_builtin(in, out, cmd, m));
 	m->pid = fork();
 	if (m->pid == 0)

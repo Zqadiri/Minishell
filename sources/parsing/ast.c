@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 17:05:51 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/10 12:19:10 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ void	visitor_args(t_ast *ast, t_cmd *z, int n)
 
 	x = (t_index){.k = 0, .l = 0, .m = 0};
 	init_cmdargs(ast, z, n);
+	if ((ast->args_size - 1) == (ast->redir_nbr * 2))
+		z[n].argvs = NULL;
 	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof
 			|| ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id)
-		{
 			z[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
-			// printf("args[%d] = [%s]\n", x.l - 1, z[n].argvs[x.l - 1]);
-		}
 		else
 		{
 			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1
@@ -53,22 +52,11 @@ void	visitor_args(t_ast *ast, t_cmd *z, int n)
 				z[n].r[x.m].type = ast->args[x.k - 1]->type;
 				z[n].r[x.m].is_quoted = ast->args[x.k]->is_quoted;
 				z[n].r[x.m++].filename = ft_strdup(ast->args[x.k++]->value);
-				// printf("[%s] - [%u]\n", z[n].r[x.m - 1].filename, z[n].r[x.m - 1].type);
 			}
 		}
 	}
-	if (x.l == 0)
-	{
-		printf("k = %d\n", x.k);
-		free(z[n].argvs);
-		z[n].argvs = NULL;
-	}
-	else
-	{
-		printf("ok\n");
-		printf("size = %d  l = %d\n", ast->args_size, x.l);
+	if (x.l != 0)
 		z[n].argvs[x.l] = NULL;
-	}
 }
 
 void	init_cmd(t_cmd z)
@@ -79,57 +67,52 @@ void	init_cmd(t_cmd z)
 	z.r = NULL;
 }
 
-void	print_cmd(t_cmd *z, int n)
-{
-	// printf("in\n");
-	int i;
-	int j;
+// void	print_cmd(t_cmd *z, int n)
+// {
+// 	int	i;
+// 	int	j;
 
-	(void)n;
-	i = -1;
-	while (++i < z[0].nbr_cmd)
-	{
-		j = -1;
-		while (z[i].args_size > ++j)
-			printf("cmd[%d].args[%d] = [%s]\n", i, j, z[i].argvs[j]);
-		j = -1;
-		while (z[i].redir_nbr > ++j)
-		{
-			printf("cmd[%d].file[%d] = [%s] - ", i, j, z[i].r[j].filename);
-			printf("cmd[%d].type[%d] = [%u]\n", i, j, z[i].r[j].type);
-		}
-	}
-	printf("out\n");
-}
+// 	(void)n;
+// 	i = -1;
+// 	while (++i < z[0].nbr_cmd)
+// 	{
+// 		j = -1;
+// 		while (z[i].args_size > ++j)
+// 			printf("cmd[%d].args[%d] = [%s]\n", i, j, z[i].argvs[j]);
+// 		j = -1;
+// 		while (z[i].redir_nbr > ++j)
+// 		{
+// 			printf("cmd[%d].file[%d] = [%s] - ", i, j, z[i].r[j].filename);
+// 			printf("cmd[%d].type[%d] = [%u]\n", i, j, z[i].r[j].type);
+// 		}
+// 	}
+// }
 
 t_cmd	*visitor(t_ast *ast)
 {
 	t_cmd	*z;
-	int		j;
-	int		n;
+	t_index	x;
 
+	x = (t_index){.k = 0, .l = -1, .m = -1};
 	z = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
 	if (!z)
 		return (NULL);
-	n = 0;
 	if (ast->type == pipe_ast)
 	{
-		j = -1;
-		while (++j < ast->pipecmd_size && n < ast->pipecmd_size)
+		while (++(x.l) < ast->pipecmd_size && x.k < ast->pipecmd_size)
 		{
-			init_cmd(z[n]);
-			visitor_args(ast->pipecmd_values[j], z, n);
-			if (ast->pipecmd_size >= 2 && j < ast->pipecmd_size - 1)
-				z[n].type = pip;
+			init_cmd(z[x.k]);
+			visitor_args(ast->pipecmd_values[x.l], z, x.k);
+			if (ast->pipecmd_size >= 2 && x.l < ast->pipecmd_size - 1)
+				z[x.k].type = pip;
 			else
-				z[n].type = eof;
-			n++;
+				z[x.k].type = eof;
+			(x.k)++;
 		}
-		int i = -1;
-		while (++i < n)
-			z[i].nbr_cmd = n;
+		x.m = -1;
+		while (++(x.m) < x.k)
+			z[x.m].nbr_cmd = x.k;
 	}
-	// print_tree(ast);
 	free_tree(ast);
 	return (z);
 }

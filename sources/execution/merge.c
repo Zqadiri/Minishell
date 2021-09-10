@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 16:48:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/10 13:16:00 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	parse_here_doc(t_data *m)
 	}
 	else
 		m->redir->filename_ = random_file_name();
-	fd = open(m->redir->filename_,  O_RDONLY|O_WRONLY|O_CREAT, 0644);
+	fd = open(m->redir->filename_, O_RDONLY | O_WRONLY | O_CREAT, 0644);
 	if (fd < 0)
 		check_valid_fd(m, m->redir->filename_, fd);
 	while (1)
@@ -102,7 +102,7 @@ void	parse_here_doc(t_data *m)
 		buff = readline("> ");
 		// printf ("buff %s\n", buff); 
 		if (ft_strcmp(buff, "exit"))
-			break;
+			break ;
 		else
 		{
 			output = ft_strdup("");
@@ -112,12 +112,8 @@ void	parse_here_doc(t_data *m)
 	}
 	printf("output : %s\n", output);
 	ft_putendl_fd(output, fd);
-	printf ("out");	
+	printf("out");
 }
-
-
-
-
 
 // void	parse_here_doc(t_redir *r, t_data *m)
 // {

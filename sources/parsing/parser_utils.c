@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 18:13:03 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/10 14:27:55 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ t_parser	*init_parser(t_lexer *l)
 	{
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
-		free_parser2(p);
+		free_parser(p);
 		return (NULL);
 	}
 	if (p->curr_token->type == illegal)
 	{
 		free(l->buffer);
 		l->buffer = NULL;
-		free_parser2(p);
+		free_parser(p);
 		return (NULL);
 	}
 	return (p);
@@ -44,7 +44,6 @@ t_parser	*init_parser(t_lexer *l)
 char	*get_stop_word(t_parser *p)
 {
 	int		i;
-	int		j;
 	char	*s;
 	char	*word;
 
@@ -52,15 +51,10 @@ char	*get_stop_word(t_parser *p)
 	s = ft_strdup(p->lexer->buffer);
 	if (p->curr_token->is_quoted == 0)
 	{
-		printf("end[%c]\n", s[i]);
-		j = i;
 		while (s[i] != 32 && s[i] != '<')
 			i--;
 		i += 1;
-		printf("start |%c|\n", s[i]);
-		word = ft_substr(s, i, j);
-		printf("word = [%s]\n", word);
-		//? <<      abcdefghi
+		word = ft_substr(s, i, p->lexer->curpos - i);
 	}
 	else
 	{
@@ -121,7 +115,7 @@ int	syntax_error(t_parser *p)
 	{
 		print_msg("minishell: syntax error near unexpected token `newline'\n",
 			NULL);
-			return (0);
+		return (0);
 	}
 	return (1);
 }
