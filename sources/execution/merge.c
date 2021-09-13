@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 16:48:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 18:11:54 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*random_file_name(void)
 	return (name);
 }
 
-void	parse_here_doc(t_data *m)
+void	parse_here_doc(t_redir *r, t_data *m)
 {
 	char	*buff;
 	char	*output;
@@ -93,26 +93,28 @@ void	parse_here_doc(t_data *m)
 	}
 	else
 		m->redir->filename_ = random_file_name();
-	fd = open(m->redir->filename_,  O_RDONLY|O_WRONLY|O_CREAT, 0644);
+	fd = open(m->redir->filename_, O_RDONLY|O_WRONLY|O_CREAT|O_TRUNC, 0644);
+	printf ("fd :%d\n", fd);
 	if (fd < 0)
 		check_valid_fd(m, m->redir->filename_, fd);
+	m->redir->infile = fd;
 	while (1)
 	{
 		m->redir->in_heredoc = 1;
 		buff = readline("> ");
-		// printf ("buff %s\n", buff); 
-		if (ft_strcmp(buff, "exit"))
+		if (!ft_strcmp(buff, r->filename) || !buff)
+		{
+			printf ("break!\n");
 			break;
+		}
 		else
 		{
 			output = ft_strdup("");
 			output = ft_strjoin(output, buff);
+			ft_putendl_fd(output, fd);
 		}
 		m->redir->in_heredoc = 0;
-	}
-	printf("output : %s\n", output);
-	ft_putendl_fd(output, fd);
-	printf ("out");	
+	}	
 }
 
 

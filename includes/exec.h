@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/09 16:47:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/09 17:08:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,6 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m);
 int			execute_regular_cmd(t_cmd *cmd, t_data *m);
 void		close_all_pipes(int **fd, int n);
 void		sigint_handler(int sig);
-void		parse_here_doc(t_data *m);
+void		parse_here_doc(t_redir *r,t_data *m);
 
 #endif

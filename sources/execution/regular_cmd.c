@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/09 14:23:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/13 15:56:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 		exit (127);
 	}
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
-		exit (126);
+		exit (126); 
 }
 
 /*
-** execute_regular_cmd() executes regular command, commands with no
+** execute_regular_cmd() executes regular command, commands with 
 ** redirections & no pipes
 */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 16:02:25 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 17:18:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 		ast->redir_nbr += 1;
 		if (p->prev_token->type == here_doc)
 		{
-			printf("**6\n");
+			// printf("**6\n");
 			temp = p->curr_token->value;
 			p->curr_token->value = get_stop_word(p);
 			free(temp);

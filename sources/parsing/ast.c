@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 14:45:23 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/09 17:19:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	visitor_args(t_ast *ast, t_cmd *z, int n)
 	}
 	else
 	{
-		printf("ok\n");
-		printf("size = %d  l = %d\n", ast->args_size, x.l);
+		// printf("ok\n");
+		// printf("size = %d  l = %d\n", ast->args_size, x.l);
 		z[n].argvs[x.l] = NULL;
 	}
 }

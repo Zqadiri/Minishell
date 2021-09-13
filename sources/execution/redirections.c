@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/09 16:46:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/13 16:04:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 			check_valid_fd(m, cmd->r[i].filename, fd);
 		}
 		else if (cmd->r[i].type == here_doc)
-		{
-			printf ("|%s|\n", cmd->r->filename);
-			parse_here_doc(m);
-		}
+			parse_here_doc(cmd->r, m);
 	}
 	if (!m->redir->err)
 		dup2(m->redir->infile, 0);
@@ -81,7 +78,7 @@ int	setup_redirections(t_cmd *cmd, t_data *m)
 
 /*
 **	exec_single_cmd() executes single commands , 
-**	commands with redirections and no pipes
+**	commands with redirections and no pipes.
 */
 
 void	exec_single_cmd(t_cmd *cmd, t_data *m)
@@ -100,10 +97,7 @@ void	exec_single_cmd(t_cmd *cmd, t_data *m)
 	{
 		child_pid = fork();
 		if (child_pid < 0)
-		{
-			write (2, "Fork failed !\n", 14);
-			exit (EXIT_FAILURE);
-		}
+			fork_failed();
 		if (child_pid == 0)
 			find_cmd_path(cmd, m);
 		else
