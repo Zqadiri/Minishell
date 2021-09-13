@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/13 16:06:06 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/13 16:14:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 			check_valid_fd(m, cmd->r[i].filename, fd);
 		}
 		else if (cmd->r[i].type == here_doc)
+		{
+			printf ("%s\n", cmd->r[i].filename);
 			parse_here_doc(cmd->r, m);
+		}
 	}
 	if (!m->redir->err)
 		dup2(m->redir->infile, 0);

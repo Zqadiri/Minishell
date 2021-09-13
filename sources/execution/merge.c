@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/13 16:07:23 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/13 16:15:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	int		fd;
 
 	(void)r;
+	output = ft_strdup("");
 	if (m->redir->filename_ != NULL)
 	{
 		unlink(m->redir->filename_);
@@ -115,7 +116,7 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	}
 	printf("output : %s\n", output);
 	ft_putendl_fd(output, fd);
-	printf("out");
+	// printf("out");
 }
 
 // void	parse_here_doc(t_redir *r, t_data *m)
