@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 16:56:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/13 16:06:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	parse(t_lexer *l)
 			if (z)
 			{
 				execution(z);
-				free_cmd(z);
+				if (z)
+					free_cmd(z);
 			}
 		}
 	}
@@ -95,8 +96,8 @@ int	main(int argc, char **argv, char **env)
 		else if (buff[0] == '\0')
 		{
 			free(buff);
-			system("leaks minishell");
-			continue;
+			// system("leaks minishell");
+			continue ;
 		}
 		else
 		{

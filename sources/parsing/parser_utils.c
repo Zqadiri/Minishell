@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 17:18:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/13 16:06:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ t_parser	*init_parser(t_lexer *l)
 	{
 		print_msg("minishell: syntax error near unexpected token 1",
 			p->curr_token->value);
-		free_parser2(p);
+		free_parser(p);
 		return (NULL);
 	}
 	if (p->curr_token->type == illegal)
 	{
 		free(l->buffer);
 		l->buffer = NULL;
-		free_parser2(p);
+		free_parser(p);
 		return (NULL);
 	}
 	return (p);
@@ -53,7 +53,8 @@ char	*get_stop_word(t_parser *p)
 	{
 		while (s[i] != 32 && s[i] != '<')
 			i--;
-		word = ft_substr(s, i + 1, p->lexer->curpos - i + 1);
+		i += 1;
+		word = ft_substr(s, i, p->lexer->curpos - i);
 	}
 	else
 	{
@@ -93,7 +94,6 @@ t_token	*check_token(t_parser *p, t_ast *ast)
 		ast->redir_nbr += 1;
 		if (p->prev_token->type == here_doc)
 		{
-			// printf("**6\n");
 			temp = p->curr_token->value;
 			p->curr_token->value = get_stop_word(p);
 			free(temp);
@@ -115,7 +115,7 @@ int	syntax_error(t_parser *p)
 	{
 		print_msg("minishell: syntax error near unexpected token `newline'\n",
 			NULL);
-			return (0);
+		return (0);
 	}
 	return (1);
 }

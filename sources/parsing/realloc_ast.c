@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/08 17:41:40 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/10 11:46:19 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_ast	**realloc_ast_node(t_ast *ast, int size)
 			new[i] = ast->pipecmd_values[i];
 		new[i] = NULL;
 		free(ast->pipecmd_values);
-		// free_tree2(ast->pipecmd_values);
 		ast->pipecmd_values = NULL;
 		return (new);
 	}
@@ -61,4 +60,26 @@ void	print_msg(char *str, char *var)
 		printf("'\n");
 	}
 	g_global->exit_status = 258;
+}
+
+char	*tokenize_text(t_lexer *l, char *s)
+{
+	char	*str;
+
+	str = ft_strdup(s);
+	while (l->c != EOF && !ft_strchar("|>< \"\'", l->c))
+	{
+		while (l->c == 32 && l->c != EOF)
+			readchar(l);
+		if (l->c == DOLLAR)
+			str = ft_joinfree(str, envar_token(l));
+		else if (l->c == EOF)
+			return (str);
+		else
+		{
+			str = ft_joinchar(str, l->c);
+			readchar(l);
+		}
+	}
+	return (str);
 }
