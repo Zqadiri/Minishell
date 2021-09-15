@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/13 16:14:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/15 17:03:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 			m->redir->infile = fd;
 			check_valid_fd(m, cmd->r[i].filename, fd);
 		}
-		else if (cmd->r[i].type == here_doc)
-		{
-			printf ("%s\n", cmd->r[i].filename);
-			parse_here_doc(cmd->r, m);
-		}
 	}
 	if (!m->redir->err)
-		dup2(m->redir->infile, 0);
+	{
+		if(dup2(m->redir->infile, 0) < 0) 
+		{
+    		printf("Unable to duplicate file descriptor.");
+    		exit(EXIT_FAILURE);
+		}
+		close(m->redir->infile);
+		printf("dup is done\n");
+	}
 }
 
 void	setup_outfiles(t_cmd *cmd, t_data *m)
@@ -63,7 +66,10 @@ void	setup_outfiles(t_cmd *cmd, t_data *m)
 		}
 	}
 	if (!m->redir->err)
+	{
 		dup2(m->redir->outfile, 1);
+		close(m->redir->outfile);
+	}
 }
 
 int	setup_redirections(t_cmd *cmd, t_data *m)
@@ -71,7 +77,7 @@ int	setup_redirections(t_cmd *cmd, t_data *m)
 	int	i;
 
 	i = 0;
-	if ((count(cmd, less) != 0) || (count(cmd, here_doc) != 0))
+	if ((count(cmd, less) != 0))
 		setup_infiles(cmd, m);
 	if (((count(cmd, great) != 0) || (count(cmd, greater)) != 0) && \
 		!m->redir->err)
@@ -83,6 +89,30 @@ int	setup_redirections(t_cmd *cmd, t_data *m)
 **	exec_single_cmd() executes single commands , 
 **	commands with redirections and no pipes.
 */
+
+void	check_for_heredoc(t_data *m, t_cmd *cmd)
+{
+	int	i;
+
+	i = -1;
+	if ((count(cmd, here_doc) == 0))
+		return ;
+	else
+	{
+		while (++i < cmd->redir_nbr)
+		{
+			if (cmd->r[i].type == here_doc)
+			{
+				printf ("-------\n");
+				parse_here_doc(&cmd->r[i], m);
+				cmd->r[i].type = less;
+				cmd->r[i].filename = m->redir->filename_;
+			}
+		}
+	}
+
+
+}
 
 void	exec_single_cmd(t_cmd *cmd, t_data *m)
 {
@@ -101,10 +131,10 @@ void	exec_single_cmd(t_cmd *cmd, t_data *m)
 		child_pid = fork();
 		if (child_pid < 0)
 			fork_failed();
-		if (child_pid == 0)
+		else if (child_pid == 0)
 			find_cmd_path(cmd, m);
 		else
-			waitpid(child_pid, &status, 0);
+			waitpid(-1, &status, 0);
 		restore_std(m->saved_stdout, m->saved_stdin);
 	}
 }
