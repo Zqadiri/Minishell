@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/15 11:58:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/16 11:09:59 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	parse(t_lexer *l)
 			z = visitor(ast);
 			if (z)
 			{
-				execution(z);
-				if (z)
+				// execution(z);
+				// if (z)
 					free_cmd(z);
 			}
 		}
@@ -96,7 +96,7 @@ int	main(int argc, char **argv, char **env)
 		else if (buff[0] == '\0')
 		{
 			free(buff);
-			// system("leaks minishell");
+			system("leaks minishell");
 			continue ;
 		}
 		else
@@ -112,13 +112,7 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	return (0);
 }
-
-// ! heap-buffer-overflow get_stop_word parser_utils.c:62 > cat << eof
-// ! < Makefile <<'EOF' |  sed 's/l/e/g'
-
-
-//$a

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 12:43:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:07:56 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ char	*ft_joinchar(char *s, char c);
 int		is_valid_id(char *str);
 char	*ft_joinfree(char *s1, char *s2);
 char	*ft_getenv(char **env, char *str);
+void	ft_freeptr(void *ptr);
 
 #endif

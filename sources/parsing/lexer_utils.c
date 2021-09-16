@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/15 11:41:54 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/16 11:09:08 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*ft_getenv(char **env, char *str)
 	char	*temp;
 	int		i;
 
-	i = 0;
 	value = ft_strdup("");
-	while (env[i])
+	i = -1;
+	while (env[++i])
 	{
 		env_var = ft_split(env[i], '=');
 		if (!ft_strcmp(env_var[0], str))
@@ -46,17 +46,11 @@ char	*ft_getenv(char **env, char *str)
 			free(temp);
 			break ;
 		}
-		else
-			i++;
 	}
 	i = -1;
 	while (env_var[++i])
-	{
-		free(env_var[i]);
-		env_var[i] = NULL;
-	}
-	free(env_var);
-	env_var = NULL;
+		ft_freeptr(env_var[i]);
+	ft_freeptr(env_var);
 	return (value);
 }
 
