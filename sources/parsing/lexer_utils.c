@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/10 16:18:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/15 11:41:54 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char	*invalid_envar(t_lexer *l, int i)
 			str = ft_strdup("minishell");
 		if (l->c == '?')
 			str = ft_itoa(g_global->exit_status);
+		else
+			str = ft_strdup("");
 		readchar(l);
 		return (tokenize_text(l, str));
 	}
