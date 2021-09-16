@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:48:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/05/31 12:20:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:03:07 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ char	*ft_substr(char const *s, int start, size_t len)
 		start++;
 	}
 	*(p + i) = '\0';
+	//free((char *)s);
 	return (p);
 }

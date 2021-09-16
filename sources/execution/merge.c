@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/15 17:01:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 13:12:52 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*envar_here_doc(char *buff, int i)
 		free(temp);
 		i++;
 	}
-	str = ft_getenv(g_global->env_var, str);
+	str = ft_getenv(str);
 	if (!str)
 		str = ft_strdup("");
 	return (str);

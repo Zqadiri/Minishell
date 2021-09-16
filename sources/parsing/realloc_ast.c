@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 11:07:16 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/16 16:00:55 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,17 @@ void	ft_freeptr(void *ptr)
 {
 	free(ptr);
 	ptr = NULL;
+}
+
+char	*string_envar(t_lexer *l)
+{
+	char	*str;
+
+	str = ft_strdup("$");
+	while (l->c != EOF && !ft_strchar("|><\"\'", l->c))
+	{
+		str = ft_joinchar(str, l->c);
+		readchar(l);
+	}
+	return (str);
 }

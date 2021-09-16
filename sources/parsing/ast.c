@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/13 16:06:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 17:46:39 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,26 @@ void	init_cmd(t_cmd z)
 	z.r = NULL;
 }
 
-// void	print_cmd(t_cmd *z, int n)
-// {
-// 	int	i;
-// 	int	j;
+void	print_cmd(t_cmd *z, int n)
+{
+	int	i;
+	int	j;
 
-// 	(void)n;
-// 	i = -1;
-// 	while (++i < z[0].nbr_cmd)
-// 	{
-// 		j = -1;
-// 		while (z[i].args_size > ++j)
-// 			printf("cmd[%d].args[%d] = [%s]\n", i, j, z[i].argvs[j]);
-// 		j = -1;
-// 		while (z[i].redir_nbr > ++j)
-// 		{
-// 			printf("cmd[%d].file[%d] = [%s] - ", i, j, z[i].r[j].filename);
-// 			printf("cmd[%d].type[%d] = [%u]\n", i, j, z[i].r[j].type);
-// 		}
-// 	}
-// }
+	(void)n;
+	i = -1;
+	while (++i < z[0].nbr_cmd)
+	{
+		j = -1;
+		while (z[i].args_size > ++j)
+			printf("cmd[%d].args[%d] = [%s]\n", i, j, z[i].argvs[j]);
+		j = -1;
+		while (z[i].redir_nbr > ++j)
+		{
+			printf("cmd[%d].file[%d] = [%s] - ", i, j, z[i].r[j].filename);
+			printf("cmd[%d].type[%d] = [%u]\n", i, j, z[i].r[j].type);
+		}
+	}
+}
 
 t_cmd	*visitor(t_ast *ast)
 {
@@ -113,6 +113,7 @@ t_cmd	*visitor(t_ast *ast)
 		while (++(x.m) < x.k)
 			z[x.m].nbr_cmd = x.k;
 	}
+	// print_cmd(z, x.k);
 	free_tree(ast);
 	return (z);
 }

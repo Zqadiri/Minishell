@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 11:09:08 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/16 18:15:50 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,29 @@ int	valid_envar(char c)
 	return (0);
 }
 
-char	*ft_getenv(char **env, char *str)
+char	*ft_getenv(char *str)
 {
 	char	**env_var;
 	char	*value;
-	char	*temp;
+	// char	*temp;
 	int		i;
 
-	value = ft_strdup("");
+	//value = ft_strdup("");
 	i = -1;
-	while (env[++i])
+	while (g_global->env_var[++i])
 	{
-		env_var = ft_split(env[i], '=');
+		env_var = ft_split(g_global->env_var[i], '=');
 		if (!ft_strcmp(env_var[0], str))
 		{
-			temp = value;
+			// temp = value;
 			value = ft_strdup(env_var[1]);
-			free(temp);
+		// free(temp);
 			break ;
 		}
+		// int j = -1;
+		// while (env_var[++j])
+		// 	ft_freeptr(env_var[j]);
+		// ft_freeptr(env_var); //!!!!!!!!!! abort
 	}
 	i = -1;
 	while (env_var[++i])
@@ -54,20 +58,24 @@ char	*ft_getenv(char **env, char *str)
 	return (value);
 }
 
+
 char	*invalid_envar(t_lexer *l, int i)
 {
 	char	*str;
+	char	*s;
 
 	if (i == 1)
 	{
 		if (l->c == '0')
 			str = ft_strdup("minishell");
-		if (l->c == '?')
+		else if (l->c == '?')
 			str = ft_itoa(g_global->exit_status);
 		else
-			str = ft_strdup("");
+			return (string_envar(l));
 		readchar(l);
-		return (tokenize_text(l, str));
+		s = tokenize_text(l, str);
+		free(str);
+		return (s);
 	}
 	else
 	{
@@ -97,7 +105,7 @@ char	*envar_token(t_lexer *l)
 		str = ft_joinchar(str, l->c);
 		readchar(l);
 	}
-	v = ft_getenv(g_global->env_var, str);
+	v = ft_getenv(str);
 	free(str);
 	if (!v)
 		return (NULL);
