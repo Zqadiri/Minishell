@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/13 16:11:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:22:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 	if (!cmd->argvs)
 		exit(0);
 	possible_path = find_path (cmd->argvs[0], m->path);
+	// printf ("possible path : %s\n", possible_path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
 	fd = open(possible_path, O_RDONLY);
@@ -31,7 +32,7 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 		exit (127);
 	}
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
-		exit (126); 
+		exit (126);
 }
 
 /*
@@ -52,12 +53,9 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 		if (child_pid < 0 )
 			fork_failed();
 		else if (child_pid == 0)
-		{
-			if (!cmd->argvs)
-				exit(0);
 			find_cmd_path(cmd, m);
-		}
 		wait_children();
+		restore_std(m->saved_stdout, m->saved_stdin);
 	}
 	return (1);
 }

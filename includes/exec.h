@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/09 17:08:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:55:31 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void		find_cmd_path(t_cmd *cmd, t_data *m);
 ** main
 */
 
+void		check_for_heredoc(t_data *m, t_cmd *cmd);
 int			check_signals(void);
 char		*find_path(char	*cmd, char **path);
 void		exec_multiple_cmd(t_cmd *cmd, t_data *m);
