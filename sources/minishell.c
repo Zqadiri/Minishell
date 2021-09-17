@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 18:16:13 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 12:50:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	parse(t_lexer *l)
 			z = visitor(ast);
 			if (z)
 			{
-				execution(z);
-				if (z)
+				// execution(z);
+				// if (z)
 					free_cmd(z);
 			}
 		}

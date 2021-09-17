@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 16:00:55 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 10:25:52 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,6 @@ t_token	**realloc_ast_args(t_ast *ast, int size)
 	return (NULL);
 }
 
-void	print_msg(char *str, char *var)
-{
-	printf("%s", str);
-	if (var)
-	{
-		printf(" `");
-		printf("%s", var);
-		printf("'\n");
-	}
-	g_global->exit_status = 258;
-}
-
 char	*tokenize_text(t_lexer *l, char *s)
 {
 	char	*str;
@@ -80,25 +68,6 @@ char	*tokenize_text(t_lexer *l, char *s)
 			str = ft_joinchar(str, l->c);
 			readchar(l);
 		}
-	}
-	return (str);
-}
-
-void	ft_freeptr(void *ptr)
-{
-	free(ptr);
-	ptr = NULL;
-}
-
-char	*string_envar(t_lexer *l)
-{
-	char	*str;
-
-	str = ft_strdup("$");
-	while (l->c != EOF && !ft_strchar("|><\"\'", l->c))
-	{
-		str = ft_joinchar(str, l->c);
-		readchar(l);
 	}
 	return (str);
 }

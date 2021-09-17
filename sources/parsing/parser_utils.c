@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/13 16:06:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/17 10:24:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ t_parser	*init_parser(t_lexer *l)
 	return (p);
 }
 
+int	is_redic(t_token *t)
+{
+	if (t->type == great || t->type == greater || t->type == less
+		|| t->type == here_doc)
+		return (1);
+	return (0);
+}
+
 char	*get_stop_word(t_parser *p)
 {
 	int		i;
@@ -65,14 +73,6 @@ char	*get_stop_word(t_parser *p)
 	}
 	free(s);
 	return (word);
-}
-
-int	is_redic(t_token *t)
-{
-	if (t->type == great || t->type == greater || t->type == less
-		|| t->type == here_doc)
-		return (1);
-	return (0);
 }
 
 t_token	*check_token(t_parser *p, t_ast *ast)

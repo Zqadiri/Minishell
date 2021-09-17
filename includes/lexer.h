@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 16:01:55 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 10:26:31 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_token
 */
 
 char	*tokenize_text(t_lexer *l, char *s);
-t_token	*string_token(t_lexer *l);
+t_token	*string_token(t_lexer *l); 
 
 /*
 ** lexer.c
@@ -85,21 +85,17 @@ t_token	*get_next_token(t_lexer *l);
 ** lexer_utlis.c
 */
 
-int		peek_char(t_lexer *l);
-char	*envar_token(t_lexer *l);
 int		valid_envar(char c);
-char	*string_envar(t_lexer *l);
+char	*ft_getenv(char *str);
+char	*envar_token(t_lexer *l);
 
 /*
 ** utils.c
 */
 
 t_token	*init_token(t_token_type type, char *s, t_lexer *l);
-int		ftstrcmp(char *s1, char *s2);
-char	*ft_joinchar(char *s, char c);
 int		is_valid_id(char *str);
-char	*ft_joinfree(char *s1, char *s2);
-char	*ft_getenv(char *str);
-void	ft_freeptr(void *ptr);
+void	print_msg(char *str, char *var);
+int		peek_char(t_lexer *l);
 
 #endif

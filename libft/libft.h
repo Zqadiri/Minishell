@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/08 17:17:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/17 10:30:13 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,9 @@ int					len(char **env);
 int					ft_strlen_new(const char *str);
 int					is_white_space(char *buff);
 char				*ft_strchar(char *save, char c);
+int					ftstrcmp(char *s1, char *s2);
+char				*ft_joinchar(char *s, char c);
+char				*ft_joinfree(char *s1, char *s2);
+void				ft_freeptr(void *ptr);
 
 #endif

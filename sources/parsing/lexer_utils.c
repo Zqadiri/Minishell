@@ -6,19 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 18:15:50 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 14:29:03 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	peek_char(t_lexer *l)
-{
-	if (l->readpos >= l->bufsize)
-		return (EOF);
-	else
-		return (l->buffer[l->readpos]);
-}
 
 int	valid_envar(char c)
 {
@@ -31,33 +23,43 @@ char	*ft_getenv(char *str)
 {
 	char	**env_var;
 	char	*value;
-	// char	*temp;
+	char	*temp;
 	int		i;
 
-	//value = ft_strdup("");
+	value = ft_strdup("");
 	i = -1;
 	while (g_global->env_var[++i])
 	{
 		env_var = ft_split(g_global->env_var[i], '=');
 		if (!ft_strcmp(env_var[0], str))
 		{
-			// temp = value;
+			temp = value;
 			value = ft_strdup(env_var[1]);
-		// free(temp);
+			free(temp);
+			ft_freeptr(env_var[0]);
+			ft_freeptr(env_var[1]);
+			ft_freeptr(env_var);
 			break ;
 		}
-		// int j = -1;
-		// while (env_var[++j])
-		// 	ft_freeptr(env_var[j]);
-		// ft_freeptr(env_var); //!!!!!!!!!! abort
+		ft_freeptr(env_var[0]);
+		ft_freeptr(env_var[1]);
+		ft_freeptr(env_var);
 	}
-	i = -1;
-	while (env_var[++i])
-		ft_freeptr(env_var[i]);
-	ft_freeptr(env_var);
 	return (value);
 }
 
+char	*string_envar(t_lexer *l)
+{
+	char	*str;
+
+	str = ft_strdup("$");
+	while (l->c != EOF && !ft_strchar("|><\"\'", l->c))
+	{
+		str = ft_joinchar(str, l->c);
+		readchar(l);
+	}
+	return (str);
+}
 
 char	*invalid_envar(t_lexer *l, int i)
 {
