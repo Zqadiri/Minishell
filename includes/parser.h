@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/10 14:24:19 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 10:25:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_cmd		*visitor(t_ast *ast);
 ** realloc_ast.c
 */
 
-void		print_msg(char *str, char *var);
 t_token		**realloc_ast_args(t_ast *ast, int size);
 t_ast		**realloc_ast_node(t_ast *ast, int size);
 

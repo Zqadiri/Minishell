@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_joinchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/12 14:48:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/16 18:03:07 by iidzim           ###   ########.fr       */
+/*   Created: 2021/09/17 10:05:21 by iidzim            #+#    #+#             */
+/*   Updated: 2021/09/17 10:05:32 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, int start, size_t len)
+char	*ft_joinchar(char *s, char c)
 {
-	size_t	i;
-	char	*p;
+	int		i;
+	char	*str;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_calloc(1, 1));
-	p = (char *)malloc(len + 1 * sizeof(char));
-	if (p == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		p[i] = s[start];
-		i++;
-		start++;
-	}
-	*(p + i) = '\0';
-	//free((char *)s);
-	return (p);
+	i = strlen(s);
+	str = (char *)malloc(i + 2);
+	if (!str)
+		return (0);
+	i = -1;
+	while (s[++i])
+		str[i] = s[i];
+	str[i] = c;
+	str[i + 1] = '\0';
+	free(s);
+	return (str);
 }

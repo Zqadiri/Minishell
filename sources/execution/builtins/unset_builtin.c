@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/16 17:00:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/18 16:20:21 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,21 @@ int	find_env(char *key)
 	return (-1);
 }
 
-//! 1 leak c:71 
-
-char	**realloc_new_env(int env_num)
+char	**realloc_new_env(int env_num, char *arg)
 {
 	char	**new_env;
 	int		i;
 
 	i = 0;
-	new_env = (char **)malloc(sizeof(char *) * (env_num + 1));
+	new_env = (char **)malloc(sizeof(char *) * (env_num + 2));
 	if (!new_env)
 		return (NULL);
-	while (g_global->env_var[i] && i <= env_num)
+	while (g_global->env_var[i])
 	{
 		new_env[i] = ft_strdup(g_global->env_var[i]);
 		i++;
 	}
+	new_env[i] = ft_strdup(arg);
 	new_env[env_num + 1] = 0;
 	free_old_env();
 	return (new_env);
@@ -90,7 +89,10 @@ char	**remove_env_by_key(int index)
 		g_global->env_var[i] = next_env;
 		i++;
 	}
-	new_one = realloc_new_env(len(g_global->env_var));
+	
+	// ! remove realloc
+	// ? g_global->env_var[i] = NULL;
+	new_one = realloc_new_env(len(g_global->env_var), NULL);
 	return (new_one);
 }
 

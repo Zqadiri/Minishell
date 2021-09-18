@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_joinfree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/12 14:48:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/16 18:03:07 by iidzim           ###   ########.fr       */
+/*   Created: 2021/09/17 10:06:18 by iidzim            #+#    #+#             */
+/*   Updated: 2021/09/17 10:06:39 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, int start, size_t len)
+char	*ft_joinfree(char *s1, char *s2)
 {
-	size_t	i;
-	char	*p;
+	char	*s;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_calloc(1, 1));
-	p = (char *)malloc(len + 1 * sizeof(char));
-	if (p == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		p[i] = s[start];
-		i++;
-		start++;
-	}
-	*(p + i) = '\0';
-	//free((char *)s);
-	return (p);
+	if (!s2)
+		return (s1);
+	s = ft_strjoin(s1, s2);
+	free(s1);
+	free(s2);
+	return (s);
 }

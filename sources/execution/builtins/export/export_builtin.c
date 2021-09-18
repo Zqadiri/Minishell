@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/16 15:43:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/18 16:26:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,9 @@ int	is_valid_env_key(char *arg)
 
 static void	set_new_env(char *arg)
 {
+	printf ("arg: |%s|\n", arg);
 	int		index;
-	char	*env;
 	int		i;
-	// char	*pfree;
 
 	index = 0;
 	i = -1;
@@ -90,12 +89,8 @@ static void	set_new_env(char *arg)
 	while (arg[++i])
 		if (arg[i] == '=')
 			index = 1;
-	index = (env_count() + 1);
-	g_global->env_var = realloc_new_env(index);
-	env = ft_substr(arg, 0, ft_strlen(arg));
-	g_global->env_var[env_count() - 1] = env;
-	g_global->env_var[index] = 0;
-	// free (env);
+	index = (env_count());
+	g_global->env_var = realloc_new_env(index, arg);
 }
 
 static void	set_or_modify(char *arg)

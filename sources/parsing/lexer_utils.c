@@ -6,19 +6,11 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/15 11:41:54 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 14:29:03 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	peek_char(t_lexer *l)
-{
-	if (l->readpos >= l->bufsize)
-		return (EOF);
-	else
-		return (l->buffer[l->readpos]);
-}
 
 int	valid_envar(char c)
 {
@@ -27,53 +19,65 @@ int	valid_envar(char c)
 	return (0);
 }
 
-char	*ft_getenv(char **env, char *str)
+char	*ft_getenv(char *str)
 {
 	char	**env_var;
 	char	*value;
 	char	*temp;
 	int		i;
 
-	i = 0;
 	value = ft_strdup("");
-	while (env[i])
+	i = -1;
+	while (g_global->env_var[++i])
 	{
-		env_var = ft_split(env[i], '=');
+		env_var = ft_split(g_global->env_var[i], '=');
 		if (!ft_strcmp(env_var[0], str))
 		{
 			temp = value;
 			value = ft_strdup(env_var[1]);
 			free(temp);
+			ft_freeptr(env_var[0]);
+			ft_freeptr(env_var[1]);
+			ft_freeptr(env_var);
 			break ;
 		}
-		else
-			i++;
+		ft_freeptr(env_var[0]);
+		ft_freeptr(env_var[1]);
+		ft_freeptr(env_var);
 	}
-	i = -1;
-	while (env_var[++i])
-	{
-		free(env_var[i]);
-		env_var[i] = NULL;
-	}
-	free(env_var);
-	env_var = NULL;
 	return (value);
+}
+
+char	*string_envar(t_lexer *l)
+{
+	char	*str;
+
+	str = ft_strdup("$");
+	while (l->c != EOF && !ft_strchar("|><\"\'", l->c))
+	{
+		str = ft_joinchar(str, l->c);
+		readchar(l);
+	}
+	return (str);
 }
 
 char	*invalid_envar(t_lexer *l, int i)
 {
 	char	*str;
+	char	*s;
 
 	if (i == 1)
 	{
 		if (l->c == '0')
 			str = ft_strdup("minishell");
-		if (l->c == '?')
+		else if (l->c == '?')
 			str = ft_itoa(g_global->exit_status);
 		else
-			str = ft_strdup("");
+			return (string_envar(l));
 		readchar(l);
-		return (tokenize_text(l, str));
+		s = tokenize_text(l, str);
+		free(str);
+		return (s);
 	}
 	else
 	{
@@ -103,7 +107,7 @@ char	*envar_token(t_lexer *l)
 		str = ft_joinchar(str, l->c);
 		readchar(l);
 	}
-	v = ft_getenv(g_global->env_var, str);
+	v = ft_getenv(str);
 	free(str);
 	if (!v)
 		return (NULL);

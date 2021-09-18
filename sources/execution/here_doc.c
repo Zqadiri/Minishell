@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 11:42:47 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/18 11:59:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*envar_here_doc(char *buff, int i)
 		free(temp);
 		i++;
 	}
-	str = ft_getenv(g_global->env_var, str);
+	str = ft_getenv(str);
 	if (!str)
 		str = ft_strdup("");
 	return (str);
