@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/16 10:57:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:49:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	initialize(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
-	// signal(SIGINT, sigint_handler);
-	// signal(SIGQUIT, sigint_handler);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigint_handler);
 }
 
 void	quit_minishell(void)
@@ -112,7 +112,9 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	return (0);
 }
+
+// ! leaks in ft_getenv and envar_token

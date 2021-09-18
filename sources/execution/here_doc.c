@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   merge.c                                            :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/15 17:01:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:42:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ char	*random_file_name(void)
 	name = NULL;
 	itoa_nbr = ft_itoa(file_nbr);
 	name = ft_strjoin("/tmp/file", itoa_nbr);
-	printf ("file_name_random : %s\n", name);
 	free(itoa_nbr);
 	return (name);
 }
@@ -87,15 +86,7 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	int		fd;
 
 	output = ft_strdup("");
-	// if (m->redir->filename_ != NULL)
-	// {
-	// 	unlink(m->redir->filename_);
-	// 	free (m->redir->filename_);
-	// 	m->redir->filename_ = NULL;
-	// }
-	// else
-		m->redir->filename_ = random_file_name();
-	printf ("> > %s\n", m->redir->filename_);
+	m->redir->filename_ = random_file_name();
 	fd = open(m->redir->filename_, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 		check_valid_fd(m, m->redir->filename_, fd);

@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/15 10:54:10 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/09/16 15:49:41 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRCS_EXEC		=	./sources/execution/builtins/cd/cd_builtin.c\
 					./sources/execution/error_functions.c\
 					./sources/execution/n_pipes_red.c\
 					./sources/execution/signals.c\
-					./sources/execution/merge.c\
+					./sources/execution/here_doc.c\
 					./sources/execution/utils.c
 
 
@@ -52,16 +52,15 @@ OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
 INCLUDE 		= 	-I includes -L includes
 CC				= 	gcc
-FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g -fsanitize=address
+FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g #-fsanitize=address
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) -o  $(NAME) -lreadline -ltermcap  $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
+				@$(CC) -o  $(NAME) -lreadline -ltermcap -L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
 				
-# -L /Users/$(USER)/.brown/opt/readline/lib -I /Users/$(USER)/.brown/opt/readline/include
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
 

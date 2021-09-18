@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   n_pipes_red.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/10 13:13:34 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/16 11:47:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	exec_builtin(int in, int out, t_cmd *cmd, t_data *m)
 	return (0);
 }
 
-int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
+int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 {
 	if (cmd->argvs != NULL && is_builtin(cmd))
 		return (exec_builtin(in, out, cmd, m));
@@ -38,7 +38,7 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 	{
 		if (m->redir->infile && !m->redir->err)
 		{
-			close(m->pipe_fd[id][0]);
+			close(m->pipe_fd[m->id][0]);
 			dup2(m->redir->infile, 0);
 		}
 		else if (in != 0)
@@ -53,7 +53,7 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m, int id)
 			dup2(out, 1);
 			close(out);
 		}
-		exec_cmd_path(id, cmd, m);
+		exec_cmd_path(m->id, cmd, m);
 	}
 	return (m->pid);
 }
@@ -76,10 +76,9 @@ void	setup_all_redirections(t_cmd *cmd, t_data *m)
 int	fork_pipes(t_cmd *cmd, t_data *m)
 {
 	int		i;
-	int		in;
 
 	i = -1;
-	in = 0;
+	m->id = 0;
 	while (++i < cmd->nbr_cmd)
 		init_m(&m[i]);
 	pipe_all(cmd, m);
@@ -87,11 +86,13 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	while (++i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_proc(in, m->pipe_fd[i][1], &cmd[i], &m[i], i);
+		g_global->pid = exec_proc(m->id, m->pipe_fd[i][1], &cmd[i], &m[i]);
 		close(m->pipe_fd[i][1]);
-		in = m->pipe_fd[i][0];
+		if (m->id != 0)
+			close(m->id);
+		m->id = m->pipe_fd[i][0];
 	}
-	g_global->pid = exec_proc(in, 1, &cmd[i], &m[i], i);
+	g_global->pid = exec_proc(m->id, 1, &cmd[i], &m[i]);
 	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
 	wait_children();
 	return (1);

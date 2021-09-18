@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/15 17:03:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:51:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 	}
 	if (!m->redir->err)
 	{
-		if(dup2(m->redir->infile, 0) < 0) 
+		if (dup2(m->redir->infile, 0) < 0)
 		{
-    		printf("Unable to duplicate file descriptor.");
-    		exit(EXIT_FAILURE);
+			printf("Unable to duplicate file descriptor.");
+			exit(EXIT_FAILURE);
 		}
 		close(m->redir->infile);
 		printf("dup is done\n");
@@ -103,15 +103,12 @@ void	check_for_heredoc(t_data *m, t_cmd *cmd)
 		{
 			if (cmd->r[i].type == here_doc)
 			{
-				printf ("-------\n");
 				parse_here_doc(&cmd->r[i], m);
 				cmd->r[i].type = less;
 				cmd->r[i].filename = m->redir->filename_;
 			}
 		}
 	}
-
-
 }
 
 void	exec_single_cmd(t_cmd *cmd, t_data *m)

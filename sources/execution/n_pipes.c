@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/13 16:10:58 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:47:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exec_cmd_path(int in, t_cmd *cmd, t_data *m)
+void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 {
 	int		fd;
 	char	*possible_path;
@@ -30,8 +30,8 @@ void	exec_cmd_path(int in, t_cmd *cmd, t_data *m)
 		ft_putendl_fd(": command not found", 2);
 		exit (127);
 	}
-	if (in == 0)
-		close (m->pipe_fd[in][0]);
+	if (id == 0)
+		close (m->pipe_fd[id][0]);
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
 		exit(126);
 }

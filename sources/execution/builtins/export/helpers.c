@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 15:27:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/16 11:24:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:40:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**dup_env(void)
 	i--;
 	while (i != -1)
 	{
-		dup[i] = ft_strdup(g_global->env_var[i]);
+		dup[i] = g_global->env_var[i];
 		i--;
 	}
 	return (dup);
