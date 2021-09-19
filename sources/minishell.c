@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/19 18:13:14 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/19 19:08:18 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	main(int argc, char **argv, char **env)
 		else if (buff[0] == '\0')
 		{
 			free(buff);
-			// system("leaks minishell");
 			continue ;
 		}
 		else
@@ -116,5 +115,3 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
-
-// ! leaks in ft_getenv and envar_token

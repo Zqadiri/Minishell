@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 19:01:09 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/19 19:08:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,12 @@ int	dup_env_var(char **env)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	g_global->env_var = (char **)malloc(sizeof(char *) * (len(env) + 1));
 	if (g_global->env_var == NULL)
 		exit(EXIT_FAILURE);
-	while (env[i])
-	{
+	while (++i < len(env))
 		g_global->env_var[i] = ft_strdup(env[i]);
-		i++;
-	}
 	g_global->env_var[i] = 0;
 	return (1);
 }

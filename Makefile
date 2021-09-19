@@ -6,7 +6,11 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2021/09/19 17:46:02 by iidzim           ###   ########.fr        #
+=======
+#    Updated: 2021/09/19 18:48:11 by zqadiri          ###   ########.fr        #
+>>>>>>> f7eadde5a822c534d7341a5556488e098cf635ad
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +63,8 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) -o  $(NAME) -lreadline -ltermcap -L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
-				
+				@$(CC) -o  $(NAME) -lreadline -ltermcap $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
+#-L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
 

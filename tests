@@ -43,7 +43,7 @@ echo "$USER$USER$USER"
 echo '$USER'"$USER"'$USER'
 echo '"$USER"''$USER'"""$USER"
 echo " $USER  "'$PWD'
-echo " $USER  \$ "'$PWD' !!!!!!!!!!!!!!!!!!!
+echo " $USER  \$ "'$PWD'
 echo $USER=4
 echo $USER=thallard
 echo $USER
@@ -111,7 +111,7 @@ export TEST=100 ; echo $TEST ; unset TEST
 unset doesntexist
 unset PWD
 unset PWD ; echo $PWD
-unset PATH ; ls !!! fix error message
+unset PATH ; ls !!! maessage
 unset PATH ; echo "something"
 unset TES\\\\T
 unset TES.T
@@ -166,8 +166,6 @@ cat /dev/random | head
 cat /dev/random | head -c 10
 cat Makefile | head -c 10 | wc -l
 ls | cat | cat
-
-!!!!!! Error
 cat /dev/random | head -c 10 | wc -l
 cat /dev/random | head -c 10 | wc -c
 

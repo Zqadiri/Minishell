@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/18 16:26:20 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/19 14:37:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	is_valid_env_key(char *arg)
 
 static void	set_new_env(char *arg)
 {
-	printf ("arg: |%s|\n", arg);
 	int		index;
 	int		i;
 
@@ -118,6 +117,7 @@ int	export_builtin(char **args)
 	int	i;
 
 	i = 0;
+	g_global->exit_status = 0;
 	if (!args[1])
 	{
 		sort_and_print();
@@ -130,6 +130,7 @@ int	export_builtin(char **args)
 			ft_putstr_fd("minishell: export: `", 2);
 			ft_putstr_fd(args[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
+			g_global->exit_status = 1;
 			continue ;
 		}
 		set_or_modify(args[i]);

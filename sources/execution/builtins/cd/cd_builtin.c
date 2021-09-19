@@ -16,6 +16,7 @@ static int	add_var_to_env(char *key, char *new_path)
 {
 	int		index;
 	char	*tmp;
+	char	*pfree;
 
 	tmp = NULL;
 	if (!key || !new_path)
@@ -26,8 +27,12 @@ static int	add_var_to_env(char *key, char *new_path)
 	else
 	{
 		tmp = ft_strjoin(key, "=");
+		pfree = tmp;
 		tmp = ft_strjoin(tmp, new_path);
+		free (pfree);
+		pfree = g_global->env_var[index];
 		g_global->env_var[index] = tmp;
+		free (pfree);
 	}
 	return (1);
 }
@@ -38,6 +43,7 @@ static int	move_to_dir(char *path)
 	char		*old_pwd;
 	char		*tmp;
 
+	tmp = NULL;
 	old_pwd = get_env_var_by_key("PWD");
 	add_var_to_env("OLDPWD", old_pwd);
 	ret = chdir(path);
@@ -47,11 +53,13 @@ static int	move_to_dir(char *path)
 		ft_putstr_fd("cd: error retrieving current directory: ", 2);
 		ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
 		printf("%s\n", strerror(errno));
+		free (tmp);
 		tmp = get_env_var_by_key("PWD");
 		tmp = add_char_to_word(tmp, '/');
 		old_pwd = tmp;
 		tmp = ft_strjoin(tmp, path);
 		add_var_to_env("PWD", tmp);
+		g_global->exit_status = 0;
 		return (1);
 	}
 	else
@@ -83,6 +91,7 @@ static int	exec_cd(char *path, int i, char **argv)
 		return (1);
 	pwd = get_env_var_by_key("PWD");
 	add_var_to_env("PWD", pwd);
+	free (pwd);
 	return (0);
 }
 
@@ -92,7 +101,7 @@ int	cd_builtin(char **argv)
 	int		i;
 
 	i = 0;
-	path = NULL;
+	g_global->exit_status = 0;
 	if (len(argv) > 2)
 	{
 		ft_putstr_fd("minishell: cd: to many arguments\n", 2);
@@ -103,11 +112,14 @@ int	cd_builtin(char **argv)
 		path = get_env_var_by_key("HOME");
 		if (!argv[i++] && ft_strlen_new(path) == 0)
 		{
+			g_global->exit_status = 1;
 			ft_putstr_fd ("HOME PATH NOT SET", 2);
 			return (-1);
 		}
 	}
 	else
 		path = ft_strdup(argv[i + 1]);
-	return (exec_cd(path, i, argv));
+	exec_cd(path, i, argv);
+	free(path);
+	return (0);
 }
