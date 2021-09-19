@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/17 14:29:03 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:35:57 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,24 @@ char	*string_envar(t_lexer *l)
 {
 	char	*str;
 
-	str = ft_strdup("$");
-	while (l->c != EOF && !ft_strchar("|><\"\'", l->c))
+	if (ft_isdigit(l->c))
 	{
-		str = ft_joinchar(str, l->c);
 		readchar(l);
+		str = ft_strdup("");
+		while (l->c != EOF && !ft_strchar("|><\"\' $", l->c))
+		{
+			str = ft_joinchar(str, l->c);
+			readchar(l);
+		}
+	}
+	else
+	{
+		str = ft_strdup("$");
+		while (l->c != EOF && !ft_strchar("|><\"\'$", l->c))
+		{
+			str = ft_joinchar(str, l->c);
+			readchar(l);
+		}
 	}
 	return (str);
 }

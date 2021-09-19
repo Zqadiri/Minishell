@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:47:46 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/17 14:30:05 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:37:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_cmd	*visitor(t_ast *ast)
 		while (++(x.m) < x.k)
 			z[x.m].nbr_cmd = x.k;
 	}
+	// print_cmd(z, x.k);
 	free_tree(ast);
 	return (z);
 }
