@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/17 10:30:13 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 14:32:43 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ char				*ft_strchar(char *save, char c);
 int					ftstrcmp(char *s1, char *s2);
 char				*ft_joinchar(char *s, char c);
 char				*ft_joinfree(char *s1, char *s2);
-void				ft_freeptr(void *ptr);
 
 #endif

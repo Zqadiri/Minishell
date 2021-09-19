@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 12:11:32 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/17 10:30:29 by iidzim           ###   ########.fr        #
+#    Updated: 2021/09/17 14:32:37 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,7 @@ SRC = ft_memalloc.c\
 	  ft_strlen_new.c\
 	  ftstrcmp.c\
 	  ft_joinchar.c\
-	  ft_joinfree.c\
-	  ft_freeptr.c
+	  ft_joinfree.c
 	  
 
 all:	$(NAME)

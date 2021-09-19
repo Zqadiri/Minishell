@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/17 10:26:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 14:40:16 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l);
 int		is_valid_id(char *str);
 void	print_msg(char *str, char *var);
 int		peek_char(t_lexer *l);
+void	ft_freeptr(void *ptr);
 
 #endif

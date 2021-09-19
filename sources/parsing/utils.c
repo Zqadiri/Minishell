@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:21:43 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/17 10:23:31 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/17 14:40:22 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,10 @@ int	peek_char(t_lexer *l)
 		return (EOF);
 	else
 		return (l->buffer[l->readpos]);
+}
+
+void	ft_freeptr(void *ptr)
+{
+	free(ptr);
+	ptr = NULL;
 }
