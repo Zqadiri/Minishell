@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:42:45 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/13 16:10:25 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:34:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	init_m(t_data *m)
 	m->saved_stdin = dup(0);
 	m->path = get_path();
 	m->pid = 0;
-	m->in = 0;
 	m->redir = (t_red *)malloc(sizeof(t_red));
 	m->redir->infile = 0;
 	m->redir->outfile = 0;

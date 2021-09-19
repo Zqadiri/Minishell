@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/09 14:26:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:41:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,33 @@ void	setup_out(t_cmd *cmd, t_data *m)
 	m->redir->outfile = fd;
 }
 
+/*
+**   j = -1;
+   while (++j < nbr_cmd - 1)
+   {
+   	i = -1;
+   	while (m[j].pipe_fd[++i] != NULL)
+   		free(m[j].pipe_fd[i]);
+   	free (m[j].pipe_fd);
+   }
+*/
+
+int	pipe_free(t_data *m, int nbr_cmd)
+{
+	int	i;
+
+	i = 0;
+	if (nbr_cmd == 1)
+		return (1);
+	while (i < nbr_cmd - 1)
+	{
+		free(m->pipe_fd[i]);
+		i++;
+	}
+	free(m->pipe_fd);
+	return (1);
+}
+
 void	free_m(t_data *m, int nbr_cmd)
 {
 	int	i;
@@ -119,14 +146,8 @@ void	free_m(t_data *m, int nbr_cmd)
 		free(m[j].redir);
 		free(m[j].path);
 	}
-	// j = -1;
-	// while (++j < nbr_cmd - 1)
-	// {
-	// 	i = -1;
-	// 	while (m[j].pipe_fd[++i] != NULL)
-	// 		free(m[j].pipe_fd[i]);
-	// 	free (m[j].pipe_fd);
-	// }
+	pipe_free(m, nbr_cmd);
 	free (m);
 	m = NULL;
 }
+

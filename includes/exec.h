@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/15 13:55:31 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/18 15:20:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_data
 	int				**pipe_fd;
 	pid_t			pid;
 	t_red			*redir;
-	int				in;
+	int				id;
 }	t_data;
 
 /*
@@ -104,7 +104,7 @@ int			dup_env_var(char **env);
 char		**dup_env(void);
 char		**get_path(void);
 void		print_sorted_env(char **sorted_env);
-char		**realloc_new_env(int env_num);
+char		**realloc_new_env(int env_num, char *arg);
 int			set_env_var(char *key, char *new_path);
 void		free_m(t_data *m, int nbr_cmd);
 
@@ -144,6 +144,6 @@ void		exec_single_cmd(t_cmd *cmd, t_data *m);
 int			execute_regular_cmd(t_cmd *cmd, t_data *m);
 void		close_all_pipes(int **fd, int n);
 void		sigint_handler(int sig);
-void		parse_here_doc(t_redir *r,t_data *m);
+void		parse_here_doc(t_redir *r, t_data *m);
 
 #endif

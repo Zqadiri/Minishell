@@ -105,7 +105,6 @@ export TEST="$USER" ; env | grep "TEST" ; unset TEST
 export TEST="$USER$USER" ; env | grep "TEST" ; unset TEST
 export TEST="'$USER'""test" ; env | grep "TEST" ; unset TEST
 export TEST="$USER" TEST1=$TEST ; env | grep "TEST" ; unset TEST
-concatenation ????
 
 //*  Unset *//
 export TEST=100 ; echo $TEST ; unset TEST

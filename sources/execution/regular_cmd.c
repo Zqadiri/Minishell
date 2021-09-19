@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/15 14:22:47 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:50:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 	if (!cmd->argvs)
 		exit(0);
 	possible_path = find_path (cmd->argvs[0], m->path);
-	// printf ("possible path : %s\n", possible_path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
 	fd = open(possible_path, O_RDONLY);
