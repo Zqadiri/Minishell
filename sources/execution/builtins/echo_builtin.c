@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/01 14:25:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/19 14:40:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	echo_builtin(char **args)
 
 	i = 0;
 	option = 0;
+	g_global->exit_status = 0;
 	if (!args[1])
 	{
 		ft_putchar_fd('\n', 1);

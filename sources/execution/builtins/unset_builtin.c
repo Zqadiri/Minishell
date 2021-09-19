@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/18 16:20:21 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/19 14:37:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,22 @@ char	**realloc_new_env(int env_num, char *arg)
 char	**remove_env_by_key(int index)
 {
 	char			*next_env;
-	char			**new_one;
+	char			*pfree;
 	register int	i;
 
 	i = index;
 	while (g_global->env_var[i + 1])
 	{
 		next_env = ft_strdup(g_global->env_var[i + 1]);
-		free(g_global->env_var[i]);
+		pfree = g_global->env_var[i];
 		g_global->env_var[i] = next_env;
+		free (pfree);
 		i++;
 	}
-	
-	// ! remove realloc
-	// ? g_global->env_var[i] = NULL;
-	new_one = realloc_new_env(len(g_global->env_var), NULL);
-	return (new_one);
+	pfree = g_global->env_var[i];
+	g_global->env_var[i] = 0;
+	free (pfree);
+	return (g_global->env_var);
 }
 
 /*
@@ -108,6 +108,7 @@ int	unset_builtin(char **args)
 	int	env_index;
 
 	i = -1;
+	g_global->exit_status = 0;
 	if (!args[1])
 		return (1);
 	while (args[++i])
@@ -122,6 +123,7 @@ int	unset_builtin(char **args)
 				write (2, "minishell: unset: `", 19);
 				write (2, args[i], ft_strlen(args[i]));
 				write (2, "': not a valid identifier\n", 26);
+				g_global->exit_status = 1;
 				continue ;
 			}
 		}

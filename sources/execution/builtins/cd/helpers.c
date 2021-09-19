@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:17:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/01 14:23:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/19 16:07:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	get_pwd(char **pwd)
 		return (0);
 	}
 	*pwd = new_pwd;
+	// free (new_pwd);
 	return (1);
 }
 
