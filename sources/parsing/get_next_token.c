@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/17 11:12:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/19 19:05:14 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,17 @@ t_token	*string_token(t_lexer *l)
 		s = ft_strdup("");
 		temp = s;
 		if (l->c == DQUOTE)
+		{
 			s = tokenize_dquoted_text(l);
+			if (!ft_strcmp(s, "\0"))
+				g_global->exit_status = 127;//?
+		}
 		else if (l->c == SQUOTE)
+		{
 			s = tokenize_squoted_text(l);
+			if (!ft_strcmp(s, "\0"))
+				g_global->exit_status = 127;//?
+		}
 		else
 			s = tokenize_text(l, s);
 		if (!s && l->multi_line == 1)

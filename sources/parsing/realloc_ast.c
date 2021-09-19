@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/17 10:25:52 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/19 18:54:12 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,20 @@ t_token	**realloc_ast_args(t_ast *ast, int size)
 char	*tokenize_text(t_lexer *l, char *s)
 {
 	char	*str;
+	int		i;
 
+	i = 0;
 	str = ft_strdup(s);
 	while (l->c != EOF && !ft_strchar("|>< \"\'", l->c))
 	{
 		while (l->c == 32 && l->c != EOF)
 			readchar(l);
 		if (l->c == DOLLAR)
+		{
+			g_global->exit_status = 0;//?
 			str = ft_joinfree(str, envar_token(l));
+			i += 1;
+		}
 		else if (l->c == EOF)
 			return (str);
 		else
