@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 14:37:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/19 18:36:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ static	void	free_old_env(void)
 	}
 	free (g_global->env_var);
 	g_global->env_var = NULL;
+}
+
+int	check_only_key(char *key)
+{
+	int		i;
+
+	i = -1;
+	if (!key)
+		return (-1);
+	while (g_global->env_var[++i])
+	{
+		if (!ft_strcmp(g_global->env_var[i], key))
+			return (i);
+	}
+	return (-1);	
 }
 
 int	find_env(char *key)
@@ -52,7 +67,7 @@ int	find_env(char *key)
 			free (sub_env);
 		}
 	}
-	return (-1);
+	return (check_only_key(key));
 }
 
 char	**realloc_new_env(int env_num, char *arg)

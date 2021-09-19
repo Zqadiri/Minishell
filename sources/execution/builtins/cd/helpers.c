@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:17:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 16:07:55 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/19 17:54:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*add_char_to_word(char *word, char c)
 	}
 	new_word_len = ft_strlen_new(word) + 2;
 	save_word = word;
+	free (word);
 	word = (char *)ft_memalloc(sizeof(char) * new_word_len);
 	if (!word)
 		return (NULL);
@@ -50,7 +51,7 @@ int	get_pwd(char **pwd)
 		return (0);
 	}
 	*pwd = new_pwd;
-	// free (new_pwd);
+	free (new_pwd);
 	return (1);
 }
 
