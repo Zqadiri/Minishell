@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 15:27:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/16 15:40:00 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 14:22:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	modify_env(char *arg, char *key)
 	char	*new_value;
 	char	*tmp;
 
-	i = find_env(key);
+	i = find_env(key, g_global->env_var);
 	if (i == -1)
 		return ;
 	else

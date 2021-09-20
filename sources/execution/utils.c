@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 13:20:21 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 14:22:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_env_var_by_key(char *key)
 	i = 0;
 	if (!key)
 		return (NULL);
-	index = find_env(key);
+	index = find_env(key, g_global->env_var);
 	if (index == -1)
 		return (NULL);
 	value = return_value(g_global->env_var[index], '=');

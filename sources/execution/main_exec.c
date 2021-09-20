@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 14:30:03 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 14:22:37 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	wait_children(void)
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
+		{
+			printf ("****%d\n", g_global->exit_status);
 			g_global->exit_status = WEXITSTATUS(status);
+		}
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
@@ -35,7 +38,7 @@ char	**get_path(void)
 	char	*tmp;
 	int		ret;
 
-	ret = find_env("PATH");
+	ret = find_env("PATH", g_global->env_var);
 	if (ret == -1)
 		return (NULL);
 	tmp = return_value(g_global->env_var[ret], '=');
@@ -56,6 +59,13 @@ int	dup_env_var(char **env)
 	while (++i < len(env))
 		g_global->env_var[i] = ft_strdup(env[i]);
 	g_global->env_var[i] = 0;
+	i = -1;
+	g_global->env_ = (char **)malloc(sizeof(char *) * (len(env) + 1));
+	if (g_global->env_ == NULL)
+		exit(EXIT_FAILURE);
+	while (++i < len(env))
+		g_global->env_[i] = ft_strdup(env[i]);
+	g_global->env_[i] = 0;
 	return (1);
 }
 

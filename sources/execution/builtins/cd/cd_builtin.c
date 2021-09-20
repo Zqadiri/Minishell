@@ -21,7 +21,7 @@ static int	add_var_to_env(char *key, char *new_path)
 	tmp = NULL;
 	if (!key || !new_path)
 		return (0);
-	index = find_env(key);
+	index = find_env(key, g_global->env_var);
 	if (index == -1)
 		return (1);
 	else
@@ -102,11 +102,11 @@ int	cd_builtin(char **argv)
 
 	i = 0;
 	g_global->exit_status = 0;
-	if (len(argv) > 2)
-	{
-		ft_putstr_fd("minishell: cd: to many arguments\n", 2);
-		return (1);
-	}
+	// if (len(argv) > 2)
+	// {
+	// 	ft_putstr_fd("minishell: cd: to many arguments\n", 2);
+	// 	return (1);
+	// }
 	if (argv[i + 1] == NULL)
 	{
 		path = get_env_var_by_key("HOME");

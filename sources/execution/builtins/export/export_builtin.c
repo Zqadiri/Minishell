@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 14:37:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 14:35:51 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	set_new_env(char *arg)
 		if (arg[i] == '=')
 			index = 1;
 	index = (env_count());
-	g_global->env_var = realloc_new_env(index, arg);
+	g_global->env_var = realloc_new_env(index, arg, g_global->env_var);
 }
 
 static void	set_or_modify(char *arg)
@@ -104,7 +104,7 @@ static void	set_or_modify(char *arg)
 	if (i == -1)
 		i = ft_strlen(arg);
 	key = ft_substr(arg, 0, i);
-	is_set = find_env(key);
+	is_set = find_env(key, g_global->env_var);
 	if (is_set == -1)
 		set_new_env(arg);
 	else

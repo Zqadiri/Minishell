@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/09 12:44:23 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 12:52:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_global
 	char	**env_var;
 	int		pid;
 	int		exit_status;
+	char	**env_;
 }	t_global;
 
 t_global	*g_global;

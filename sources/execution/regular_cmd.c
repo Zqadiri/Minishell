@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/16 11:50:09 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 12:21:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 {
 	pid_t	child_pid;
 
+	//! check if cmd is \0
 	if (is_builtin(cmd))
 		return (check_builtin(cmd));
 	else
