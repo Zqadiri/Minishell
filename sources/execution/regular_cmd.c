@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   regular_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 15:47:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 18:28:30 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 	if (m->redir->err)
 	{
 		g_global->exit_status = 1;
-		printf("[%d]\n", g_global->exit_status);
+		// printf("[%d]\n", g_global->exit_status);
 		exit(g_global->exit_status);
 	}
 	possible_path = find_path (cmd->argvs[0], m->path);
