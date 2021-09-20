@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 12:23:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:46:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 			exit(EXIT_FAILURE);
 		}
 		close(m->redir->infile);
-		printf("dup is done\n");
 	}
 }
 
@@ -114,7 +113,7 @@ void	check_for_heredoc(t_data *m, t_cmd *cmd)
 void	exec_single_cmd(t_cmd *cmd, t_data *m)
 {
 	pid_t	child_pid;
-	int		status;
+	// int		status;
 
 	setup_redirections(cmd, m);
 	if (is_builtin(cmd) && !m->redir->err)
@@ -131,7 +130,10 @@ void	exec_single_cmd(t_cmd *cmd, t_data *m)
 		else if (child_pid == 0)
 			find_cmd_path(cmd, m);
 		else
-			waitpid(-1, &status, 0);
+		{
+			printf("[%d]\n", g_global->exit_status);
+			wait_children();
+		}
 		restore_std(m->saved_stdout, m->saved_stdin);
 	}
 }

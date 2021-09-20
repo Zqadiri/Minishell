@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 12:21:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:47:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 
 	if (!cmd->argvs)
 		exit(0);
+	if (m->redir->err)
+	{
+		g_global->exit_status = 1;
+		printf("[%d]\n", g_global->exit_status);
+		exit(g_global->exit_status);
+	}
 	possible_path = find_path (cmd->argvs[0], m->path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
@@ -43,7 +49,6 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 {
 	pid_t	child_pid;
 
-	//! check if cmd is \0
 	if (is_builtin(cmd))
 		return (check_builtin(cmd));
 	else

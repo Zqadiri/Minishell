@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 14:56:51 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:55:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	wait_children(void)
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
-		{
-			printf ("****%d\n", g_global->exit_status);
 			g_global->exit_status = WEXITSTATUS(status);
-		}
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
@@ -85,7 +82,6 @@ int	execution(t_cmd *cmd)
 {
 	t_data	*m;
 
-	printf("exit status = %d\n", g_global->exit_status);
 	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (cmd->redir_nbr == 0 && cmd->type == eof)
 	{
