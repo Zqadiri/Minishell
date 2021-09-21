@@ -3,17 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   regular_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 18:28:30 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/21 19:03:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+// void	check_if_is_executalble(t_cmd *cmd, int ret)
+// {
+// 	// if (stat(cmd->argvs[0], &sb) == 0 && sb.st_mode & S_IXUSR)
+// 	// if((stat(cmd->argvs[0], &sb) >= 0) && (sb.st_mode > 0) && (S_IEXEC & sb.st_mode))
+// 	// if (!stat(cmd->argvs[0], &sb))
+// 	// {
+// 	// 	if((sb.st_mode > 0) && (S_IEXEC & sb.st_mode))
+// 	// 		printf("%s is executable\n", cmd->argvs[0]);
+// 	// }
+// 	// else  
+// 	// 	exit (126);
+// 	printf ("here!\n");
+// 	struct stat sb;
+// 	DIR		*dir;
+	
+// 	if ((ret == -1) && (ft_strncmp(cmd->argvs[0], "./", 2) && ft_strncmp(cmd->argvs[0] , "../", 3)))
+// 	{
+// 		write (2, "minishell: ", 11);
+// 		write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+// 		ft_putendl_fd(": *permission denied", 2);
+// 		exit (126);
+// 	}
+// 	else
+// 	{
+// 		if (!(stat(cmd->argvs[0], &sb)) && (S_IEXEC & sb.st_mode))
+// 			exit(126);
+// 		dir = opendir(cmd->argvs[0]);
+// 		if (!dir)
+// 		{
+// 			write (2, "minishell: ", 11);
+// 			write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+// 			ft_putendl_fd(": permission denied", 2);
+// 			exit (126);
+// 		}
+// 		else
+// 		{
+// 			closedir(dir);
+// 			write (2, "minishell: ", 11);
+// 			write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+// 			ft_putendl_fd(": is a directory", 2);
+// 			exit (126);
+// 		}
+// 	}
+// }
+
 void	find_cmd_path(t_cmd *cmd, t_data *m)
 {
+	printf ("here!\n");
+
 	char	*possible_path;
 	int		fd;
 
@@ -22,7 +69,6 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 	if (m->redir->err)
 	{
 		g_global->exit_status = 1;
-		// printf("[%d]\n", g_global->exit_status);
 		exit(g_global->exit_status);
 	}
 	possible_path = find_path (cmd->argvs[0], m->path);
@@ -36,13 +82,14 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 		ft_putendl_fd(": command not found", 2);
 		exit (127);
 	}
-	if (execve (possible_path, cmd->argvs, g_global->env_var))
-		exit (126);
+	execve (possible_path, cmd->argvs, g_global->env_var);
+	// if (rt == -1)
+	// 	check_if_is_executalble(cmd, rt);
 }
 
 /*
 ** execute_regular_cmd() executes regular command, commands with 
-** redirections & no pipes
+** no redirections & no pipes
 */
 
 int	execute_regular_cmd(t_cmd *cmd, t_data *m)

@@ -141,6 +141,9 @@ unset TES^T
 unset TES!T
 
 //* Pipes *//
+ls | wc
+cat | ls 
+cat | ls | cat | cat 
 env | grep "_="
 env | grep "SHLVL"
 echo oui | cat -e
@@ -183,3 +186,6 @@ ifconfig | grep "." > file
 cat < README.md | wc -l | xargs
 echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e > file
 
+
+
+//???? no such file pr directory -> $? = 1
