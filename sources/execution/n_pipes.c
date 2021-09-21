@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 15:02:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/21 11:01:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,12 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 void	exec_simple_pipe(t_cmd *cmd, t_data *m)
 {
 	int		i;
-	// int		status;
-	// int		signal;
 
 	i = -1;
 	while (++i < cmd->nbr_cmd)
 		init_m(&m[i]);
 	fork_cmd_pipes(cmd, m);
-	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
 	g_global->pid = 0;
+	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
 	wait_children();
 }

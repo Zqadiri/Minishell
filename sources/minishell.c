@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/21 10:14:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:43:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }

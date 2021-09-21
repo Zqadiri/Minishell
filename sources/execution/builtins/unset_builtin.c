@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 14:33:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:48:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_only_key(char *key)
 		if (!ft_strcmp(g_global->env_var[i], key))
 			return (i);
 	}
-	return (-1);	
+	return (-1);
 }
 
 int	find_env(char *key, char **env_pointer)
@@ -133,7 +133,7 @@ int	unset_builtin(char **args)
 		env_index_ = find_env(args[i], g_global->env_);
 		if (env_index_ != -1)
 			g_global->env_ = remove_env_by_key(env_index_, g_global->env_);
- 		if (env_index != -1)
+		if (env_index != -1)
 			g_global->env_var = remove_env_by_key(env_index, g_global->env_var);
 		else
 		{

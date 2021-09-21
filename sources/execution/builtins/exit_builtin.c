@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/06 13:54:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:47:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,36 @@ void	exit_number(char *arg)
 	atoi_exit(arg);
 }
 
+int	check_for_num_arg(char *args)
+{
+	int	i;
+	int	is_alpha;
+
+	i = 0;
+	is_alpha = 0;
+	while (args[i])
+	{
+		if (args[0] == '-' || args[0] == '+')
+			i++;
+		if (args[i] < 48 || args[i] > 57)
+			is_alpha = 1;
+		i++;
+	}
+	if (!is_alpha)
+	{
+		ft_putendl_fd("exit", 1);
+		ft_putendl_fd("*minishell: exit: too many arguments", 2);
+		g_global->exit_status = 1;
+	}
+	else
+		error_exit(args);
+	return (0);
+}
+
 int	exit_builtin(char **args)
 {
 	if (len(args) > 2)
-	{
-		ft_putendl_fd("exit", 1);
-		ft_putendl_fd("minishell: exit: too many arguments", 2);
-		g_global->exit_status = 1;
-		return (0);
-	}
+		return (check_for_num_arg(args[1]));
 	else if (args[1])
 	{
 		if (!ft_strcmp(args[1], "-9223372036854775808"))

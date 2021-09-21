@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 15:55:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/21 11:23:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	wait_children(void)
 	int		status;
 	int		signal;
 
-	while (waitpid(-1, &status, 0) > 0)
+	while (wait(&status) > 0)
 	{
 		if (WIFEXITED(status))
 			g_global->exit_status = WEXITSTATUS(status);

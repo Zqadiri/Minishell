@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 12:53:29 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:46:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 ** env [without any options]
 ** is used to print environment variables
 */
-
-
 
 int	env_builtin(void)
 {
