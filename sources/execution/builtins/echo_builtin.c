@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 18:56:31 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/22 14:52:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,21 @@ void	check_n_option(char **av, int *i, int *option)
 	int	j;
 
 	*i = 1;
+	*option = 0;
 	if (av[1] && av[*i][0] == '-' && av[*i][1] == 'n')
 	{
-		while (av[*i][0] == '-' && av[*i][1] == 'n')
+		while (av[*i][0] == '-' && av[*i][1] == 'n' && av[*i])
 		{
 			j = 1;
 			while (av[*i][j] != '\0')
 			{
-				if (av[*i][j] != 'n')
+				if (av[*i][j] == 'n')
+					j++;
+				else
 					return ;
-				j++;
 			}
-			(*i)++;
 			*option = 1;
+			(*i)++;
 		}
 	}
 }
@@ -47,9 +49,8 @@ int	echo_builtin(char **args)
 		ft_putchar_fd('\n', 1);
 		return (1);
 	}
-	else if (!(ft_strcmp(args[1], "-n") && len(args) == 2))
-		return (1);
 	check_n_option(args, &i, &option);
+	// printf (--> "%d\n", i);
 	while (args[i])
 	{
 		write(1, args[i], ft_strlen(args[i]));

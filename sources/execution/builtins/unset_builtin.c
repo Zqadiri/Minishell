@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/21 10:48:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/22 15:05:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	**realloc_new_env(int env_num, char *arg, char **env_pointer)
 		new_env[i] = ft_strdup(env_pointer[i]);
 		i++;
 	}
+	printf ("-->arg %s\n", arg);
 	new_env[i] = ft_strdup(arg);
 	new_env[env_num + 1] = 0;
 	free_old_env();
