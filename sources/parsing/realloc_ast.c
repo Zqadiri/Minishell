@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc_ast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/19 18:54:12 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/22 11:08:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*tokenize_text(t_lexer *l, char *s)
 			readchar(l);
 		if (l->c == DOLLAR)
 		{
-			g_global->exit_status = 0;//?
 			str = ft_joinfree(str, envar_token(l));
 			i += 1;
 		}

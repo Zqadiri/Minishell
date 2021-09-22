@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/21 19:03:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:21:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,8 @@
 // 	}
 // }
 
-void	find_cmd_path(t_cmd *cmd, t_data *m)
+void	check_for_errors(t_cmd *cmd, t_data *m)
 {
-	printf ("here!\n");
-
-	char	*possible_path;
-	int		fd;
-
 	if (!cmd->argvs)
 		exit(0);
 	if (m->redir->err)
@@ -71,6 +66,19 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 		g_global->exit_status = 1;
 		exit(g_global->exit_status);
 	}
+	if (!ft_strcmp(cmd->argvs[0], "\0"))
+	{
+		write (2, "minishell: ", 11);
+		ft_putendl_fd(": command not found", 2);
+	}
+}
+
+void	find_cmd_path(t_cmd *cmd, t_data *m)
+{
+	char	*possible_path;
+	int		fd;
+
+	check_for_errors(cmd, m);
 	possible_path = find_path (cmd->argvs[0], m->path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
