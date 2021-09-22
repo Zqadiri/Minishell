@@ -26,45 +26,6 @@ char	*to_lower(char *s)
 	return (s);
 }
 
-// char	*invalid_envar_here_doc(char *buff, int i, char *str)
-// {
-// 	char	*temp;
-
-// 	temp = str;
-// 	if (buff[i] == '0')
-// 	{
-// 		str = ft_strjoin(str, "minishell");
-// 		free(temp);
-// 	}
-// 	if (buff[i] == '?')
-// 	{
-// 		str = ft_strjoin(str, ft_itoa(g_global->exit_status));
-// 		free(temp);
-// 	}
-// 	return (str);
-// }
-
-// char	*envar_here_doc(char *buff, int i)
-// {
-// 	char	*str;
-// 	char	*temp;
-
-// 	str = ft_strdup("");
-// 	if (ft_isdigit(buff[i]) || buff[i] == '?')
-// 		return (invalid_envar_here_doc(buff, i, str));
-// 	while (valid_envar(buff[i]) && buff[i] != EOF)
-// 	{
-// 		temp = str;
-// 		str = ft_joinchar(str, buff[i]);
-// 		free(temp);
-// 		i++;
-// 	}
-// 	str = ft_getenv(str);
-// 	if (!str)
-// 		str = ft_strdup("");
-// 	return (str);
-// }
-
 char	*invalid_envar_here_doc(char *buff, int i)
 {
 	char	*s;

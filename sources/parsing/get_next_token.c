@@ -108,13 +108,13 @@ t_token	*string_token(t_lexer *l)
 		{
 			s = tokenize_dquoted_text(l);
 			if (!ft_strcmp(s, "\0"))
-				g_global->exit_status = 127;//?
+				g_global->exit_status = 127;
 		}
 		else if (l->c == SQUOTE)
 		{
 			s = tokenize_squoted_text(l);
 			if (!ft_strcmp(s, "\0"))
-				g_global->exit_status = 127;//?
+				g_global->exit_status = 127;
 		}
 		else
 			s = tokenize_text(l, s);
