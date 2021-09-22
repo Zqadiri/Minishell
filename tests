@@ -1,4 +1,5 @@
 //* echo *//
+!! 
 echo echo
 echo rhobebou
 echo stop barking
@@ -173,12 +174,12 @@ cat /dev/random | head -c 10 | wc -c
 
 //* Redirections *//
 ls -la > file
+echo ok > fileee < fileee
 echo text > file2 text2 > file3
 echo text > $PWD/file text2
 echo text$USER > file $USER 
 echo "text"$USER > file
 cat < README.md
-
 
 //* Pipes ND Redirections *//
 ifconfig | grep "." > file 

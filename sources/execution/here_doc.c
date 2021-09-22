@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/22 11:30:33 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/22 12:20:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ char	*random_file_name(void)
 
 void	parse_here_doc(t_redir *r, t_data *m)
 {
-	printf ("here !\n");
 	char	*buff;
 	char	*output;
 	char	*temp;
@@ -162,11 +161,14 @@ void	parse_here_doc(t_redir *r, t_data *m)
 		}
 		else
 		{
-			output = ft_joinfree(output, envar_here_doc(buff, r->is_quoted));
-			temp = output;
-			output = ft_strjoin(output, "\n");
-			free(temp);
+			if (ft_strcmp(output, "\0"))
+			{
+				temp = output;
+				output = ft_strjoin(output, "\n");
+				free(temp);
+			}
 		}
+		output = ft_joinfree(output, envar_here_doc(buff, r->is_quoted));
 		free(buff);
 	}
 	ft_putendl_fd(output, fd);

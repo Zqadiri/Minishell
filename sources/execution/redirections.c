@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 11:31:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/22 12:45:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,15 @@
 ** redirect stdout to outfile_fd 
 */
 
-void	setup_infiles(t_cmd *cmd, t_data *m)
+void	setup_infiles(t_cmd *cmd, t_data *m, int i)
 {
-	int	i;
 	int	fd;
 
-	i = -1;
-	while (++i < cmd->redir_nbr)
+	if (cmd->r[i].type == less)
 	{
-		if (cmd->r[i].type == less)
-		{
-			fd = open(cmd->r[i].filename, O_RDWR);
-			m->redir->infile = fd;
-			check_valid_fd(m, cmd->r[i].filename, fd);
-		}
+		fd = open(cmd->r[i].filename, O_RDWR);
+		m->redir->infile = fd;
+		check_valid_fd(m, cmd->r[i].filename, fd);
 	}
 	if (!m->redir->err)
 	{
@@ -43,26 +38,21 @@ void	setup_infiles(t_cmd *cmd, t_data *m)
 	}
 }
 
-void	setup_outfiles(t_cmd *cmd, t_data *m)
+void	setup_outfiles(t_cmd *cmd, t_data *m, int i)
 {
-	int	i;
 	int	fd;
 
-	i = -1;
-	while (++i < cmd->redir_nbr)
+	if (cmd->r[i].type == great && !m->redir->err)
 	{
-		if (cmd->r[i].type == great && !m->redir->err)
-		{
-			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
-			m->redir->outfile = fd;
-			check_valid_fd(m, cmd->r[i].filename, fd);
-		}
-		else if (cmd->r[i].type == greater && !m->redir->err)
-		{
-			fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
-			m->redir->outfile = fd;
-			check_valid_fd(m, cmd->r[i].filename, fd);
-		}
+		fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
+		m->redir->outfile = fd;
+		check_valid_fd(m, cmd->r[i].filename, fd);
+	}
+	else if (cmd->r[i].type == greater && !m->redir->err)
+	{
+		fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
+		m->redir->outfile = fd;
+		check_valid_fd(m, cmd->r[i].filename, fd);
 	}
 	if (!m->redir->err)
 	{
@@ -71,16 +61,33 @@ void	setup_outfiles(t_cmd *cmd, t_data *m)
 	}
 }
 
+// int	setup_redirections(t_cmd *cmd, t_data *m)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if ((count(cmd, less) != 0))
+// 		setup_infiles(cmd, m);
+// 	if (((count(cmd, great) != 0) || (count(cmd, greater)) != 0) && \
+// 		!m->redir->err)
+// 		setup_outfiles(cmd, m);
+// 	return (1);
+// }
+
 int	setup_redirections(t_cmd *cmd, t_data *m)
 {
 	int	i;
 
 	i = 0;
-	if ((count(cmd, less) != 0))
-		setup_infiles(cmd, m);
-	if (((count(cmd, great) != 0) || (count(cmd, greater)) != 0) && \
-		!m->redir->err)
-		setup_outfiles(cmd, m);
+	while (i < cmd->redir_nbr)
+	{
+		if (cmd->r[i].type == less)
+			setup_infiles(cmd, m, i);
+		if ((cmd->r[i].type == greater || cmd->r[i].type == great) && \
+			!m->redir->err)
+			setup_outfiles(cmd, m, i);	
+		i++;
+	}
 	return (1);
 }
 

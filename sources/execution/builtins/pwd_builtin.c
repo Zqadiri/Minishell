@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 12:40:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/22 12:53:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_builtin(t_cmd *cmd)
 		return (echo_builtin(args));
 	else if (ft_strequ(args[0], "env"))
 		return (env_builtin());
-	else if (ft_strequ(args[0], "export"))
+	else if (ft_strequ(args[0], "export") && cmd->nbr_cmd == 1)
 		return (export_builtin(args));
 	else if (ft_strequ(args[0], "unset"))
 		return (unset_builtin(args));

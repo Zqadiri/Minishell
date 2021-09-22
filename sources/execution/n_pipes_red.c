@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 11:38:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:45:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 		m->id = m->pipe_fd[i][0];
 	}
 	g_global->pid = exec_proc(m->id, 1, &cmd[i], &m[i]);
-	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
-	wait_children();
 	return (1);
 }
 
@@ -118,6 +116,10 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 		return ;
 	}
 	else
+	{
 		fork_pipes(cmd, m);
+		close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
+		wait_children();
+	}
 	g_global->pid = 0;
 }
