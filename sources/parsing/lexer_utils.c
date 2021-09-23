@@ -21,31 +21,30 @@ int	valid_envar(char c)
 
 char	*ft_getenv(char *str)
 {
-	char	**env_var;
-	char	*value;
+	char	*env_value;
+	char	*env_key;
 	char	*temp;
 	int		i;
+	int		start;
 
-	value = ft_strdup("");
+	env_value = ft_strdup("");
 	i = -1;
 	while (g_global->env_var[++i])
 	{
-		env_var = ft_split(g_global->env_var[i], '=');//!!!!!
-		if (!ft_strcmp(env_var[0], str))
+		start = get_str_by_char(g_global->env_var[i], '=');
+		env_key = ft_substr(g_global->env_var[i], 0, start);
+		if (!ft_strcmp(env_key, str))
 		{
-			temp = value;
-			value = ft_strdup(env_var[1]);
+			temp = env_value;
+			env_value = ft_substr(g_global->env_var[i], start + 1,
+					ft_strlen(g_global->env_var[i]) - start);
 			free(temp);
-			ft_freeptr(env_var[0]);
-			ft_freeptr(env_var[1]);
-			ft_freeptr(env_var);
+			ft_freeptr(env_key);
 			break ;
 		}
-		ft_freeptr(env_var[0]);
-		ft_freeptr(env_var[1]);
-		ft_freeptr(env_var);
+		ft_freeptr(env_key);
 	}
-	return (value);
+	return (env_value);
 }
 
 char	*string_envar(t_lexer *l)
