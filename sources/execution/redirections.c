@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 12:45:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/23 11:16:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,6 @@ void	setup_outfiles(t_cmd *cmd, t_data *m, int i)
 		close(m->redir->outfile);
 	}
 }
-
-// int	setup_redirections(t_cmd *cmd, t_data *m)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if ((count(cmd, less) != 0))
-// 		setup_infiles(cmd, m);
-// 	if (((count(cmd, great) != 0) || (count(cmd, greater)) != 0) && \
-// 		!m->redir->err)
-// 		setup_outfiles(cmd, m);
-// 	return (1);
-// }
 
 int	setup_redirections(t_cmd *cmd, t_data *m)
 {

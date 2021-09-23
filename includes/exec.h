@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/20 14:34:03 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/23 12:06:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ long long	atoi_exit(const char *str);
 */
 
 void		print_error(char *file_error);
-void		setup_out(t_cmd *cmd, t_data *m);
-void		setup_in(t_cmd *cmd, t_data *m);
+void		setup_out(t_cmd *cmd, t_data *m, int j);
+void		setup_in(t_cmd *cmd, t_data *m, int j);
 void		wait_children(void);
 void		fork_failed(void);
 

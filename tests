@@ -183,6 +183,7 @@ cat < README.md
 
 //* Pipes ND Redirections *//
 ifconfig | grep "." > file 
+<< ok | grep << ov
 cat < README.md | wc -l | xargs
 echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e > file
 

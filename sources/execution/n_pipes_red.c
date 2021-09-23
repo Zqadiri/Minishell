@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 11:45:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/23 12:05:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 	if (m->pid == 0)
 	{
 		if (m->redir->infile && !m->redir->err)
-		{
-			close(m->pipe_fd[m->id][0]);
 			dup2(m->redir->infile, 0);
-		}
 		else if (in != 0)
 		{
 			dup2(in, 0);
@@ -58,19 +55,41 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 	return (m->pid);
 }
 
+// void	setup_all_redirections(t_cmd *cmd, t_data *m)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (++i < cmd->nbr_cmd)
+// 	{
+// 		check_for_heredoc(&m[i], &cmd[i]);
+// 		if (count(&cmd[i], less) > 0)
+// 			setup_in(&cmd[i], &m[i]);
+// 		if (count(&cmd[i], great) > 0 || \
+// 		count(&cmd[i], great) > 0)
+// 			setup_out(&cmd[i], &m[i]);
+// 	}
+// }
+
 void	setup_all_redirections(t_cmd *cmd, t_data *m)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < cmd->nbr_cmd)
 	{
+		j = -1;
 		check_for_heredoc(&m[i], &cmd[i]);
-		if (count(&cmd[i], less) > 0)
-			setup_in(&cmd[i], &m[i]);
-		if (count(&cmd[i], great) > 0 || \
-		count(&cmd[i], great) > 0)
-			setup_out(&cmd[i], &m[i]);
+		while (++j < cmd[i].redir_nbr)
+		{
+			if (cmd[i].r[j].type == less)
+				setup_in(&cmd[i], &m[i], j);
+			if ((cmd[i].r[j].type == great || cmd[i].r[j].type == greater) && \
+				!m->redir->err)
+				setup_out(&cmd[i], &m[i], j);
+		}
+
 	}
 }
 

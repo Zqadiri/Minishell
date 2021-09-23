@@ -6,59 +6,75 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:06:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 14:52:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/23 11:14:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	check_n_option(char **av, int *i, int *option)
+int	is_valid_option(char *arg)
 {
-	int	j;
+	int	i;
 
-	*i = 1;
-	*option = 0;
-	if (av[1] && av[*i][0] == '-' && av[*i][1] == 'n')
+	i = 1;
+	if (arg[0] == '-')
 	{
-		while (av[*i][0] == '-' && av[*i][1] == 'n' && av[*i])
+		while (arg[i] != '\0')
 		{
-			j = 1;
-			while (av[*i][j] != '\0')
-			{
-				if (av[*i][j] == 'n')
-					j++;
-				else
-					return ;
-			}
-			*option = 1;
-			(*i)++;
+			if (arg[i] != 'n')
+				return (1);
+			i++;
 		}
+		return (0);
+	}
+	return (1);
+}
+
+void	check_n_option(char **args)
+{
+	int	i;
+
+	if (args[2] == NULL)
+		return ;
+	i = 2;
+	while (is_valid_option(args[i]) == 0)
+	{
+		i++;
+		if (args[i] == NULL)
+			return ;
+	}
+	while (args[i] != NULL)
+	{
+		ft_putstr_fd(args[i], 1);
+		i++;
+		if (args[i] != NULL)
+			ft_putstr_fd(" ", 1);
 	}
 }
 
 int	echo_builtin(char **args)
 {
-	int		i;
-	int		option;
+	int	j;
 
-	i = 0;
-	option = 0;
 	g_global->exit_status = 0;
-	if (len(args) == 1)
+	if (args[1] == NULL)
+		ft_putstr_fd("\n", 1);
+	else
 	{
-		ft_putchar_fd('\n', 1);
-		return (1);
+		if (is_valid_option(args[1]) == 0)
+			check_n_option(args);
+		else
+		{
+			j = 1;
+			while (args[j] != NULL)
+			{
+				ft_putstr_fd(args[j], 1);
+				if (args[j + 1] != NULL)
+					ft_putstr_fd(" ", 1);
+				j++;
+			}
+			ft_putstr_fd("\n", 1);
+		}
 	}
-	check_n_option(args, &i, &option);
-	// printf (--> "%d\n", i);
-	while (args[i])
-	{
-		write(1, args[i], ft_strlen(args[i]));
-		if (i < len(args) - 1)
-			write(1, " ", 1);
-		i++;
-	}
-	if (option == 0)
-		write(1, "\n", 1);
 	return (0);
 }
