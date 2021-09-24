@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 14:51:10 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/24 17:59:17 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 typedef struct s_redir
 {
 	t_token_type	type;
-	char			*filename;
+	char			*filename; // !!free
 	int				is_quoted;
 }					t_redir;
 
