@@ -116,7 +116,7 @@ int			exec_builtin(int in, int out, t_cmd *cmd, t_data *m);
 int			find_env(char *key, char **env_pointer);
 char		*get_env_var_by_key(char *key);
 char		*return_value(const char *s, int c);
-int			get_str_by_char(char *str, char c);
+int			get_str_by_char(char *str, char c, int i);
 int			is_valid_env_key(char *arg);
 void		modify_env(char *arg, char *key);
 char		*get_env_var_by_key(char *key);

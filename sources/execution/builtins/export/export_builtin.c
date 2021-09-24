@@ -112,7 +112,7 @@ static void	set_or_modify(char *arg)
 
 	if (arg == NULL)
 		return ;
-	i = get_str_by_char(arg, '=');
+	i = get_str_by_char(arg, '=', 0);
 	if (i == -1)
 		i = ft_strlen(arg);
 	key = ft_substr(arg, 0, i);

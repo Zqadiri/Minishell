@@ -53,7 +53,7 @@ int	find_env(char *key, char **env_pointer)
 		return (-1);
 	while (env_pointer[++i])
 	{
-		index = get_str_by_char(env_pointer[i], '=');
+		index = get_str_by_char(env_pointer[i], '=', 0);
 		if (index == -1)
 			index = ft_strlen(env_pointer[i]);
 		else

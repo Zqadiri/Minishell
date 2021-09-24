@@ -88,14 +88,16 @@ void	modify_env(char *arg, char *key)
 	}
 }
 
-int	get_str_by_char(char *str, char c)
+int	get_str_by_char(char *str, char c, int i)
 {
 	char	*str2;
 	int		ret;
 
 	str2 = ft_strchr(str, c);
-	if (!str2)
+	if (!str2 && i == 0)
 		return (-1);
+	else if (!str2 && i ==1)
+		return (0);
 	else
 		ret = (int)(str2 - str);
 	return (ret);

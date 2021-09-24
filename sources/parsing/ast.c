@@ -67,27 +67,6 @@ void	init_cmd(t_cmd z)
 	z.r = NULL;
 }
 
-// void	print_cmd(t_cmd *z, int n)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	(void)n;
-// 	i = -1;
-// 	while (++i < z[0].nbr_cmd)
-// 	{
-// 		j = -1;
-// 		while (z[i].args_size > ++j)
-// 			printf("cmd[%d].args[%d] = [%s]\n", i, j, z[i].argvs[j]);
-// 		j = -1;
-// 		while (z[i].redir_nbr > ++j)
-// 		{
-// 			printf("cmd[%d].file[%d] = [%s] - ", i, j, z[i].r[j].filename);
-// 			printf("cmd[%d].type[%d] = [%u]\n", i, j, z[i].r[j].type);
-// 		}
-// 	}
-// }
-
 t_cmd	*visitor(t_ast *ast)
 {
 	t_cmd	*z;
@@ -113,7 +92,6 @@ t_cmd	*visitor(t_ast *ast)
 		while (++(x.m) < x.k)
 			z[x.m].nbr_cmd = x.k;
 	}
-	// print_cmd(z, x.k);
 	free_tree(ast);
 	return (z);
 }

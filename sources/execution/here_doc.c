@@ -52,7 +52,10 @@ char	*envar_here_doc(char *buff, int i)
 	char	*temp;
 
 	if (!ft_strcmp(buff, "\0") || i == 1)
-		return (buff);
+	{
+		s = ft_strdup(buff);
+		return (s);
+	}
 	i = -1;
 	s = ft_strdup("");
 	while (buff[++i] != '\0')
