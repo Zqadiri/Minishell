@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/23 15:32:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:23:33 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ int	execution(t_cmd *cmd)
 	{
 		exec_multiple_cmd(cmd, m);
 	}
-	free_m(m, cmd->nbr_cmd);
+	// free_m(m, cmd->nbr_cmd);
 	return (1);
 }

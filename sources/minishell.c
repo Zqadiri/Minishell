@@ -71,6 +71,7 @@ void	parse(t_lexer *l)
 			z = visitor(ast);
 			if (z)
 			{
+				// printf("[%d]\n", g_global->exit_status);
 				execution(z);
 				if (z)
 					free_cmd(z);
@@ -115,3 +116,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
+
+//!!! export a ; unset a ->> heap-buffer0-overflow | remove_env_by_key unset_builtin.c:101 |
