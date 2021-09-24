@@ -84,7 +84,7 @@ char	**realloc_new_env(int env_num, char *arg, char **env_pointer)
 		new_env[i] = ft_strdup(env_pointer[i]);
 		i++;
 	}
-	printf ("-->arg %s\n", arg);
+	// printf ("-->arg %s\n", arg);
 	new_env[i] = ft_strdup(arg);
 	new_env[env_num + 1] = 0;
 	free_old_env();

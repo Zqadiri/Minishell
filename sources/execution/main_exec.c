@@ -98,6 +98,6 @@ int	execution(t_cmd *cmd)
 	{
 		exec_multiple_cmd(cmd, m);
 	}
-	// free_m(m, cmd->nbr_cmd);
+	// free_m(m, cmd->nbr_cmd);//???
 	return (1);
 }

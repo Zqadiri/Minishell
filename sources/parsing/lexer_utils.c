@@ -32,6 +32,8 @@ char	*ft_getenv(char *str)
 	while (g_global->env_var[++i])
 	{
 		start = get_str_by_char(g_global->env_var[i], '=');
+			if (start == -1)
+				start += 1;
 		env_key = ft_substr(g_global->env_var[i], 0, start);
 		if (!ft_strcmp(env_key, str))
 		{

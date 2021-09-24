@@ -76,16 +76,16 @@ int	is_valid_env_key(char *arg)
 	return (1);
 }
 
-void print_envar(char **s)
-{
-	int i;
+// void print_envar(char **s)
+// {
+// 	int i;
 
-	i = -1;
-	while (s[++i])
-	{
-		printf("env[%d] = %s\n", i, s[i]);
-	}
-}
+// 	i = -1;
+// 	while (s[++i])
+// 	{
+// 		printf("env[%d] = %s\n", i, s[i]);
+// 	}
+// }
 
 static void	set_new_env(char *arg)
 {
@@ -146,7 +146,7 @@ int	export_builtin(char **args)
 			continue ;
 		}
 		set_or_modify(args[i]);
-		print_envar(g_global->env_var);
+		// print_envar(g_global->env_var);
 	}
 	return (1);
 }
