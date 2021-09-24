@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 12:53:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:16:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	check_builtin(t_cmd *cmd)
 	char	**args;
 
 	args = cmd->argvs;
+	g_global->exit_status = 0;
 	if (ft_strequ(args[0], "pwd"))
 		return (pwd_builtin());
 	else if (ft_strequ(args[0], "echo"))

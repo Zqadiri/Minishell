@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/23 12:06:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:21:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void		setup_out(t_cmd *cmd, t_data *m, int j);
 void		setup_in(t_cmd *cmd, t_data *m, int j);
 void		wait_children(void);
 void		fork_failed(void);
+void		not_valid_id(char *arg);
+void		error_retrieving_cd(void);
 
 /*
 ** Utils

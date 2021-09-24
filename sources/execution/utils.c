@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:31:05 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/23 12:13:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:22:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,56 +83,45 @@ void	setup_out(t_cmd *cmd, t_data *m, int i)
 	m->redir->outfile = fd;
 }
 
-/*
-**   j = -1;
-   while (++j < nbr_cmd - 1)
-   {
-   	i = -1;
-   	while (m[j].pipe_fd[++i] != NULL)
-   		free(m[j].pipe_fd[i]);
-   	free (m[j].pipe_fd);
-   }
-*/
-
-int	pipe_free(t_data *m, int nbr_cmd)
+static int	check_only_key(char *key)
 {
-	int	i;
+	int		i;
 
-	i = 0;
-	if (nbr_cmd == 1)
-		return (1);
-	while (i < nbr_cmd - 1)
+	i = -1;
+	if (!key)
+		return (-1);
+	while (g_global->env_var[++i])
 	{
-		free(m->pipe_fd[i]);
-		i++;
+		if (!ft_strcmp(g_global->env_var[i], key))
+			return (i);
 	}
-	free(m->pipe_fd);
-	return (1);
+	return (-1);
 }
 
-void	free_m(t_data *m, int nbr_cmd)
+int	find_env(char *key, char **env_pointer)
 {
-	int	i;
-	int	j;
+	int		index;
+	char	*sub_env;
+	int		i;
 
-	j = -1;
-	while (++j < nbr_cmd)
+	i = -1;
+	if (!key)
+		return (-1);
+	while (env_pointer[++i])
 	{
-		i = -1;
-		if (m[j].path == NULL)
-			break;
-		while (m[j].path[++i] != NULL)
+		index = get_str_by_char(env_pointer[i], '=', 0);
+		if (index == -1)
+			index = ft_strlen(env_pointer[i]);
+		else
 		{
-			free(m[j].path[i]);
-			m[j].path[i] = NULL;
+			sub_env = ft_substr(env_pointer[i], 0, index);
+			if (sub_env != NULL && ft_strequ(key, sub_env))
+			{
+				free(sub_env);
+				return (i);
+			}
+			free (sub_env);
 		}
-		free(m[j].path);
 	}
-	j = -1;
-	while (++j < nbr_cmd)
-		free(m[j].redir);
-	pipe_free(m, nbr_cmd);
-	free (m);
-	m = NULL;
+	return (check_only_key(key));
 }
-

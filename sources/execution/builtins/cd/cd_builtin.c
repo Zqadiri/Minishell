@@ -50,9 +50,7 @@ static int	move_to_dir(char *path)
 	get_pwd(&tmp);
 	if (!tmp && (!ft_strcmp(".", path) || !ft_strcmp("./", path)))
 	{
-		ft_putstr_fd("cd: error retrieving current directory: ", 2);
-		ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
-		printf("%s\n", strerror(errno));
+		error_retrieving_cd();
 		free (tmp);
 		tmp = get_env_var_by_key("PWD");
 		tmp = add_char_to_word(tmp, '/');

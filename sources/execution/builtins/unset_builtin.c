@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 15:05:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:23:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,49 +27,6 @@ static	void	free_old_env(void)
 	g_global->env_var = NULL;
 }
 
-int	check_only_key(char *key)
-{
-	int		i;
-
-	i = -1;
-	if (!key)
-		return (-1);
-	while (g_global->env_var[++i])
-	{
-		if (!ft_strcmp(g_global->env_var[i], key))
-			return (i);
-	}
-	return (-1);
-}
-
-int	find_env(char *key, char **env_pointer)
-{
-	int		index;
-	char	*sub_env;
-	int		i;
-
-	i = -1;
-	if (!key)
-		return (-1);
-	while (env_pointer[++i])
-	{
-		index = get_str_by_char(env_pointer[i], '=', 0);
-		if (index == -1)
-			index = ft_strlen(env_pointer[i]);
-		else
-		{
-			sub_env = ft_substr(env_pointer[i], 0, index);
-			if (sub_env != NULL && ft_strequ(key, sub_env))
-			{
-				free(sub_env);
-				return (i);
-			}
-			free (sub_env);
-		}
-	}
-	return (check_only_key(key));
-}
-
 char	**realloc_new_env(int env_num, char *arg, char **env_pointer)
 {
 	char	**new_env;
@@ -84,7 +41,6 @@ char	**realloc_new_env(int env_num, char *arg, char **env_pointer)
 		new_env[i] = ft_strdup(env_pointer[i]);
 		i++;
 	}
-	// printf ("-->arg %s\n", arg);
 	new_env[i] = ft_strdup(arg);
 	new_env[env_num + 1] = 0;
 	free_old_env();
@@ -98,13 +54,16 @@ char	**remove_env_by_key(int index, char **env_pointer)
 	register int	i;
 
 	i = index;
-	while (env_pointer[i + 1])
+	if (i < len(env_pointer))
 	{
-		next_env = ft_strdup(env_pointer[i + 1]);
-		pfree = env_pointer[i];
-		env_pointer[i] = next_env;
-		free (pfree);
-		i++;
+		while (env_pointer[i + 1] != NULL)
+		{
+			next_env = ft_strdup(env_pointer[i + 1]);
+			pfree = env_pointer[i];
+			env_pointer[i] = next_env;
+			free (pfree);
+			i++;
+		}
 	}
 	pfree = env_pointer[i];
 	env_pointer[i] = 0;
@@ -125,7 +84,6 @@ int	unset_builtin(char **args)
 	int	env_index_;
 
 	i = -1;
-	g_global->exit_status = 0;
 	if (!args[1])
 		return (1);
 	while (args[++i])
@@ -140,10 +98,7 @@ int	unset_builtin(char **args)
 		{
 			if (!is_valid_env_key(args[i]))
 			{
-				write (2, "minishell: unset: `", 19);
-				write (2, args[i], ft_strlen(args[i]));
-				write (2, "': not a valid identifier\n", 26);
-				g_global->exit_status = 1;
+				not_valid_id(args[i]);
 				continue ;
 			}
 		}
