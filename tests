@@ -187,6 +187,6 @@ ifconfig | grep "." > file
 cat < README.md | wc -l | xargs
 echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e > file
 
-
+<< ee  cat |  grep -> grep usage
 
 //???? no such file pr directory -> $? = 1

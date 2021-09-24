@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/24 15:21:26 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/24 17:25:00 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	parse_here_doc(t_redir *r, t_data *m)
 
 	m->redir->filename_ = random_file_name();
 	fd = open(m->redir->filename_, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0) //!!! exit after display msg 
+	if (fd < 0) //!!! exit after display msg
 		check_valid_fd(m, m->redir->filename_, fd);
 	output = ft_strdup("");
 	while (1)
