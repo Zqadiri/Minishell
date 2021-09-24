@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
+#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/24 10:56:01 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/09/24 13:06:21 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS_EXEC		=	./sources/execution/builtins/cd/cd_builtin.c\
 					./sources/execution/n_pipes_red.c\
 					./sources/execution/signals.c\
 					./sources/execution/here_doc.c\
+					./sources/execution/here_doc_expander.c\
 					./sources/execution/utils.c\
 					./sources/execution/free_functions.c
 
