@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/23 11:16:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 15:21:37 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	setup_redirections(t_cmd *cmd, t_data *m)
 			setup_infiles(cmd, m, i);
 		if ((cmd->r[i].type == greater || cmd->r[i].type == great) && \
 			!m->redir->err)
-			setup_outfiles(cmd, m, i);	
+			setup_outfiles(cmd, m, i);
 		i++;
 	}
 	return (1);

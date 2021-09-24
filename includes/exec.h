@@ -6,7 +6,7 @@
 /*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 13:07:04 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/24 14:51:10 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,6 @@ void		parse_here_doc(t_redir *r, t_data *m);
 
 void	ft_freeptr(void *ptr);
 char	*envar_here_doc(char *buff, int i);
+int		valid_envar(char c);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 15:27:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 11:22:29 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 15:14:30 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	get_str_by_char(char *str, char c, int i)
 	str2 = ft_strchr(str, c);
 	if (!str2 && i == 0)
 		return (-1);
-	else if (!str2 && i ==1)
+	else if (!str2 && i == 1)
 		return (0);
 	else
 		ret = (int)(str2 - str);
