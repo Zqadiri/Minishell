@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:00:28 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/22 15:16:03 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:21:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_getenv(char *str)
 	i = -1;
 	while (g_global->env_var[++i])
 	{
-		start = get_str_by_char(g_global->env_var[i], '=');
+		start = get_str_by_char(g_global->env_var[i], '=', 1);
 		env_key = ft_substr(g_global->env_var[i], 0, start);
 		if (!ft_strcmp(env_key, str))
 		{

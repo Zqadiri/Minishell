@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 15:11:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:21:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,6 @@ int	is_valid_env_key(char *arg)
 	return (1);
 }
 
-void print_envar(char **s)
-{
-	int i;
-
-	i = -1;
-	while (s[++i])
-	{
-		printf("env[%d] = %s\n", i, s[i]);
-	}
-}
-
 static void	set_new_env(char *arg)
 {
 	int		index;
@@ -101,7 +90,6 @@ static void	set_new_env(char *arg)
 			index = 1;
 	index = (env_count());
 	g_global->env_var = realloc_new_env(index, arg, g_global->env_var);
-	// print_envar(g_global->env_var);
 }
 
 static void	set_or_modify(char *arg)
@@ -112,7 +100,7 @@ static void	set_or_modify(char *arg)
 
 	if (arg == NULL)
 		return ;
-	i = get_str_by_char(arg, '=');
+	i = get_str_by_char(arg, '=', 0);
 	if (i == -1)
 		i = ft_strlen(arg);
 	key = ft_substr(arg, 0, i);
@@ -146,7 +134,6 @@ int	export_builtin(char **args)
 			continue ;
 		}
 		set_or_modify(args[i]);
-		print_envar(g_global->env_var);
 	}
 	return (1);
 }

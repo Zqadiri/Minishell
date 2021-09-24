@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/19 19:05:14 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:01:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,13 @@ t_token	*string_token(t_lexer *l)
 		if (l->c == DQUOTE)
 		{
 			s = tokenize_dquoted_text(l);
-			if (!ft_strcmp(s, "\0"))
+			if (!ft_strcmp(s, "\0") && !str)
 				g_global->exit_status = 127;
 		}
 		else if (l->c == SQUOTE)
 		{
 			s = tokenize_squoted_text(l);
-			if (!ft_strcmp(s, "\0"))
+			if (!ft_strcmp(s, "\0") && !str)
 				g_global->exit_status = 127;
 		}
 		else

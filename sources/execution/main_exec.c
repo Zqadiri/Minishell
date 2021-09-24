@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/22 11:35:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/09/23 15:32:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	wait_children(void)
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
-			g_global->exit_status = signal + 128;
+			if (signal == 13)
+				g_global->exit_status = 0;
+			else
+				g_global->exit_status = signal + 128;
 		}		
 	}
 }
@@ -98,6 +101,6 @@ int	execution(t_cmd *cmd)
 	{
 		exec_multiple_cmd(cmd, m);
 	}
-	// free_m(m, cmd->nbr_cmd);
+	free_m(m, cmd->nbr_cmd);
 	return (1);
 }
