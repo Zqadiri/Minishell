@@ -148,4 +148,6 @@ void		close_all_pipes(int **fd, int n);
 void		sigint_handler(int sig);
 void		parse_here_doc(t_redir *r, t_data *m);
 
+void	ft_freeptr(void *ptr);
+
 #endif

@@ -97,6 +97,6 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l);
 int		is_valid_id(char *str);
 void	print_msg(char *str, char *var);
 int		peek_char(t_lexer *l);
-void	ft_freeptr(void *ptr);
+int	multi_lines(t_lexer *l, char c);
 
 #endif

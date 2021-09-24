@@ -53,3 +53,9 @@ void	free_m(t_data *m, int nbr_cmd)
 	free (m);
 	m = NULL;
 }
+
+void	ft_freeptr(void *ptr)
+{
+	free(ptr);
+	ptr = NULL;
+}

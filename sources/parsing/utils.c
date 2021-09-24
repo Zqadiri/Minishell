@@ -66,8 +66,16 @@ int	peek_char(t_lexer *l)
 		return (l->buffer[l->readpos]);
 }
 
-void	ft_freeptr(void *ptr)
+int	multi_lines(t_lexer *l, char c)
 {
-	free(ptr);
-	ptr = NULL;
+	if (l->c == EOF)
+	{
+		if (c == DQUOTE)
+			print_msg("minishell: syntax error expected \"\n", NULL);
+		else
+			print_msg("minishell: syntax error expected \'\n", NULL);
+		l->multi_line = 1;
+		return (0);
+	}
+	return (1);
 }

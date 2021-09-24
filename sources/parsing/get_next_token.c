@@ -12,20 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-int	multi_lines(t_lexer *l, char c)
-{
-	if (l->c == EOF)
-	{
-		if (c == DQUOTE)
-			print_msg("minishell: syntax error expected \"\n", NULL);
-		else
-			print_msg("minishell: syntax error expected \'\n", NULL);
-		l->multi_line = 1;
-		return (0);
-	}
-	return (1);
-}
-
 char	*tokenize_dquoted_text(t_lexer *l)
 {
 	char	*str;
@@ -93,8 +79,8 @@ t_token	*return_token(char *str, t_lexer *l, int i)
 
 char	*quoted_string(t_lexer *l, char *str)
 {
-	char *s;
-	
+	char	*s;
+
 	if (l->c == DQUOTE)
 	{
 		s = tokenize_dquoted_text(l);
