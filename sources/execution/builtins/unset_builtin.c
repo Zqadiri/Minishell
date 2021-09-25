@@ -12,20 +12,20 @@
 
 #include "../../../includes/minishell.h"
 
-static	void	free_old_env(void)
-{
-	int	i;
+// static	void	free_old_env(void)
+// {
+// 	int	i;
 
-	i = 0;
-	while (g_global->env_var[i])
-	{
-		free(g_global->env_var[i]);
-		g_global->env_var[i] = NULL;
-		i++;
-	}
-	free (g_global->env_var);
-	g_global->env_var = NULL;
-}
+// 	i = 0;
+// 	while (g_global->env_var[i])
+// 	{
+// 		free(g_global->env_var[i]);
+// 		g_global->env_var[i] = NULL;
+// 		i++;
+// 	}
+// 	free (g_global->env_var);
+// 	g_global->env_var = NULL;
+// }
 
 char	**realloc_new_env(int env_num, char *arg, char **env_pointer)
 {
@@ -43,7 +43,7 @@ char	**realloc_new_env(int env_num, char *arg, char **env_pointer)
 	}
 	new_env[i] = ft_strdup(arg);
 	new_env[env_num + 1] = 0;
-	free_old_env();
+	// free_old_env();
 	return (new_env);
 }
 

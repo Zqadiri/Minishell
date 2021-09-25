@@ -112,6 +112,55 @@ static void	set_or_modify(char *arg)
 	free (key);
 }
 
+static void	new_env(char *arg)
+{
+	int		index;
+	int		i;
+
+	index = 0;
+	i = -1;
+	if (arg == NULL)
+		return ;
+	// while (arg[++i])
+	// 	if (arg[i] == '=')
+	// 		index = 1;
+	// index = 0;
+	while (g_global->env_[index])
+		index++;
+	g_global->env_ = realloc_new_env(index, arg, g_global->env_);
+}
+
+static void	add_to_env(char *arg)
+{
+	int		i;
+	char	*key;
+	int		is_set;
+	char	*get_key;
+
+	if (arg == NULL)
+		return ;
+	i = get_str_by_char(arg, '=', 0);
+	if (i == -1)
+		i = ft_strlen(arg);
+	key = ft_substr(arg, 0, i);
+	get_key = getenv(key);
+	if (get_key == NULL)
+	{
+		free (key);
+		return;
+	}
+	else
+	{
+		is_set = find_env(key, g_global->env_);
+		printf ("is_set : %d\n", is_set);
+		if (is_set == -1)
+			new_env(arg);
+		// else
+		// 	modify_env(arg, key);
+	}
+	free (key);
+}
+
 int	export_builtin(char **args)
 {
 	int	i;
@@ -134,6 +183,7 @@ int	export_builtin(char **args)
 			continue ;
 		}
 		set_or_modify(args[i]);
+		add_to_env(args[i]);
 	}
 	return (1);
 }

@@ -55,7 +55,7 @@ OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
 INCLUDE 		= 	-I includes -L includes
 CC				= 	gcc
-FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g #-fsanitize=address
+FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g -fsanitize=address
 RM				= 	rm -f
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
