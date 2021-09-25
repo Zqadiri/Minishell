@@ -74,6 +74,7 @@ typedef struct s_data
 int			cd_builtin(char **arg);
 int			echo_builtin(char **arg);
 int			pwd_builtin(void);
+void		add_to_env(char *arg);
 int			env_builtin(void);
 int			exit_builtin(char **args);
 int			unset_builtin(char **args);

@@ -26,18 +26,27 @@ char	*to_lower(char *s)
 	return (s);
 }
 
-char	*random_file_name(void)
+int		random_file_name(t_data *m)
 {
 	static int	file_nbr = 0;
 	char		*name;
 	char		*itoa_nbr;
+	int			fd;
 
 	file_nbr++;
 	name = NULL;
 	itoa_nbr = ft_itoa(file_nbr);
 	name = ft_strjoin("/tmp/file", itoa_nbr);
 	free(itoa_nbr);
-	return (name);
+	m->redir->filename_ = name;
+	fd = open(m->redir->filename_, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		check_valid_fd(m, m->redir->filename_, fd);
+		exit (g_global->exit_status);
+	}
+	free(name);
+	return (fd);
 }
 
 char	*herdoc_helper(char *buff, char *output, char *filename, int is_quoted)
@@ -67,13 +76,7 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	char	*temp;
 	int		fd;
 
-	m->redir->filename_ = random_file_name();
-	fd = open(m->redir->filename_, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-	{
-		check_valid_fd(m, m->redir->filename_, fd);
-		exit (g_global->exit_status);
-	}
+	fd = random_file_name(m);
 	output = ft_strdup("");
 	while (1)
 	{
