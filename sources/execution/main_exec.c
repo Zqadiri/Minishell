@@ -102,6 +102,6 @@ int	execution(t_cmd *cmd)
 	{
 		exec_multiple_cmd(cmd, m);
 	}
-	// free_m(m, cmd->nbr_cmd);
+	main_free(m, cmd);
 	return (1);
 }

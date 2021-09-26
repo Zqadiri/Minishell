@@ -28,30 +28,34 @@ int	pipe_free(t_data *m, int nbr_cmd)
 	return (1);
 }
 
-void	free_m(t_data *m, int nbr_cmd)
+void	free_m(t_data *m, t_cmd *cmd)
+{
+	(void)m;
+	(void)cmd;
+}
+
+void	main_free(t_data *m, t_cmd *cmd)
 {
 	int	i;
-	int	j;
 
-	j = -1;
-	while (++j < nbr_cmd)
+	if (cmd->nbr_cmd == 1)
 	{
-		i = -1;
-		if (m[j].path == NULL)
-			break ;
-		while (m[j].path[++i] != NULL)
+		i = 0;
+		while (m->path[i])
 		{
-			free(m[j].path[i]);
-			m[j].path[i] = NULL;
+			free (m->path[i]);
+			m->path[i] = NULL;
+			i++;
 		}
-		free(m[j].path);
+		free(m->path);
+		m->path = NULL;
+		free(m->redir);
+		m->redir = NULL;
+		free (m);
+		m = NULL;
 	}
-	j = -1;
-	while (++j < nbr_cmd)
-		free(m[j].redir);
-	pipe_free(m, nbr_cmd);
-	free (m);
-	m = NULL;
+	else
+		free_m(m, cmd);
 }
 
 void	ft_freeptr(void *ptr)

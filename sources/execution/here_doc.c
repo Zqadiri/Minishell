@@ -45,7 +45,7 @@ int		random_file_name(t_data *m)
 		check_valid_fd(m, m->redir->filename_, fd);
 		exit (g_global->exit_status);
 	}
-	free(name);
+	// free(name);
 	return (fd);
 }
 

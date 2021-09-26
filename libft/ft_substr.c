@@ -32,6 +32,5 @@ char	*ft_substr(char const *s, int start, size_t len)
 		start++;
 	}
 	*(p + i) = '\0';
-	free((char *)s); // ! check free
 	return (p);
 }

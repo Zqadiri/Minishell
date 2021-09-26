@@ -33,7 +33,7 @@
 typedef struct s_redir
 {
 	t_token_type	type;
-	char			*filename; // !!free
+	char			*filename;
 	int				is_quoted;
 }					t_redir;
 
@@ -109,7 +109,7 @@ char		**get_path(void);
 void		print_sorted_env(char **sorted_env);
 char		**realloc_new_env(int env_num, char *arg, char **env_pointer);
 int			set_env_var(char *key, char *new_path);
-void		free_m(t_data *m, int nbr_cmd);
+void		main_free(t_data *m, t_cmd *cmd);
 
 /*
 ** Helpers 
@@ -149,8 +149,8 @@ void		close_all_pipes(int **fd, int n);
 void		sigint_handler(int sig);
 void		parse_here_doc(t_redir *r, t_data *m);
 
-void	ft_freeptr(void *ptr);
-char	*envar_here_doc(char *buff, int i);
-int		valid_envar(char c);
+void		ft_freeptr(void *ptr);
+char		*envar_here_doc(char *buff, int i);
+int			valid_envar(char c);
 
 #endif

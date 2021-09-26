@@ -85,7 +85,8 @@ int	setup_redirections(t_cmd *cmd, t_data *m)
 
 void	check_for_heredoc(t_data *m, t_cmd *cmd)
 {
-	int	i;
+	int		i;
+	char	*pfree;
 
 	i = -1;
 	if ((count(cmd, here_doc) == 0))
@@ -98,7 +99,9 @@ void	check_for_heredoc(t_data *m, t_cmd *cmd)
 			{
 				parse_here_doc(&cmd->r[i], m);
 				cmd->r[i].type = less;
+				pfree = cmd->r[i].filename;
 				cmd->r[i].filename = m->redir->filename_;
+				free (pfree);
 			}
 		}
 	}
