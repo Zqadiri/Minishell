@@ -91,6 +91,14 @@ void	close_all_pipes(int **fd, int n)
 		close(fd[i][0]);
 		close(fd[i][1]);
 	}
+	// i = -1;
+	// int j = 0;
+	// while (j < n + 1)
+	// {
+	// 	while (++i < n)
+	// 		free(fd[i]);
+	// 	j++;
+	// }
 }
 
 /*

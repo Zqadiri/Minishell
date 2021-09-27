@@ -28,10 +28,57 @@ int	pipe_free(t_data *m, int nbr_cmd)
 	return (1);
 }
 
+static void	free_path(char **path)
+{
+	int	i;
+
+	i = 0;
+	while (path[i])
+	{
+		free (path[i]);
+		path[i] = NULL;
+		i++;
+	}
+	free(path);
+	path = NULL;
+}
+
+static void	free_fd(int **fd, int nbr)
+{
+	int	i;
+
+	i = 0;
+	while (i < nbr - 1)
+	{
+		printf("here!\n");
+		free (fd[i]);
+		fd[i] = NULL;
+		i++;
+	}
+	free(fd);
+	fd = NULL;
+}
+
 void	free_m(t_data *m, t_cmd *cmd)
 {
-	(void)m;
-	(void)cmd;
+	int i;
+
+	i = 0;
+	while (i < cmd->nbr_cmd - 1)
+	{
+		if (m[i].pipe_fd != NULL)
+			free_fd (m[i].pipe_fd, cmd->nbr_cmd);
+		i++;
+	}
+	i = 0;
+	while (i < cmd->nbr_cmd)
+	{
+		if (m[i].path != NULL)
+			free_path (m[i].path);
+		free(m[i].redir);
+		i++;
+	}
+	free(m);
 }
 
 void	main_free(t_data *m, t_cmd *cmd)
