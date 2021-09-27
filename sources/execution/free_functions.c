@@ -41,14 +41,17 @@ void	main_free(t_data *m, t_cmd *cmd)
 	if (cmd->nbr_cmd == 1)
 	{
 		i = 0;
-		while (m->path[i])
+		if (m->path != NULL)
 		{
-			free (m->path[i]);
-			m->path[i] = NULL;
-			i++;
+			while (m->path[i])
+			{
+				free (m->path[i]);
+				m->path[i] = NULL;
+				i++;
+			}
+			free(m->path);
+			m->path = NULL;
 		}
-		free(m->path);
-		m->path = NULL;
 		free(m->redir);
 		m->redir = NULL;
 		free (m);

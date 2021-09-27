@@ -97,6 +97,7 @@ void		wait_children(void);
 void		fork_failed(void);
 void		not_valid_id(char *arg);
 void		error_retrieving_cd(void);
+void		no_such_file(t_cmd *cmd);
 
 /*
 ** Utils

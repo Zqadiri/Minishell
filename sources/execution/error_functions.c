@@ -51,3 +51,10 @@ void	error_retrieving_cd(void)
 	ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
 	printf("%s\n", strerror(errno));
 }
+
+void	no_such_file(t_cmd *cmd)
+{
+	write (2, "minishell: ", 11);
+	write (2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+	write (2, ": No such file or directory\n", 28);
+}

@@ -25,9 +25,14 @@ void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 	fd = open(possible_path, O_RDONLY);
 	if (fd < 0)
 	{
-		write (2, "minishell: ", 11);
-		write(2, possible_path, ft_strlen(possible_path));
-		ft_putendl_fd(": command not found", 2);
+		if (m->path == NULL)
+			no_such_file(cmd);
+		else
+		{
+			write (2, "minishell: ", 11);
+			write(2, possible_path, ft_strlen(possible_path));
+			ft_putendl_fd(": command not found", 2);
+		}
 		exit (127);
 	}
 	if (id == 0)
