@@ -26,7 +26,7 @@ char	*to_lower(char *s)
 	return (s);
 }
 
-int		random_file_name(t_data *m)
+int	random_file_name(t_data *m)
 {
 	static int	file_nbr = 0;
 	char		*name;
@@ -45,7 +45,6 @@ int		random_file_name(t_data *m)
 		check_valid_fd(m, m->redir->filename_, fd);
 		exit (g_global->exit_status);
 	}
-	// free(name);
 	return (fd);
 }
 

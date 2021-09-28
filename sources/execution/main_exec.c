@@ -39,7 +39,6 @@ char	**get_path(void)
 	int		ret;
 
 	ret = find_env("PATH", g_global->env_var);
-	// printf ("ret %d\n", ret);
 	if (ret == -1)
 		return (NULL);
 	tmp = return_value(g_global->env_var[ret], '=');

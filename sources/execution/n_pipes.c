@@ -38,7 +38,7 @@ void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 	if (id == 0)
 		close (m->redir->pipe_fd[id][0]);
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
-		exit(126); 
+		exit(126);
 }
 
 int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
@@ -61,7 +61,7 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 			close(out);
 		}
 		exec_cmd_path(in, cmd, m);
-		// close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1);
+		close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 	}
 	return (m->pid);
 }
@@ -76,7 +76,8 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_process(in, m->redir->pipe_fd[i][1], &cmd[i], &m[i]);
+		g_global->pid = exec_process(in, m->redir->pipe_fd[i][1],
+				&cmd[i], &m[i]);
 		close(m->redir->pipe_fd[i][1]);
 		if (in != 0)
 			close(in);

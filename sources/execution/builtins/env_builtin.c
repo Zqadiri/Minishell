@@ -17,18 +17,14 @@
 ** is used to print environment variables
 */
 
-
 static void	new_env(char *arg, char *key)
 {
 	int		i;
-	int		is_set;
 	char	*new_value;
 	char	*tmp;
 
-	is_set = find_env(key, g_global->env_);
-	if (arg == NULL)
-		return ;
-	if (is_set == -1)
+	i = find_env(key, g_global->env_);
+	if (i == -1)
 	{
 		i = 0;
 		while (g_global->env_[i])
@@ -66,7 +62,7 @@ void	add_to_env(char *arg)
 	if (get_key == NULL)
 	{
 		free (key);
-		return;
+		return ;
 	}
 	else
 		new_env(arg, key);

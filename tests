@@ -190,3 +190,5 @@ echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -
 << ee  cat |  grep -> grep usage
 
 //???? no such file pr directory -> $? = 1
+no exit after no such file or directory
+env with only key value 

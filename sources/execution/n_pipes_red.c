@@ -89,7 +89,8 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	while (++i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_proc(m->id, m->redir->pipe_fd[i][1], &cmd[i], &m[i]);
+		g_global->pid = exec_proc(m->id, m->redir->pipe_fd[i][1],
+				&cmd[i], &m[i]);
 		close(m->redir->pipe_fd[i][1]);
 		if (m->id != 0)
 			close(m->id);

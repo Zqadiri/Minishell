@@ -45,7 +45,7 @@ static void	free_path(char **path)
 
 void	free_m(t_data *m, t_cmd *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < cmd->nbr_cmd)
