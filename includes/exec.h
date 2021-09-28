@@ -149,7 +149,7 @@ int			execute_regular_cmd(t_cmd *cmd, t_data *m);
 void		close_all_pipes(int **fd, int n, t_data *m);
 void		sigint_handler(int sig);
 void		parse_here_doc(t_redir *r, t_data *m);
-
+void		check_for_errors(t_cmd *cmd, t_data *m);
 void		ft_freeptr(void *ptr);
 char		*envar_here_doc(char *buff, int i);
 int			valid_envar(char c);

@@ -34,8 +34,8 @@ void	initialize(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigint_handler);
+	// signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, sigint_handler);
 }
 
 void	quit_minishell(void)

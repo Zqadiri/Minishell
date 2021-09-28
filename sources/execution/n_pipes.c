@@ -17,8 +17,7 @@ void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 	int		fd;
 	char	*possible_path;
 
-	if (!cmd->argvs)
-		exit(0);
+	check_for_errors(cmd, m);
 	possible_path = find_path(cmd->argvs[0], m->path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);

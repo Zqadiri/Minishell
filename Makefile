@@ -62,8 +62,8 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			 ${NAME} libft_all
 
 $(NAME):		${OBJS} 
-				@$(CC) -o  $(NAME) -L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
-
+				@$(CC) -o  $(NAME) $(SRCS) $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
+#-L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
 
