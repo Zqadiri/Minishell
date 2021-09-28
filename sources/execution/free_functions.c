@@ -21,10 +21,10 @@ int	pipe_free(t_data *m, int nbr_cmd)
 		return (1);
 	while (i < nbr_cmd - 1)
 	{
-		free(m->pipe_fd[i]);
+		free(m->redir->pipe_fd[i]);
 		i++;
 	}
-	free(m->pipe_fd);
+	free(m->redir->pipe_fd);
 	return (1);
 }
 
@@ -43,33 +43,10 @@ static void	free_path(char **path)
 	path = NULL;
 }
 
-static void	free_fd(int **fd, int nbr)
-{
-	int	i;
-
-	i = 0;
-	while (i < nbr - 1)
-	{
-		printf("here!\n");
-		free (fd[i]);
-		fd[i] = NULL;
-		i++;
-	}
-	free(fd);
-	fd = NULL;
-}
-
 void	free_m(t_data *m, t_cmd *cmd)
 {
 	int i;
 
-	i = 0;
-	while (i < cmd->nbr_cmd - 1)
-	{
-		if (m[i].pipe_fd != NULL)
-			free_fd (m[i].pipe_fd, cmd->nbr_cmd);
-		i++;
-	}
 	i = 0;
 	while (i < cmd->nbr_cmd)
 	{

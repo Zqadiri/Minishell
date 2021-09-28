@@ -54,6 +54,7 @@ typedef struct s_red
 	int				err;
 	int				in_heredoc;
 	char			*filename_;
+	int				**pipe_fd;
 }	t_red;
 
 typedef struct s_data
@@ -61,7 +62,6 @@ typedef struct s_data
 	char			**path;
 	int				saved_stdout;
 	int				saved_stdin;
-	int				**pipe_fd;
 	pid_t			pid;
 	t_red			*redir;
 	int				id;
@@ -146,7 +146,7 @@ int			count(t_cmd *cmd, t_token_type type);
 void		exec_simple_pipe(t_cmd *cmd, t_data *m);
 void		exec_single_cmd(t_cmd *cmd, t_data *m);
 int			execute_regular_cmd(t_cmd *cmd, t_data *m);
-void		close_all_pipes(int **fd, int n);
+void		close_all_pipes(int **fd, int n, t_data *m);
 void		sigint_handler(int sig);
 void		parse_here_doc(t_redir *r, t_data *m);
 

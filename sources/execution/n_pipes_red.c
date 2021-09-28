@@ -89,11 +89,11 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	while (++i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_proc(m->id, m->pipe_fd[i][1], &cmd[i], &m[i]);
-		close(m->pipe_fd[i][1]);
+		g_global->pid = exec_proc(m->id, m->redir->pipe_fd[i][1], &cmd[i], &m[i]);
+		close(m->redir->pipe_fd[i][1]);
 		if (m->id != 0)
 			close(m->id);
-		m->id = m->pipe_fd[i][0];
+		m->id = m->redir->pipe_fd[i][0];
 	}
 	g_global->pid = exec_proc(m->id, 1, &cmd[i], &m[i]);
 	return (1);
@@ -120,7 +120,7 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 	else
 	{
 		fork_pipes(cmd, m);
-		close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
+		close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 		wait_children();
 	}
 	g_global->pid = 0;

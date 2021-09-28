@@ -66,11 +66,11 @@ int	pipe_all(t_cmd *cmd, t_data *m)
 	int	i;
 
 	i = 0;
-	m->pipe_fd = (int **)malloc(sizeof(int *) * cmd->nbr_cmd - 1);
+	m->redir->pipe_fd = (int **)malloc(sizeof(int *) * cmd->nbr_cmd - 1);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		m->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
-		if (pipe(m->pipe_fd[i]))
+		m->redir->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
+		if (pipe(m->redir->pipe_fd[i]))
 			return (0);
 		i++;
 	}
@@ -81,7 +81,23 @@ int	pipe_all(t_cmd *cmd, t_data *m)
 ** Close all pipes fds
 */
 
-void	close_all_pipes(int **fd, int n)
+static void	free_fd(int **fd, int nbr)
+{
+	int	i;
+
+	i = 0;
+	nbr = 0;
+	while (fd[i])
+	{
+		free (fd[i]);
+		fd[i] = NULL;
+		i++;
+	}
+	free(fd);
+	fd = NULL;
+}
+
+void	close_all_pipes(int **fd, int n, t_data *m)
 {
 	int	i;
 
@@ -91,14 +107,13 @@ void	close_all_pipes(int **fd, int n)
 		close(fd[i][0]);
 		close(fd[i][1]);
 	}
-	// i = -1;
-	// int j = 0;
-	// while (j < n + 1)
-	// {
-	// 	while (++i < n)
-	// 		free(fd[i]);
-	// 	j++;
-	// }
+	i = 0;
+	while (i < n + 1)
+	{
+		if (m[i].redir->pipe_fd != NULL)
+			free_fd (m[i].redir->pipe_fd, n);
+		i++;
+	}
 }
 
 /*
@@ -116,5 +131,6 @@ void	init_m(t_data *m)
 	m->redir->outfile = 0;
 	m->redir->in_heredoc = 0;
 	m->redir->filename_ = NULL;
+	m->redir->pipe_fd = NULL;
 	m->redir->err = 0;
 }

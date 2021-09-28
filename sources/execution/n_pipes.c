@@ -36,7 +36,7 @@ void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 		exit (127);
 	}
 	if (id == 0)
-		close (m->pipe_fd[id][0]);
+		close (m->redir->pipe_fd[id][0]);
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
 		exit(126); 
 }
@@ -61,7 +61,7 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 			close(out);
 		}
 		exec_cmd_path(in, cmd, m);
-		// close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
+		// close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1);
 	}
 	return (m->pid);
 }
@@ -76,11 +76,11 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_process(in, m->pipe_fd[i][1], &cmd[i], &m[i]);
-		close(m->pipe_fd[i][1]);
+		g_global->pid = exec_process(in, m->redir->pipe_fd[i][1], &cmd[i], &m[i]);
+		close(m->redir->pipe_fd[i][1]);
 		if (in != 0)
 			close(in);
-		in = m->pipe_fd[i][0];
+		in = m->redir->pipe_fd[i][0];
 		i++;
 	}
 	g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
@@ -100,6 +100,6 @@ void	exec_simple_pipe(t_cmd *cmd, t_data *m)
 		init_m(&m[i]);
 	fork_cmd_pipes(cmd, m);
 	g_global->pid = 0;
-	close_all_pipes(m->pipe_fd, cmd->nbr_cmd - 1);
+	close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 	wait_children();
 }
