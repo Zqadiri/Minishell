@@ -43,11 +43,10 @@ static int	move_to_dir(char *path)
 	char		*old_pwd;
 	char		*tmp;
 
-	tmp = NULL;
 	old_pwd = get_env_var_by_key("PWD");
 	add_var_to_env("OLDPWD", old_pwd);
 	ret = chdir(path);
-	get_pwd(&tmp);
+	tmp = get_pwd();
 	if (!tmp && (!ft_strcmp(".", path) || !ft_strcmp("./", path)))
 	{
 		error_retrieving_cd();
@@ -56,12 +55,14 @@ static int	move_to_dir(char *path)
 		tmp = add_char_to_word(tmp, '/');
 		old_pwd = tmp;
 		tmp = ft_strjoin(tmp, path);
+		free (old_pwd);
 		add_var_to_env("PWD", tmp);
 		g_global->exit_status = 0;
+		free(tmp);
 		return (1);
 	}
-	else
-		return (add_var_to_env("PWD", tmp));
+	add_var_to_env("PWD", tmp);
+	free (tmp);
 	return (ret);
 }
 

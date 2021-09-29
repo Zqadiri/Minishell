@@ -12,19 +12,20 @@
 
 #include "../../includes/minishell.h"
 
-int	pipe_free(t_data *m, int nbr_cmd)
+int	pipe_free(int **pipe_fd, int nbr_cmd)
 {
 	int	i;
 
-	i = 0;
-	if (nbr_cmd == 1)
-		return (1);
-	while (i < nbr_cmd - 1)
+	i = nbr_cmd - 1;
+	while (i > 0)
 	{
-		free(m->redir->pipe_fd[i]);
-		i++;
+		// printf ("\n\n\n\nhere!\n\nn");
+		free(pipe_fd[i]);
+		pipe_fd[i] = NULL;
+		i--;
 	}
-	free(m->redir->pipe_fd);
+	free(pipe_fd);
+	pipe_fd = NULL;
 	return (1);
 }
 
@@ -47,13 +48,16 @@ void	free_m(t_data *m, t_cmd *cmd)
 {
 	int	i;
 
-	i = 0;
-	while (i < cmd->nbr_cmd)
+	i = cmd->nbr_cmd - 1;
+	while (i >= 0)
 	{
+		printf ("cmd id :%d\n", i);
+		if (m[i].redir->pipe_fd != NULL)
+			pipe_free (m[i].redir->pipe_fd, cmd->nbr_cmd);
 		if (m[i].path != NULL)
 			free_path (m[i].path);
-		free(m[i].redir);
-		i++;
+		free (m[i].redir);
+		i--;
 	}
 	free(m);
 }

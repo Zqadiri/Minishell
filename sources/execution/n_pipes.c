@@ -40,8 +40,9 @@ void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 		exit(126);
 }
 
-int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
+int	exec_process(int in, int out, t_cmd *cmd, t_data *m, int i)
 {
+	i = 0;
 	if (is_builtin(cmd))
 		return (exec_builtin(in, out, cmd, m));
 	m->pid = fork();
@@ -59,8 +60,14 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 			dup2(out, 1);
 			close(out);
 		}
+		// i = 0;
+		// if (i < cmd->nbr_cmd - 1)
+		// {
+		// 	close(m->redir->pipe_fd[i][1]);
+		// 	close(m->redir->pipe_fd[i][0]);
+		// }
+		// close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 		exec_cmd_path(in, cmd, m);
-		close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 	}
 	return (m->pid);
 }
@@ -76,14 +83,14 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 	while (i < cmd->nbr_cmd - 1)
 	{
 		g_global->pid = exec_process(in, m->redir->pipe_fd[i][1],
-				&cmd[i], &m[i]);
+				&cmd[i], &m[i], i);
 		close(m->redir->pipe_fd[i][1]);
 		if (in != 0)
 			close(in);
 		in = m->redir->pipe_fd[i][0];
 		i++;
 	}
-	g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
+	g_global->pid = exec_process(in, 1, &cmd[i], &m[i], i);
 	return (1);
 }
 

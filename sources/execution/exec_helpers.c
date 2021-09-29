@@ -81,38 +81,16 @@ int	pipe_all(t_cmd *cmd, t_data *m)
 ** Close all pipes fds
 */
 
-static void	free_fd(int **fd, int nbr)
-{
-	int	i;
-
-	i = 0;
-	nbr = 0;
-	while (fd[i])
-	{
-		free (fd[i]);
-		fd[i] = NULL;
-		i++;
-	}
-	free(fd);
-	fd = NULL;
-}
-
 void	close_all_pipes(int **fd, int n, t_data *m)
 {
 	int	i;
 
 	i = -1;
+	(void)m;
 	while (++i < n)
 	{
 		close(fd[i][0]);
 		close(fd[i][1]);
-	}
-	i = 0;
-	while (i < n + 1)
-	{
-		if (m[i].redir->pipe_fd != NULL)
-			free_fd (m[i].redir->pipe_fd, n);
-		i++;
 	}
 }
 
@@ -122,6 +100,7 @@ void	close_all_pipes(int **fd, int n, t_data *m)
 
 void	init_m(t_data *m)
 {
+	printf ("in\n");
 	m->saved_stdout = dup(1);
 	m->saved_stdin = dup(0);
 	m->path = get_path();

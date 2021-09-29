@@ -28,6 +28,17 @@ void	check_for_errors(t_cmd *cmd, t_data *m)
 	}
 }
 
+// void	check_for_permission(t_cmd *cmd, t_data *m)
+// {
+// 	struct stat st;
+
+// 	(void)m;
+// 	if (!(lstat(cmd->argvs[0], &st)) && (S_IEXEC & st.st_mode))
+// 	{
+// 		printf ("minishell: %s: is a directory\n", cmd->argvs[0]);
+// 	}
+// }
+
 void	find_cmd_path(t_cmd *cmd, t_data *m)
 {
 	char	*possible_path;
@@ -51,6 +62,7 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 		exit (127);
 	}
 	execve (possible_path, cmd->argvs, g_global->env_var);
+		// check_for_permission(cmd, m);
 }
 
 /*
@@ -77,3 +89,49 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 	}
 	return (1);
 }
+
+
+// void	check_if_is_executalble(t_cmd *cmd, int ret)
+// {
+// 	// if (stat(cmd->argvs[0], &sb) == 0 && sb.st_mode & S_IXUSR)
+// 	// if((stat(cmd->argvs[0], &sb) >= 0) && (sb.st_mode > 0) && (S_IEXEC & sb.st_mode))
+// 	// if (!stat(cmd->argvs[0], &sb))
+// 	// {
+// 	// 	if((sb.st_mode > 0) && (S_IEXEC & sb.st_mode))
+// 	// 		printf("%s is executable\n", cmd->argvs[0]);
+// 	// }
+// 	// else  
+// 	// 	exit (126);
+// 	printf ("here!\n");
+// 	struct stat sb;
+// 	DIR		*dir;
+	
+// 	if ((ret == -1) && (ft_strncmp(cmd->argvs[0], "./", 2) && ft_strncmp(cmd->argvs[0] , "../", 3)))
+// 	{
+// 		write (2, "minishell: ", 11);
+// 		write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+// 		ft_putendl_fd(": *permission denied", 2);
+// 		exit (126);
+// 	}
+// 	else
+// 	{
+// 		if (!(stat(cmd->argvs[0], &sb)) && (S_IEXEC & sb.st_mode))
+// 			exit(126);
+// 		dir = opendir(cmd->argvs[0]);
+// 		if (!dir)
+// 		{
+// 			write (2, "minishell: ", 11);
+// 			write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+// 			ft_putendl_fd(": permission denied", 2);
+// 			exit (126);
+// 		}
+// 		else
+// 		{
+// 			closedir(dir);
+// 			write (2, "minishell: ", 11);
+// 			write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+// 			ft_putendl_fd(": is a directory", 2);
+// 			exit (126);
+// 		}
+// 	}
+// }

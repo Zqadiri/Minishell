@@ -80,7 +80,7 @@ int			exit_builtin(char **args);
 int			unset_builtin(char **args);
 int			export_builtin(char **arg);
 char		*add_char_to_word(char *word, char c);
-int			get_pwd(char **pwd);
+char		*get_pwd(void);
 char		*return_value(const char *s, int c);
 int			error_path(const char *cmd, const char *path, int errnum);
 void		error_exit(char *arg);

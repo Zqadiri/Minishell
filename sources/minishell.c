@@ -71,6 +71,7 @@ void	parse(t_lexer *l)
 			z = visitor(ast);
 			if (z)
 			{
+				// printf("exit status = %d\n", g_global->exit_status);
 				execution(z);
 				if (z)
 					free_cmd(z);

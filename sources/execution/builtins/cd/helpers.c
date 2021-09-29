@@ -28,7 +28,6 @@ char	*add_char_to_word(char *word, char c)
 	}
 	new_word_len = ft_strlen_new(word) + 2;
 	save_word = word;
-	free (word);
 	word = (char *)ft_memalloc(sizeof(char) * new_word_len);
 	if (!word)
 		return (NULL);
@@ -37,22 +36,20 @@ char	*add_char_to_word(char *word, char c)
 	return (word);
 }
 
-int	get_pwd(char **pwd)
+char	*get_pwd(void)
 {
 	char	*new_pwd;
 
 	new_pwd = (char *)malloc(sizeof(char) * 1025);
 	if (!new_pwd)
-		return (-1);
+		return (NULL);
 	ft_bzero(new_pwd, 1025);
 	if (getcwd(new_pwd, sizeof(char) * 1024) == NULL)
 	{
 		free(new_pwd);
-		return (0);
+		return (NULL);
 	}
-	*pwd = new_pwd;
-	free (new_pwd);
-	return (1);
+	return (new_pwd);
 }
 
 char	*return_value(const char *s, int c)
