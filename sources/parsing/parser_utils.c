@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/19 17:40:33 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/09/29 21:03:17 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,7 @@ char	*get_stop_word(t_parser *p)
 		word = ft_substr(s, i, p->lexer->curpos - i);
 	}
 	else
-	{
-		i--;
-		while (s[i] != DQUOTE && s[i] != SQUOTE)
-			i--;
-		word = ft_substr(s, i + 1, p->lexer->curpos - i - 2);
-	}
+		word = ft_strdup(p->curr_token->value);
 	free(s);
 	return (word);
 }
