@@ -71,7 +71,6 @@ void	parse(t_lexer *l)
 			z = visitor(ast);
 			if (z)
 			{
-				// printf("exit status = %d\n", g_global->exit_status);
 				execution(z);
 				if (z)
 					free_cmd(z);
@@ -112,7 +111,7 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }

@@ -104,6 +104,8 @@ int	cd_builtin(char **argv)
 	if (argv[i + 1] == NULL)
 	{
 		path = get_env_var_by_key("HOME");
+		if (!ft_strcmp(path, ""))
+			return (0);
 		if (!argv[i++] && ft_strlen_new(path) == 0)
 		{
 			g_global->exit_status = 1;

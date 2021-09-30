@@ -100,7 +100,6 @@ void	close_all_pipes(int **fd, int n, t_data *m)
 
 void	init_m(t_data *m)
 {
-	printf ("in\n");
 	m->saved_stdout = dup(1);
 	m->saved_stdin = dup(0);
 	m->path = get_path();
