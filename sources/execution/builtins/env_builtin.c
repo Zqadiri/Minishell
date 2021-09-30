@@ -50,22 +50,14 @@ void	add_to_env(char *arg)
 {
 	int		i;
 	char	*key;
-	char	*get_key;
 
 	if (arg == NULL)
 		return ;
 	i = get_str_by_char(arg, '=', 0);
 	if (i == -1)
-		i = ft_strlen(arg);
-	key = ft_substr(arg, 0, i);
-	get_key = getenv(key);
-	if (get_key == NULL)
-	{
-		free (key);
 		return ;
-	}
-	else
-		new_env(arg, key);
+	key = ft_substr(arg, 0, i);
+	new_env(arg, key);
 	free (key);
 }
 

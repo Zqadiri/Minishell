@@ -83,7 +83,7 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	m->id = 0;
 	while (++i < cmd->nbr_cmd)
-		init_m(&m[i]);
+		init_m(&m[i], i);
 	pipe_all(cmd, m);
 	setup_all_redirections(cmd, m);
 	i = -1;

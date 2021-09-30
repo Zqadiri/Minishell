@@ -59,6 +59,7 @@ typedef struct s_red
 
 typedef struct s_data
 {
+	int				cmd_id;
 	char			**path;
 	int				saved_stdout;
 	int				saved_stdin;
@@ -140,7 +141,7 @@ int			check_signals(void);
 char		*find_path(char	*cmd, char **path);
 void		exec_multiple_cmd(t_cmd *cmd, t_data *m);
 int			is_builtin(t_cmd *cmd);
-void		init_m(t_data *m);
+void		init_m(t_data *m, int i);
 void		print_error(char *file_error);
 int			count(t_cmd *cmd, t_token_type type);
 void		exec_simple_pipe(t_cmd *cmd, t_data *m);

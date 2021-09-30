@@ -88,12 +88,12 @@ int	execution(t_cmd *cmd)
 	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (cmd->redir_nbr == 0 && cmd->type == eof)
 	{
-		init_m(m);
+		init_m(m, 0);
 		execute_regular_cmd(cmd, m);
 	}
 	else if (cmd->type == eof && cmd->redir_nbr > 0)
 	{
-		init_m(m);
+		init_m(m, 0);
 		check_for_heredoc(m, cmd);
 		exec_single_cmd(cmd, m);
 	}

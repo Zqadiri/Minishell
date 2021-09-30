@@ -98,8 +98,9 @@ void	close_all_pipes(int **fd, int n, t_data *m)
 ** Init t_data structure 
 */
 
-void	init_m(t_data *m)
+void	init_m(t_data *m, int i)
 {
+	m->cmd_id = i;
 	m->saved_stdout = dup(1);
 	m->saved_stdin = dup(0);
 	m->path = get_path();
