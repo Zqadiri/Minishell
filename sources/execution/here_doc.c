@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/29 21:05:07 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/30 22:39:10 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	{
 		m->redir->in_heredoc = 1;
 		buff = readline("> ");
+		printf("buff = [%s]\n", buff);
+		printf("filename = [%s]\n", r->filename);
 		temp = output;
 		output = herdoc_helper(buff, output, r->filename, r->is_quoted);
 		if (!output)

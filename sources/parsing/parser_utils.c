@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/29 21:03:17 by mac              ###   ########.fr       */
+/*   Updated: 2021/10/01 00:02:48 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,33 @@ char	*get_stop_word(t_parser *p)
 	s = ft_strdup(p->lexer->buffer);
 	if (p->curr_token->is_quoted == 0)
 	{
+		printf("in\n");
 		while (s[i] != 32 && s[i] != '<')
 			i--;
 		i += 1;
 		word = ft_substr(s, i, p->lexer->curpos - i);
 	}
 	else
-		word = ft_strdup(p->curr_token->value);
+	{
+		// while (s[i] != 32 && s[i] != '<')
+		// 	i--;
+		// i += 1;
+		// while (s[i] == 32)
+		// 	i++;
+		// printf("s[i] = [%c]\n", s[i]);
+		// if (s[i] == DOLLAR) // ?? s[i+1]= '$'
+		// {
+		// 	printf("s[i] = [%c]\n", s[i]);
+		// 	while ((s[i] != DQUOTE || s[i] != SQUOTE) && s[i] != EOF)
+		// 	{
+		// 		word = ft_joinchar(word, s[i]);
+		// 		i++;
+		// 	}
+		// }
+		// else
+			word = ft_strdup(p->curr_token->value);
+	}
+	printf("word = [%s]\n", word);
 	free(s);
 	return (word);
 }
