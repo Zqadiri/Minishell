@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:52:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/29 21:03:17 by mac              ###   ########.fr       */
+/*   Updated: 2021/10/01 13:31:05 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,30 @@ int	is_redic(t_token *t)
 	return (0);
 }
 
+char	*quoted_delim(t_parser *p, char *s, int *i)
+{
+	char	*word;
+	int		start;
+
+	start = *i;
+	while (s[*i] != 32 && s[*i] != '<')
+		(*i)--;
+	if (s[(*i) + 1] == DQUOTE || s[(*i) + 1] == SQUOTE)
+		(*i) += 2;
+	if (s[*i] == DOLLAR)
+	{
+		word = ft_strdup("");
+		while ((s[*i] != DQUOTE || s[*i] != SQUOTE) && (*i) < start)
+		{
+			word = ft_joinchar(word, s[*i]);
+			(*i)++;
+		}
+	}
+	else
+		word = ft_strdup(p->curr_token->value);
+	return (word);
+}
+
 char	*get_stop_word(t_parser *p)
 {
 	int		i;
@@ -65,36 +89,9 @@ char	*get_stop_word(t_parser *p)
 		word = ft_substr(s, i, p->lexer->curpos - i);
 	}
 	else
-		word = ft_strdup(p->curr_token->value);
+		word = quoted_delim(p, s, &i);
 	free(s);
 	return (word);
-}
-
-t_token	*check_token(t_parser *p, t_ast *ast)
-{
-	char	*temp;
-
-	if (p->curr_token->type == illegal)
-		return (NULL);
-	if (!syntax_error(p))
-		return (NULL);
-	if (is_redic(p->prev_token))
-	{
-		if (p->curr_token->type != id)
-		{
-			print_msg("minishell: syntax error near unexpected token 2",
-				p->curr_token->value);
-			return (NULL);
-		}
-		ast->redir_nbr += 1;
-		if (p->prev_token->type == here_doc)
-		{
-			temp = p->curr_token->value;
-			p->curr_token->value = get_stop_word(p);
-			free(temp);
-		}
-	}
-	return (p->curr_token);
 }
 
 int	syntax_error(t_parser *p)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc_ast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/22 11:08:22 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:31:02 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,31 @@ char	*tokenize_text(t_lexer *l, char *s)
 		}
 	}
 	return (str);
+}
+
+t_token	*check_token(t_parser *p, t_ast *ast)
+{
+	char	*temp;
+
+	if (p->curr_token->type == illegal)
+		return (NULL);
+	if (!syntax_error(p))
+		return (NULL);
+	if (is_redic(p->prev_token))
+	{
+		if (p->curr_token->type != id)
+		{
+			print_msg("minishell: syntax error near unexpected token 2",
+				p->curr_token->value);
+			return (NULL);
+		}
+		ast->redir_nbr += 1;
+		if (p->prev_token->type == here_doc)
+		{
+			temp = p->curr_token->value;
+			p->curr_token->value = get_stop_word(p);
+			free(temp);
+		}
+	}
+	return (p->curr_token);
 }

@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:56:25 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/29 20:45:31 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/30 22:03:40 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*quoted_string(t_lexer *l, char *str)
 		if (!ft_strcmp(s, "\0") && !str)
 			g_global->exit_status = 127;
 	}
-	if (l->c == SQUOTE)
+	else
 	{
 		s = tokenize_squoted_text(l);
 		if (!ft_strcmp(s, "\0") && !str)
