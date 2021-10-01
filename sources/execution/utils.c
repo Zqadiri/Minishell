@@ -78,7 +78,11 @@ void	setup_out(t_cmd *cmd, t_data *m, int i)
 	else if (cmd->r[i].type == greater)
 	{
 		fd = open(cmd->r[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
-		check_valid_fd(m, cmd->r[i].filename, fd);
+		if (fd < 0)
+		{
+			m->redir->err = 1;
+			print_error(cmd->r[i].filename);
+		}
 	}
 	m->redir->outfile = fd;
 }

@@ -129,6 +129,7 @@ int			is_builtin(t_cmd *cmd);
 int			pipe_all(t_cmd *cmd, t_data *m);
 void		restore_std(int saved_stdout, int saved_stdin);
 void		exec_cmd_path(int in, t_cmd *cmd, t_data *m);
+// void		exec_cmd_path(int id, t_cmd *cmd, t_data *m, int in);
 void		check_valid_fd(t_data *m, char *file_error, int fd);
 void		find_cmd_path(t_cmd *cmd, t_data *m);
 

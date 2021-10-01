@@ -24,9 +24,9 @@ void	wait_children(void)
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
-			if (signal == 13)
-				g_global->exit_status = 0;
-			else
+			// if (signal > 13)
+			// 	g_global->exit_status = 0;
+			// else
 				g_global->exit_status = signal + 128;
 		}		
 	}
@@ -42,7 +42,9 @@ char	**get_path(void)
 	if (ret == -1)
 		return (NULL);
 	tmp = return_value(g_global->env_var[ret], '=');
-	path = ft_split(g_global->env_var[ret], ':');
+	path = ft_split(tmp, ':');
+	if (path[0] == NULL)
+		return (NULL);
 	if (!path)
 		return (NULL);
 	return (path);

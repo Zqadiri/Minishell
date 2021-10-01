@@ -31,8 +31,6 @@ int	exec_builtin(int in, int out, t_cmd *cmd, t_data *m)
 
 int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 {
-	if (cmd->argvs != NULL && is_builtin(cmd))
-		return (exec_builtin(in, out, cmd, m));
 	m->pid = fork();
 	if (m->pid == 0)
 	{
@@ -50,7 +48,10 @@ int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
 			dup2(out, 1);
 			close(out);
 		}
-		exec_cmd_path(m->id, cmd, m);
+		if (cmd->argvs != NULL && is_builtin(cmd))
+			return (exec_builtin(in, out, cmd, m));
+		else
+			exec_cmd_path(m->id, cmd, m);
 	}
 	return (m->pid);
 }
