@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/30 22:39:10 by mac              ###   ########.fr       */
+/*   Updated: 2021/10/01 13:19:57 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	{
 		m->redir->in_heredoc = 1;
 		buff = readline("> ");
-		printf("buff = [%s]\n", buff);
-		printf("filename = [%s]\n", r->filename);
 		temp = output;
 		output = herdoc_helper(buff, output, r->filename, r->is_quoted);
 		if (!output)
