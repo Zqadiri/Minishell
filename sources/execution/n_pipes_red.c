@@ -14,16 +14,18 @@
 
 int	exec_builtin(int in, int out, t_cmd *cmd, t_data *m)
 {
-	if (in != 0)
-	{
-		dup2(in, 0);
-		close(in);
-	}
-	if (out != 1)
-	{
-		dup2(out, 1);
-		close(out);
-	}
+	(void)in;
+	(void)out;
+	// if (in != 0)
+	// {
+	// 	dup2(in, 0);
+	// 	close(in);
+	// }
+	// if (out != 1)
+	// {
+	// 	dup2(out, 1);
+	// 	close(out);
+	// }
 	check_builtin(cmd);
 	restore_std(m->saved_stdout, m->saved_stdin);
 	return (0);

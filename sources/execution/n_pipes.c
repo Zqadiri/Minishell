@@ -17,7 +17,7 @@ void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 	int		fd;
 	char	*possible_path;
 
-	// id = 0;
+	// (void)id;
 	check_for_errors(cmd, m);
 	possible_path = find_path(cmd->argvs[0], m->path);
 	if (possible_path == NULL)
@@ -37,11 +37,6 @@ void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
 	}
 	if (id == 0)
 		close (m->redir->pipe_fd[id][0]);
-	// if (m->cmd_id < cmd->nbr_cmd - 2)
-	// {
-	// 	close (m->redir->pipe_fd[m->cmd_id][0]);
-	// 	// close (m->redir->pipe_fd[m->cmd_id][1]);
-	// }
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
 		exit(126);
 }
@@ -64,9 +59,10 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 			close(out);
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
-			return (exec_builtin(in, out, cmd, m));
+			check_builtin(cmd);
 		else
 			exec_cmd_path(in, cmd, m);
+		exit(0);
 	}
 	return (m->pid);
 }
@@ -78,21 +74,25 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 
 	i = 0;
 	in = 0;
+	int time_each = 0;
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		m->id = 0;
-		g_global->pid = exec_process(in, m->redir->pipe_fd[i][1],
+		time_each++;
+		if (g_global->pid != 0 || i == 0)
+		{
+			g_global->pid = exec_process(in, m->redir->pipe_fd[i][1],
 				&cmd[i], &m[i]);
-		close(m->redir->pipe_fd[i][1]);
-		if (in != 0)
-			close(in);
+			close(m->redir->pipe_fd[i][1]);
+			if (in != 0)
+				close(in);
+			in = m->redir->pipe_fd[i][0];
+		}
 		in = m->redir->pipe_fd[i][0];
 		i++;
 	}
-	close (in);
-	close(m->redir->pipe_fd[i -1][1]);
-	g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
+	if (g_global->pid != 0)
+		g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
 	return (1);
 }
 

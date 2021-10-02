@@ -34,25 +34,23 @@ void	initialize(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
-	// signal(SIGINT, sigint_handler);
-	// signal(SIGQUIT, sigint_handler);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigint_handler);
 }
 
 void	quit_minishell(void)
 {
-	char		*cm_cap;
 	char		*up;
 	char		*ri;
 
 	up = tgetstr("up", NULL);
 	ri = tgetstr("RI", NULL);
-	cm_cap = tgetstr("cm", NULL);
 	tputs(ri, 1, putchar);
 	tputs(ri, 1, putchar);
 	tputs(ri, 1, putchar);
 	tputs(up, 1, putchar);
 	printf("exit\n");
-	g_global->exit_status = 0;
+	// g_global->exit_status = 0;
 	exit(g_global->exit_status);
 }
 

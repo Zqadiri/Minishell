@@ -63,6 +63,7 @@ t_parser	*init_parser(t_lexer *l);
 int			is_redic(t_token *t);
 t_token		*check_token(t_parser *p, t_ast *ast);
 int			syntax_error(t_parser *p);
+char		*get_stop_word(t_parser *p);
 
 /*
 ** ast.c
