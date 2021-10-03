@@ -108,6 +108,7 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
+		system("leaks minishell");
 	}
 	return (0);
 }

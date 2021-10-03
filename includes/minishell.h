@@ -37,4 +37,9 @@ typedef struct s_global
 
 t_global	*g_global;
 
+//! thinking about deleting env_
+//! strtrim in exit
+//! 3147483648
+//! check if the env var already exist , don't change its value if `export A="qq";export A;echo $A ->'empty string';`
+
 #endif

@@ -125,7 +125,6 @@ int	exit_builtin(char **args)
 	else
 	{
 		ft_putendl_fd("exit", 1);
-		printf("%d\n", g_global->exit_status);
 		exit (g_global->exit_status);
 	}
 	return (1);

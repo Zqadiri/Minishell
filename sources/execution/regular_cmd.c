@@ -25,6 +25,7 @@ void	check_for_errors(t_cmd *cmd, t_data *m)
 	{
 		write (2, "minishell: ", 11);
 		ft_putendl_fd(": command not found", 2);
+		exit (g_global->exit_status);
 	}
 }
 

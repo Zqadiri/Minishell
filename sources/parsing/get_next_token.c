@@ -35,6 +35,7 @@ char	*tokenize_dquoted_text(t_lexer *l)
 	}
 	l->is_quoted = 1;
 	readchar(l);
+
 	return (str);
 }
 
@@ -84,13 +85,13 @@ char	*quoted_string(t_lexer *l, char *str)
 	if (l->c == DQUOTE)
 	{
 		s = tokenize_dquoted_text(l);
-		if (!ft_strcmp(s, "\0") && !str)
+		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
 			g_global->exit_status = 127;
 	}
 	else
 	{
 		s = tokenize_squoted_text(l);
-		if (!ft_strcmp(s, "\0") && !str)
+		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
 			g_global->exit_status = 127;
 	}
 	return (s);
@@ -113,7 +114,10 @@ t_token	*string_token(t_lexer *l)
 		else
 			s = tokenize_text(l, s);
 		if (!s && l->multi_line == 1)
+		{
+			free(temp);
 			return (return_token(str, l, 1));
+		}
 		str = ft_joinfree(str, s);
 		free(temp);
 		if (l->c == 32)
