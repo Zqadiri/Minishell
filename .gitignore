@@ -3,7 +3,9 @@
 
 ./parsing/.trash
 .vscode
-pipex
+minishell
+libft.a
+.Ds_Store
 
 ### C ###
 # Prerequisites
