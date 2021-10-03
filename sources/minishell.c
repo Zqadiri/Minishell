@@ -50,7 +50,6 @@ void	quit_minishell(void)
 	tputs(ri, 1, putchar);
 	tputs(up, 1, putchar);
 	printf("exit\n");
-	// g_global->exit_status = 0;
 	exit(g_global->exit_status);
 }
 
@@ -109,7 +108,6 @@ int	main(int argc, char **argv, char **env)
 			free (buff);
 		}
 		parse(l);
-		// system("leaks minishell");
 	}
 	return (0);
 }

@@ -12,22 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-int	count(t_cmd *cmd, t_token_type type)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < cmd->redir_nbr)
-	{
-		if (cmd->r[i].type == type)
-			j++;
-		i++;
-	}
-	return (j);
-}
-
 char	*get_env_var_by_key(char *key)
 {
 	int		index;

@@ -24,10 +24,7 @@ void	wait_children(void)
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
-			// if (signal > 13)
-			// 	g_global->exit_status = 0;
-			// else
-				g_global->exit_status = signal + 128;
+			g_global->exit_status = signal + 128;
 		}		
 	}
 }

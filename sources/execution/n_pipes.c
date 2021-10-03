@@ -12,56 +12,49 @@
 
 #include "../../includes/minishell.h"
 
-void	exec_cmd_path(int id, t_cmd *cmd, t_data *m)
+void	exec_cmd_path(t_cmd *cmd, t_data *m, int *p_fd)
 {
 	int		fd;
 	char	*possible_path;
 
-	// (void)id;
 	check_for_errors(cmd, m);
 	possible_path = find_path(cmd->argvs[0], m->path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
 	fd = open(possible_path, O_RDONLY);
 	if (fd < 0)
+		if (cmdnf_nsfile(cmd, m, possible_path))
+			exit(127);
+	if (p_fd != NULL)
 	{
-		if (m->path == NULL)
-			no_such_file(cmd);
-		else
-		{
-			write (2, "minishell: ", 11);
-			write(2, possible_path, ft_strlen(possible_path));
-			ft_putendl_fd(": command not found", 2);
-		}
-		exit (127);
+		close (p_fd[0]);
+		close (p_fd[1]);
 	}
-	if (id == 0)
-		close (m->redir->pipe_fd[id][0]);
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
 		exit(126);
 }
 
-int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
+int	exec_process(int write_end, t_cmd *cmd, t_data *m, int *fd)
 {
 	m->pid = fork();
 	if (m->pid < 0)
 		fork_failed();
 	if (m->pid == 0)
 	{
-		if (in != 0)
+		if (m->read_end != 0)
 		{
-			dup2(in, 0);
-			close(in);
+			dup2(m->read_end, 0);
+			close(m->read_end);
 		}
-		if (out != 1)
+		if (write_end != 1)
 		{
-			dup2(out, 1);
-			close(out);
+			dup2(write_end, 1);
+			close(write_end);
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
 			check_builtin(cmd);
 		else
-			exec_cmd_path(in, cmd, m);
+			exec_cmd_path(cmd, m, fd);
 		exit(0);
 	}
 	return (m->pid);
@@ -70,29 +63,22 @@ int	exec_process(int in, int out, t_cmd *cmd, t_data *m)
 int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 {
 	int		i;
-	int		in;
 
 	i = 0;
-	in = 0;
-	int time_each = 0;
+	m->read_end = 0;
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
-		time_each++;
-		if (g_global->pid != 0 || i == 0)
-		{
-			g_global->pid = exec_process(in, m->redir->pipe_fd[i][1],
-				&cmd[i], &m[i]);
-			close(m->redir->pipe_fd[i][1]);
-			if (in != 0)
-				close(in);
-			in = m->redir->pipe_fd[i][0];
-		}
-		in = m->redir->pipe_fd[i][0];
+		pipe(m->redir->pipe_fd[i]);
+		g_global->pid = exec_process(m->redir->pipe_fd[i][1],
+				&cmd[i], &m[i], m->redir->pipe_fd[i]);
+		close(m->redir->pipe_fd[i][1]);
+		if (m->read_end != 0)
+			close(m->read_end);
+		m->read_end = m->redir->pipe_fd[i][0];
 		i++;
 	}
-	if (g_global->pid != 0)
-		g_global->pid = exec_process(in, 1, &cmd[i], &m[i]);
+	g_global->pid = exec_process(1, &cmd[i], &m[i], NULL);
 	return (1);
 }
 

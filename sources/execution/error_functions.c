@@ -45,16 +45,21 @@ void	not_valid_id(char *arg)
 	g_global->exit_status = 1;
 }
 
-void	error_retrieving_cd(void)
+int	cmdnf_nsfile(t_cmd *cmd, t_data *m, char *possible_path)
 {
-	ft_putstr_fd("cd: error retrieving current directory: ", 2);
-	ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
-	printf("%s\n", strerror(errno));
-}
-
-void	no_such_file(t_cmd *cmd)
-{
-	write (2, "minishell: ", 11);
-	write (2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
-	write (2, ": No such file or directory\n", 28);
+	if (m->path == NULL)
+	{
+		write (2, "minishell: ", 11);
+		write (2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
+		write (2, ": No such file or directory\n", 28);
+		return (1);
+	}
+	else if (ft_strncmp(cmd->argvs[0], "./", 2))
+	{
+		write (2, "minishell: ", 11);
+		write(2, possible_path, ft_strlen(possible_path));
+		ft_putendl_fd(": command not found", 2);
+		return (1);
+	}
+	return (0);
 }

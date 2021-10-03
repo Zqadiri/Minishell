@@ -71,7 +71,7 @@ typedef struct s_token
 */
 
 char	*tokenize_text(t_lexer *l, char *s);
-t_token	*string_token(t_lexer *l); 
+t_token	*string_token(t_lexer *l);
 
 /*
 ** lexer.c
@@ -97,6 +97,6 @@ t_token	*init_token(t_token_type type, char *s, t_lexer *l);
 int		is_valid_id(char *str);
 void	print_msg(char *str, char *var);
 int		peek_char(t_lexer *l);
-int	multi_lines(t_lexer *l, char c);
+int		multi_lines(t_lexer *l, char c);
 
 #endif

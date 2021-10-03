@@ -12,6 +12,22 @@
 
 #include "../includes/minishell.h"
 
+int	count(t_cmd *cmd, t_token_type type)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < cmd->redir_nbr)
+	{
+		if (cmd->r[i].type == type)
+			j++;
+		i++;
+	}
+	return (j);
+}
+
 char	*invalid_envar_here_doc(char *buff, int i)
 {
 	char	*s;

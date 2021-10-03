@@ -28,34 +28,27 @@ void	check_for_errors(t_cmd *cmd, t_data *m)
 	}
 }
 
-int	check_for_permission(t_cmd *cmd, t_data *m)
+int	check_for_permission(t_cmd *cmd)
 {
-	struct stat sb;
+	struct stat	sb;
 	DIR			*dirp;
-	(void)m;
 
 	dirp = opendir(cmd->argvs[0]);
+	write (2, "minishell :", 11);
+	write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
 	if (dirp)
 	{
 		closedir(dirp);
-		write (2, "minishell :", 11);
-		write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
 		ft_putstr_fd(": is a directory\n", 2);
 		return (126);
 	}
-	if (stat(cmd->argvs[0], &sb) == 0 /*&& sb.st_mode & S_IXUSR*/)
+	if (stat(cmd->argvs[0], &sb) == 0)
 	{
-		write (2, "minishell :", 11);
-		write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
 		ft_putstr_fd(": Permission denied\n", 2);
-		return(126);
+		return (126);
 	}
 	if (!dirp)
-	{
-		write (2, "minishell :", 11);
-		write(2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));
-		ft_putstr_fd(" *Not a directory\n", 2);
-	}
+		ft_putstr_fd(" Not a directory\n", 2);
 	return (126);
 }
 
@@ -70,26 +63,10 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 		possible_path = ft_strdup(cmd->argvs[0]);
 	fd = open(possible_path, O_RDONLY);
 	if (fd < 0)
-	{
-		if (m->path == NULL)
-		{
-			no_such_file(cmd);
-			exit (127);
-		}
-		else
-		{
-			if (ft_strncmp(cmd->argvs[0], "./", 2))
-			{
-				puts("in");
-				write (2, "minishell: ", 11);
-				write(2, possible_path, ft_strlen(possible_path));
-				ft_putendl_fd(": command not found", 2);
-				exit (127);
-			}
-		}
-	}
+		if (cmdnf_nsfile(cmd, m, possible_path))
+			exit(127);
 	if (execve (possible_path, cmd->argvs, g_global->env_var))
-		exit(check_for_permission(cmd, m));
+		exit(check_for_permission(cmd));
 }
 
 /*

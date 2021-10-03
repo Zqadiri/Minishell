@@ -12,48 +12,30 @@
 
 #include "../../includes/minishell.h"
 
-int	exec_builtin(int in, int out, t_cmd *cmd, t_data *m)
-{
-	(void)in;
-	(void)out;
-	// if (in != 0)
-	// {
-	// 	dup2(in, 0);
-	// 	close(in);
-	// }
-	// if (out != 1)
-	// {
-	// 	dup2(out, 1);
-	// 	close(out);
-	// }
-	check_builtin(cmd);
-	restore_std(m->saved_stdout, m->saved_stdin);
-	return (0);
-}
-
-int	exec_proc(int in, int out, t_cmd *cmd, t_data *m)
+int	exec_proc(int write_end, t_cmd *cmd, t_data *m, int *fd)
 {
 	m->pid = fork();
 	if (m->pid == 0)
 	{
 		if (m->redir->infile && !m->redir->err)
 			dup2(m->redir->infile, 0);
-		else if (in != 0)
+		else if (m->read_end != 0)
 		{
-			dup2(in, 0);
-			close(in);
+			dup2(m->read_end, 0);
+			close(m->read_end);
 		}
 		if (m->redir->outfile && !m->redir->err)
 			dup2(m->redir->outfile, 1);
-		else if (out != 1)
+		else if (write_end != 1)
 		{
-			dup2(out, 1);
-			close(out);
+			dup2(write_end, 1);
+			close(write_end);
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
-			return (exec_builtin(in, out, cmd, m));
+			check_builtin(cmd);
 		else
-			exec_cmd_path(m->id, cmd, m);
+			exec_cmd_path(cmd, m, fd);
+		exit (0);
 	}
 	return (m->pid);
 }
@@ -84,7 +66,7 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	int		i;
 
 	i = -1;
-	m->id = 0;
+	m->read_end = 0;
 	while (++i < cmd->nbr_cmd)
 		init_m(&m[i], i);
 	pipe_all(cmd, m);
@@ -92,14 +74,15 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	while (++i < cmd->nbr_cmd - 1)
 	{
-		g_global->pid = exec_proc(m->id, m->redir->pipe_fd[i][1],
-				&cmd[i], &m[i]);
+		pipe(m->redir->pipe_fd[i]);
+		g_global->pid = exec_proc(m->redir->pipe_fd[i][1],
+				&cmd[i], &m[i], m->redir->pipe_fd[i]);
 		close(m->redir->pipe_fd[i][1]);
-		if (m->id != 0)
-			close(m->id);
-		m->id = m->redir->pipe_fd[i][0];
+		if (m->read_end != 0)
+			close(m->read_end);
+		m->read_end = m->redir->pipe_fd[i][0];
 	}
-	g_global->pid = exec_proc(m->id, 1, &cmd[i], &m[i]);
+	g_global->pid = exec_proc(1, &cmd[i], &m[i], NULL);
 	return (1);
 }
 

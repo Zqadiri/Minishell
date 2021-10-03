@@ -70,8 +70,8 @@ int	pipe_all(t_cmd *cmd, t_data *m)
 	while (i < cmd->nbr_cmd - 1)
 	{
 		m->redir->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
-		if (pipe(m->redir->pipe_fd[i]))
-			return (0);
+		m->redir->pipe_fd[i][0] = -1;
+		m->redir->pipe_fd[i][1] = -1;
 		i++;
 	}
 	return (1);

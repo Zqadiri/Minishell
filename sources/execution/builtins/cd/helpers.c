@@ -12,6 +12,13 @@
 
 #include "../../../../includes/minishell.h"
 
+void	error_retrieving_cd(void)
+{
+	ft_putstr_fd("cd: error retrieving current directory: ", 2);
+	ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
+	printf("%s\n", strerror(errno));
+}
+
 char	*add_char_to_word(char *word, char c)
 {
 	char	*save_word;

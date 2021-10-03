@@ -65,7 +65,7 @@ typedef struct s_data
 	int				saved_stdin;
 	pid_t			pid;
 	t_red			*redir;
-	int				id;
+	int				read_end;
 }	t_data;
 
 /*
@@ -91,14 +91,14 @@ long long	atoi_exit(const char *str);
 ** Error Functions
 */
 
-void		print_error(char *file_error);
 void		setup_out(t_cmd *cmd, t_data *m, int j);
 void		setup_in(t_cmd *cmd, t_data *m, int j);
 void		wait_children(void);
 void		fork_failed(void);
 void		not_valid_id(char *arg);
 void		error_retrieving_cd(void);
-void		no_such_file(t_cmd *cmd);
+int			cmdnf_nsfile(t_cmd *cmd, t_data *m, char *possible_path);
+int			check_for_permission(t_cmd *cmd);
 
 /*
 ** Utils
@@ -117,7 +117,6 @@ void		main_free(t_data *m, t_cmd *cmd);
 ** Helpers 
 */
 
-int			exec_builtin(int in, int out, t_cmd *cmd, t_data *m);
 int			find_env(char *key, char **env_pointer);
 char		*get_env_var_by_key(char *key);
 char		*return_value(const char *s, int c);
@@ -128,8 +127,7 @@ char		*get_env_var_by_key(char *key);
 int			is_builtin(t_cmd *cmd);
 int			pipe_all(t_cmd *cmd, t_data *m);
 void		restore_std(int saved_stdout, int saved_stdin);
-void		exec_cmd_path(int in, t_cmd *cmd, t_data *m);
-// void		exec_cmd_path(int id, t_cmd *cmd, t_data *m, int in);
+void		exec_cmd_path(t_cmd *cmd, t_data *m, int *p_fd);
 void		check_valid_fd(t_data *m, char *file_error, int fd);
 void		find_cmd_path(t_cmd *cmd, t_data *m);
 
