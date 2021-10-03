@@ -16,6 +16,7 @@ int	pwd_builtin(void)
 {
 	char	*pwd;
 
+	g_global->exit_status = 0;
 	pwd = get_env_var_by_key("PWD");
 	ft_putstr_fd(pwd, 1);
 	ft_putchar_fd('\n', 1);
@@ -31,7 +32,6 @@ int	check_builtin(t_cmd *cmd)
 	char	**args;
 
 	args = cmd->argvs;
-	g_global->exit_status = 0;
 	if (ft_strequ(args[0], "pwd"))
 		return (pwd_builtin());
 	else if (ft_strequ(args[0], "echo"))

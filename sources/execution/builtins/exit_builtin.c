@@ -101,7 +101,7 @@ int	check_for_num_arg(char *args)
 	if (!is_alpha)
 	{
 		ft_putendl_fd("exit", 1);
-		ft_putendl_fd("*minishell: exit: too many arguments", 2);
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
 		g_global->exit_status = 1;
 	}
 	else
@@ -125,7 +125,8 @@ int	exit_builtin(char **args)
 	else
 	{
 		ft_putendl_fd("exit", 1);
-		exit (0);
+		printf("%d\n", g_global->exit_status);
+		exit (g_global->exit_status);
 	}
 	return (1);
 }

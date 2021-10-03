@@ -66,6 +66,7 @@ int	env_builtin(void)
 	int	i;
 
 	i = 0;
+	g_global->exit_status = 0;
 	while (g_global->env_[i] != NULL)
 	{
 		ft_putendl_fd(g_global->env_[i], 1);
