@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 13:02:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 18:22:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 # include <signal.h>
 # include <dirent.h>
 # include "lexer.h"
-
-# define IS_FIRST	0
-# define IS_LAST	1	
-# define IS_MIDDLE	2
 
 typedef struct s_redir
 {

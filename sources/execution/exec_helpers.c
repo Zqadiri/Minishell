@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:42:45 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/16 15:34:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 17:36:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	pipe_all(t_cmd *cmd, t_data *m)
 	while (i < cmd->nbr_cmd - 1)
 	{
 		m->redir->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
-		m->redir->pipe_fd[i][0] = -1;
-		m->redir->pipe_fd[i][1] = -1;
+		m->redir->pipe_fd[i][0] = -15645;
+		m->redir->pipe_fd[i][1] = -15645;
 		i++;
 	}
 	return (1);
