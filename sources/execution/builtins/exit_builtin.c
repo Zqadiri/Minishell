@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:28:41 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/21 10:47:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 10:46:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,19 @@ int	check_for_num_arg(char *args)
 
 int	exit_builtin(char **args)
 {
+	char	*trim_arg;
+
+	trim_arg = ft_strtrim(args[1], " ");
 	if (len(args) > 2)
-		return (check_for_num_arg(args[1]));
+		return (check_for_num_arg(trim_arg));
 	else if (args[1])
 	{
-		if (!ft_strcmp(args[1], "-9223372036854775808"))
+		if (!ft_strcmp(trim_arg, "-9223372036854775808"))
 		{
 			ft_putendl_fd("exit", 1);
 			exit(0);
 		}
-		exit_number(args[1]);
+		exit_number(trim_arg);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/21 15:46:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 12:31:36 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ typedef struct s_global
 t_global	*g_global;
 
 //! thinking about deleting env_
-//! strtrim in exit
-//! 3147483648
-//! check if the env var already exist , don't change its value if `export A="qq";export A;echo $A ->'empty string';`
-
+//! NOTE: check if unset PWD and/or OLDPWD with cd command -> done
+//! << newline
 #endif

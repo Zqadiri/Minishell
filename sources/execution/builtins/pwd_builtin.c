@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 11:16:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 12:32:54 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	pwd_builtin(void)
 	g_global->exit_status = 0;
 	pwd = get_env_var_by_key("PWD");
 	ft_putstr_fd(pwd, 1);
+	if (pwd == NULL)
+	{
+		pwd = getcwd(NULL, 1024);
+		ft_putstr_fd(pwd, 1);
+		free (pwd);
+	}
 	ft_putchar_fd('\n', 1);
 	return (1);
 }
@@ -38,7 +44,7 @@ int	check_builtin(t_cmd *cmd)
 		return (echo_builtin(args));
 	else if (ft_strequ(args[0], "env"))
 		return (env_builtin());
-	else if (ft_strequ(args[0], "export") && cmd->nbr_cmd == 1)
+	else if (ft_strequ(args[0], "export"))
 		return (export_builtin(args));
 	else if (ft_strequ(args[0], "unset"))
 		return (unset_builtin(args));

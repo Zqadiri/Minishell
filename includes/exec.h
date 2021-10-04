@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 17:59:17 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/10/04 13:02:36 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ char		*return_value(const char *s, int c);
 int			get_str_by_char(char *str, char c, int i);
 int			is_valid_env_key(char *arg);
 void		modify_env(char *arg, char *key);
-char		*get_env_var_by_key(char *key);
 int			is_builtin(t_cmd *cmd);
 int			pipe_all(t_cmd *cmd, t_data *m);
 void		restore_std(int saved_stdout, int saved_stdin);

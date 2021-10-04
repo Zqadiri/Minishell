@@ -104,18 +104,18 @@ int	cd_builtin(char **argv)
 	if (argv[i + 1] == NULL)
 	{
 		path = get_env_var_by_key("HOME");
-		if (!ft_strcmp(path, ""))
-			return (0);
-		if (!argv[i++] && ft_strlen_new(path) == 0)
+		if (path == NULL)
 		{
 			g_global->exit_status = 1;
-			ft_putstr_fd ("HOME PATH NOT SET", 2);
+			ft_putstr_fd("minishell: cd:", 2);
+			ft_putstr_fd (" HOME not set\n", 2);
 			return (-1);
 		}
+		if (!ft_strcmp(path, ""))
+			return (0);
 	}
 	else
-		path = ft_strdup(argv[i + 1]);
+		path = argv[i + 1];
 	exec_cd(path, i, argv);
-	free(path);
 	return (0);
 }

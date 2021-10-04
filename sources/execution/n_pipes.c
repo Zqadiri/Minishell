@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/23 15:31:55 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 13:19:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	exec_cmd_path(t_cmd *cmd, t_data *m, int *p_fd)
 	if (fd < 0)
 		if (cmdnf_nsfile(cmd, m, possible_path))
 			exit(127);
-	if (p_fd != NULL)
+	// if (m->cmd_id == 0)
+	// 	close (p_fd[0]);
+	// else
+	if (p_fd == NULL)
 	{
 		close (p_fd[0]);
 		close (p_fd[1]);

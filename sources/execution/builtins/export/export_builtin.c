@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 11:23:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 11:54:10 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	is_valid_env_key(char *arg)
 
 	i = 0;
 	alpha = 0;
+	if (!ft_strcmp(arg, ""))
+		return (0);
 	if (arg == NULL || arg[0] == '=')
 		return (0);
 	while (arg[i] && arg[i] != '=')
@@ -97,18 +99,26 @@ static void	set_or_modify(char *arg)
 	int		is_set;
 	int		i;
 	char	*key;
+	int		just_key;
 
+	just_key = 0;
 	if (arg == NULL)
 		return ;
 	i = get_str_by_char(arg, '=', 0);
 	if (i == -1)
+	{
+		just_key = 1;
 		i = ft_strlen(arg);
+	}
 	key = ft_substr(arg, 0, i);
 	is_set = find_env(key, g_global->env_var);
 	if (is_set == -1)
 		set_new_env(arg);
 	else
-		modify_env(arg, key);
+	{
+		if (!just_key)
+			modify_env(arg, key);
+	}
 	free (key);
 }
 

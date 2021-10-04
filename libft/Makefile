@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 12:11:32 by zqadiri           #+#    #+#              #
-#    Updated: 2021/09/17 14:32:37 by iidzim           ###   ########.fr        #
+#    Updated: 2021/10/04 10:37:10 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ SRC = ft_memalloc.c\
 	  ft_strlen_new.c\
 	  ftstrcmp.c\
 	  ft_joinchar.c\
-	  ft_joinfree.c
+	  ft_joinfree.c\
+	  ft_strtrim.c
 	  
 
 all:	$(NAME)
