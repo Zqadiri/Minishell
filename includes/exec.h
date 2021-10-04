@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 18:22:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:49:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,19 @@ typedef struct s_red
 	int				**pipe_fd;
 }	t_red;
 
+typedef	struct s_state
+{
+	char			**env_;
+	char			**path;
+}	t_state;
 typedef struct s_data
 {
 	int				cmd_id;
-	char			**path;
 	int				saved_stdout;
 	int				saved_stdin;
 	pid_t			pid;
 	t_red			*redir;
+	t_state			*state;
 	int				read_end;
 }	t_data;
 
@@ -71,11 +76,11 @@ typedef struct s_data
 int			cd_builtin(char **arg);
 int			echo_builtin(char **arg);
 int			pwd_builtin(void);
-void		add_to_env(char *arg);
-int			env_builtin(void);
+void		add_to_env(char *arg, t_data *m);
+int			env_builtin(t_data *m);
 int			exit_builtin(char **args);
-int			unset_builtin(char **args);
-int			export_builtin(char **arg);
+int			unset_builtin(char **args, t_data *m);
+int			export_builtin(char **arg, t_data *m);
 char		*add_char_to_word(char *word, char c);
 char		*get_pwd(void);
 char		*return_value(const char *s, int c);
@@ -133,12 +138,12 @@ void		find_cmd_path(t_cmd *cmd, t_data *m);
 void		check_for_heredoc(t_data *m, t_cmd *cmd);
 int			check_signals(void);
 char		*find_path(char	*cmd, char **path);
-void		exec_multiple_cmd(t_cmd *cmd, t_data *m);
+void		exec_multiple_cmd(t_cmd *cmd, t_data *m, t_state *state);
 int			is_builtin(t_cmd *cmd);
-void		init_m(t_data *m, int i);
+void		init_m(t_data *m, int i, t_state *state);
 void		print_error(char *file_error);
 int			count(t_cmd *cmd, t_token_type type);
-void		exec_simple_pipe(t_cmd *cmd, t_data *m);
+void		exec_simple_pipe(t_cmd *cmd, t_data *m, t_state *state);
 void		exec_single_cmd(t_cmd *cmd, t_data *m);
 int			execute_regular_cmd(t_cmd *cmd, t_data *m);
 void		close_all_pipes(int **fd, int n, t_data *m);

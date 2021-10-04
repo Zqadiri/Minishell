@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 11:32:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:28:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ int	dup_env_var(char **env)
 	while (++i < len(env))
 		g_global->env_var[i] = ft_strdup(env[i]);
 	g_global->env_var[i] = 0;
-	i = -1;
-	g_global->env_ = (char **)malloc(sizeof(char *) * (len(env) + 1));
-	if (g_global->env_ == NULL)
-		exit(EXIT_FAILURE);
-	while (++i < len(env))
-		g_global->env_[i] = ft_strdup(env[i]);
-	g_global->env_[i] = 0;
 	return (1);
 }
 
@@ -80,25 +73,25 @@ void	restore_std(int saved_stdout, int saved_stdin)
 ** main function
 */
 
-int	execution(t_cmd *cmd)
+int	execution(t_cmd *cmd, t_state *state)
 {
 	t_data	*m;
 
 	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (cmd->redir_nbr == 0 && cmd->type == eof)
 	{
-		init_m(m, 0);
+		init_m(m, 0, state);
 		execute_regular_cmd(cmd, m);
 	}
 	else if (cmd->type == eof && cmd->redir_nbr > 0)
 	{
-		init_m(m, 0);
+		init_m(m, 0, state);
 		check_for_heredoc(m, cmd);
 		exec_single_cmd(cmd, m);
 	}
 	else
 	{
-		exec_multiple_cmd(cmd, m);
+		exec_multiple_cmd(cmd, m, state);
 	}
 	main_free(m, cmd);
 	return (1);

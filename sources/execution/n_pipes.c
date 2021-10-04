@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 18:22:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:52:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_cmd_path(t_cmd *cmd, t_data *m, int *p_fd)
 	char	*possible_path;
 
 	check_for_errors(cmd, m);
-	possible_path = find_path(cmd->argvs[0], m->path);
+	possible_path = find_path(cmd->argvs[0], m->state->path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
 	fd = open(possible_path, O_RDONLY);
@@ -52,7 +52,7 @@ int	exec_process(int read_end, int write_end, t_cmd *cmd, t_data *m, int *fd)
 			close(write_end);
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
-			check_builtin(cmd);
+			check_builtin(cmd, m);
 		else
 			exec_cmd_path(cmd, m, fd);
 		exit(0);
@@ -86,13 +86,13 @@ int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
 **	exec_simple_pipe() execute commands with pipes only
 */
 
-void	exec_simple_pipe(t_cmd *cmd, t_data *m)
+void	exec_simple_pipe(t_cmd *cmd, t_data *m, t_state *state)
 {
 	int		i;
 
 	i = -1;
 	while (++i < cmd->nbr_cmd)
-		init_m(&m[i], i);
+		init_m(&m[i], i, state);
 	fork_cmd_pipes(cmd, m);
 	g_global->pid = 0;
 	close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);

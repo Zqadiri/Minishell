@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 15:21:37 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:38:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	exec_single_cmd(t_cmd *cmd, t_data *m)
 	setup_redirections(cmd, m);
 	if (is_builtin(cmd) && !m->redir->err)
 	{
-		check_builtin(cmd);
+		check_builtin(cmd, m);
 		restore_std(m->saved_stdout, m->saved_stdin);
 		return ;
 	}

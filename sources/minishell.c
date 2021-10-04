@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/04 16:19:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:05:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,22 @@ t_lexer	*init_l(t_lexer	*l)
 	return (l);
 }
 
-void	initialize(int argc, char **argv, char **env)
+char	**get_env_(char	**env_)
+{
+	char	**env;
+	int		i;
+
+	i = -1;
+	env = (char **)malloc(sizeof(char *) * (len(env_) + 1));
+	if (env == NULL)
+		exit(EXIT_FAILURE);
+	while (++i < len(env_))
+		env[i] = ft_strdup(env_[i]);
+	env[i] = 0;
+	return (env);
+}
+
+void	initialize(int argc, char **argv, char **env, t_state *state)
 {
 	(void)argc;
 	(void)argv;
@@ -36,6 +51,8 @@ void	initialize(int argc, char **argv, char **env)
 	g_global->exit_status = 0;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigint_handler);
+	state->env_ = get_env_(env);
+	state->path = get_path();
 }
 
 void	quit_minishell(void)
@@ -53,7 +70,7 @@ void	quit_minishell(void)
 	exit(g_global->exit_status);
 }
 
-void	parse(t_lexer *l)
+void	parse(t_lexer *l, t_state *state)
 {
 	t_cmd		*z;
 	t_ast		*ast;
@@ -68,7 +85,7 @@ void	parse(t_lexer *l)
 			z = visitor(ast);
 			if (z)
 			{
-				execution(z);
+				execution(z, state);
 				if (z)
 					free_cmd(z);
 			}
@@ -82,8 +99,10 @@ int	main(int argc, char **argv, char **env)
 {
 	t_lexer		*l;
 	char		*buff;
+	t_state		*state;
 
-	initialize(argc, argv, env);
+	state = (t_state *)malloc(sizeof(t_state));
+	initialize(argc, argv, env, state);
 	while (1)
 	{
 		buff = NULL;
@@ -107,8 +126,8 @@ int	main(int argc, char **argv, char **env)
 			}
 			free (buff);
 		}
-		parse(l);
-		// system("leaks minishell");
+		parse(l, state);
+		system("leaks minishell");
 	}
 	return (0);
 }

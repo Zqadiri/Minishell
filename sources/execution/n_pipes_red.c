@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 18:24:29 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:37:56 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exec_proc(int read_end, int write_end, t_cmd *cmd, t_data *m, int *fd)
 			close(write_end);
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
-			check_builtin(cmd);
+			check_builtin(cmd, m);
 		else
 			exec_cmd_path(cmd, m, fd);
 		exit (0);
@@ -61,7 +61,7 @@ void	setup_all_redirections(t_cmd *cmd, t_data *m)
 	}
 }
 
-int	fork_pipes(t_cmd *cmd, t_data *m)
+int	fork_pipes(t_cmd *cmd, t_data *m, t_state *state)
 {
 	int		i;
 	int		read_end;
@@ -69,7 +69,7 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	i = -1;
 	read_end = 0;
 	while (++i < cmd->nbr_cmd)
-		init_m(&m[i], i);
+		init_m(&m[i], i, state);
 	pipe_all(cmd, m);
 	setup_all_redirections(cmd, m);
 	i = -1;
@@ -87,7 +87,7 @@ int	fork_pipes(t_cmd *cmd, t_data *m)
 	return (1);
 }
 
-void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
+void	exec_multiple_cmd(t_cmd *cmd, t_data *m, t_state *state)
 {
 	int		i;
 	int		is_redir;
@@ -102,12 +102,12 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m)
 	}
 	if (!is_redir)
 	{
-		exec_simple_pipe(cmd, m);
+		exec_simple_pipe(cmd, m, state);
 		return ;
 	}
 	else
 	{
-		fork_pipes(cmd, m);
+		fork_pipes(cmd, m, state);
 		close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 		wait_children();
 	}

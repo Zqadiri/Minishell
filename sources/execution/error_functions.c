@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:46:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 15:16:06 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:52:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	not_valid_id(char *arg)
 
 int	cmdnf_nsfile(t_cmd *cmd, t_data *m, char *possible_path)
 {
-	if (m->path == NULL)
+	if (m->state->path == NULL)
 	{
 		write (2, "minishell: ", 11);
 		write (2, cmd->argvs[0], ft_strlen(cmd->argvs[0]));

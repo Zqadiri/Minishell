@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 14:14:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:46:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	pwd_builtin(void)
 **	check lowercase
 */
 
-int	check_builtin(t_cmd *cmd)
+int	check_builtin(t_cmd *cmd, t_data *m)
 {
 	char	**args;
 
@@ -43,11 +43,11 @@ int	check_builtin(t_cmd *cmd)
 	else if (ft_strequ(args[0], "echo"))
 		return (echo_builtin(args));
 	else if (ft_strequ(args[0], "env"))
-		return (env_builtin());
+		return (env_builtin(m));
 	else if (ft_strequ(args[0], "export"))
-		return (export_builtin(args));
+		return (export_builtin(args, m));
 	else if (ft_strequ(args[0], "unset"))
-		return (unset_builtin(args));
+		return (unset_builtin(args, m));
 	else if (ft_strequ(args[0], "cd"))
 		return (cd_builtin(args));
 	else if (ft_strequ(args[0], "exit"))

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:42:45 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 17:36:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:51:54 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ void	close_all_pipes(int **fd, int n, t_data *m)
 ** Init t_data structure 
 */
 
-void	init_m(t_data *m, int i)
+void	init_m(t_data *m, int i, t_state *state)
 {
 	m->cmd_id = i;
 	m->saved_stdout = dup(1);
 	m->saved_stdin = dup(0);
-	m->path = get_path();
+	m->state = state;
 	m->pid = 0;
 	m->redir = (t_red *)malloc(sizeof(t_red));
 	m->redir->infile = 0;

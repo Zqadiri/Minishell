@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 16:23:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:52:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	find_cmd_path(t_cmd *cmd, t_data *m)
 	int		fd;
 
 	check_for_errors(cmd, m);
-	possible_path = find_path (cmd->argvs[0], m->path);
+	possible_path = find_path (cmd->argvs[0], m->state->path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
 	fd = open(possible_path, O_RDONLY);
@@ -80,7 +80,7 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 	pid_t	child_pid;
 
 	if (is_builtin(cmd))
-		return (check_builtin(cmd));
+		return (check_builtin(cmd, m));
 	else
 	{
 		child_pid = fork();

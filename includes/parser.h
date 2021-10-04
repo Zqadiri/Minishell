@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:19:03 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/20 12:36:47 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:39:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void		free_cmd(t_cmd *z);
 ** exec
 */
 
-int			check_builtin(t_cmd *cmd);
+int			check_builtin(t_cmd *cmd, t_data *m);
 int			setup_redirections(t_cmd *cmd, t_data *m);
-int			execution(t_cmd *cmd);
+int			execution(t_cmd *cmd, t_state *state);
 
 #endif

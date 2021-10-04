@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 10:52:50 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 17:47:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:45:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static void	set_or_modify(char *arg)
 	free (key);
 }
 
-int	export_builtin(char **args)
+int	export_builtin(char **args, t_data *m)
 {
 	int	i;
 
@@ -144,7 +144,7 @@ int	export_builtin(char **args)
 			continue ;
 		}
 		set_or_modify(args[i]);
-		add_to_env(args[i]);
+		add_to_env(args[i], m);
 	}
 	return (1);
 }

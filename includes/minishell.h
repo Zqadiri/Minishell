@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/04 12:31:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:40:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,9 @@ typedef struct s_global
 	char	**env_var;
 	int		pid;
 	int		exit_status;
-	char	**env_;
 }	t_global;
 
 t_global	*g_global;
 
 //! thinking about deleting env_
-//! NOTE: check if unset PWD and/or OLDPWD with cd command -> done
-//! << newline
 #endif

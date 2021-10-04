@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 10:54:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 10:55:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:03:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ void	free_m(t_data *m, t_cmd *cmd)
 	{
 		if (m[i].redir->pipe_fd != NULL)
 			pipe_free (m[i].redir->pipe_fd, cmd->nbr_cmd);
-		if (m[i].path != NULL)
-			free_path (m[i].path);
 		free (m[i].redir);
 		i--;
 	}
+	if (m->state->path != NULL)
+		free_path (m->state->path);
+	if (m->state->env_ != NULL)
+		free_path (m->state->env_);
+	free (m->state);
 	free(m);
 }
 
@@ -67,24 +70,25 @@ void	main_free(t_data *m, t_cmd *cmd)
 	if (cmd->nbr_cmd == 1)
 	{
 		i = 0;
-		if (m->path != NULL)
-		{
-			while (m->path[i])
-			{
-				free (m->path[i]);
-				m->path[i] = NULL;
-				i++;
-			}
-			free(m->path);
-			m->path = NULL;
-		}
+		// if (m->state->path != NULL)
+		// {
+		// 	while (m->state->path[i])
+		// 	{
+		// 		free (m->state->path[i]);
+		// 		m->state->path[i] = NULL;
+		// 		i++;
+		// 	}
+		// 	free(m->state->path);
+		// 	m->state->path = NULL;
+		// }
+		// // free(m->state);
 		free(m->redir);
 		m->redir = NULL;
 		free (m);
 		m = NULL;
 	}
-	else
-		free_m(m, cmd);
+	// else
+	// 	free_m(m, cmd);
 }
 
 void	ft_freeptr(void *ptr)
