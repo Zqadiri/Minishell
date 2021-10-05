@@ -6,25 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/05 10:54:50 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 19:21:58 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*to_lower(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] >= 65 && s[i] <= 90)
-			s[i] += 32;
-		i++;
-	}
-	return (s);
-}
 
 int	random_file_name(t_data *m)
 {
@@ -74,8 +60,9 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	char	*output;
 	char	*temp;
 	int		fd;
-	int		empty = 0;
+	int		empty;
 
+	empty = 0;
 	fd = random_file_name(m);
 	output = ft_strdup("");
 	while (1)

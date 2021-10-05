@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   realloc_ast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:15:34 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/01 13:31:02 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/10/05 19:02:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+t_lexer	*init_l(t_lexer	*l)
+{
+	l = malloc(sizeof(t_lexer));
+	if (!l)
+		return (NULL);
+	l->buffer = NULL;
+	l->bufsize = 0;
+	l->c = ' ';
+	l->curpos = 0;
+	l->readpos = 0;
+	return (l);
+}
 
 t_ast	**realloc_ast_node(t_ast *ast, int size)
 {

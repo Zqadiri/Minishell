@@ -6,39 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/05 18:49:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 19:20:43 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-t_lexer	*init_l(t_lexer	*l)
-{
-	l = malloc(sizeof(t_lexer));
-	if (!l)
-		return (NULL);
-	l->buffer = NULL;
-	l->bufsize = 0;
-	l->c = ' ';
-	l->curpos = 0;
-	l->readpos = 0;
-	return (l);
-}
-
-char	**get_env_(char	**env_)
-{
-	char	**env;
-	int		i;
-
-	i = -1;
-	env = (char **)malloc(sizeof(char *) * (len(env_) + 1));
-	if (env == NULL)
-		exit(EXIT_FAILURE);
-	while (++i < len(env_))
-		env[i] = ft_strdup(env_[i]);
-	env[i] = 0;
-	return (env);
-}
 
 void	initialize(int argc, char **argv, char **env, t_state *state)
 {
@@ -95,7 +67,7 @@ void	parse(t_lexer *l, t_state *state)
 		free(p);
 }
 
-void test(char **buff, t_lexer **l)
+void	norme(char **buff, t_lexer **l)
 {
 	add_history(*buff);
 	if (!is_white_space(*buff))
@@ -129,7 +101,7 @@ int	main(int argc, char **argv, char **env)
 		else
 		{
 			l = NULL;
-			test(&buff, &l);
+			norme(&buff, &l);
 		}
 		parse(l, state);
 	}

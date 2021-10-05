@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 10:54:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 10:51:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 19:06:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	pipe_free(int **pipe_fd, int nbr_cmd)
+static int	pipe_free(int **pipe_fd, int nbr_cmd)
 {
 	int	i;
 
@@ -28,23 +28,10 @@ int	pipe_free(int **pipe_fd, int nbr_cmd)
 	return (1);
 }
 
-void	free_m(t_data *m, t_cmd *cmd)
+void	main_free(t_data *m, t_cmd *cmd)
 {
 	int	i;
 
-	i = cmd->nbr_cmd - 1;
-	while (i >= 0)
-	{
-		if (m[i].redir->pipe_fd != NULL)
-			pipe_free (m[i].redir->pipe_fd, cmd->nbr_cmd);
-		free (m[i].redir);
-		i--;
-	}
-	free(m);
-}
-
-void	main_free(t_data *m, t_cmd *cmd)
-{
 	if (cmd->nbr_cmd == 1)
 	{
 		free(m->redir);
@@ -53,7 +40,17 @@ void	main_free(t_data *m, t_cmd *cmd)
 		m = NULL;
 	}
 	else
-		free_m(m, cmd);
+	{
+		i = cmd->nbr_cmd - 1;
+		while (i >= 0)
+		{
+			if (m[i].redir->pipe_fd != NULL)
+				pipe_free (m[i].redir->pipe_fd, cmd->nbr_cmd);
+			free (m[i].redir);
+			i--;
+		}
+		free(m);
+	}
 }
 
 void	ft_freeptr(void *ptr)

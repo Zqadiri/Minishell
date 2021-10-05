@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:13:01 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/17 14:40:16 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/10/05 19:02:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ char	*envar_token(t_lexer *l);
 ** utils.c
 */
 
+t_lexer	*init_l(t_lexer	*l);
 t_token	*init_token(t_token_type type, char *s, t_lexer *l);
 int		is_valid_id(char *str);
 void	print_msg(char *str, char *var);

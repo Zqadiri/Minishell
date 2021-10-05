@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_expander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 13:05:12 by iidzim            #+#    #+#             */
-/*   Updated: 2021/09/24 17:35:20 by iidzim           ###   ########.fr       */
+/*   Updated: 2021/10/05 19:14:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count(t_cmd *cmd, t_token_type type)
 	return (j);
 }
 
-char	*invalid_envar_here_doc(char *buff, int i)
+static char	*invalid_envar_here_doc(char *buff, int i)
 {
 	char	*s;
 
@@ -47,7 +47,7 @@ char	*invalid_envar_here_doc(char *buff, int i)
 	return (s);
 }
 
-char	*envar_helper(char *buff, int *i, char *s, int flag)
+static char	*envar_helper(char *buff, int *i, char *s, int flag)
 {
 	char	*temp;
 	char	*env;

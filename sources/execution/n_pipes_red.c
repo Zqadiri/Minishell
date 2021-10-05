@@ -6,11 +6,26 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 18:47:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 19:20:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	**get_env_(char	**env_)
+{
+	char	**env;
+	int		i;
+
+	i = -1;
+	env = (char **)malloc(sizeof(char *) * (len(env_) + 1));
+	if (env == NULL)
+		exit(EXIT_FAILURE);
+	while (++i < len(env_))
+		env[i] = ft_strdup(env_[i]);
+	env[i] = 0;
+	return (env);
+}
 
 int	exec_proc(t_cmd *cmd, t_data *m, int *fd)
 {
