@@ -6,30 +6,30 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 19:37:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:25:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exec_proc(int read_end, int write_end, t_cmd *cmd, t_data *m, int *fd)
+int	exec_proc(t_cmd *cmd, t_data *m, int *fd)
 {
 	m->pid = fork();
 	if (m->pid == 0)
 	{
 		if (m->redir->infile && !m->redir->err)
 			dup2(m->redir->infile, 0);
-		else if (read_end != 0)
+		else if (m->state->read_end != 0)
 		{
-			dup2(read_end, 0);
-			close(read_end);
+			dup2(m->state->read_end, 0);
+			close(m->state->read_end);
 		}
 		if (m->redir->outfile && !m->redir->err)
 			dup2(m->redir->outfile, 1);
-		else if (write_end != 1)
+		else if (m->state->write_end != 1)
 		{
-			dup2(write_end, 1);
-			close(write_end);
+			dup2(m->state->write_end, 1);
+			close(m->state->write_end);
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
 			check_builtin(cmd, m);
@@ -61,29 +61,29 @@ void	setup_all_redirections(t_cmd *cmd, t_data *m)
 	}
 }
 
-int	fork_pipes(t_cmd *cmd, t_data *m, t_state *state)
+int	exec_pipe_red(t_cmd *cmd, t_data *m, t_state *state)
 {
 	int		i;
-	int		read_end;
 
 	i = -1;
-	read_end = 0;
+	m->state->read_end = 0;
 	while (++i < cmd->nbr_cmd)
-		init_m(&m[i], i, state);
+		init_m(&m[i], state);
 	pipe_all(cmd, m);
 	setup_all_redirections(cmd, m);
 	i = -1;
 	while (++i < cmd->nbr_cmd - 1)
 	{
 		pipe(m->redir->pipe_fd[i]);
-		g_global->pid = exec_proc(read_end, m->redir->pipe_fd[i][1],
-				&cmd[i], &m[i], m->redir->pipe_fd[i]);
-		close(m->redir->pipe_fd[i][1]);
-		if (read_end != 0)
-			close(read_end);
-		read_end = m->redir->pipe_fd[i][0];
+		m->state->write_end = m->redir->pipe_fd[i][1];
+		g_global->pid = exec_proc(&cmd[i], &m[i], m->redir->pipe_fd[i]);
+		close(m->state->write_end);
+		if (m->state->read_end != 0)
+			close(m->state->read_end);
+		m->state->read_end = m->redir->pipe_fd[i][0];
 	}
-	g_global->pid = exec_proc(read_end, 1, &cmd[i], &m[i], NULL);
+	m->state->write_end = 1;
+	g_global->pid = exec_proc(&cmd[i], &m[i], NULL);
 	return (1);
 }
 
@@ -107,7 +107,7 @@ void	exec_multiple_cmd(t_cmd *cmd, t_data *m, t_state *state)
 	}
 	else
 	{
-		fork_pipes(cmd, m, state);
+		exec_pipe_red(cmd, m, state);
 		close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 		wait_children();
 	}

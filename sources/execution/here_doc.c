@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:38:32 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/04 13:31:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 10:54:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	parse_here_doc(t_redir *r, t_data *m)
 		if (!output)
 			break ;
 	}
-	if (ft_strcmp(output, "\0")) //?????
+	if (ft_strcmp(output, "\0"))
 		ft_putendl_fd(temp, fd);
 	else
-		ft_putstr_fd(temp, fd);;
+		ft_putstr_fd(temp, fd);
 	free(output);
 	free(temp);
 	close (fd);

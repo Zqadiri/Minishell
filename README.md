@@ -12,7 +12,7 @@ own little bash or zsh. You will learn a lot about processes and file descriptor
 
 The shell is a command line interface (CLI) program that takes commands from the keyboard and gives them to the operating system to perform.
 
-## Man for the External functions :
+## Man for somfunctions :
 
 `fork`  
 
@@ -40,7 +40,7 @@ The difference is  wait3() waits of any child, while wait4() can be used to sele
 
 A signal is a software generated interrupt that is sent to a process by the OS because of when the user press ctrl-c or another process tells something to this process. There are fixed set of signals that can be sent to a process. signal are identified by integers.
 
-```cpp
+```c
 #include<stdio.h>
 #include<signal.h>
 **int** main()
@@ -61,16 +61,41 @@ Output: Print hello world infinite times. If user presses ctrl-c to terminate th
 
 [https://www.youtube.com/watch?v=EqndHT606Tw](https://www.youtube.com/watch?v=EqndHT606Tw)
 
+[What does dup2() do in C](https://stackoverflow.com/questions/24538470/what-does-dup2-do-in-c)
+
+[The dup2 Function in C](https://www.delftstack.com/howto/c/dup2-in-c/)
+
 `pipe`
 
 Conceptually, a pipe is a connection between two processes, such that the standard output from one process becomes the standard input of the other process.
 
 [Pipe() tutorial for linux](https://www.youtube.com/watch?v=uHH7nHkgZ4w)
 
-- Enclosing characters in single quotes (‘’’) preserves the literal value of each character within the quotes. A single quote may not occur between single quotes, even when preceded by a backslash.
-- Enclosing characters in double quotes (‘"’) preserves the literal value of all characters withinthe quotes, with the exception of ‘$’, ‘‘’, ‘\’ .  The characters ‘$’ and ‘‘’ retain their special meaning within double quotes.The backslash retains its special meaning only when followed by one of the following characters: ‘$’, ‘‘’, ‘"’, ‘\’, or newline. Within double quotes, backslashes that are followed by one of these characters are removed
+`execve`
 
-## notions :
+execve() executes the program pointed to by filename. filename must be either a binary executable or a script starting with a line of the form "#! interpreter [arg]". On success, execve() does not return, on error -1 is returned, and errno is set appropriately.
+
+`getenv`
+
+searches for the environment string pointed to by name and returns the associated value to the string.
+
+`isatty`
+
+is a function that returns 1 if the file descriptor refers to a terminal.
+
+Further investigation would lead you to the discovery that file descriptors 0, 1 and 2 (aka STDIN_FILENO, STDOUT_FILENO and STDERR_FILENO) are by convention set up to point to your terminal when your program is running from a terminal.
+
+## Termcap and Terminfo
+
+[Termcap et Terminfo * Tutoriels * Zeste de Savoir](https://zestedesavoir.com/tutoriels/1733/termcap-et-terminfo/)
+
+[General Terminal Interface](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html#tag_11_01_07)
+
+### Termios Functions:
+
+[terminfo(4) [osf1 man page]](https://www.unix.com/man-page/osf1/4/terminfo/)
+
+[termcap(4) [osf1 man page]](https://www.unix.com/man-page/osf1/4/termcap/)
+
+## Notion :
  [https://www.notion.so/ikram9/MiniShell-b2a9017a1f784f4da4e55b79c3c46975](https://www.notion.so/ikram9/MiniShell-b2a9017a1f784f4da4e55b79c3c46975)
-
- [https://www.notion.so/Minishell-66adc233845a48ba8039360e06970ea9](https://www.notion.so/Minishell-66adc233845a48ba8039360e06970ea9)

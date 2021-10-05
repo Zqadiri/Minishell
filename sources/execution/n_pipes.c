@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 19:52:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:18:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@ void	exec_cmd_path(t_cmd *cmd, t_data *m, int *p_fd)
 		exit(126);
 }
 
-int	exec_process(int read_end, int write_end, t_cmd *cmd, t_data *m, int *fd)
+int	exec_process(t_cmd *cmd, t_data *m, int *fd)
 {
 	m->pid = fork();
 	if (m->pid < 0)
 		fork_failed();
 	if (m->pid == 0)
 	{
-		if (read_end != 0)
+		if (m->state->read_end != 0)
 		{
-			dup2(read_end, 0);
-			close(read_end);
+			dup2(m->state->read_end, 0);
+			close(m->state->read_end);
 		}
-		if (write_end != 1)
+		if (m->state->write_end != 1)
 		{
-			dup2(write_end, 1);
-			close(write_end);
+			dup2(m->state->write_end, 1);
+			close(m->state->write_end);
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
 			check_builtin(cmd, m);
@@ -60,25 +60,26 @@ int	exec_process(int read_end, int write_end, t_cmd *cmd, t_data *m, int *fd)
 	return (m->pid);
 }
 
-int	fork_cmd_pipes(t_cmd *cmd, t_data *m)
+int	exec_pipe_cmd(t_cmd *cmd, t_data *m)
 {
 	int		i;
-	int		read_end;
+
 	i = 0;
-	read_end = 0;
+	m->state->read_end = 0;
 	pipe_all(cmd, m);
 	while (i < cmd->nbr_cmd - 1)
 	{
 		pipe(m->redir->pipe_fd[i]);
-		g_global->pid = exec_process(read_end, m->redir->pipe_fd[i][1],
-				&cmd[i], &m[i], m->redir->pipe_fd[i]);
-		close(m->redir->pipe_fd[i][1]);
-		if (read_end != 0)
-			close (read_end);
-		read_end = m->redir->pipe_fd[i][0];
+		m->state->write_end = m->redir->pipe_fd[i][1];
+		g_global->pid = exec_process(&cmd[i], &m[i], m->redir->pipe_fd[i]);
+		close(m->state->write_end);
+		if (m->state->read_end != 0)
+			close (m->state->read_end);
+		m->state->read_end = m->redir->pipe_fd[i][0];
 		i++;
 	}
-	g_global->pid = exec_process(read_end, 1, &cmd[i], &m[i], NULL);
+	m->state->write_end = 1;
+	g_global->pid = exec_process(&cmd[i], &m[i], NULL);
 	return (1);
 }
 
@@ -92,8 +93,8 @@ void	exec_simple_pipe(t_cmd *cmd, t_data *m, t_state *state)
 
 	i = -1;
 	while (++i < cmd->nbr_cmd)
-		init_m(&m[i], i, state);
-	fork_cmd_pipes(cmd, m);
+		init_m(&m[i], state);
+	exec_pipe_cmd(cmd, m);
 	g_global->pid = 0;
 	close_all_pipes(m->redir->pipe_fd, cmd->nbr_cmd - 1, m);
 	wait_children();

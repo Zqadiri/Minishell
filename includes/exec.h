@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 19:49:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:29:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,21 @@ typedef struct s_red
 	int				**pipe_fd;
 }	t_red;
 
-typedef	struct s_state
+typedef struct s_state
 {
 	char			**env_;
 	char			**path;
+	int				read_end;
+	int				write_end;
 }	t_state;
+
 typedef struct s_data
 {
-	int				cmd_id;
 	int				saved_stdout;
 	int				saved_stdin;
 	pid_t			pid;
 	t_red			*redir;
 	t_state			*state;
-	int				read_end;
 }	t_data;
 
 /*
@@ -140,7 +141,7 @@ int			check_signals(void);
 char		*find_path(char	*cmd, char **path);
 void		exec_multiple_cmd(t_cmd *cmd, t_data *m, t_state *state);
 int			is_builtin(t_cmd *cmd);
-void		init_m(t_data *m, int i, t_state *state);
+void		init_m(t_data *m, t_state *state);
 void		print_error(char *file_error);
 int			count(t_cmd *cmd, t_token_type type);
 void		exec_simple_pipe(t_cmd *cmd, t_data *m, t_state *state);

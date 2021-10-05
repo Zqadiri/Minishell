@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:20:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 19:43:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 10:52:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	unset_builtin(char **args, t_data *m)
 		env_index = find_env(args[i], g_global->env_var);
 		env_index_ = find_env(args[i], m->state->env_);
 		if (env_index_ != -1)
-			 m->state->env_ = remove_env_by_key(env_index_,  m->state->env_);
+			m->state->env_ = remove_env_by_key(env_index_, m->state->env_);
 		if (env_index != -1)
 			g_global->env_var = remove_env_by_key(env_index, g_global->env_var);
 		else

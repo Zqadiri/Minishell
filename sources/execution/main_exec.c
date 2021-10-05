@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:05:02 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 19:28:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:01:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ int	execution(t_cmd *cmd, t_state *state)
 	m = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (cmd->redir_nbr == 0 && cmd->type == eof)
 	{
-		init_m(m, 0, state);
+		init_m(m, state);
 		execute_regular_cmd(cmd, m);
 	}
 	else if (cmd->type == eof && cmd->redir_nbr > 0)
 	{
-		init_m(m, 0, state);
+		init_m(m, state);
 		check_for_heredoc(m, cmd);
 		exec_single_cmd(cmd, m);
 	}

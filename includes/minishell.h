@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:28:30 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/04 19:40:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:04:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,4 @@ typedef struct s_global
 
 t_global	*g_global;
 
-//! thinking about deleting env_
 #endif
