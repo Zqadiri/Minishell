@@ -74,11 +74,13 @@ void	parse_here_doc(t_redir *r, t_data *m)
 	char	*output;
 	char	*temp;
 	int		fd;
+	int		empty = 0;
 
 	fd = random_file_name(m);
 	output = ft_strdup("");
 	while (1)
 	{
+		empty++;
 		m->redir->in_heredoc = 1;
 		buff = readline("> ");
 		temp = output;
@@ -86,10 +88,8 @@ void	parse_here_doc(t_redir *r, t_data *m)
 		if (!output)
 			break ;
 	}
-	if (ft_strcmp(output, "\0"))
+	if (empty != 1)
 		ft_putendl_fd(temp, fd);
-	else
-		ft_putstr_fd(temp, fd);
 	free(output);
 	free(temp);
 	close (fd);
