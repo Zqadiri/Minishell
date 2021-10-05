@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:42:45 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 11:01:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 16:23:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	close_all_pipes(int **fd, int n, t_data *m)
 
 void	init_m(t_data *m, t_state *state)
 {
+	state->path = get_path();
 	m->saved_stdout = dup(1);
 	m->saved_stdin = dup(0);
 	m->state = state;

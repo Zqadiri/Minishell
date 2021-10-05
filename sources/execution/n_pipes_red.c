@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 11:25:55 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 16:12:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	exec_pipe_red(t_cmd *cmd, t_data *m, t_state *state)
 	int		i;
 
 	i = -1;
-	m->state->read_end = 0;
 	while (++i < cmd->nbr_cmd)
 		init_m(&m[i], state);
 	pipe_all(cmd, m);
 	setup_all_redirections(cmd, m);
 	i = -1;
+	m->state->read_end = 0;
 	while (++i < cmd->nbr_cmd - 1)
 	{
 		pipe(m->redir->pipe_fd[i]);

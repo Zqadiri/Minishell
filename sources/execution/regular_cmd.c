@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 19:52:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 16:24:37 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_for_errors(t_cmd *cmd, t_data *m)
 {
 	if (!cmd->argvs)
-		exit(0);
+		exit(g_global->exit_status);
 	if (m->redir->err)
 	{
 		g_global->exit_status = 1;

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:17:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/19 17:54:47 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:07:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*return_value(const char *s, int c)
 
 int	error_path(const char *cmd, const char *path, int errnum)
 {
+	g_global->exit_status = 1;
 	printf("minishell: %s: %s: %s\n",
 		cmd, path, strerror(errnum));
 	return (1);
