@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:42:45 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 16:23:55 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 18:46:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ void	close_all_pipes(int **fd, int n, t_data *m)
 
 void	init_m(t_data *m, t_state *state)
 {
+	g_global->pid = 1;
 	state->path = get_path();
 	m->saved_stdout = dup(1);
 	m->saved_stdin = dup(0);
 	m->state = state;
-	m->pid = 0;
 	m->redir = (t_red *)malloc(sizeof(t_red));
 	m->redir->infile = 0;
 	m->redir->outfile = 0;

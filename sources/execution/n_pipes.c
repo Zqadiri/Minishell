@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:19:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 11:18:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 18:47:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	exec_cmd_path(t_cmd *cmd, t_data *m, int *p_fd)
 
 int	exec_process(t_cmd *cmd, t_data *m, int *fd)
 {
-	m->pid = fork();
-	if (m->pid < 0)
+	g_global->pid = fork();
+	if (g_global->pid < 0)
 		fork_failed();
-	if (m->pid == 0)
+	if (g_global->pid == 0)
 	{
 		if (m->state->read_end != 0)
 		{
@@ -57,7 +57,7 @@ int	exec_process(t_cmd *cmd, t_data *m, int *fd)
 			exec_cmd_path(cmd, m, fd);
 		exit(0);
 	}
-	return (m->pid);
+	return (1);
 }
 
 int	exec_pipe_cmd(t_cmd *cmd, t_data *m)

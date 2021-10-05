@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/05 16:23:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 18:49:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	initialize(int argc, char **argv, char **env, t_state *state)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
 	g_global->exit_status = 0;
+	g_global->pid = 1;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigint_handler);
 	state->env_ = get_env_(env);

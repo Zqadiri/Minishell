@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:03:30 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 11:29:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 18:46:23 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_data
 {
 	int				saved_stdout;
 	int				saved_stdin;
-	pid_t			pid;
 	t_red			*redir;
 	t_state			*state;
 }	t_data;

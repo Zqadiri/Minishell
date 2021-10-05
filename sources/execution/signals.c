@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 10:59:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/09/24 10:49:33 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 18:50:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	exit_child_process(int signum)
 {
 	if (signum == SIGINT)
 	{
+		// g_global->exit_status = 1;
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -68,12 +69,13 @@ void	is_child_process(int signum)
 
 void	sigint_handler(int signum)
 {
-	if ((signum == SIGINT || signum == SIGQUIT) && g_global->pid != 0)
+	if ((signum == SIGINT || signum == SIGQUIT) && g_global->pid == 0)
 		is_child_process(signum);
 	else
 	{
 		if (signum == SIGINT)
 		{
+			g_global->exit_status = 1;
 			ft_putchar_fd('\n', 2);
 			rl_replace_line("", 0);
 			rl_on_new_line();

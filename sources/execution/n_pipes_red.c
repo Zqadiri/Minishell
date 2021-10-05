@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:18:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 16:12:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 18:47:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	exec_proc(t_cmd *cmd, t_data *m, int *fd)
 {
-	m->pid = fork();
-	if (m->pid == 0)
+	g_global->pid = fork();
+	if (g_global->pid == 0)
 	{
 		if (m->redir->infile && !m->redir->err)
 			dup2(m->redir->infile, 0);
@@ -37,7 +37,7 @@ int	exec_proc(t_cmd *cmd, t_data *m, int *fd)
 			exec_cmd_path(cmd, m, fd);
 		exit (0);
 	}
-	return (m->pid);
+	return (1);
 }
 
 void	setup_all_redirections(t_cmd *cmd, t_data *m)
