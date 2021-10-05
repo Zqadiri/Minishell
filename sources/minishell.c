@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:27:47 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/05 11:40:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/05 12:32:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,18 @@ void	parse(t_lexer *l, t_state *state)
 		free(p);
 }
 
+void test(char **buff, t_lexer **l)
+{
+	add_history(*buff);
+	if (!is_white_space(*buff))
+	{
+		(*l) = init_l(*l);
+		(*l)->buffer = ft_strdup(*buff);
+		(*l)->bufsize = ft_strlen((*l)->buffer);
+	}
+	free (*buff);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_lexer		*l;
@@ -117,14 +129,7 @@ int	main(int argc, char **argv, char **env)
 		else
 		{
 			l = NULL;
-			add_history(buff);
-			if (!is_white_space(buff))
-			{
-				l = init_l(l);
-				l->buffer = ft_strdup(buff);
-				l->bufsize = ft_strlen(l->buffer);
-			}
-			free (buff);
+			test(&buff, &l);
 		}
 		parse(l, state);
 	}
