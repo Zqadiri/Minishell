@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/10/05 11:41:24 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/10/06 11:32:08 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,6 @@ SRCS_EXEC		=	./sources/execution/builtins/cd/cd_builtin.c\
 
 OBJS			= 	${SRCS:.c=.o}
 OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
-# fix header
 
 INCLUDE 		= 	-I includes -L includes
 CC				= 	gcc

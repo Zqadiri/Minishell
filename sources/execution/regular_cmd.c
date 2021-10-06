@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:44:36 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 16:24:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/06 11:25:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,14 @@ int	execute_regular_cmd(t_cmd *cmd, t_data *m)
 		return (check_builtin(cmd, m));
 	else
 	{
+		g_global->pid = 0;
 		child_pid = fork();
-		g_global->pid = child_pid;
 		if (child_pid < 0 )
 			fork_failed();
 		else if (child_pid == 0)
 			find_cmd_path(cmd, m);
 		wait_children();
+		g_global->pid = 1;
 		restore_std(m->saved_stdout, m->saved_stdin);
 	}
 	return (1);
