@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_expander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 13:05:12 by iidzim            #+#    #+#             */
-/*   Updated: 2021/10/05 19:14:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/06 10:34:29 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*envar_helper(char *buff, int *i, char *s, int flag)
 	if (flag == 0)
 	{
 		temp = invalid_envar_here_doc(buff, (*i));
-		(*i) += ft_strlen(temp);
+		(*i) += ft_strlen(temp) - 1;
 		return (ft_joinfree(s, temp));
 	}
 	else
