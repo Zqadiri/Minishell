@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 10:54:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/05 19:06:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:19:26 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,21 @@ static int	pipe_free(int **pipe_fd, int nbr_cmd)
 	free(pipe_fd);
 	pipe_fd = NULL;
 	return (1);
+}
+
+void	free_path(char **path)
+{
+	int	i;
+
+	i = 0;
+	while (path[i])
+	{
+		free (path[i]);
+		path[i] = NULL;
+		i++;
+	}
+	free(path);
+	path = NULL;
 }
 
 void	main_free(t_data *m, t_cmd *cmd)
