@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:28:20 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/10/04 19:38:03 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:26:44 by iidzim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 /*
 ** redirect stdin to read from the pipe

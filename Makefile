@@ -6,7 +6,7 @@
 #    By: iidzim <iidzim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/08 15:30:22 by zqadiri           #+#    #+#              #
-#    Updated: 2021/10/06 13:24:49 by iidzim           ###   ########.fr        #
+#    Updated: 2021/10/06 13:26:27 by iidzim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRCS_EXEC		=	./sources/execution/builtins/cd/cd_builtin.c\
 OBJS			= 	${SRCS:.c=.o}
 OBJS_EXEC		= 	${SRCS_EXEC:.c=.o}
 
-INCLUDE 		= 	-I includes -L includes
+INCLUDE 		= 	./includes
 CC				= 	gcc
 FLAGS           =  -Wall -Wextra -Werror -ltermcap -lreadline -g #-fsanitize=address
 RM				= 	rm -f
@@ -60,8 +60,8 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 
 all:			 ${NAME} libft_all
 
-$(NAME):		${OBJS} 
-				@$(CC) -o  $(NAME) $(SRCS) -L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include $(SRCS_EXEC) $(INCLUDE) $(LIBFLAGS)  $(FLAGS) -g
+$(NAME):		$(SRCS) $(SRCS_EXEC) $(INCLUDE)
+				@$(CC) -o  $(NAME) $(SRCS) -L /Users/$(USER)/goinfre/.brew/opt/readline/lib -I /Users/$(USER)/goinfre/.brew/opt/readline/include $(SRCS_EXEC) $(LIBFLAGS)  $(FLAGS) -g
 
 clean:			libft_clean
 				@${RM} ${OBJS} ${OBJS_EXEC}
