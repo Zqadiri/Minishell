@@ -1,5 +1,4 @@
 //* echo *//
-!! 
 echo echo
 echo rhobebou
 echo stop barking
@@ -186,10 +185,5 @@ ifconfig | grep "." > file
 << ok | grep << ov
 cat < README.md | wc -l | xargs
 echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e > file
-
 << ee  cat |  grep -> grep usage
-
-//???? no such file pr directory -> $? = 1
-no exit after no such file or directory
-env with only key value 
 echo ali >1 <1 | cat -e
